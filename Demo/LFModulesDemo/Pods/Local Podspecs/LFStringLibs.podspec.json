@@ -1,0 +1,23 @@
+{
+  "name": "LFStringLibs",
+  "version": "0.0.1",
+  "summary": "对NSString类的一些扩展",
+  "description": "1、对 NSString 类进行一些简单的扩展增加一些事公用的方法",
+  "homepage": "https://github.com/afree_liu/LocalPods",
+  "license": {
+    "type": "MIT",
+    "file": "FILE_LICENSE"
+  },
+  "authors": {
+    "afreeliu": "afree_liu@163.com"
+  },
+  "platforms": {
+    "ios": "9.0"
+  },
+  "source": {
+    "git": "https://github.com/LocalPods.git",
+    "tag": "0.0.1"
+  },
+  "source_files": "src/*.{h,m}",
+  "public_header_files": "src/*.h"
+}

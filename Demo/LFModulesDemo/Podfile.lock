@@ -1,0 +1,16 @@
+PODS:
+  - LFStringLibs (0.0.1)
+
+DEPENDENCIES:
+  - LFStringLibs (from `../../Modules/NSString_Categorys/`)
+
+EXTERNAL SOURCES:
+  LFStringLibs:
+    :path: "../../Modules/NSString_Categorys/"
+
+SPEC CHECKSUMS:
+  LFStringLibs: c576113b5b23b8b4ade272a24890be7e7638b11a
+
+PODFILE CHECKSUM: af26f393ca7d61ad5af73dbfa5243576530dfa8e
+
+COCOAPODS: 1.10.1
