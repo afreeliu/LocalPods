@@ -9,6 +9,11 @@ target 'LFModulesDemo' do
   pod 'LFStringLibs', :path => '../../Modules/NSString_Categorys/'
   
   
+  # vendor Lib
+  pod 'Masonry'
+  pod 'SDWebImage'
+  pod 'YYModel'
+  
   target 'LFModulesDemoTests' do
     inherit! :search_paths
     # Pods for testing

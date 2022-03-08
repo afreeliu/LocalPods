@@ -21,6 +21,13 @@
 		DFDCCFE327D6F012001B8400 /* LFModulesDemoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DFDCCFE227D6F012001B8400 /* LFModulesDemoTests.m */; };
 		DFDCCFED27D6F013001B8400 /* LFModulesDemoUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = DFDCCFEC27D6F013001B8400 /* LFModulesDemoUITests.m */; };
 		DFDCCFEF27D6F013001B8400 /* LFModulesDemoUITestsLaunchTests.m in Sources */ = {isa = PBXBuildFile; fileRef = DFDCCFEE27D6F013001B8400 /* LFModulesDemoUITestsLaunchTests.m */; };
+		DFDCCFFD27D708BF001B8400 /* ZKCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DFDCCFFC27D708BF001B8400 /* ZKCollectionViewCell.m */; };
+		DFDCD00027D709D4001B8400 /* UIColor+RandomColor.m in Sources */ = {isa = PBXBuildFile; fileRef = DFDCCFFF27D709D4001B8400 /* UIColor+RandomColor.m */; };
+		DFDCD00327D7297D001B8400 /* LLB_HomeLifeModlueViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DFDCD00227D7297D001B8400 /* LLB_HomeLifeModlueViewModel.m */; };
+		DFDCD00627D72A19001B8400 /* LLB_HomeLifeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DFDCD00527D72A19001B8400 /* LLB_HomeLifeModel.m */; };
+		DFDCD00B27D7474A001B8400 /* LLB_HomeLifeModuleView.m in Sources */ = {isa = PBXBuildFile; fileRef = DFDCD00A27D7474A001B8400 /* LLB_HomeLifeModuleView.m */; };
+		DFDCD01027D750AA001B8400 /* LLB_ AdvertisementImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = DFDCD00F27D750AA001B8400 /* LLB_ AdvertisementImageView.m */; };
+		DFDCD01327D75173001B8400 /* LLB_AdvertisementImageViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = DFDCD01227D75173001B8400 /* LLB_AdvertisementImageViewModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -68,6 +75,21 @@
 		DFDCCFE827D6F013001B8400 /* LFModulesDemoUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LFModulesDemoUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFDCCFEC27D6F013001B8400 /* LFModulesDemoUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFModulesDemoUITests.m; sourceTree = "<group>"; };
 		DFDCCFEE27D6F013001B8400 /* LFModulesDemoUITestsLaunchTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LFModulesDemoUITestsLaunchTests.m; sourceTree = "<group>"; };
+		DFDCCFFB27D708BF001B8400 /* ZKCollectionViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZKCollectionViewCell.h; sourceTree = "<group>"; };
+		DFDCCFFC27D708BF001B8400 /* ZKCollectionViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZKCollectionViewCell.m; sourceTree = "<group>"; };
+		DFDCCFFE27D709D4001B8400 /* UIColor+RandomColor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "UIColor+RandomColor.h"; sourceTree = "<group>"; };
+		DFDCCFFF27D709D4001B8400 /* UIColor+RandomColor.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "UIColor+RandomColor.m"; sourceTree = "<group>"; };
+		DFDCD00127D7297D001B8400 /* LLB_HomeLifeModlueViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLB_HomeLifeModlueViewModel.h; sourceTree = "<group>"; };
+		DFDCD00227D7297D001B8400 /* LLB_HomeLifeModlueViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLB_HomeLifeModlueViewModel.m; sourceTree = "<group>"; };
+		DFDCD00427D72A19001B8400 /* LLB_HomeLifeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLB_HomeLifeModel.h; sourceTree = "<group>"; };
+		DFDCD00527D72A19001B8400 /* LLB_HomeLifeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLB_HomeLifeModel.m; sourceTree = "<group>"; };
+		DFDCD00827D7343D001B8400 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		DFDCD00927D7474A001B8400 /* LLB_HomeLifeModuleView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLB_HomeLifeModuleView.h; sourceTree = "<group>"; };
+		DFDCD00A27D7474A001B8400 /* LLB_HomeLifeModuleView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLB_HomeLifeModuleView.m; sourceTree = "<group>"; };
+		DFDCD00E27D750AA001B8400 /* LLB_ AdvertisementImageView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "LLB_ AdvertisementImageView.h"; sourceTree = "<group>"; };
+		DFDCD00F27D750AA001B8400 /* LLB_ AdvertisementImageView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "LLB_ AdvertisementImageView.m"; sourceTree = "<group>"; };
+		DFDCD01127D75173001B8400 /* LLB_AdvertisementImageViewModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LLB_AdvertisementImageViewModel.h; sourceTree = "<group>"; };
+		DFDCD01227D75173001B8400 /* LLB_AdvertisementImageViewModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LLB_AdvertisementImageViewModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +176,9 @@
 		DFDCCFC527D6F011001B8400 /* LFModulesDemo */ = {
 			isa = PBXGroup;
 			children = (
+				DFDCD00D27D74FD4001B8400 /* 广告图 */,
+				DFDCD00C27D74FAE001B8400 /* 邻里生活模块 */,
+				DFDCD00727D73424001B8400 /* global_header */,
 				8818933327D6F6A000B76873 /* specs */,
 				DFDCCFC627D6F011001B8400 /* AppDelegate.h */,
 				DFDCCFC727D6F011001B8400 /* AppDelegate.m */,
@@ -161,6 +186,8 @@
 				DFDCCFCA27D6F011001B8400 /* SceneDelegate.m */,
 				DFDCCFCC27D6F011001B8400 /* ViewController.h */,
 				DFDCCFCD27D6F011001B8400 /* ViewController.m */,
+				DFDCCFFE27D709D4001B8400 /* UIColor+RandomColor.h */,
+				DFDCCFFF27D709D4001B8400 /* UIColor+RandomColor.m */,
 				DFDCCFCF27D6F011001B8400 /* Main.storyboard */,
 				DFDCCFD227D6F012001B8400 /* Assets.xcassets */,
 				DFDCCFD427D6F012001B8400 /* LaunchScreen.storyboard */,
@@ -185,6 +212,40 @@
 				DFDCCFEE27D6F013001B8400 /* LFModulesDemoUITestsLaunchTests.m */,
 			);
 			path = LFModulesDemoUITests;
+			sourceTree = "<group>";
+		};
+		DFDCD00727D73424001B8400 /* global_header */ = {
+			isa = PBXGroup;
+			children = (
+				DFDCD00827D7343D001B8400 /* PrefixHeader.pch */,
+			);
+			path = global_header;
+			sourceTree = "<group>";
+		};
+		DFDCD00C27D74FAE001B8400 /* 邻里生活模块 */ = {
+			isa = PBXGroup;
+			children = (
+				DFDCD00927D7474A001B8400 /* LLB_HomeLifeModuleView.h */,
+				DFDCD00A27D7474A001B8400 /* LLB_HomeLifeModuleView.m */,
+				DFDCCFFB27D708BF001B8400 /* ZKCollectionViewCell.h */,
+				DFDCCFFC27D708BF001B8400 /* ZKCollectionViewCell.m */,
+				DFDCD00127D7297D001B8400 /* LLB_HomeLifeModlueViewModel.h */,
+				DFDCD00227D7297D001B8400 /* LLB_HomeLifeModlueViewModel.m */,
+				DFDCD00427D72A19001B8400 /* LLB_HomeLifeModel.h */,
+				DFDCD00527D72A19001B8400 /* LLB_HomeLifeModel.m */,
+			);
+			path = "邻里生活模块";
+			sourceTree = "<group>";
+		};
+		DFDCD00D27D74FD4001B8400 /* 广告图 */ = {
+			isa = PBXGroup;
+			children = (
+				DFDCD00E27D750AA001B8400 /* LLB_ AdvertisementImageView.h */,
+				DFDCD00F27D750AA001B8400 /* LLB_ AdvertisementImageView.m */,
+				DFDCD01127D75173001B8400 /* LLB_AdvertisementImageViewModel.h */,
+				DFDCD01227D75173001B8400 /* LLB_AdvertisementImageViewModel.m */,
+			);
+			path = "广告图";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -390,10 +451,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DFDCD01027D750AA001B8400 /* LLB_ AdvertisementImageView.m in Sources */,
+				DFDCD00327D7297D001B8400 /* LLB_HomeLifeModlueViewModel.m in Sources */,
+				DFDCD00627D72A19001B8400 /* LLB_HomeLifeModel.m in Sources */,
 				DFDCCFCE27D6F011001B8400 /* ViewController.m in Sources */,
 				DFDCCFC827D6F011001B8400 /* AppDelegate.m in Sources */,
 				DFDCCFD927D6F012001B8400 /* main.m in Sources */,
 				DFDCCFCB27D6F011001B8400 /* SceneDelegate.m in Sources */,
+				DFDCD00027D709D4001B8400 /* UIColor+RandomColor.m in Sources */,
+				DFDCCFFD27D708BF001B8400 /* ZKCollectionViewCell.m in Sources */,
+				DFDCD00B27D7474A001B8400 /* LLB_HomeLifeModuleView.m in Sources */,
+				DFDCD01327D75173001B8400 /* LLB_AdvertisementImageViewModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -570,6 +638,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = MLP436SVZS;
+				GCC_PREFIX_HEADER = /Users/lufee/Desktop/project_CI/LocalPods/Demo/LFModulesDemo/LFModulesDemo/global_header/PrefixHeader.pch;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LFModulesDemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -598,6 +667,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = MLP436SVZS;
+				GCC_PREFIX_HEADER = /Users/lufee/Desktop/project_CI/LocalPods/Demo/LFModulesDemo/LFModulesDemo/global_header/PrefixHeader.pch;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = LFModulesDemo/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
