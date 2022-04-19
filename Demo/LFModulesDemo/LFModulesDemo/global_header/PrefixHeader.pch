@@ -13,5 +13,5 @@
 
 #import <YYModel/YYModel.h>
 #import <Masonry/Masonry.h>
-
+#import "UIColor+RandomColor.h"
 #endif /* PrefixHeader_pch */

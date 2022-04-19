@@ -9,10 +9,13 @@
 #import <NSString+MD5.h>
 #import "ZKCollectionViewCell.h"
 #import "UIColor+RandomColor.h"
-
+#import "ZKStarsScoreView.h"
+#import "ZKAppraiseView.h"
 @interface ViewController ()<UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, strong) UICollectionView *collectionView;
+
+@property (nonatomic, strong) ZKStarsScoreView *starScoreView;
 
 
 @end
@@ -25,12 +28,58 @@
     NSString *str = @"你好";
     [str lf_md5];
     
-    [self addSubViews];
+    [self addCollectionSubViews];
+    [self addStarScoreView];
+//    [self addAppraiseView];
+    [self getToday];
 }
 
-- (void)addSubViews {
+- (void)getToday {
+    NSDate *today = [NSDate date];
+    NSDateFormatter *forMatter = [[NSDateFormatter alloc] init];
+        //设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
+    [forMatter setDateFormat:@"yyyy-MM-dd"];
+    NSString *dateStr = [forMatter stringFromDate:today];
+    NSLog(@"当前日期:%@", dateStr);
+}
+
+
+- (void)addCollectionSubViews {
     [self.view addSubview:self.collectionView];
 }
+
+- (void)addStarScoreView {
+    
+    ZKStarsScoreViewModel *viewModel = [[ZKStarsScoreViewModel alloc]initWithModel:nil];
+    
+    self.starScoreView = [[ZKStarsScoreView alloc]initWithViewModel:viewModel];
+    
+    [self.view addSubview:self.starScoreView];
+    
+    [self.starScoreView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.offset(105);
+        make.center.offset(0);
+        make.height.mas_equalTo(42);
+        
+    }];
+}
+
+- (void)addAppraiseView {
+    ZKAppraiseViewModel *viewModel = [[ZKAppraiseViewModel alloc]initWithModel:nil];
+    
+    ZKAppraiseView *view = [[ZKAppraiseView alloc]initWithViewModel:viewModel];
+    
+    [self.view addSubview:view];
+    
+    [view mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.top.mas_equalTo(self.collectionView.mas_bottom).offset(10);
+        make.leading.offset(16);
+        make.trailing.offset(-16);
+        make.height.mas_equalTo(100);
+    }];
+    
+}
+
 
 
 #pragma mark - Delegate

@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		7BE794890F5D4835A5B0D3E2 /* libPods-LFModulesDemo-LFModulesDemoUITests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7364B251D2EA5BA5D68E9C29 /* libPods-LFModulesDemo-LFModulesDemoUITests.a */; };
 		843F2D7DFB0DCC5FA27C905A /* libPods-LFModulesDemoTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8C94172C03D1E54961B7A5F2 /* libPods-LFModulesDemoTests.a */; };
-		8818933927D6F94300B76873 /* NSString_Categorys in Resources */ = {isa = PBXBuildFile; fileRef = 8818933827D6F94300B76873 /* NSString_Categorys */; };
 		AB73643D0912B53DC1E133B1 /* libPods-LFModulesDemo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B029C28307EFC8E32578182 /* libPods-LFModulesDemo.a */; };
+		DF1D678827FD390F00E48412 /* ZKStarsScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = DF1D678727FD390F00E48412 /* ZKStarsScoreView.m */; };
+		DF1D678B27FD9AFB00E48412 /* ZKAppraiseView.m in Sources */ = {isa = PBXBuildFile; fileRef = DF1D678A27FD9AFB00E48412 /* ZKAppraiseView.m */; };
 		DFDCCFC827D6F011001B8400 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DFDCCFC727D6F011001B8400 /* AppDelegate.m */; };
 		DFDCCFCB27D6F011001B8400 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DFDCCFCA27D6F011001B8400 /* SceneDelegate.m */; };
 		DFDCCFCE27D6F011001B8400 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DFDCCFCD27D6F011001B8400 /* ViewController.m */; };
@@ -56,8 +57,11 @@
 		67E2DC7281A8224666533CD3 /* Pods-LFModulesDemo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LFModulesDemo.release.xcconfig"; path = "Target Support Files/Pods-LFModulesDemo/Pods-LFModulesDemo.release.xcconfig"; sourceTree = "<group>"; };
 		7364B251D2EA5BA5D68E9C29 /* libPods-LFModulesDemo-LFModulesDemoUITests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LFModulesDemo-LFModulesDemoUITests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		808F3EDFACF40AABF16B2385 /* Pods-LFModulesDemo-LFModulesDemoUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LFModulesDemo-LFModulesDemoUITests.release.xcconfig"; path = "Target Support Files/Pods-LFModulesDemo-LFModulesDemoUITests/Pods-LFModulesDemo-LFModulesDemoUITests.release.xcconfig"; sourceTree = "<group>"; };
-		8818933827D6F94300B76873 /* NSString_Categorys */ = {isa = PBXFileReference; lastKnownFileType = folder; name = NSString_Categorys; path = ../../../../Modules/NSString_Categorys; sourceTree = "<group>"; };
 		8C94172C03D1E54961B7A5F2 /* libPods-LFModulesDemoTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-LFModulesDemoTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		DF1D678627FD390F00E48412 /* ZKStarsScoreView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZKStarsScoreView.h; sourceTree = "<group>"; };
+		DF1D678727FD390F00E48412 /* ZKStarsScoreView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZKStarsScoreView.m; sourceTree = "<group>"; };
+		DF1D678927FD9AFA00E48412 /* ZKAppraiseView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ZKAppraiseView.h; sourceTree = "<group>"; };
+		DF1D678A27FD9AFB00E48412 /* ZKAppraiseView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ZKAppraiseView.m; sourceTree = "<group>"; };
 		DFDCCFC327D6F011001B8400 /* LFModulesDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LFModulesDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DFDCCFC627D6F011001B8400 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		DFDCCFC727D6F011001B8400 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -130,14 +134,6 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		8818933327D6F6A000B76873 /* specs */ = {
-			isa = PBXGroup;
-			children = (
-				8818933827D6F94300B76873 /* NSString_Categorys */,
-			);
-			path = specs;
-			sourceTree = "<group>";
-		};
 		D18EDD2D97B89A394309B3FD /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -149,6 +145,24 @@
 				577003ACCFB4F19C8B7946E0 /* Pods-LFModulesDemoTests.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		DF1D678527FD386D00E48412 /* 五星评分 */ = {
+			isa = PBXGroup;
+			children = (
+				DF1D678627FD390F00E48412 /* ZKStarsScoreView.h */,
+				DF1D678727FD390F00E48412 /* ZKStarsScoreView.m */,
+				DF1D678927FD9AFA00E48412 /* ZKAppraiseView.h */,
+				DF1D678A27FD9AFB00E48412 /* ZKAppraiseView.m */,
+			);
+			path = "五星评分";
+			sourceTree = "<group>";
+		};
+		DF1D678C27FEC3D400E48412 /* 首页广告弹框 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "首页广告弹框";
 			sourceTree = "<group>";
 		};
 		DFDCCFBA27D6F011001B8400 = {
@@ -176,10 +190,11 @@
 		DFDCCFC527D6F011001B8400 /* LFModulesDemo */ = {
 			isa = PBXGroup;
 			children = (
+				DF1D678C27FEC3D400E48412 /* 首页广告弹框 */,
+				DF1D678527FD386D00E48412 /* 五星评分 */,
 				DFDCD00D27D74FD4001B8400 /* 广告图 */,
 				DFDCD00C27D74FAE001B8400 /* 邻里生活模块 */,
 				DFDCD00727D73424001B8400 /* global_header */,
-				8818933327D6F6A000B76873 /* specs */,
 				DFDCCFC627D6F011001B8400 /* AppDelegate.h */,
 				DFDCCFC727D6F011001B8400 /* AppDelegate.m */,
 				DFDCCFC927D6F011001B8400 /* SceneDelegate.h */,
@@ -356,7 +371,6 @@
 			files = (
 				DFDCCFD627D6F012001B8400 /* LaunchScreen.storyboard in Resources */,
 				DFDCCFD327D6F012001B8400 /* Assets.xcassets in Resources */,
-				8818933927D6F94300B76873 /* NSString_Categorys in Resources */,
 				DFDCCFD127D6F011001B8400 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -454,6 +468,7 @@
 				DFDCD01027D750AA001B8400 /* LLB_ AdvertisementImageView.m in Sources */,
 				DFDCD00327D7297D001B8400 /* LLB_HomeLifeModlueViewModel.m in Sources */,
 				DFDCD00627D72A19001B8400 /* LLB_HomeLifeModel.m in Sources */,
+				DF1D678B27FD9AFB00E48412 /* ZKAppraiseView.m in Sources */,
 				DFDCCFCE27D6F011001B8400 /* ViewController.m in Sources */,
 				DFDCCFC827D6F011001B8400 /* AppDelegate.m in Sources */,
 				DFDCCFD927D6F012001B8400 /* main.m in Sources */,
@@ -461,6 +476,7 @@
 				DFDCD00027D709D4001B8400 /* UIColor+RandomColor.m in Sources */,
 				DFDCCFFD27D708BF001B8400 /* ZKCollectionViewCell.m in Sources */,
 				DFDCD00B27D7474A001B8400 /* LLB_HomeLifeModuleView.m in Sources */,
+				DF1D678827FD390F00E48412 /* ZKStarsScoreView.m in Sources */,
 				DFDCD01327D75173001B8400 /* LLB_AdvertisementImageViewModel.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
