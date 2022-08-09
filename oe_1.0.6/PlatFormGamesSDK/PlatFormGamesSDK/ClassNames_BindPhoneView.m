@@ -95,8 +95,8 @@
     
     self.varNames_secondInputView = varNames_tmpSecondInputView;
     
-    ClassNames_CommitButton *varNames_tmpCommitBtn = [ClassNames_CommitButton methodNames_createCommitButtonWithTitle:@"手机登录" withTouchUpInsidBlock:^{
-        NSLog(@"绑定手机");
+    ClassNames_CommitButton *varNames_tmpCommitBtn = [ClassNames_CommitButton methodNames_createCommitButtonWithTitle:@"绑定手机" withTouchUpInsidBlock:^{
+        [weakSelf methodNames_commitAction:nil];
     }];
     
     self.varNames_firstCommitBtn = varNames_tmpCommitBtn;
@@ -135,7 +135,7 @@
 - (void)methodNames_createAccountView {
     UILabel *varNames_tmpLabel = [[UILabel alloc]init];
     varNames_tmpLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    varNames_tmpLabel.font = [UIFont systemFontOfSize:11];
+    varNames_tmpLabel.font = [UIFont systemFontOfSize:12];
     varNames_tmpLabel.textColor = [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_fillColor_config()];
     varNames_tmpLabel.textAlignment = NSTextAlignmentCenter;
     varNames_tmpLabel.text = @"账户ID:1234567890";
@@ -150,7 +150,7 @@
     varNames_tmpLabel.font = [UIFont systemFontOfSize:12];
     varNames_tmpLabel.textColor = [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_fillColor_config()];
     varNames_tmpLabel.textAlignment = NSTextAlignmentCenter;
-    varNames_tmpLabel.text = @"为了您的账号安全，请进行手机绑定\n绑定之后可以自行找回密码，保护账号安全";
+    varNames_tmpLabel.text = @"为了您的账号安全，请进行手机绑定\n\n绑定之后可以自行找回密码，保护账号安全";
     self.varNames_tipLabel = varNames_tmpLabel;
     [self addSubview:varNames_tmpLabel];
 }

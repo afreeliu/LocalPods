@@ -115,6 +115,11 @@
  */
 -(void)umPlatsFormLogin {
     
+    [[ClassNames_MainView methodNames_instanceMainView]methodNames_showUserCenterView];
+    return;
+    
+    
+    
     methodNames_readGameBundleID();
     
     [ClassNames_PGHubView methodNames_showIndicatorWithTitlte:@"加载中..."];

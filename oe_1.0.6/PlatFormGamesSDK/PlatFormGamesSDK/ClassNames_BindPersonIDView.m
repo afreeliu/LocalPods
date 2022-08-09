@@ -13,12 +13,12 @@
 #import "ClassNames_RegularMatch.h"
 #import "ClassNames_ImageCommitButton.h"
 #import "ClassNames_ImageErrorRight.h"
-
+#import "ClassNames_NavigationBarView.h"
 @interface ClassNames_BindPersonIDView ()
 
-@property (nonatomic, readwrite, strong) UILabel *varNames_titleLabel;
+@property (nonatomic, readwrite, strong) ClassNames_NavigationBarView *varNames_naviView;
 
-@property (nonatomic, readwrite, strong) UIButton *varNames_closeBtn;
+@property (nonatomic, readwrite, strong) UILabel *varNames_tipLabel;
 
 @property (nonatomic, readwrite, strong) ClassNames_InputView *varNames_firstInputView;
 
@@ -61,20 +61,10 @@
 
 - (void)methodNames_createUI {
     
-    UILabel *varNames_tmpTitleLabel = [[UILabel alloc]init];
-    varNames_tmpTitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    varNames_tmpTitleLabel.text = methodNames_getTitle_BindPersonIDView_Title();
-    varNames_tmpTitleLabel.textColor = [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_titleFontColor_config()];
-    varNames_tmpTitleLabel.textAlignment = NSTextAlignmentCenter;
-    varNames_tmpTitleLabel.font = [UIFont systemFontOfSize:17];
-    self.varNames_titleLabel = varNames_tmpTitleLabel;
+
+    [self methodNames_setNavi];
     
-    UIButton *varNames_closeBtn = [[UIButton alloc]init];
-    varNames_closeBtn.translatesAutoresizingMaskIntoConstraints = NO;
-    [varNames_closeBtn addTarget:self action:@selector(methodNames_closeAction:) forControlEvents:UIControlEventTouchUpInside];
-    methodNames_drawImageError(varNames_closeBtn, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_titleFontColor_config()]);
-    self.varNames_closeBtn = varNames_closeBtn;
-    
+    [self methodNames_createTipLabel];
     
     ClassNames_InputView *varNames_tmpFirstInputView = [ClassNames_InputView methodNames_inputViewType:varNames_inputViewTypeBindPersonIDName];
     varNames_tmpFirstInputView.translatesAutoresizingMaskIntoConstraints = NO;
@@ -84,19 +74,19 @@
     varNames_tmpSecondInputView.translatesAutoresizingMaskIntoConstraints = NO;
     self.varNames_secondInputView = varNames_tmpSecondInputView;
     
-    ClassNames_CommitButton *varNames_tmpCommitBtn = [[ClassNames_CommitButton alloc]init];
-    varNames_tmpCommitBtn.translatesAutoresizingMaskIntoConstraints = NO;
-    methodNames_drawOKCommitImage(varNames_tmpCommitBtn, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_titleFontColor_config()]);
-    [varNames_tmpCommitBtn addTarget:self action:@selector(methodNames_commitAction:) forControlEvents:UIControlEventTouchUpInside];
+    __weak typeof(self) weakSelf = self;
+    ClassNames_CommitButton *varNames_tmpCommitBtn = [ClassNames_CommitButton methodNames_createCommitButtonWithTitle:@"实名认证" withTouchUpInsidBlock:^{
+        NSLog(@"实名认证");
+        [weakSelf methodNames_commitAction:nil];
+    }];
+    
     self.varNames_firstCommitBtn = varNames_tmpCommitBtn;
     
-    [self addSubview:self.varNames_titleLabel];
-    [self addSubview:self.varNames_closeBtn];
     [self addSubview:self.varNames_firstInputView];
     [self addSubview:self.varNames_secondInputView];
     [self addSubview:self.varNames_firstCommitBtn];
     
-    __weak typeof(self) weakSelf = self;
+    
     [self.varNames_firstInputView methodNames_setInputViewKeyboardReutrnType:varNames_keyboardReturnNext];
     [self.varNames_secondInputView methodNames_setInputViewKeyboardReutrnType:varNames_keyboardReturnDefault];
     self.varNames_firstInputView.methodNames_nextInputView = ^{
@@ -105,46 +95,93 @@
     
 }
 
+- (void)methodNames_setNavi {
+    
+    __weak typeof(self) weakSelf = self;
+    ClassNames_NavigationBarView *varNames_tmpNaviView = [[ClassNames_NavigationBarView alloc]init];
+    varNames_tmpNaviView.translatesAutoresizingMaskIntoConstraints = NO;
+    
+    [varNames_tmpNaviView methodNames_setTitle:@"实名验证" rightButtonImage:@"" rightTitle:@"" btnAction:^{
+        if (weakSelf.methodNames_closeBindPersonIDView) {
+            weakSelf.hidden = YES;
+            weakSelf.methodNames_closeBindPersonIDView();
+        }
+    }];
+    
+    self.varNames_naviView = varNames_tmpNaviView;
+    [self addSubview:varNames_tmpNaviView];
+}
+
+- (void)methodNames_createTipLabel {
+    UILabel *varNames_tipLabel = [[UILabel alloc]init];
+    varNames_tipLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    varNames_tipLabel.numberOfLines = 3;
+    varNames_tipLabel.textColor = [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_fillColor_config()];
+    varNames_tipLabel.textAlignment = NSTextAlignmentLeft;
+    NSString *varNames_tip = @"温馨提示：\n根据国家规定，游戏用户需要进行实名验证。\n信息仅用于验证且绝对保密。";
+    NSMutableParagraphStyle *varNames_paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    varNames_paragraphStyle.lineSpacing= 2;
+    varNames_paragraphStyle.paragraphSpacing = methodNames_setMargin_base();
+    varNames_paragraphStyle.alignment = NSTextAlignmentLeft;
+    NSDictionary *varNames_attDic = @{NSFontAttributeName:[UIFont systemFontOfSize:13],
+                                NSParagraphStyleAttributeName:varNames_paragraphStyle,
+                                      NSForegroundColorAttributeName:[ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_fillColor_config()]
+    };
+    NSMutableAttributedString *varNames_attString = [[NSMutableAttributedString alloc] initWithString:varNames_tip attributes:varNames_attDic];
+    varNames_tipLabel.attributedText = varNames_attString;
+    self.varNames_tipLabel = varNames_tipLabel;
+    
+    [self addSubview:varNames_tipLabel];
+    
+}
+
+
 - (void)methodNames_layoutSubViews {
     
-    self.varNames_topMarginValue = methodNames_setMargin_3base();
+    self.varNames_topMarginValue = 0;
     
-    [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_titleLabel methodNames_constriant:self.varNames_topMarginValue];
-    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_titleLabel methodNames_constriant:methodNames_setMargin_base()];
-    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_titleLabel methodNames_constriant:methodNames_setMargin_base()];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_titleLabel methodNames_constriant:methodNames_getInputView_inputView_Height()];
+    [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_naviView methodNames_constriant:self.varNames_topMarginValue];
+    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_naviView methodNames_constriant:methodNames_setMargin_base()];
+    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_naviView methodNames_constriant:methodNames_setMargin_base()];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_naviView methodNames_constriant:methodNames_setNavigationBarHeight()];
     
-    /// closeBtn
-    [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_closeBtn methodNames_constriant:self.varNames_topMarginValue - 5];
-    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_closeBtn methodNames_constriant:methodNames_setMargin_3base()];
-    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_closeBtn methodNames_constriant:methodNames_getInputView_ItemButton_Width()];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_closeBtn methodNames_constriant:methodNames_getInputView_ItemButton_Width()];
+    self.varNames_topMarginValue += methodNames_setNavigationBarHeight();
+    self.varNames_topMarginValue += methodNames_setMargin_2base();
     
-    self.varNames_topMarginValue += methodNames_getInputView_inputView_Height();
-    self.varNames_topMarginValue += methodNames_setMargin_3base();
+    [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_tipLabel methodNames_constriant:self.varNames_topMarginValue];
+    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_tipLabel methodNames_constriant:methodNames_setMargin_3base()];
+    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_tipLabel methodNames_constriant:methodNames_setMargin_3base()];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_tipLabel methodNames_constriant:methodNames_setMargin_3base() * 5];
+    
+    self.varNames_topMarginValue += methodNames_setMargin_3base() * 5;
+    self.varNames_topMarginValue += methodNames_setMargin_2base();
+    
     
     [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_firstInputView methodNames_constriant:self.varNames_topMarginValue];
-    [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_firstInputView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_firstInputView methodNames_constriant:methodNames_getInputView_inputView_Width()];
+    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_firstInputView methodNames_constriant:methodNames_setMargin_2base()];
+    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_firstInputView methodNames_constriant:methodNames_setMargin_2base()];
     [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_firstInputView methodNames_constriant:methodNames_getInputView_inputView_Height()];
     
     self.varNames_topMarginValue += methodNames_getInputView_inputView_Height();
     self.varNames_topMarginValue += methodNames_setMargin_3base();
     
     [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_secondInputView methodNames_constriant:self.varNames_topMarginValue];
-    [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_secondInputView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_secondInputView methodNames_constriant:methodNames_getInputView_inputView_Width()];
+    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_secondInputView methodNames_constriant:methodNames_setMargin_2base()];
+    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_secondInputView methodNames_constriant:methodNames_setMargin_2base()];
     [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_secondInputView methodNames_constriant:methodNames_getInputView_inputView_Height()];
     
+    
     self.varNames_topMarginValue += methodNames_getInputView_inputView_Height();
-    self.varNames_topMarginValue += (methodNames_setMargin_3base() * 2);
+    self.varNames_topMarginValue += methodNames_setMargin_3base();
     
     [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_firstCommitBtn methodNames_constriant:self.varNames_topMarginValue];
-    [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_firstCommitBtn methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_firstCommitBtn methodNames_constriant:methodNames_setCommitButtonWidth()];
+    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_firstCommitBtn methodNames_constriant:methodNames_setMargin_3base()];
+    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_firstCommitBtn methodNames_constriant:methodNames_setMargin_3base()];
     [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_firstCommitBtn methodNames_constriant:methodNames_setCommitButtonHeight()];
     
-    self.varNames_topMarginValue += methodNames_getInputView_inputView_Height();
+    self.varNames_topMarginValue += methodNames_setCommitButtonHeight();
+    self.varNames_topMarginValue += methodNames_setMargin_3base();
+    
     
     [self methodNames_caculateInputViewLocal];
 }

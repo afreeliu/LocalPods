@@ -31,26 +31,7 @@
 
 @interface ClassNames_MainView ()
 
-
-
-
-
 @property (nonatomic, readwrite, strong) UIView *varNames_backgroundView;
-
-@property (nonatomic, readwrite, strong) UIButton *varNames_loginButton;
-@property (nonatomic, readwrite, strong) CAShapeLayer *varNames_loginLayer;
-@property (nonatomic, readwrite, strong) UIButton *varNames_registerButton;
-@property (nonatomic, readwrite, strong) CAShapeLayer *varNames_registerLayer;
-@property (nonatomic, readwrite, strong) UIButton *varNames_quickLoginButton;
-@property (nonatomic, readwrite, strong) CAShapeLayer *varNames_quickLoginLayer;
-
-/// 功能页面的约束偏移量
-@property (nonatomic, readwrite, assign) CGFloat varNames_layoutConstriantWidth;
-@property (nonatomic, readwrite, assign) CGFloat varNames_layoutConstriantHeight;
-@property (nonatomic, readwrite, assign) CGFloat varNames_layoutConstriantOffset;
-
-/// 功能页面的动画时长
-@property (nonatomic, readwrite, assign) CGFloat varNames_skillViewAnimationDuration;
 
 
 @property (nonatomic, readwrite, strong) UIView *varNames_skillBtnView;
@@ -59,15 +40,6 @@
 @property (nonatomic, readwrite, assign) BOOL varNames_canQuickLogin;
 @property (nonatomic, readwrite, assign) BOOL varNames_quickLoginSuccess;
 
-/// 背景页面的约束
-@property (nonatomic, readwrite, strong) NSLayoutConstraint *varNames_backgroundViewCenterYConstraint;
-/// 北京页面的约束偏移量
-@property (nonatomic, readwrite, assign) CGFloat varNames_backgroundViewCenterYMarginValue;
-
-/// 功能按钮页面的约束
-@property (nonatomic, readwrite, strong) NSLayoutConstraint *varNames_skillViewTopConstraint;
-/// 功能按钮页面的约束偏移量
-@property (nonatomic, readwrite, assign) CGFloat varNames_skillViewTopMarginValue;
 
 /// 各大页面
 @property (nonatomic, readwrite, strong) ClassNames_LoginView *varNames_loginView;
@@ -109,6 +81,47 @@
 
 @implementation ClassNames_MainView
 
++ (instancetype)methodNames_instanceMainView {
+    UIWindow *varNames_tmpWindow = methodNames_getCurrentWindow();
+    ClassNames_MainView *varNames_mainView = [[ClassNames_MainView alloc]init];
+    [varNames_tmpWindow addSubview:varNames_mainView];
+    
+    varNames_mainView.translatesAutoresizingMaskIntoConstraints = NO;
+    [ClassNames_BaseViewLayout methodNames_layoutTop:varNames_mainView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutLeft:varNames_mainView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutBottom:varNames_mainView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutRight:varNames_mainView methodNames_constriant:0];
+    
+    return varNames_mainView;
+}
+// 显示手机号登录页
+- (void)methodNames_showPhoneLoginView {
+    [self methodNames_createPhoneRegisterView];
+    [self methodNames_switchSkillViewWithDefaultButtonTap:10];
+}
+
+// 显示账号登陆页
+- (void)methodNames_showLoginView {
+    [self methodNames_createLoginView];
+    [self methodNames_switchSkillViewWithDefaultButtonTap:11];
+}
+// 显示账号注册页
+- (void)methodNames_showRegisterView {
+    
+    [self methodNames_createNormalRegisterView];
+    [self methodNames_switchSkillViewWithDefaultButtonTap:12];
+}
+
+// 显示用户中心页
+- (void)methodNames_showUserCenterView {
+    [self methodNames_createSuggestView];
+}
+
+
+
+
+
+
 #pragma mark ---------- 登录成功，并不需要进入绑定任何内容
 - (void)methodNames_loginFinishWithoutBind {
     self.hidden = YES;
@@ -132,18 +145,6 @@
 -(instancetype)init {
     self = [super init];
     if (self) {
-        
-        /// 页面的宽
-        _varNames_layoutConstriantWidth = 320.0;
-        /// 页面的高
-        _varNames_layoutConstriantHeight = 290.0;
-        /// 偏移量
-        _varNames_layoutConstriantOffset = 3.0;
-        
-        _varNames_backgroundViewCenterYMarginValue = 30.0;
-//        _varNames_skillViewTopMarginValue = -60.0;
-        
-//        _varNames_skillViewAnimationDuration = 0.5;
         
         /// 是否能自动登录
         _varNames_isAutoLogin = methodNames_canAutoLogin();
@@ -184,22 +185,23 @@
     [self addSubview:self.varNames_backgroundView];
     
     [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_backgroundView methodNames_constriant:0];
-    _varNames_backgroundViewCenterYConstraint = [ClassNames_BaseViewLayout methodNames_layoutCenterY:self.varNames_backgroundView methodNames_constriant:methodNames_canAutoLogin()?0:_varNames_backgroundViewCenterYMarginValue];
-    [ClassNames_BaseViewLayout methodNames_layoutWidth:_varNames_backgroundView methodNames_constriant:methodNames_getMainViewWidth()];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:_varNames_backgroundView methodNames_constriant:methodNames_getMainViewHeight()];
+    [ClassNames_BaseViewLayout methodNames_layoutCenterY:self.varNames_backgroundView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_backgroundView methodNames_constriant:methodNames_getMainViewWidth()];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_backgroundView methodNames_constriant:methodNames_getMainViewHeight()];
     
-    [self methodNames_createSkillButtonView:methodNames_canAutoLogin()];
-    
-    if (methodNames_canAutoLogin()) {
-        [self methodNames_createAutoLoginView];
-    } else {
-        self.varNames_isAutoLogin = YES;
-        [self methodNames_createLoginView];
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            [ClassNames_PGHubView methodNames_hide];
-            
-        });
-    }
+    // 创建功能按钮 10\11\12
+//    [self methodNames_switchSkillViewWithDefaultButtonTap:12];
+//
+//    if (methodNames_canAutoLogin()) {
+//        [self methodNames_createAutoLoginView];
+//    } else {
+//        self.varNames_isAutoLogin = YES;
+//        [self methodNames_createLoginView];
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.5 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            [ClassNames_PGHubView methodNames_hide];
+//
+//        });
+//    }
     
     [self setNeedsLayout];
 }
@@ -215,9 +217,10 @@
         _varNames_autoLoginView.methodNames_cancelAutoLoginBlock = ^{
             weakSelf.varNames_autoLoginView.hidden = YES;
             [weakSelf.varNames_autoLoginView removeFromSuperview];
-            [weakSelf methodNames_showSkillView:^{
-                [weakSelf methodNames_createLoginView];
-            }];
+            [weakSelf methodNames_createLoginView];
+//            [weakSelf methodNames_showSkillView:^{
+//                [weakSelf methodNames_createLoginView];
+//            }];
         };
         _varNames_autoLoginView.methodNames_autoLoginSuccess = ^(BOOL varNames_isNeedBindPhone, BOOL varNames_isNeedBindPersonID) {
             weakSelf.varNames_isNeedBindPhone = varNames_isNeedBindPhone;
@@ -229,9 +232,10 @@
         _varNames_autoLoginView.methodNames_autoLoginFailure = ^{
             weakSelf.varNames_autoLoginView.hidden = YES;
             [weakSelf.varNames_autoLoginView removeFromSuperview];
-            [weakSelf methodNames_showSkillView:^{
-                [weakSelf methodNames_createLoginView];
-            }];
+            [weakSelf methodNames_createLoginView];
+//            [weakSelf methodNames_showSkillView:^{
+//                [weakSelf methodNames_createLoginView];
+//            }];
         };
 
         [_varNames_backgroundView addSubview:_varNames_autoLoginView];
@@ -278,9 +282,10 @@
             weakSelf.varNames_isNeedBindPersonID = varNames_isNeedBindPersonID;
             weakSelf.varNames_loginView.hidden = YES;
             [weakSelf.varNames_loginView removeFromSuperview];
-            [weakSelf methodNames_hideSkillView:^{
-                [weakSelf methodNames_createBindView];
-            }];
+            [weakSelf methodNames_createBindView];
+//            [weakSelf methodNames_hideSkillView:^{
+//                [weakSelf methodNames_createBindView];
+//            }];
         };
         _varNames_loginView.methodNames_loginFailure = ^{
             NSLog(@"login error");
@@ -304,86 +309,86 @@
 }
 
 
-#pragma mark ---------- 隐藏功能按钮view，下移功能view
-- (void)methodNames_hideSkillView:(void (^)(void))varNames_hide {
-    __weak typeof(self) weakSelf = self;
-    _varNames_skillViewTopConstraint.constant = _varNames_skillViewTopMarginValue;
-    [UIView animateWithDuration:_varNames_skillViewAnimationDuration animations:^{
-        [weakSelf layoutIfNeeded];
-    } completion:^(BOOL finished) {
-        if (finished) {
-            weakSelf.varNames_backgroundViewCenterYConstraint.constant = 0;
-            [UIView animateWithDuration:0.3 animations:^{
-                [weakSelf layoutIfNeeded];
-            } completion:^(BOOL finished) {
-                if (varNames_hide) {
-                    varNames_hide();
-                }
-            }];
-        }
-    }];
-}
-#pragma mark ---------- 上移功能view， 显示功能按钮view
-- (void)methodNames_showSkillView:(void (^)(void))varNames_show {
-    __weak typeof(self) weakSelf = self;
-    _varNames_backgroundViewCenterYConstraint.constant = _varNames_backgroundViewCenterYMarginValue;
-    [UIView animateWithDuration:_varNames_skillViewAnimationDuration animations:^{
-        [weakSelf layoutIfNeeded];
-    } completion:^(BOOL finished) {
-        if (finished) {
-            weakSelf.varNames_skillViewTopConstraint.constant = 0;
-            [UIView animateWithDuration:0.3 animations:^{
-                [weakSelf layoutIfNeeded];
-            } completion:^(BOOL finished) {
-                if (varNames_show) {
-                    varNames_show();
-                }
-            }];
-        }
-    }];
-}
+//#pragma mark ---------- 隐藏功能按钮view，下移功能view
+//- (void)methodNames_hideSkillView:(void (^)(void))varNames_hide {
+//    __weak typeof(self) weakSelf = self;
+//    _varNames_skillViewTopConstraint.constant = _varNames_skillViewTopMarginValue;
+//    [UIView animateWithDuration:_varNames_skillViewAnimationDuration animations:^{
+//        [weakSelf layoutIfNeeded];
+//    } completion:^(BOOL finished) {
+//        if (finished) {
+//            weakSelf.varNames_backgroundViewCenterYConstraint.constant = 0;
+//            [UIView animateWithDuration:0.3 animations:^{
+//                [weakSelf layoutIfNeeded];
+//            } completion:^(BOOL finished) {
+//                if (varNames_hide) {
+//                    varNames_hide();
+//                }
+//            }];
+//        }
+//    }];
+//}
+//#pragma mark ---------- 上移功能view， 显示功能按钮view
+//- (void)methodNames_showSkillView:(void (^)(void))varNames_show {
+//    __weak typeof(self) weakSelf = self;
+//    _varNames_backgroundViewCenterYConstraint.constant = _varNames_backgroundViewCenterYMarginValue;
+//    [UIView animateWithDuration:_varNames_skillViewAnimationDuration animations:^{
+//        [weakSelf layoutIfNeeded];
+//    } completion:^(BOOL finished) {
+//        if (finished) {
+//            weakSelf.varNames_skillViewTopConstraint.constant = 0;
+//            [UIView animateWithDuration:0.3 animations:^{
+//                [weakSelf layoutIfNeeded];
+//            } completion:^(BOOL finished) {
+//                if (varNames_show) {
+//                    varNames_show();
+//                }
+//            }];
+//        }
+//    }];
+//}
 
 
 #pragma mark ---------- 切换到找回密码
-- (void)methodNames_changeToFindbackPasswordView {
-    __weak typeof(self) weakSelf = self;
-    _varNames_skillViewTopConstraint.constant = _varNames_skillViewTopMarginValue;
-    [UIView animateWithDuration:_varNames_skillViewAnimationDuration animations:^{
-        [weakSelf layoutIfNeeded];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:weakSelf.varNames_backgroundView cache:YES];
-    } completion:^(BOOL finished) {
-        if (finished) {
-            [weakSelf methodNames_createFindBackPasswordView];
-            weakSelf.varNames_backgroundViewCenterYConstraint.constant = 0;
-            [UIView animateWithDuration:0.3 animations:^{
-                [weakSelf layoutIfNeeded];
-            }];
-        }
-    }];
-}
+//- (void)methodNames_changeToFindbackPasswordView {
+//    __weak typeof(self) weakSelf = self;
+//    _varNames_skillViewTopConstraint.constant = _varNames_skillViewTopMarginValue;
+//    [UIView animateWithDuration:_varNames_skillViewAnimationDuration animations:^{
+//        [weakSelf layoutIfNeeded];
+//        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+//        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:weakSelf.varNames_backgroundView cache:YES];
+//    } completion:^(BOOL finished) {
+//        if (finished) {
+//            [weakSelf methodNames_createFindBackPasswordView];
+//            weakSelf.varNames_backgroundViewCenterYConstraint.constant = 0;
+//            [UIView animateWithDuration:0.3 animations:^{
+//                [weakSelf layoutIfNeeded];
+//            }];
+//        }
+//    }];
+//}
 #pragma mark ---------- 切换到重置密码
-- (void)methodNames_changeToResetPasswordView {
-    __weak typeof(self) weakSelf = self;
-    _varNames_skillViewTopConstraint.constant = _varNames_skillViewTopMarginValue;
-    [UIView animateWithDuration:_varNames_skillViewAnimationDuration animations:^{
-        [weakSelf layoutIfNeeded];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:weakSelf.varNames_backgroundView cache:YES];
-    } completion:^(BOOL finished) {
-        if (finished) {
-            [weakSelf methodNames_createResetPasswordView];
-            weakSelf.varNames_backgroundViewCenterYConstraint.constant = 0;
-            [UIView animateWithDuration:0.3 animations:^{
-                [weakSelf layoutIfNeeded];
-            }];
-        }
-    }];
-}
+//- (void)methodNames_changeToResetPasswordView {
+//    __weak typeof(self) weakSelf = self;
+//    _varNames_skillViewTopConstraint.constant = _varNames_skillViewTopMarginValue;
+//    [UIView animateWithDuration:_varNames_skillViewAnimationDuration animations:^{
+//        [weakSelf layoutIfNeeded];
+//        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+//        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:weakSelf.varNames_backgroundView cache:YES];
+//    } completion:^(BOOL finished) {
+//        if (finished) {
+//            [weakSelf methodNames_createResetPasswordView];
+//            weakSelf.varNames_backgroundViewCenterYConstraint.constant = 0;
+//            [UIView animateWithDuration:0.3 animations:^{
+//                [weakSelf layoutIfNeeded];
+//            }];
+//        }
+//    }];
+//}
 
 
 #pragma mark ---------- 功能按钮
-- (void)methodNames_createSkillButtonView:(BOOL)varNames_isHide {
+- (void)methodNames_switchSkillViewWithDefaultButtonTap:(NSInteger)index {
     
     if (!_varNames_skillBtnView) {
         _varNames_skillBtnView = [[UIView alloc]init];
@@ -392,22 +397,33 @@
         [self.varNames_backgroundView addSubview:_varNames_skillBtnView];
     }
     
+    UIButton *varNames_selectBtn;
+    
     CGFloat varNames_btnwidth = (320 - methodNames_setMargin_3base() * 2 - 20 * 2)/3.0;
     CGFloat varNames_btnY = 10;
     UIButton *varNames_tmptmpBtn = [self methodNames_createButton:CGRectMake(methodNames_setMargin_3base(), varNames_btnY, varNames_btnwidth, 35) methodNames_title:@"手机登录"];
     varNames_tmptmpBtn.tag = 10;
-    [varNames_tmptmpBtn addTarget:self action:@selector(methodNames_changeLayerColor:) forControlEvents:UIControlEventTouchUpInside];
+    [varNames_tmptmpBtn addTarget:self action:@selector(methodNames_switchSkillView:) forControlEvents:UIControlEventTouchUpInside];
     [_varNames_skillBtnView addSubview:varNames_tmptmpBtn];
+    if (index == varNames_tmptmpBtn.tag) {
+        varNames_selectBtn = varNames_tmptmpBtn;
+    }
     
     UIButton *varNames_tmptmpBtn2 = [self methodNames_createButton:CGRectMake(CGRectGetMaxX(varNames_tmptmpBtn.frame) + 20, varNames_btnY, varNames_btnwidth, 35) methodNames_title:@"账号登录"];
     varNames_tmptmpBtn2.tag = 11;
-    [varNames_tmptmpBtn2 addTarget:self action:@selector(methodNames_changeLayerColor:) forControlEvents:UIControlEventTouchUpInside];
+    [varNames_tmptmpBtn2 addTarget:self action:@selector(methodNames_switchSkillView:) forControlEvents:UIControlEventTouchUpInside];
     [_varNames_skillBtnView addSubview:varNames_tmptmpBtn2];
+    if (index == varNames_tmptmpBtn2.tag) {
+        varNames_selectBtn = varNames_tmptmpBtn2;
+    }
     
     UIButton *varNames_tmptmpBtn3 = [self methodNames_createButton:CGRectMake((CGRectGetMaxX(varNames_tmptmpBtn2.frame) + 20), varNames_btnY, varNames_btnwidth, 35) methodNames_title:@"账号注册"];
     varNames_tmptmpBtn3.tag = 12;
-    [varNames_tmptmpBtn3 addTarget:self action:@selector(methodNames_changeLayerColor:) forControlEvents:UIControlEventTouchUpInside];
+    [varNames_tmptmpBtn3 addTarget:self action:@selector(methodNames_switchSkillView:) forControlEvents:UIControlEventTouchUpInside];
     [_varNames_skillBtnView addSubview:varNames_tmptmpBtn3];
+    if (index == varNames_tmptmpBtn3.tag) {
+        varNames_selectBtn = varNames_tmptmpBtn3;
+    }
     
     [ClassNames_BaseViewLayout methodNames_layoutCenterX:_varNames_skillBtnView methodNames_constriant:0];
     [ClassNames_BaseViewLayout methodNames_layoutBottom:_varNames_skillBtnView methodNames_constriant:0];
@@ -416,7 +432,7 @@
     
     [self bringSubviewToFront:_varNames_backgroundView];
     
-    [self methodNames_resetSkillButtonStatus:varNames_tmptmpBtn2];
+    [self methodNames_resetSkillButtonStatus:varNames_selectBtn];
 }
 
 - (UIButton *)methodNames_createButton:(CGRect)frame methodNames_title:(NSString *)varNames_title {
@@ -439,7 +455,7 @@
 }
 
 #pragma mark ---------- 功能按钮的事件
-- (void)methodNames_changeLayerColor:(UIButton *)sender {
+- (void)methodNames_switchSkillView:(UIButton *)sender {
     
     [self endEditing:YES];
     [self.varNames_loginView methodNames_hidMoreAccountTableView];
@@ -567,9 +583,10 @@
                 if (object.varNames_msg) {
                     [ClassNames_PGHubView methodNames_showErrorMessage:object.varNames_msg];
                     weakSelf.varNames_isAnimating = NO;
-                    [weakSelf methodNames_showSkillView:^{
-                        [weakSelf methodNames_visitorLoginFailureForNoNet];
-                    }];
+                    [weakSelf methodNames_visitorLoginFailureForNoNet];
+//                    [weakSelf methodNames_showSkillView:^{
+//                        [weakSelf methodNames_visitorLoginFailureForNoNet];
+//                    }];
                 }
             }
             
@@ -580,9 +597,10 @@
             [ClassNames_PGHubView methodNames_hide];
             [ClassNames_PGHubView methodNames_showErrorMessage:@"网络出了小差!!!"];
             weakSelf.varNames_isAnimating = NO;
-            [weakSelf methodNames_showSkillView:^{
-                [weakSelf methodNames_visitorLoginFailureForNoNet];
-            }];
+            [weakSelf methodNames_visitorLoginFailureForNoNet];
+//            [weakSelf methodNames_showSkillView:^{
+//                [weakSelf methodNames_visitorLoginFailureForNoNet];
+//            }];
         });
     };
 }
@@ -608,10 +626,10 @@
     [self.varNames_quickLoginView methodNames_canBindPhone:self.varNames_isNeedBindPhone];
     
     
-    [ClassNames_BaseViewLayout methodNames_layoutCenterX:_varNames_quickLoginView methodNames_constriant:_varNames_layoutConstriantOffset];
+    [ClassNames_BaseViewLayout methodNames_layoutCenterX:_varNames_quickLoginView methodNames_constriant:0];
     [ClassNames_BaseViewLayout methodNames_layoutTop:_varNames_quickLoginView methodNames_constriant:methodNames_setMargin_2base() * 2];
-    [ClassNames_BaseViewLayout methodNames_layoutWidth:_varNames_quickLoginView methodNames_constriant:_varNames_layoutConstriantWidth];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:_varNames_quickLoginView methodNames_constriant:_varNames_layoutConstriantHeight];
+    [ClassNames_BaseViewLayout methodNames_layoutWidth:_varNames_quickLoginView methodNames_constriant:methodNames_getMainViewWidth()];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:_varNames_quickLoginView methodNames_constriant:methodNames_getMainViewHeight()];
     
 }
 /// 快速登陆成功
@@ -640,10 +658,11 @@
 
         [self methodNames_showQuickLoginView:nil methodNames_account:model.varNames_username methodNames_password:model.varNames_password];
     } else {
-        __weak typeof(self) weakSelf = self;
-        [self methodNames_hideSkillView:^{
-            [weakSelf methodNames_createBindView];
-        }];
+        [self methodNames_createBindView];
+//        __weak typeof(self) weakSelf = self;
+//        [self methodNames_hideSkillView:^{
+//            [weakSelf methodNames_createBindView];
+//        }];
     }
     
 }
@@ -671,40 +690,40 @@
         _varNames_findbackPasswordView.clipsToBounds = YES;
         _varNames_findbackPasswordView.methodNames_findBackPasswordSuccess = ^{
             weakSelf.varNames_findbackPasswordView.hidden = YES;
-            [weakSelf methodNames_changeLoginViewFormFindbackPasswordView];
+//            [weakSelf methodNames_changeLoginViewFormFindbackPasswordView];
         };
         _varNames_findbackPasswordView.methodNames_backAction = ^{
-            [weakSelf methodNames_changeLoginViewFormFindbackPasswordView];
+//            [weakSelf methodNames_changeLoginViewFormFindbackPasswordView];
         };
     } else {
         _varNames_findbackPasswordView.hidden = NO;
     }
     [_varNames_backgroundView addSubview:_varNames_findbackPasswordView];
-    [ClassNames_BaseViewLayout methodNames_layoutCenterX:_varNames_findbackPasswordView methodNames_constriant:_varNames_layoutConstriantOffset];
+    [ClassNames_BaseViewLayout methodNames_layoutCenterX:_varNames_findbackPasswordView methodNames_constriant:0];
     [ClassNames_BaseViewLayout methodNames_layoutTop:_varNames_findbackPasswordView methodNames_constriant:methodNames_setMargin_2base() * 2];
-    [ClassNames_BaseViewLayout methodNames_layoutWidth:_varNames_findbackPasswordView methodNames_constriant:_varNames_layoutConstriantWidth];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:_varNames_findbackPasswordView methodNames_constriant:_varNames_layoutConstriantHeight];
+    [ClassNames_BaseViewLayout methodNames_layoutWidth:_varNames_findbackPasswordView methodNames_constriant:methodNames_getMainViewWidth()];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:_varNames_findbackPasswordView methodNames_constriant:methodNames_getMainViewHeight()];
     [self setNeedsLayout];
 }
 #pragma mark ---------- 从找回密码返回到登陆页面
-- (void)methodNames_changeLoginViewFormFindbackPasswordView {
-    __weak typeof(self) weakSelf = self;
-    
-    _varNames_backgroundViewCenterYConstraint.constant = _varNames_backgroundViewCenterYMarginValue;
-    [UIView animateWithDuration:_varNames_skillViewAnimationDuration animations:^{
-        [weakSelf layoutIfNeeded];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:weakSelf.varNames_backgroundView cache:YES];
-    } completion:^(BOOL finished) {
-        if (finished) {
-            [weakSelf methodNames_createLoginView];
-            weakSelf.varNames_skillViewTopConstraint.constant = 0;
-            [UIView animateWithDuration:0.3 animations:^{
-                [weakSelf layoutIfNeeded];
-            }];
-        }
-    }];
-}
+//- (void)methodNames_changeLoginViewFormFindbackPasswordView {
+//    __weak typeof(self) weakSelf = self;
+//
+//    _varNames_backgroundViewCenterYConstraint.constant = _varNames_backgroundViewCenterYMarginValue;
+//    [UIView animateWithDuration:_varNames_skillViewAnimationDuration animations:^{
+//        [weakSelf layoutIfNeeded];
+//        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+//        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:weakSelf.varNames_backgroundView cache:YES];
+//    } completion:^(BOOL finished) {
+//        if (finished) {
+//            [weakSelf methodNames_createLoginView];
+//            weakSelf.varNames_skillViewTopConstraint.constant = 0;
+//            [UIView animateWithDuration:0.3 animations:^{
+//                [weakSelf layoutIfNeeded];
+//            }];
+//        }
+//    }];
+//}
 #pragma mark ---------- 重置密码按钮事件
 - (void)methodNames_createResetPasswordView{
     __weak typeof(self) weakSelf = self;
@@ -714,40 +733,40 @@
         _varNames_resetPasswordView.hidden = NO;
         _varNames_resetPasswordView.methodNames_resetPasswordSuccess = ^{
             weakSelf.varNames_resetPasswordView.hidden = YES;
-            [weakSelf methodNames_changeLoginViewFormResetPasswordView];
+//            [weakSelf methodNames_changeLoginViewFormResetPasswordView];
         };
         _varNames_resetPasswordView.methodNames_backAction = ^{  
-            [weakSelf methodNames_changeLoginViewFormResetPasswordView];
+//            [weakSelf methodNames_changeLoginViewFormResetPasswordView];
         };
     } else {
         _varNames_resetPasswordView.hidden = NO;
         
     }
     [_varNames_backgroundView addSubview:_varNames_resetPasswordView];
-    [ClassNames_BaseViewLayout methodNames_layoutCenterX:_varNames_resetPasswordView methodNames_constriant:_varNames_layoutConstriantOffset];
+    [ClassNames_BaseViewLayout methodNames_layoutCenterX:_varNames_resetPasswordView methodNames_constriant:0];
     [ClassNames_BaseViewLayout methodNames_layoutTop:_varNames_resetPasswordView methodNames_constriant:methodNames_setMargin_2base() * 2];
-    [ClassNames_BaseViewLayout methodNames_layoutWidth:_varNames_resetPasswordView methodNames_constriant:_varNames_layoutConstriantWidth];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:_varNames_resetPasswordView methodNames_constriant:_varNames_layoutConstriantHeight];
+    [ClassNames_BaseViewLayout methodNames_layoutWidth:_varNames_resetPasswordView methodNames_constriant:methodNames_getMainViewWidth()];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:_varNames_resetPasswordView methodNames_constriant:methodNames_getMainViewHeight()];
     [self setNeedsLayout];
 }
-- (void)methodNames_changeLoginViewFormResetPasswordView {
-    __weak typeof(self) weakSelf = self;
-    _varNames_backgroundViewCenterYConstraint.constant = _varNames_backgroundViewCenterYMarginValue;
-    [UIView animateWithDuration:_varNames_skillViewAnimationDuration animations:^{
-        // 详见UIViewAnimationCurve
-        [weakSelf layoutIfNeeded];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:weakSelf.varNames_backgroundView cache:YES];
-    } completion:^(BOOL finished) {
-        if (finished) {
-            [weakSelf methodNames_createLoginView];
-            weakSelf.varNames_skillViewTopConstraint.constant = 0;
-            [UIView animateWithDuration:0.3 animations:^{
-                [weakSelf layoutIfNeeded];
-            }];
-        }
-    }];
-}
+//- (void)methodNames_changeLoginViewFormResetPasswordView {
+//    __weak typeof(self) weakSelf = self;
+//    _varNames_backgroundViewCenterYConstraint.constant = _varNames_backgroundViewCenterYMarginValue;
+//    [UIView animateWithDuration:_varNames_skillViewAnimationDuration animations:^{
+//        // 详见UIViewAnimationCurve
+//        [weakSelf layoutIfNeeded];
+//        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+//        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromRight forView:weakSelf.varNames_backgroundView cache:YES];
+//    } completion:^(BOOL finished) {
+//        if (finished) {
+//            [weakSelf methodNames_createLoginView];
+//            weakSelf.varNames_skillViewTopConstraint.constant = 0;
+//            [UIView animateWithDuration:0.3 animations:^{
+//                [weakSelf layoutIfNeeded];
+//            }];
+//        }
+//    }];
+//}
 #pragma mark ---------- 账号注册View
 - (void)methodNames_createNormalRegisterView {
     __weak typeof(self) weakSelf = self;
@@ -756,9 +775,10 @@
         _varNames_normalRegisterView.methodNames_normalRegisterSuccess = ^(BOOL varNames_isNeedBindPhone, BOOL varNames_isNeedBindPersonID) {
             weakSelf.varNames_isNeedBindPhone = varNames_isNeedBindPhone;
             weakSelf.varNames_isNeedBindPersonID = varNames_isNeedBindPersonID;
-            [weakSelf methodNames_hideSkillView:^{
-                [weakSelf methodNames_createBindView];
-            }];
+            [weakSelf methodNames_createBindView];
+//            [weakSelf methodNames_hideSkillView:^{
+//                [weakSelf methodNames_createBindView];
+//            }];
         };
         _varNames_normalRegisterView.methodNames_servicceBlock = ^{
             [weakSelf methodNames_showCustomerServerView];
@@ -817,12 +837,13 @@
         _varNames_phoneRegisterView.methodNames_phoneRegisterSuccess = ^(BOOL varNames_isNeedBindPersonID) {
             weakSelf.varNames_isNeedBindPhone = NO;
             weakSelf.varNames_isNeedBindPersonID = varNames_isNeedBindPersonID;
-            [weakSelf methodNames_hideSkillView:^{
-                [weakSelf methodNames_createBindView];
-            }];
+            [weakSelf methodNames_createBindView];
+//            [weakSelf methodNames_hideSkillView:^{
+//                [weakSelf methodNames_createBindView];
+//            }];
         };
         _varNames_phoneRegisterView.methodNames_backAction = ^{
-            [weakSelf methodNames_changeNormalViewFormPhoneRegisterView];
+//            [weakSelf methodNames_changeNormalViewFormPhoneRegisterView];
         };
         _varNames_phoneRegisterView.methodNames_servicceBlock = ^{
             [weakSelf methodNames_showCustomerServerView];
@@ -848,24 +869,24 @@
     
 }
 #pragma mark ---------- 返回账号注册view
-- (void)methodNames_changeNormalViewFormPhoneRegisterView {
-    __weak typeof(self) weakSelf = self;
-    
-    _varNames_backgroundViewCenterYConstraint.constant = _varNames_backgroundViewCenterYMarginValue;
-    [UIView animateWithDuration:_varNames_skillViewAnimationDuration animations:^{
-        [weakSelf layoutIfNeeded];
-        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
-        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:weakSelf.varNames_backgroundView cache:YES];
-    } completion:^(BOOL finished) {
-        if (finished) {
-            [weakSelf methodNames_createNormalRegisterView];
-            weakSelf.varNames_skillViewTopConstraint.constant = 0;
-            [UIView animateWithDuration:0.3 animations:^{
-                [weakSelf layoutIfNeeded];
-            }];
-        }
-    }];
-}
+//- (void)methodNames_changeNormalViewFormPhoneRegisterView {
+//    __weak typeof(self) weakSelf = self;
+//
+//    _varNames_backgroundViewCenterYConstraint.constant = _varNames_backgroundViewCenterYMarginValue;
+//    [UIView animateWithDuration:_varNames_skillViewAnimationDuration animations:^{
+//        [weakSelf layoutIfNeeded];
+//        [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+//        [UIView setAnimationTransition:UIViewAnimationTransitionFlipFromLeft forView:weakSelf.varNames_backgroundView cache:YES];
+//    } completion:^(BOOL finished) {
+//        if (finished) {
+//            [weakSelf methodNames_createNormalRegisterView];
+//            weakSelf.varNames_skillViewTopConstraint.constant = 0;
+//            [UIView animateWithDuration:0.3 animations:^{
+//                [weakSelf layoutIfNeeded];
+//            }];
+//        }
+//    }];
+//}
 
 #pragma mark ---------- 绑定手机号
 - (void)methodNames_createBindPhoeView {
@@ -880,6 +901,7 @@
         };
         _varNames_bindPhoneView.methodNames_closeBindPhoneView = ^{
             weakSelf.varNames_isNeedBindPhone = NO;
+            weakSelf.varNames_isNeedBindPersonID = YES;
             [weakSelf methodNames_createBindView];
         };
         [_varNames_backgroundView addSubview:_varNames_bindPhoneView];
@@ -908,10 +930,10 @@
         [_varNames_backgroundView addSubview:_varNames_bindPersonIDView];
     }
     
-    [ClassNames_BaseViewLayout methodNames_layoutCenterX:_varNames_bindPersonIDView methodNames_constriant:_varNames_layoutConstriantOffset];
-    [ClassNames_BaseViewLayout methodNames_layoutTop:_varNames_bindPersonIDView methodNames_constriant:methodNames_setMargin_2base() * 2];
-    [ClassNames_BaseViewLayout methodNames_layoutWidth:_varNames_bindPersonIDView methodNames_constriant:_varNames_layoutConstriantWidth];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:_varNames_bindPersonIDView methodNames_constriant:_varNames_layoutConstriantHeight];
+    [ClassNames_BaseViewLayout methodNames_layoutTop:_varNames_bindPersonIDView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutLeft:_varNames_bindPersonIDView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutRight:_varNames_bindPersonIDView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:_varNames_bindPersonIDView methodNames_constriant:290];
     [self setNeedsLayout];
 }
 
@@ -930,10 +952,11 @@
             weakSelf.varNames_isNeedBindPersonID = NO;
             [weakSelf methodNames_createBindView];
         };
+        
         [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_suggestView methodNames_constriant:0];
         [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_suggestView methodNames_constriant:0];
-        [ClassNames_BaseViewLayout methodNames_layoutBottom:self.varNames_suggestView methodNames_constriant:0];
         [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_suggestView methodNames_constriant:0];
+        [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_suggestView methodNames_constriant:280];
     }
 }
 

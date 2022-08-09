@@ -145,6 +145,9 @@
         [self.varNames_leftButton setBackgroundImage:varNames_img forState:UIControlStateNormal];
     }
     [self.varNames_leftButton setTitle:varNames_tmpTitle forState:UIControlStateNormal];
+    if (!varNames_tmpTitle.length && !varNames_image.length) {
+        self.varNames_leftButton.hidden = YES;
+    }
     [self methodNames_layoutSubView];
 }
 
@@ -163,6 +166,9 @@
         [self.varNames_rightButton setBackgroundImage:varNames_img forState:UIControlStateNormal];
     }
     [self.varNames_rightButton setTitle:varNames_tmpTitle forState:UIControlStateNormal];
+    if (!varNames_tmpTitle.length && !varNames_image.length) {
+        self.varNames_rightButton.hidden = YES;
+    }
     [self methodNames_layoutSubView];
 }
 

@@ -851,15 +851,17 @@ static CGFloat varNameS_KEYBOARDMINY = 0;
     self.varNames_itemButton.hidden = YES;
     if (!self.varNames_inputViewTitleType) {
         self.varNames_titleLabel.text = methodNames_getTitle_BindPersonIDView_inputView_title1();
-        
+    } else {
+        UIImage *varNames_img = methodNames_getImage(@"image_phone");
+        CGSize varNames_iconSize = methodNames_getImageSize(varNames_img);
+        self.varNames_iconWidthConstraint.constant = varNames_iconSize.width/2.0;
+        self.varNames_iconHeightConstraint.constant = varNames_iconSize.height/2.0;
+        self.varNames_inputViewTypeImage.image = varNames_img;
     }
-//    self.varNames_textField.placeholder = methodNames_getTitle_BindPersonIDView_inputView_placeholder1();
     [self methodNames_confiInputViewPlaceholder:methodNames_getTitle_BindPersonIDView_inputView_placeholder1() subMethodNames_placeholdercolor:[UIColor grayColor]];
     self.varNames_textField.returnKeyType = UIReturnKeyNext;
     self.varNames_returnType = varNames_keyboardReturnNext;
     self.varNames_textFieldRight.constant = methodNames_setMargin_base();
-    
-    methodNames_drawPerson(self.varNames_inputViewTypeImage, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_backgroundColor_config()]);
 }
 
 #pragma mark ---------- 绑定身份证证件输入框
@@ -867,15 +869,17 @@ static CGFloat varNameS_KEYBOARDMINY = 0;
     self.varNames_itemButton.hidden = YES;
     if (!self.varNames_inputViewTitleType) {
         self.varNames_titleLabel.text = methodNames_getTitle_BindPersonIDView_inputView_title2();
-        
+    } else {
+        UIImage *varNames_img = methodNames_getImage(@"image_phone");
+        CGSize varNames_iconSize = methodNames_getImageSize(varNames_img);
+        self.varNames_iconWidthConstraint.constant = varNames_iconSize.width/2.0;
+        self.varNames_iconHeightConstraint.constant = varNames_iconSize.height/2.0;
+        self.varNames_inputViewTypeImage.image = varNames_img;
     }
-//    self.varNames_textField.placeholder = methodNames_getTitle_BindPersonIDView_inputView_placeholder2();
     [self methodNames_confiInputViewPlaceholder:methodNames_getTitle_BindPersonIDView_inputView_placeholder2() subMethodNames_placeholdercolor:[UIColor grayColor]];
-    self.varNames_textField.returnKeyType = UIReturnKeyDefault;
-    self.varNames_returnType = varNames_keyboardReturnDefault;
+    self.varNames_textField.returnKeyType = UIReturnKeyNext;
+    self.varNames_returnType = varNames_keyboardReturnNext;
     self.varNames_textFieldRight.constant = methodNames_setMargin_base();
-    
-    methodNames_drawCard(self.varNames_inputViewTypeImage, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_backgroundColor_config()]);
 }
 #pragma mark ---------- 统一设置inputView的placeholder的内容，颜色
 - (void)methodNames_confiInputViewPlaceholder:(NSString *)varNames_argPlaceholder subMethodNames_placeholdercolor:(UIColor *)varNames_color{
