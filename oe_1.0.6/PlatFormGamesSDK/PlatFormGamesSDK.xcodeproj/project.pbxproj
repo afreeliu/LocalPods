@@ -1,0 +1,1165 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 50;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		330FEA3823014BD8008C0D0F /* ClassNames_CustomServerView.h in Headers */ = {isa = PBXBuildFile; fileRef = 330FEA3223014BD7008C0D0F /* ClassNames_CustomServerView.h */; };
+		330FEA3923014BD8008C0D0F /* ClassNames_CustomServerView.m in Sources */ = {isa = PBXBuildFile; fileRef = 330FEA3323014BD7008C0D0F /* ClassNames_CustomServerView.m */; };
+		330FEA3A23014BD8008C0D0F /* ClassNames_DelegateView.m in Sources */ = {isa = PBXBuildFile; fileRef = 330FEA3423014BD7008C0D0F /* ClassNames_DelegateView.m */; };
+		330FEA3C23014BD8008C0D0F /* ClassNames_DelegateView.h in Headers */ = {isa = PBXBuildFile; fileRef = 330FEA3623014BD7008C0D0F /* ClassNames_DelegateView.h */; };
+		33185113221A9772003907D5 /* ClassName_AppStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 33185111221A9772003907D5 /* ClassName_AppStore.m */; };
+		33185114221A9772003907D5 /* ClassName_AppStore.h in Headers */ = {isa = PBXBuildFile; fileRef = 33185112221A9772003907D5 /* ClassName_AppStore.h */; };
+		331B31282124481A00544DB8 /* ClassNames_AccountTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = 331B31262124481A00544DB8 /* ClassNames_AccountTableViewCell.h */; };
+		331B31292124481A00544DB8 /* ClassNames_AccountTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 331B31272124481A00544DB8 /* ClassNames_AccountTableViewCell.m */; };
+		331B312D212525C800544DB8 /* ClassNames_LoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 331B312B212525C800544DB8 /* ClassNames_LoadingView.m */; };
+		331B312E212525C800544DB8 /* ClassNames_LoadingView.h in Headers */ = {isa = PBXBuildFile; fileRef = 331B312C212525C800544DB8 /* ClassNames_LoadingView.h */; };
+		331B31312125280B00544DB8 /* ClassNames_ViewTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 331B31302125280B00544DB8 /* ClassNames_ViewTool.h */; };
+		331B33D22125781200544DB8 /* UmPlatsFormGameManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 331B33D02125781200544DB8 /* UmPlatsFormGameManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		331B33D32125781200544DB8 /* UmPlatsFormGameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 331B33D12125781200544DB8 /* UmPlatsFormGameManager.m */; };
+		331B33E02125786000544DB8 /* ClassName_IAPMain.m in Sources */ = {isa = PBXBuildFile; fileRef = 331B33D62125786000544DB8 /* ClassName_IAPMain.m */; };
+		331B33E22125786000544DB8 /* ClassName_IAPMain.h in Headers */ = {isa = PBXBuildFile; fileRef = 331B33D82125786000544DB8 /* ClassName_IAPMain.h */; };
+		331B33E32125786000544DB8 /* ClassName_IAPFail.m in Sources */ = {isa = PBXBuildFile; fileRef = 331B33D92125786000544DB8 /* ClassName_IAPFail.m */; };
+		331B33E42125786000544DB8 /* ClassName_IAPRepair.h in Headers */ = {isa = PBXBuildFile; fileRef = 331B33DA2125786000544DB8 /* ClassName_IAPRepair.h */; };
+		331B33E52125786000544DB8 /* ClassName_IAPRepair.m in Sources */ = {isa = PBXBuildFile; fileRef = 331B33DB2125786000544DB8 /* ClassName_IAPRepair.m */; };
+		331B33E62125786000544DB8 /* ClassName_IAPFail.h in Headers */ = {isa = PBXBuildFile; fileRef = 331B33DC2125786000544DB8 /* ClassName_IAPFail.h */; };
+		331B33E72125786000544DB8 /* ClassName_IAPInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = 331B33DD2125786000544DB8 /* ClassName_IAPInfo.m */; };
+		331B33E82125786000544DB8 /* ClassName_IAPInfo.h in Headers */ = {isa = PBXBuildFile; fileRef = 331B33DE2125786000544DB8 /* ClassName_IAPInfo.h */; };
+		331B33F021257F6B00544DB8 /* ClassNames_NavigationBarView.m in Sources */ = {isa = PBXBuildFile; fileRef = 331B33EE21257F6B00544DB8 /* ClassNames_NavigationBarView.m */; };
+		331B33F121257F6B00544DB8 /* ClassNames_NavigationBarView.h in Headers */ = {isa = PBXBuildFile; fileRef = 331B33EF21257F6B00544DB8 /* ClassNames_NavigationBarView.h */; };
+		331D91AC217465740049853B /* ClassNames_VideoPlayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 331D91AA217465740049853B /* ClassNames_VideoPlayView.m */; };
+		331D91AD217465740049853B /* ClassNames_VideoPlayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 331D91AB217465740049853B /* ClassNames_VideoPlayView.h */; };
+		33333A61212118FB00446146 /* ClassNames_CommitButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 33333A5F212118FB00446146 /* ClassNames_CommitButton.h */; };
+		33333A62212118FB00446146 /* ClassNames_CommitButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 33333A60212118FB00446146 /* ClassNames_CommitButton.m */; };
+		33333A652121247A00446146 /* ClassNames_BindPhoneView.h in Headers */ = {isa = PBXBuildFile; fileRef = 33333A632121247A00446146 /* ClassNames_BindPhoneView.h */; };
+		33333A662121247A00446146 /* ClassNames_BindPhoneView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33333A642121247A00446146 /* ClassNames_BindPhoneView.m */; };
+		33333A692121248C00446146 /* ClassNames_BindPersonIDView.h in Headers */ = {isa = PBXBuildFile; fileRef = 33333A672121248C00446146 /* ClassNames_BindPersonIDView.h */; };
+		33333A6A2121248C00446146 /* ClassNames_BindPersonIDView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33333A682121248C00446146 /* ClassNames_BindPersonIDView.m */; };
+		33333A6D21212A7200446146 /* ClassNames_QuickLoginView.h in Headers */ = {isa = PBXBuildFile; fileRef = 33333A6B21212A7200446146 /* ClassNames_QuickLoginView.h */; };
+		33333A6E21212A7200446146 /* ClassNames_QuickLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33333A6C21212A7200446146 /* ClassNames_QuickLoginView.m */; };
+		33333A7121212AB400446146 /* ClassNames_LoginView.h in Headers */ = {isa = PBXBuildFile; fileRef = 33333A6F21212AB400446146 /* ClassNames_LoginView.h */; };
+		33333A7221212AB400446146 /* ClassNames_LoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33333A7021212AB400446146 /* ClassNames_LoginView.m */; };
+		33333A7521212ACA00446146 /* ClassNames_FindBackPasswordView.h in Headers */ = {isa = PBXBuildFile; fileRef = 33333A7321212ACA00446146 /* ClassNames_FindBackPasswordView.h */; };
+		33333A7621212ACA00446146 /* ClassNames_FindBackPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33333A7421212ACA00446146 /* ClassNames_FindBackPasswordView.m */; };
+		33333A7921212ADE00446146 /* ClassNames_ResetPasswordView.h in Headers */ = {isa = PBXBuildFile; fileRef = 33333A7721212ADE00446146 /* ClassNames_ResetPasswordView.h */; };
+		33333A7A21212ADE00446146 /* ClassNames_ResetPasswordView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33333A7821212ADE00446146 /* ClassNames_ResetPasswordView.m */; };
+		33333A7D21212B0100446146 /* ClassNames_NormalRegisterView.h in Headers */ = {isa = PBXBuildFile; fileRef = 33333A7B21212B0100446146 /* ClassNames_NormalRegisterView.h */; };
+		33333A7E21212B0100446146 /* ClassNames_NormalRegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33333A7C21212B0100446146 /* ClassNames_NormalRegisterView.m */; };
+		33333A8421212B2A00446146 /* ClassNames_PhoneRegisterView.h in Headers */ = {isa = PBXBuildFile; fileRef = 33333A8221212B2A00446146 /* ClassNames_PhoneRegisterView.h */; };
+		33333A8521212B2A00446146 /* ClassNames_PhoneRegisterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33333A8321212B2A00446146 /* ClassNames_PhoneRegisterView.m */; };
+		33333BD52121727500446146 /* ClassNames_MainView.h in Headers */ = {isa = PBXBuildFile; fileRef = 33333BD32121727500446146 /* ClassNames_MainView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		33333BD62121727500446146 /* ClassNames_MainView.m in Sources */ = {isa = PBXBuildFile; fileRef = 33333BD42121727500446146 /* ClassNames_MainView.m */; };
+		33333BD821218A0500446146 /* ClassNames_ImageBackground.h in Headers */ = {isa = PBXBuildFile; fileRef = 33333BD7212186CA00446146 /* ClassNames_ImageBackground.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		333AF949211B029B00A9FA38 /* ClassNames_InputView.h in Headers */ = {isa = PBXBuildFile; fileRef = 333AF947211B029B00A9FA38 /* ClassNames_InputView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		333AF94A211B029B00A9FA38 /* ClassNames_InputView.m in Sources */ = {isa = PBXBuildFile; fileRef = 333AF948211B029B00A9FA38 /* ClassNames_InputView.m */; };
+		333AFAB0211D635300A9FA38 /* ClassNames_AutoLoginView.h in Headers */ = {isa = PBXBuildFile; fileRef = 333AFAAE211D635300A9FA38 /* ClassNames_AutoLoginView.h */; };
+		333AFAB1211D635300A9FA38 /* ClassNames_AutoLoginView.m in Sources */ = {isa = PBXBuildFile; fileRef = 333AFAAF211D635300A9FA38 /* ClassNames_AutoLoginView.m */; };
+		3362832C2114016500CC7D24 /* ClassNames_URLSessionConfigure.h in Headers */ = {isa = PBXBuildFile; fileRef = 3362832A2114016500CC7D24 /* ClassNames_URLSessionConfigure.h */; };
+		3362832D2114016500CC7D24 /* ClassNames_URLSessionConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 3362832B2114016500CC7D24 /* ClassNames_URLSessionConfigure.m */; };
+		33628330211402D300CC7D24 /* ClassNames_URLSessionManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 3362832E211402D300CC7D24 /* ClassNames_URLSessionManager.h */; };
+		33628331211402D300CC7D24 /* ClassNames_URLSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3362832F211402D300CC7D24 /* ClassNames_URLSessionManager.m */; };
+		336283332114069000CC7D24 /* ClassNames_URLProtocol.h in Headers */ = {isa = PBXBuildFile; fileRef = 336283322114069000CC7D24 /* ClassNames_URLProtocol.h */; };
+		33628337211407AB00CC7D24 /* ClassNames_SecurityTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 33628335211407AB00CC7D24 /* ClassNames_SecurityTool.h */; };
+		33628338211407AB00CC7D24 /* ClassNames_SecurityTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 33628336211407AB00CC7D24 /* ClassNames_SecurityTool.m */; };
+		3362833C2114096F00CC7D24 /* ClassNames_InitGamesConfigure.h in Headers */ = {isa = PBXBuildFile; fileRef = 3362833A2114096F00CC7D24 /* ClassNames_InitGamesConfigure.h */; };
+		3362833D2114096F00CC7D24 /* ClassNames_InitGamesConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 3362833B2114096F00CC7D24 /* ClassNames_InitGamesConfigure.m */; };
+		33628341211409D300CC7D24 /* ClassNames_NotificationConfigure.h in Headers */ = {isa = PBXBuildFile; fileRef = 3362833F211409D300CC7D24 /* ClassNames_NotificationConfigure.h */; };
+		33628342211409D300CC7D24 /* ClassNames_NotificationConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 33628340211409D300CC7D24 /* ClassNames_NotificationConfigure.m */; };
+		3362834621140A1E00CC7D24 /* ClassNames_DebugLog.h in Headers */ = {isa = PBXBuildFile; fileRef = 3362834421140A1E00CC7D24 /* ClassNames_DebugLog.h */; };
+		336283E32114240E00CC7D24 /* ClassNames_Color.h in Headers */ = {isa = PBXBuildFile; fileRef = 336283E12114240E00CC7D24 /* ClassNames_Color.h */; };
+		336283E42114240E00CC7D24 /* ClassNames_Color.m in Sources */ = {isa = PBXBuildFile; fileRef = 336283E22114240E00CC7D24 /* ClassNames_Color.m */; };
+		336283E82114254E00CC7D24 /* ClassNames_RegularMatch.h in Headers */ = {isa = PBXBuildFile; fileRef = 336283E62114254E00CC7D24 /* ClassNames_RegularMatch.h */; };
+		336283F22114280700CC7D24 /* ClassNames_DeviceConfigure.h in Headers */ = {isa = PBXBuildFile; fileRef = 336283F02114280700CC7D24 /* ClassNames_DeviceConfigure.h */; };
+		336283F32114280700CC7D24 /* ClassNames_DeviceConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 336283F12114280700CC7D24 /* ClassNames_DeviceConfigure.m */; };
+		336283F721142C3A00CC7D24 /* ClassNames_CutImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 336283F521142C3A00CC7D24 /* ClassNames_CutImage.h */; };
+		336283FC21142DA600CC7D24 /* ClassNames_AnimateTool.h in Headers */ = {isa = PBXBuildFile; fileRef = 336283FA21142DA600CC7D24 /* ClassNames_AnimateTool.h */; };
+		3362855D2117E1B300CC7D24 /* ClassNames_BaseModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3362855B2117E1B300CC7D24 /* ClassNames_BaseModel.h */; };
+		3362855E2117E1B300CC7D24 /* ClassNames_BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3362855C2117E1B300CC7D24 /* ClassNames_BaseModel.m */; };
+		336285622117E69E00CC7D24 /* ClassNames_GameInitialiseModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 336285602117E69E00CC7D24 /* ClassNames_GameInitialiseModel.h */; };
+		336285632117E69E00CC7D24 /* ClassNames_GameInitialiseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 336285612117E69E00CC7D24 /* ClassNames_GameInitialiseModel.m */; };
+		336285662117E6D800CC7D24 /* ClassNames_ActivateModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 336285642117E6D800CC7D24 /* ClassNames_ActivateModel.h */; };
+		336285672117E6D800CC7D24 /* ClassNames_ActivateModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 336285652117E6D800CC7D24 /* ClassNames_ActivateModel.m */; };
+		3362856A2117E72300CC7D24 /* ClassNames_MemberVisitorModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 336285682117E72300CC7D24 /* ClassNames_MemberVisitorModel.h */; };
+		3362856B2117E72300CC7D24 /* ClassNames_MemberVisitorModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 336285692117E72300CC7D24 /* ClassNames_MemberVisitorModel.m */; };
+		3362856E2117E8F900CC7D24 /* ClassNames_MemberNormalRegisterModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3362856C2117E8F900CC7D24 /* ClassNames_MemberNormalRegisterModel.h */; };
+		3362856F2117E8F900CC7D24 /* ClassNames_MemberNormalRegisterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3362856D2117E8F900CC7D24 /* ClassNames_MemberNormalRegisterModel.m */; };
+		336285722117E90D00CC7D24 /* ClassNames_MemberRegisterModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 336285702117E90D00CC7D24 /* ClassNames_MemberRegisterModel.h */; };
+		336285732117E90D00CC7D24 /* ClassNames_MemberRegisterModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 336285712117E90D00CC7D24 /* ClassNames_MemberRegisterModel.m */; };
+		336285762117E9FB00CC7D24 /* ClassNames_MemberLoginModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 336285742117E9FB00CC7D24 /* ClassNames_MemberLoginModel.h */; };
+		336285772117E9FB00CC7D24 /* ClassNames_MemberLoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 336285752117E9FB00CC7D24 /* ClassNames_MemberLoginModel.m */; };
+		3362857A2117EA3300CC7D24 /* ClassNames_UpdatePSWModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 336285782117EA3300CC7D24 /* ClassNames_UpdatePSWModel.h */; };
+		3362857B2117EA3300CC7D24 /* ClassNames_UpdatePSWModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 336285792117EA3300CC7D24 /* ClassNames_UpdatePSWModel.m */; };
+		3362857E2117EA4700CC7D24 /* ClassNames_BackUserPSWModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3362857C2117EA4700CC7D24 /* ClassNames_BackUserPSWModel.h */; };
+		3362857F2117EA4700CC7D24 /* ClassNames_BackUserPSWModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3362857D2117EA4700CC7D24 /* ClassNames_BackUserPSWModel.m */; };
+		336285822117EA6100CC7D24 /* ClassNames_MembeRoleModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 336285802117EA6100CC7D24 /* ClassNames_MembeRoleModel.h */; };
+		336285832117EA6100CC7D24 /* ClassNames_MembeRoleModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 336285812117EA6100CC7D24 /* ClassNames_MembeRoleModel.m */; };
+		336285862117EA7400CC7D24 /* ClassNames_UpdateUserLoginModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 336285842117EA7400CC7D24 /* ClassNames_UpdateUserLoginModel.h */; };
+		336285872117EA7400CC7D24 /* ClassNames_UpdateUserLoginModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 336285852117EA7400CC7D24 /* ClassNames_UpdateUserLoginModel.m */; };
+		3362858A2117EA8500CC7D24 /* ClassNames_MemberOrderModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 336285882117EA8500CC7D24 /* ClassNames_MemberOrderModel.h */; };
+		3362858B2117EA8500CC7D24 /* ClassNames_MemberOrderModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 336285892117EA8500CC7D24 /* ClassNames_MemberOrderModel.m */; };
+		3362858E2117EAB400CC7D24 /* ClassNames_AppStoreModel.h in Headers */ = {isa = PBXBuildFile; fileRef = 3362858C2117EAB400CC7D24 /* ClassNames_AppStoreModel.h */; };
+		3362858F2117EAB400CC7D24 /* ClassNames_AppStoreModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3362858D2117EAB400CC7D24 /* ClassNames_AppStoreModel.m */; };
+		336285932117EBC700CC7D24 /* ClassNames_BaseViewLayout.h in Headers */ = {isa = PBXBuildFile; fileRef = 336285912117EBC700CC7D24 /* ClassNames_BaseViewLayout.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		336285942117EBC700CC7D24 /* ClassNames_BaseViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 336285922117EBC700CC7D24 /* ClassNames_BaseViewLayout.m */; };
+		3362899121193E9D00CC7D24 /* ClassNames_DefaultThemeConfigure.h in Headers */ = {isa = PBXBuildFile; fileRef = 3362898F21193E9D00CC7D24 /* ClassNames_DefaultThemeConfigure.h */; };
+		3362899221193E9D00CC7D24 /* ClassNames_DefaultThemeConfigure.m in Sources */ = {isa = PBXBuildFile; fileRef = 3362899021193E9D00CC7D24 /* ClassNames_DefaultThemeConfigure.m */; };
+		336289CD21198AC500CC7D24 /* ClassNames_ImageEyes.h in Headers */ = {isa = PBXBuildFile; fileRef = 336289CB21198AC500CC7D24 /* ClassNames_ImageEyes.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		336289DB211998EC00CC7D24 /* ClassNames_PGHubView.h in Headers */ = {isa = PBXBuildFile; fileRef = 336289D9211998EC00CC7D24 /* ClassNames_PGHubView.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		336289DC211998EC00CC7D24 /* ClassNames_PGHubView.m in Sources */ = {isa = PBXBuildFile; fileRef = 336289DA211998EC00CC7D24 /* ClassNames_PGHubView.m */; };
+		336289E021199A8800CC7D24 /* ClassNames_itemButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 336289DE21199A8800CC7D24 /* ClassNames_itemButton.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		336289E121199A8800CC7D24 /* ClassNames_itemButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 336289DF21199A8800CC7D24 /* ClassNames_itemButton.m */; };
+		336289E42119C01A00CC7D24 /* ClassNames_ImageUpDown.h in Headers */ = {isa = PBXBuildFile; fileRef = 336289E22119C01A00CC7D24 /* ClassNames_ImageUpDown.h */; };
+		336289E82119C5E300CC7D24 /* ClassNames_ImageUser.h in Headers */ = {isa = PBXBuildFile; fileRef = 336289E62119C5E300CC7D24 /* ClassNames_ImageUser.h */; };
+		336289EC2119CCAC00CC7D24 /* ClassNames_ImageErrorRight.h in Headers */ = {isa = PBXBuildFile; fileRef = 336289EA2119CCAC00CC7D24 /* ClassNames_ImageErrorRight.h */; };
+		336289F02119CF7300CC7D24 /* ClassNames_ImagePhoneMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 336289EE2119CF7300CC7D24 /* ClassNames_ImagePhoneMessage.h */; };
+		336289F4211A90E400CC7D24 /* ClassNames_ImagePassword.h in Headers */ = {isa = PBXBuildFile; fileRef = 336289F2211A90E400CC7D24 /* ClassNames_ImagePassword.h */; };
+		337161E72229125E002D5BA0 /* ClassNames_SuggestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 337161E32229125E002D5BA0 /* ClassNames_SuggestView.m */; };
+		337161E92229125E002D5BA0 /* ClassNames_SuggestView.h in Headers */ = {isa = PBXBuildFile; fileRef = 337161E52229125E002D5BA0 /* ClassNames_SuggestView.h */; };
+		339D665E2329EA8500872D27 /* ClassNames_loadFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 339D665C2329EA8500872D27 /* ClassNames_loadFileManager.h */; };
+		339D665F2329EA8500872D27 /* ClassNames_loadFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 339D665D2329EA8500872D27 /* ClassNames_loadFileManager.m */; };
+		339D66622329EAAC00872D27 /* ClassNames_RechargeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 339D66602329EAAB00872D27 /* ClassNames_RechargeView.m */; };
+		339D66632329EAAC00872D27 /* ClassNames_RechargeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 339D66612329EAAC00872D27 /* ClassNames_RechargeView.h */; };
+		33ABDEEC2363012E00F9E7D5 /* ClassNames_SuspensionBallButton.h in Headers */ = {isa = PBXBuildFile; fileRef = 33ABDEEA2363012E00F9E7D5 /* ClassNames_SuspensionBallButton.h */; };
+		33ABDEED2363012E00F9E7D5 /* ClassNames_SuspensionBallButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 33ABDEEB2363012E00F9E7D5 /* ClassNames_SuspensionBallButton.m */; };
+		33AC6EEF2113EB4B005555C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AC6EEE2113EB4B005555C3 /* UIKit.framework */; };
+		33AC6EF12113EB50005555C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AC6EF02113EB4F005555C3 /* Foundation.framework */; };
+		33AC6EF32113EB54005555C3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AC6EF22113EB54005555C3 /* CoreGraphics.framework */; };
+		DF585E62289CC753005B25BA /* ClassNames_DelegateTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = DF585E60289CC753005B25BA /* ClassNames_DelegateTextView.h */; };
+		DF585E63289CC753005B25BA /* ClassNames_DelegateTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = DF585E61289CC753005B25BA /* ClassNames_DelegateTextView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		33AC6EDF2113EB39005555C3 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		3309AEA6213F68D400E10575 /* ClassNames_ImageProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_ImageProtocol.h; sourceTree = "<group>"; };
+		330FEA3223014BD7008C0D0F /* ClassNames_CustomServerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassNames_CustomServerView.h; sourceTree = "<group>"; };
+		330FEA3323014BD7008C0D0F /* ClassNames_CustomServerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassNames_CustomServerView.m; sourceTree = "<group>"; };
+		330FEA3423014BD7008C0D0F /* ClassNames_DelegateView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassNames_DelegateView.m; sourceTree = "<group>"; };
+		330FEA3623014BD7008C0D0F /* ClassNames_DelegateView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassNames_DelegateView.h; sourceTree = "<group>"; };
+		33185111221A9772003907D5 /* ClassName_AppStore.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassName_AppStore.m; sourceTree = "<group>"; };
+		33185112221A9772003907D5 /* ClassName_AppStore.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassName_AppStore.h; sourceTree = "<group>"; };
+		331B31262124481A00544DB8 /* ClassNames_AccountTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassNames_AccountTableViewCell.h; sourceTree = "<group>"; };
+		331B31272124481A00544DB8 /* ClassNames_AccountTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassNames_AccountTableViewCell.m; sourceTree = "<group>"; };
+		331B312B212525C800544DB8 /* ClassNames_LoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassNames_LoadingView.m; sourceTree = "<group>"; };
+		331B312C212525C800544DB8 /* ClassNames_LoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassNames_LoadingView.h; sourceTree = "<group>"; };
+		331B31302125280B00544DB8 /* ClassNames_ViewTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassNames_ViewTool.h; sourceTree = "<group>"; };
+		331B33D02125781200544DB8 /* UmPlatsFormGameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = UmPlatsFormGameManager.h; sourceTree = "<group>"; };
+		331B33D12125781200544DB8 /* UmPlatsFormGameManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = UmPlatsFormGameManager.m; sourceTree = "<group>"; };
+		331B33D62125786000544DB8 /* ClassName_IAPMain.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassName_IAPMain.m; sourceTree = "<group>"; };
+		331B33D82125786000544DB8 /* ClassName_IAPMain.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassName_IAPMain.h; sourceTree = "<group>"; };
+		331B33D92125786000544DB8 /* ClassName_IAPFail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassName_IAPFail.m; sourceTree = "<group>"; };
+		331B33DA2125786000544DB8 /* ClassName_IAPRepair.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassName_IAPRepair.h; sourceTree = "<group>"; };
+		331B33DB2125786000544DB8 /* ClassName_IAPRepair.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassName_IAPRepair.m; sourceTree = "<group>"; };
+		331B33DC2125786000544DB8 /* ClassName_IAPFail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassName_IAPFail.h; sourceTree = "<group>"; };
+		331B33DD2125786000544DB8 /* ClassName_IAPInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassName_IAPInfo.m; sourceTree = "<group>"; };
+		331B33DE2125786000544DB8 /* ClassName_IAPInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassName_IAPInfo.h; sourceTree = "<group>"; };
+		331B33EE21257F6B00544DB8 /* ClassNames_NavigationBarView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassNames_NavigationBarView.m; sourceTree = "<group>"; };
+		331B33EF21257F6B00544DB8 /* ClassNames_NavigationBarView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassNames_NavigationBarView.h; sourceTree = "<group>"; };
+		331B39CB212D0F5D00544DB8 /* ClassNames_ImageCode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_ImageCode.h; sourceTree = "<group>"; };
+		331B39CC212D1F1700544DB8 /* ClassNames_ImageResetPassword.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_ImageResetPassword.h; sourceTree = "<group>"; };
+		331B39CD212D387900544DB8 /* ClassNames_ImagePersonID.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_ImagePersonID.h; sourceTree = "<group>"; };
+		331B39CE212E54EA00544DB8 /* ClassNames_ImageDelete.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_ImageDelete.h; sourceTree = "<group>"; };
+		331D91AA217465740049853B /* ClassNames_VideoPlayView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassNames_VideoPlayView.m; sourceTree = "<group>"; };
+		331D91AB217465740049853B /* ClassNames_VideoPlayView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassNames_VideoPlayView.h; sourceTree = "<group>"; };
+		33333A5F212118FB00446146 /* ClassNames_CommitButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_CommitButton.h; sourceTree = "<group>"; };
+		33333A60212118FB00446146 /* ClassNames_CommitButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_CommitButton.m; sourceTree = "<group>"; };
+		33333A632121247A00446146 /* ClassNames_BindPhoneView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_BindPhoneView.h; sourceTree = "<group>"; };
+		33333A642121247A00446146 /* ClassNames_BindPhoneView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_BindPhoneView.m; sourceTree = "<group>"; };
+		33333A672121248C00446146 /* ClassNames_BindPersonIDView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_BindPersonIDView.h; sourceTree = "<group>"; };
+		33333A682121248C00446146 /* ClassNames_BindPersonIDView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_BindPersonIDView.m; sourceTree = "<group>"; };
+		33333A6B21212A7200446146 /* ClassNames_QuickLoginView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_QuickLoginView.h; sourceTree = "<group>"; };
+		33333A6C21212A7200446146 /* ClassNames_QuickLoginView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_QuickLoginView.m; sourceTree = "<group>"; };
+		33333A6F21212AB400446146 /* ClassNames_LoginView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_LoginView.h; sourceTree = "<group>"; };
+		33333A7021212AB400446146 /* ClassNames_LoginView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_LoginView.m; sourceTree = "<group>"; };
+		33333A7321212ACA00446146 /* ClassNames_FindBackPasswordView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_FindBackPasswordView.h; sourceTree = "<group>"; };
+		33333A7421212ACA00446146 /* ClassNames_FindBackPasswordView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_FindBackPasswordView.m; sourceTree = "<group>"; };
+		33333A7721212ADE00446146 /* ClassNames_ResetPasswordView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_ResetPasswordView.h; sourceTree = "<group>"; };
+		33333A7821212ADE00446146 /* ClassNames_ResetPasswordView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_ResetPasswordView.m; sourceTree = "<group>"; };
+		33333A7B21212B0100446146 /* ClassNames_NormalRegisterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_NormalRegisterView.h; sourceTree = "<group>"; };
+		33333A7C21212B0100446146 /* ClassNames_NormalRegisterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_NormalRegisterView.m; sourceTree = "<group>"; };
+		33333A8221212B2A00446146 /* ClassNames_PhoneRegisterView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_PhoneRegisterView.h; sourceTree = "<group>"; };
+		33333A8321212B2A00446146 /* ClassNames_PhoneRegisterView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_PhoneRegisterView.m; sourceTree = "<group>"; };
+		33333BD32121727500446146 /* ClassNames_MainView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_MainView.h; sourceTree = "<group>"; };
+		33333BD42121727500446146 /* ClassNames_MainView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_MainView.m; sourceTree = "<group>"; };
+		33333BD7212186CA00446146 /* ClassNames_ImageBackground.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_ImageBackground.h; sourceTree = "<group>"; };
+		333AF947211B029B00A9FA38 /* ClassNames_InputView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_InputView.h; sourceTree = "<group>"; };
+		333AF948211B029B00A9FA38 /* ClassNames_InputView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_InputView.m; sourceTree = "<group>"; };
+		333AF9F1211C1F2C00A9FA38 /* ClassNames_Title.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_Title.h; sourceTree = "<group>"; };
+		333AFAAE211D635300A9FA38 /* ClassNames_AutoLoginView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_AutoLoginView.h; sourceTree = "<group>"; };
+		333AFAAF211D635300A9FA38 /* ClassNames_AutoLoginView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_AutoLoginView.m; sourceTree = "<group>"; };
+		335BB6CD2147ADC8003339B6 /* ClassNames_ImageSkillButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_ImageSkillButton.h; sourceTree = "<group>"; };
+		3362832A2114016500CC7D24 /* ClassNames_URLSessionConfigure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_URLSessionConfigure.h; sourceTree = "<group>"; };
+		3362832B2114016500CC7D24 /* ClassNames_URLSessionConfigure.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_URLSessionConfigure.m; sourceTree = "<group>"; };
+		3362832E211402D300CC7D24 /* ClassNames_URLSessionManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_URLSessionManager.h; sourceTree = "<group>"; };
+		3362832F211402D300CC7D24 /* ClassNames_URLSessionManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_URLSessionManager.m; sourceTree = "<group>"; };
+		336283322114069000CC7D24 /* ClassNames_URLProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_URLProtocol.h; sourceTree = "<group>"; };
+		33628335211407AB00CC7D24 /* ClassNames_SecurityTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_SecurityTool.h; sourceTree = "<group>"; };
+		33628336211407AB00CC7D24 /* ClassNames_SecurityTool.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_SecurityTool.m; sourceTree = "<group>"; };
+		3362833A2114096F00CC7D24 /* ClassNames_InitGamesConfigure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_InitGamesConfigure.h; sourceTree = "<group>"; };
+		3362833B2114096F00CC7D24 /* ClassNames_InitGamesConfigure.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_InitGamesConfigure.m; sourceTree = "<group>"; };
+		3362833F211409D300CC7D24 /* ClassNames_NotificationConfigure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_NotificationConfigure.h; sourceTree = "<group>"; };
+		33628340211409D300CC7D24 /* ClassNames_NotificationConfigure.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_NotificationConfigure.m; sourceTree = "<group>"; };
+		3362834421140A1E00CC7D24 /* ClassNames_DebugLog.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_DebugLog.h; sourceTree = "<group>"; };
+		336283E12114240E00CC7D24 /* ClassNames_Color.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_Color.h; sourceTree = "<group>"; };
+		336283E22114240E00CC7D24 /* ClassNames_Color.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_Color.m; sourceTree = "<group>"; };
+		336283E62114254E00CC7D24 /* ClassNames_RegularMatch.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_RegularMatch.h; sourceTree = "<group>"; };
+		336283F02114280700CC7D24 /* ClassNames_DeviceConfigure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_DeviceConfigure.h; sourceTree = "<group>"; };
+		336283F12114280700CC7D24 /* ClassNames_DeviceConfigure.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_DeviceConfigure.m; sourceTree = "<group>"; };
+		336283F521142C3A00CC7D24 /* ClassNames_CutImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_CutImage.h; sourceTree = "<group>"; };
+		336283FA21142DA600CC7D24 /* ClassNames_AnimateTool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_AnimateTool.h; sourceTree = "<group>"; };
+		3362855B2117E1B300CC7D24 /* ClassNames_BaseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_BaseModel.h; sourceTree = "<group>"; };
+		3362855C2117E1B300CC7D24 /* ClassNames_BaseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_BaseModel.m; sourceTree = "<group>"; };
+		336285602117E69E00CC7D24 /* ClassNames_GameInitialiseModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_GameInitialiseModel.h; sourceTree = "<group>"; };
+		336285612117E69E00CC7D24 /* ClassNames_GameInitialiseModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_GameInitialiseModel.m; sourceTree = "<group>"; };
+		336285642117E6D800CC7D24 /* ClassNames_ActivateModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_ActivateModel.h; sourceTree = "<group>"; };
+		336285652117E6D800CC7D24 /* ClassNames_ActivateModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_ActivateModel.m; sourceTree = "<group>"; };
+		336285682117E72300CC7D24 /* ClassNames_MemberVisitorModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_MemberVisitorModel.h; sourceTree = "<group>"; };
+		336285692117E72300CC7D24 /* ClassNames_MemberVisitorModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_MemberVisitorModel.m; sourceTree = "<group>"; };
+		3362856C2117E8F900CC7D24 /* ClassNames_MemberNormalRegisterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_MemberNormalRegisterModel.h; sourceTree = "<group>"; };
+		3362856D2117E8F900CC7D24 /* ClassNames_MemberNormalRegisterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_MemberNormalRegisterModel.m; sourceTree = "<group>"; };
+		336285702117E90D00CC7D24 /* ClassNames_MemberRegisterModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_MemberRegisterModel.h; sourceTree = "<group>"; };
+		336285712117E90D00CC7D24 /* ClassNames_MemberRegisterModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_MemberRegisterModel.m; sourceTree = "<group>"; };
+		336285742117E9FB00CC7D24 /* ClassNames_MemberLoginModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_MemberLoginModel.h; sourceTree = "<group>"; };
+		336285752117E9FB00CC7D24 /* ClassNames_MemberLoginModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_MemberLoginModel.m; sourceTree = "<group>"; };
+		336285782117EA3300CC7D24 /* ClassNames_UpdatePSWModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_UpdatePSWModel.h; sourceTree = "<group>"; };
+		336285792117EA3300CC7D24 /* ClassNames_UpdatePSWModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_UpdatePSWModel.m; sourceTree = "<group>"; };
+		3362857C2117EA4700CC7D24 /* ClassNames_BackUserPSWModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_BackUserPSWModel.h; sourceTree = "<group>"; };
+		3362857D2117EA4700CC7D24 /* ClassNames_BackUserPSWModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_BackUserPSWModel.m; sourceTree = "<group>"; };
+		336285802117EA6100CC7D24 /* ClassNames_MembeRoleModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_MembeRoleModel.h; sourceTree = "<group>"; };
+		336285812117EA6100CC7D24 /* ClassNames_MembeRoleModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_MembeRoleModel.m; sourceTree = "<group>"; };
+		336285842117EA7400CC7D24 /* ClassNames_UpdateUserLoginModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_UpdateUserLoginModel.h; sourceTree = "<group>"; };
+		336285852117EA7400CC7D24 /* ClassNames_UpdateUserLoginModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_UpdateUserLoginModel.m; sourceTree = "<group>"; };
+		336285882117EA8500CC7D24 /* ClassNames_MemberOrderModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_MemberOrderModel.h; sourceTree = "<group>"; };
+		336285892117EA8500CC7D24 /* ClassNames_MemberOrderModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_MemberOrderModel.m; sourceTree = "<group>"; };
+		3362858C2117EAB400CC7D24 /* ClassNames_AppStoreModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_AppStoreModel.h; sourceTree = "<group>"; };
+		3362858D2117EAB400CC7D24 /* ClassNames_AppStoreModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_AppStoreModel.m; sourceTree = "<group>"; };
+		336285912117EBC700CC7D24 /* ClassNames_BaseViewLayout.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_BaseViewLayout.h; sourceTree = "<group>"; };
+		336285922117EBC700CC7D24 /* ClassNames_BaseViewLayout.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_BaseViewLayout.m; sourceTree = "<group>"; };
+		3362898F21193E9D00CC7D24 /* ClassNames_DefaultThemeConfigure.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_DefaultThemeConfigure.h; sourceTree = "<group>"; };
+		3362899021193E9D00CC7D24 /* ClassNames_DefaultThemeConfigure.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_DefaultThemeConfigure.m; sourceTree = "<group>"; };
+		336289CB21198AC500CC7D24 /* ClassNames_ImageEyes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_ImageEyes.h; sourceTree = "<group>"; };
+		336289D9211998EC00CC7D24 /* ClassNames_PGHubView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_PGHubView.h; sourceTree = "<group>"; };
+		336289DA211998EC00CC7D24 /* ClassNames_PGHubView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_PGHubView.m; sourceTree = "<group>"; };
+		336289DE21199A8800CC7D24 /* ClassNames_itemButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_itemButton.h; sourceTree = "<group>"; };
+		336289DF21199A8800CC7D24 /* ClassNames_itemButton.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_itemButton.m; sourceTree = "<group>"; };
+		336289E22119C01A00CC7D24 /* ClassNames_ImageUpDown.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_ImageUpDown.h; sourceTree = "<group>"; };
+		336289E62119C5E300CC7D24 /* ClassNames_ImageUser.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_ImageUser.h; sourceTree = "<group>"; };
+		336289EA2119CCAC00CC7D24 /* ClassNames_ImageErrorRight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_ImageErrorRight.h; sourceTree = "<group>"; };
+		336289EE2119CF7300CC7D24 /* ClassNames_ImagePhoneMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_ImagePhoneMessage.h; sourceTree = "<group>"; };
+		336289F2211A90E400CC7D24 /* ClassNames_ImagePassword.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_ImagePassword.h; sourceTree = "<group>"; };
+		337161E32229125E002D5BA0 /* ClassNames_SuggestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassNames_SuggestView.m; sourceTree = "<group>"; };
+		337161E52229125E002D5BA0 /* ClassNames_SuggestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassNames_SuggestView.h; sourceTree = "<group>"; };
+		33733900214A6051004A5984 /* ClassNames_ImageCommitButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_ImageCommitButton.h; sourceTree = "<group>"; };
+		33733901214A71B6004A5984 /* ClassNames_ImageBackButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_ImageBackButton.h; sourceTree = "<group>"; };
+		339D665C2329EA8500872D27 /* ClassNames_loadFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassNames_loadFileManager.h; sourceTree = "<group>"; };
+		339D665D2329EA8500872D27 /* ClassNames_loadFileManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassNames_loadFileManager.m; sourceTree = "<group>"; };
+		339D66602329EAAB00872D27 /* ClassNames_RechargeView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassNames_RechargeView.m; sourceTree = "<group>"; };
+		339D66612329EAAC00872D27 /* ClassNames_RechargeView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassNames_RechargeView.h; sourceTree = "<group>"; };
+		33ABDEEA2363012E00F9E7D5 /* ClassNames_SuspensionBallButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassNames_SuspensionBallButton.h; sourceTree = "<group>"; };
+		33ABDEEB2363012E00F9E7D5 /* ClassNames_SuspensionBallButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassNames_SuspensionBallButton.m; sourceTree = "<group>"; };
+		33AC6EE12113EB39005555C3 /* libPlatFormGamesSDK.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPlatFormGamesSDK.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		33AC6EEE2113EB4B005555C3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		33AC6EF02113EB4F005555C3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		33AC6EF22113EB54005555C3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		DF585E60289CC753005B25BA /* ClassNames_DelegateTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_DelegateTextView.h; sourceTree = "<group>"; };
+		DF585E61289CC753005B25BA /* ClassNames_DelegateTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_DelegateTextView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		33AC6EDE2113EB39005555C3 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33AC6EF32113EB54005555C3 /* CoreGraphics.framework in Frameworks */,
+				33AC6EF12113EB50005555C3 /* Foundation.framework in Frameworks */,
+				33AC6EEF2113EB4B005555C3 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		330F6990211400EF00388F45 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				3362855A2117E11200CC7D24 /* AppStore */,
+				336285592117E10A00CC7D24 /* Order */,
+				336285582117E0FE00CC7D24 /* UpdateUserLogin */,
+				336285572117E0F700CC7D24 /* Role */,
+				336285562117E0EE00CC7D24 /* FindBackPassword */,
+				336285552117E0E500CC7D24 /* ResetPassword */,
+				336285542117E0E000CC7D24 /* Login */,
+				336285532117E0D900CC7D24 /* Register */,
+				336285522117E0D300CC7D24 /* Visitor */,
+				336285512117E0CD00CC7D24 /* Device */,
+				336285502117E0C400CC7D24 /* GameInit */,
+				3362854F2117E07800CC7D24 /* Base */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		330F6991211400FA00388F45 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DF585E5F289CC6C2005B25BA /* TextView */,
+				331B33ED21257F5C00544DB8 /* NaviView */,
+				331B33CA212577C300544DB8 /* PayView */,
+				331B312A212525BA00544DB8 /* LoadingView */,
+				331B31252124480C00544DB8 /* Cell */,
+				33333BD22121725600446146 /* mainView */,
+				333AFAA9211D602800A9FA38 /* SkillView */,
+				333AF946211B027400A9FA38 /* InputView */,
+				336289DD21199A3E00CC7D24 /* ItemButton */,
+				336289D62119959A00CC7D24 /* HubView */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		330F69922114010200388F45 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		330F69932114010E00388F45 /* resource */ = {
+			isa = PBXGroup;
+			children = (
+				330FEA3E23014C32008C0D0F /* loadfile */,
+				331D91A9217465520049853B /* playVideo */,
+				331B33D42125783400544DB8 /* Pay */,
+				331B312F2125280100544DB8 /* ViewTool */,
+				336289C621198A0100CC7D24 /* Image */,
+				336285902117EB8F00CC7D24 /* ViewLayout */,
+				336283F921142D8E00CC7D24 /* Animate */,
+				336283F421142C1D00CC7D24 /* CutImage */,
+				336283EF211427F200CC7D24 /* Device */,
+				336283EA2114263A00CC7D24 /* Theme */,
+				336283E52114253A00CC7D24 /* Predicate */,
+				336283E0211423F600CC7D24 /* Color */,
+				3362834321140A0600CC7D24 /* DebugLog */,
+				3362833E211409C500CC7D24 /* Notification */,
+				336283392114094800CC7D24 /* InitGames */,
+				336283342114078700CC7D24 /* Security */,
+				336283292114013700CC7D24 /* URLRequest */,
+			);
+			name = resource;
+			sourceTree = "<group>";
+		};
+		330FEA3E23014C32008C0D0F /* loadfile */ = {
+			isa = PBXGroup;
+			children = (
+				339D665C2329EA8500872D27 /* ClassNames_loadFileManager.h */,
+				339D665D2329EA8500872D27 /* ClassNames_loadFileManager.m */,
+			);
+			name = loadfile;
+			sourceTree = "<group>";
+		};
+		331B31252124480C00544DB8 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				331B31262124481A00544DB8 /* ClassNames_AccountTableViewCell.h */,
+				331B31272124481A00544DB8 /* ClassNames_AccountTableViewCell.m */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		331B312A212525BA00544DB8 /* LoadingView */ = {
+			isa = PBXGroup;
+			children = (
+				331B312C212525C800544DB8 /* ClassNames_LoadingView.h */,
+				331B312B212525C800544DB8 /* ClassNames_LoadingView.m */,
+			);
+			name = LoadingView;
+			sourceTree = "<group>";
+		};
+		331B312F2125280100544DB8 /* ViewTool */ = {
+			isa = PBXGroup;
+			children = (
+				331B31302125280B00544DB8 /* ClassNames_ViewTool.h */,
+			);
+			name = ViewTool;
+			sourceTree = "<group>";
+		};
+		331B33CA212577C300544DB8 /* PayView */ = {
+			isa = PBXGroup;
+			children = (
+				339D66612329EAAC00872D27 /* ClassNames_RechargeView.h */,
+				339D66602329EAAB00872D27 /* ClassNames_RechargeView.m */,
+			);
+			name = PayView;
+			sourceTree = "<group>";
+		};
+		331B33CF2125780800544DB8 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				331B33D02125781200544DB8 /* UmPlatsFormGameManager.h */,
+				331B33D12125781200544DB8 /* UmPlatsFormGameManager.m */,
+			);
+			name = Main;
+			sourceTree = "<group>";
+		};
+		331B33D42125783400544DB8 /* Pay */ = {
+			isa = PBXGroup;
+			children = (
+				331B33DC2125786000544DB8 /* ClassName_IAPFail.h */,
+				331B33D92125786000544DB8 /* ClassName_IAPFail.m */,
+				331B33DE2125786000544DB8 /* ClassName_IAPInfo.h */,
+				331B33DD2125786000544DB8 /* ClassName_IAPInfo.m */,
+				331B33D82125786000544DB8 /* ClassName_IAPMain.h */,
+				331B33D62125786000544DB8 /* ClassName_IAPMain.m */,
+				33185112221A9772003907D5 /* ClassName_AppStore.h */,
+				33185111221A9772003907D5 /* ClassName_AppStore.m */,
+				331B33DA2125786000544DB8 /* ClassName_IAPRepair.h */,
+				331B33DB2125786000544DB8 /* ClassName_IAPRepair.m */,
+			);
+			name = Pay;
+			sourceTree = "<group>";
+		};
+		331B33ED21257F5C00544DB8 /* NaviView */ = {
+			isa = PBXGroup;
+			children = (
+				331B33EF21257F6B00544DB8 /* ClassNames_NavigationBarView.h */,
+				331B33EE21257F6B00544DB8 /* ClassNames_NavigationBarView.m */,
+			);
+			name = NaviView;
+			sourceTree = "<group>";
+		};
+		331D91A9217465520049853B /* playVideo */ = {
+			isa = PBXGroup;
+			children = (
+				331D91AB217465740049853B /* ClassNames_VideoPlayView.h */,
+				331D91AA217465740049853B /* ClassNames_VideoPlayView.m */,
+			);
+			name = playVideo;
+			sourceTree = "<group>";
+		};
+		33333BD22121725600446146 /* mainView */ = {
+			isa = PBXGroup;
+			children = (
+				33333BD32121727500446146 /* ClassNames_MainView.h */,
+				33333BD42121727500446146 /* ClassNames_MainView.m */,
+			);
+			name = mainView;
+			sourceTree = "<group>";
+		};
+		333AF946211B027400A9FA38 /* InputView */ = {
+			isa = PBXGroup;
+			children = (
+				333AF947211B029B00A9FA38 /* ClassNames_InputView.h */,
+				333AF948211B029B00A9FA38 /* ClassNames_InputView.m */,
+			);
+			name = InputView;
+			sourceTree = "<group>";
+		};
+		333AFAA9211D602800A9FA38 /* SkillView */ = {
+			isa = PBXGroup;
+			children = (
+				330FEA3223014BD7008C0D0F /* ClassNames_CustomServerView.h */,
+				330FEA3323014BD7008C0D0F /* ClassNames_CustomServerView.m */,
+				33ABDEEA2363012E00F9E7D5 /* ClassNames_SuspensionBallButton.h */,
+				33ABDEEB2363012E00F9E7D5 /* ClassNames_SuspensionBallButton.m */,
+				330FEA3623014BD7008C0D0F /* ClassNames_DelegateView.h */,
+				330FEA3423014BD7008C0D0F /* ClassNames_DelegateView.m */,
+				333AFAAE211D635300A9FA38 /* ClassNames_AutoLoginView.h */,
+				333AFAAF211D635300A9FA38 /* ClassNames_AutoLoginView.m */,
+				33333A632121247A00446146 /* ClassNames_BindPhoneView.h */,
+				33333A642121247A00446146 /* ClassNames_BindPhoneView.m */,
+				33333A672121248C00446146 /* ClassNames_BindPersonIDView.h */,
+				33333A682121248C00446146 /* ClassNames_BindPersonIDView.m */,
+				33333A6B21212A7200446146 /* ClassNames_QuickLoginView.h */,
+				33333A6C21212A7200446146 /* ClassNames_QuickLoginView.m */,
+				33333A6F21212AB400446146 /* ClassNames_LoginView.h */,
+				33333A7021212AB400446146 /* ClassNames_LoginView.m */,
+				33333A7321212ACA00446146 /* ClassNames_FindBackPasswordView.h */,
+				33333A7421212ACA00446146 /* ClassNames_FindBackPasswordView.m */,
+				33333A7721212ADE00446146 /* ClassNames_ResetPasswordView.h */,
+				33333A7821212ADE00446146 /* ClassNames_ResetPasswordView.m */,
+				33333A7B21212B0100446146 /* ClassNames_NormalRegisterView.h */,
+				33333A7C21212B0100446146 /* ClassNames_NormalRegisterView.m */,
+				33333A8221212B2A00446146 /* ClassNames_PhoneRegisterView.h */,
+				33333A8321212B2A00446146 /* ClassNames_PhoneRegisterView.m */,
+				337161E52229125E002D5BA0 /* ClassNames_SuggestView.h */,
+				337161E32229125E002D5BA0 /* ClassNames_SuggestView.m */,
+			);
+			name = SkillView;
+			sourceTree = "<group>";
+		};
+		336283292114013700CC7D24 /* URLRequest */ = {
+			isa = PBXGroup;
+			children = (
+				3362832A2114016500CC7D24 /* ClassNames_URLSessionConfigure.h */,
+				3362832B2114016500CC7D24 /* ClassNames_URLSessionConfigure.m */,
+				3362832E211402D300CC7D24 /* ClassNames_URLSessionManager.h */,
+				3362832F211402D300CC7D24 /* ClassNames_URLSessionManager.m */,
+				336283322114069000CC7D24 /* ClassNames_URLProtocol.h */,
+			);
+			name = URLRequest;
+			sourceTree = "<group>";
+		};
+		336283342114078700CC7D24 /* Security */ = {
+			isa = PBXGroup;
+			children = (
+				33628335211407AB00CC7D24 /* ClassNames_SecurityTool.h */,
+				33628336211407AB00CC7D24 /* ClassNames_SecurityTool.m */,
+			);
+			name = Security;
+			sourceTree = "<group>";
+		};
+		336283392114094800CC7D24 /* InitGames */ = {
+			isa = PBXGroup;
+			children = (
+				3362833A2114096F00CC7D24 /* ClassNames_InitGamesConfigure.h */,
+				3362833B2114096F00CC7D24 /* ClassNames_InitGamesConfigure.m */,
+			);
+			name = InitGames;
+			sourceTree = "<group>";
+		};
+		3362833E211409C500CC7D24 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				3362833F211409D300CC7D24 /* ClassNames_NotificationConfigure.h */,
+				33628340211409D300CC7D24 /* ClassNames_NotificationConfigure.m */,
+			);
+			name = Notification;
+			sourceTree = "<group>";
+		};
+		3362834321140A0600CC7D24 /* DebugLog */ = {
+			isa = PBXGroup;
+			children = (
+				3362834421140A1E00CC7D24 /* ClassNames_DebugLog.h */,
+			);
+			name = DebugLog;
+			sourceTree = "<group>";
+		};
+		336283E0211423F600CC7D24 /* Color */ = {
+			isa = PBXGroup;
+			children = (
+				336283E12114240E00CC7D24 /* ClassNames_Color.h */,
+				336283E22114240E00CC7D24 /* ClassNames_Color.m */,
+			);
+			name = Color;
+			sourceTree = "<group>";
+		};
+		336283E52114253A00CC7D24 /* Predicate */ = {
+			isa = PBXGroup;
+			children = (
+				336283E62114254E00CC7D24 /* ClassNames_RegularMatch.h */,
+			);
+			name = Predicate;
+			sourceTree = "<group>";
+		};
+		336283EA2114263A00CC7D24 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				3362898F21193E9D00CC7D24 /* ClassNames_DefaultThemeConfigure.h */,
+				3362899021193E9D00CC7D24 /* ClassNames_DefaultThemeConfigure.m */,
+			);
+			name = Theme;
+			sourceTree = "<group>";
+		};
+		336283EF211427F200CC7D24 /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				336283F02114280700CC7D24 /* ClassNames_DeviceConfigure.h */,
+				336283F12114280700CC7D24 /* ClassNames_DeviceConfigure.m */,
+			);
+			name = Device;
+			sourceTree = "<group>";
+		};
+		336283F421142C1D00CC7D24 /* CutImage */ = {
+			isa = PBXGroup;
+			children = (
+				336283F521142C3A00CC7D24 /* ClassNames_CutImage.h */,
+			);
+			name = CutImage;
+			sourceTree = "<group>";
+		};
+		336283F921142D8E00CC7D24 /* Animate */ = {
+			isa = PBXGroup;
+			children = (
+				336283FA21142DA600CC7D24 /* ClassNames_AnimateTool.h */,
+			);
+			name = Animate;
+			sourceTree = "<group>";
+		};
+		3362854F2117E07800CC7D24 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				3362855B2117E1B300CC7D24 /* ClassNames_BaseModel.h */,
+				3362855C2117E1B300CC7D24 /* ClassNames_BaseModel.m */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		336285502117E0C400CC7D24 /* GameInit */ = {
+			isa = PBXGroup;
+			children = (
+				336285602117E69E00CC7D24 /* ClassNames_GameInitialiseModel.h */,
+				336285612117E69E00CC7D24 /* ClassNames_GameInitialiseModel.m */,
+			);
+			name = GameInit;
+			sourceTree = "<group>";
+		};
+		336285512117E0CD00CC7D24 /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				336285642117E6D800CC7D24 /* ClassNames_ActivateModel.h */,
+				336285652117E6D800CC7D24 /* ClassNames_ActivateModel.m */,
+			);
+			name = Device;
+			sourceTree = "<group>";
+		};
+		336285522117E0D300CC7D24 /* Visitor */ = {
+			isa = PBXGroup;
+			children = (
+				336285682117E72300CC7D24 /* ClassNames_MemberVisitorModel.h */,
+				336285692117E72300CC7D24 /* ClassNames_MemberVisitorModel.m */,
+			);
+			name = Visitor;
+			sourceTree = "<group>";
+		};
+		336285532117E0D900CC7D24 /* Register */ = {
+			isa = PBXGroup;
+			children = (
+				3362856C2117E8F900CC7D24 /* ClassNames_MemberNormalRegisterModel.h */,
+				3362856D2117E8F900CC7D24 /* ClassNames_MemberNormalRegisterModel.m */,
+				336285702117E90D00CC7D24 /* ClassNames_MemberRegisterModel.h */,
+				336285712117E90D00CC7D24 /* ClassNames_MemberRegisterModel.m */,
+			);
+			name = Register;
+			sourceTree = "<group>";
+		};
+		336285542117E0E000CC7D24 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				336285742117E9FB00CC7D24 /* ClassNames_MemberLoginModel.h */,
+				336285752117E9FB00CC7D24 /* ClassNames_MemberLoginModel.m */,
+			);
+			name = Login;
+			sourceTree = "<group>";
+		};
+		336285552117E0E500CC7D24 /* ResetPassword */ = {
+			isa = PBXGroup;
+			children = (
+				336285782117EA3300CC7D24 /* ClassNames_UpdatePSWModel.h */,
+				336285792117EA3300CC7D24 /* ClassNames_UpdatePSWModel.m */,
+			);
+			name = ResetPassword;
+			sourceTree = "<group>";
+		};
+		336285562117E0EE00CC7D24 /* FindBackPassword */ = {
+			isa = PBXGroup;
+			children = (
+				3362857C2117EA4700CC7D24 /* ClassNames_BackUserPSWModel.h */,
+				3362857D2117EA4700CC7D24 /* ClassNames_BackUserPSWModel.m */,
+			);
+			name = FindBackPassword;
+			sourceTree = "<group>";
+		};
+		336285572117E0F700CC7D24 /* Role */ = {
+			isa = PBXGroup;
+			children = (
+				336285802117EA6100CC7D24 /* ClassNames_MembeRoleModel.h */,
+				336285812117EA6100CC7D24 /* ClassNames_MembeRoleModel.m */,
+			);
+			name = Role;
+			sourceTree = "<group>";
+		};
+		336285582117E0FE00CC7D24 /* UpdateUserLogin */ = {
+			isa = PBXGroup;
+			children = (
+				336285842117EA7400CC7D24 /* ClassNames_UpdateUserLoginModel.h */,
+				336285852117EA7400CC7D24 /* ClassNames_UpdateUserLoginModel.m */,
+			);
+			name = UpdateUserLogin;
+			sourceTree = "<group>";
+		};
+		336285592117E10A00CC7D24 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				336285882117EA8500CC7D24 /* ClassNames_MemberOrderModel.h */,
+				336285892117EA8500CC7D24 /* ClassNames_MemberOrderModel.m */,
+			);
+			name = Order;
+			sourceTree = "<group>";
+		};
+		3362855A2117E11200CC7D24 /* AppStore */ = {
+			isa = PBXGroup;
+			children = (
+				3362858C2117EAB400CC7D24 /* ClassNames_AppStoreModel.h */,
+				3362858D2117EAB400CC7D24 /* ClassNames_AppStoreModel.m */,
+			);
+			name = AppStore;
+			sourceTree = "<group>";
+		};
+		336285902117EB8F00CC7D24 /* ViewLayout */ = {
+			isa = PBXGroup;
+			children = (
+				336285912117EBC700CC7D24 /* ClassNames_BaseViewLayout.h */,
+				336285922117EBC700CC7D24 /* ClassNames_BaseViewLayout.m */,
+			);
+			name = ViewLayout;
+			sourceTree = "<group>";
+		};
+		336289C621198A0100CC7D24 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				336289CB21198AC500CC7D24 /* ClassNames_ImageEyes.h */,
+				336289E22119C01A00CC7D24 /* ClassNames_ImageUpDown.h */,
+				336289E62119C5E300CC7D24 /* ClassNames_ImageUser.h */,
+				336289EA2119CCAC00CC7D24 /* ClassNames_ImageErrorRight.h */,
+				336289EE2119CF7300CC7D24 /* ClassNames_ImagePhoneMessage.h */,
+				336289F2211A90E400CC7D24 /* ClassNames_ImagePassword.h */,
+				331B39CC212D1F1700544DB8 /* ClassNames_ImageResetPassword.h */,
+				333AF9F1211C1F2C00A9FA38 /* ClassNames_Title.h */,
+				33333BD7212186CA00446146 /* ClassNames_ImageBackground.h */,
+				331B39CB212D0F5D00544DB8 /* ClassNames_ImageCode.h */,
+				331B39CD212D387900544DB8 /* ClassNames_ImagePersonID.h */,
+				331B39CE212E54EA00544DB8 /* ClassNames_ImageDelete.h */,
+				3309AEA6213F68D400E10575 /* ClassNames_ImageProtocol.h */,
+				335BB6CD2147ADC8003339B6 /* ClassNames_ImageSkillButton.h */,
+				33733900214A6051004A5984 /* ClassNames_ImageCommitButton.h */,
+				33733901214A71B6004A5984 /* ClassNames_ImageBackButton.h */,
+			);
+			name = Image;
+			sourceTree = "<group>";
+		};
+		336289D62119959A00CC7D24 /* HubView */ = {
+			isa = PBXGroup;
+			children = (
+				336289D9211998EC00CC7D24 /* ClassNames_PGHubView.h */,
+				336289DA211998EC00CC7D24 /* ClassNames_PGHubView.m */,
+			);
+			name = HubView;
+			sourceTree = "<group>";
+		};
+		336289DD21199A3E00CC7D24 /* ItemButton */ = {
+			isa = PBXGroup;
+			children = (
+				336289DE21199A8800CC7D24 /* ClassNames_itemButton.h */,
+				336289DF21199A8800CC7D24 /* ClassNames_itemButton.m */,
+				33333A5F212118FB00446146 /* ClassNames_CommitButton.h */,
+				33333A60212118FB00446146 /* ClassNames_CommitButton.m */,
+			);
+			name = ItemButton;
+			sourceTree = "<group>";
+		};
+		33AC6ED82113EB39005555C3 = {
+			isa = PBXGroup;
+			children = (
+				33AC6EE32113EB39005555C3 /* PlatFormGamesSDK */,
+				33AC6EE22113EB39005555C3 /* Products */,
+				33AC6EED2113EB4B005555C3 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		33AC6EE22113EB39005555C3 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				33AC6EE12113EB39005555C3 /* libPlatFormGamesSDK.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		33AC6EE32113EB39005555C3 /* PlatFormGamesSDK */ = {
+			isa = PBXGroup;
+			children = (
+				331B33CF2125780800544DB8 /* Main */,
+				330F69932114010E00388F45 /* resource */,
+				330F69922114010200388F45 /* Controller */,
+				330F6991211400FA00388F45 /* View */,
+				330F6990211400EF00388F45 /* Model */,
+			);
+			path = PlatFormGamesSDK;
+			sourceTree = "<group>";
+		};
+		33AC6EED2113EB4B005555C3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				33AC6EF22113EB54005555C3 /* CoreGraphics.framework */,
+				33AC6EF02113EB4F005555C3 /* Foundation.framework */,
+				33AC6EEE2113EB4B005555C3 /* UIKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DF585E5F289CC6C2005B25BA /* TextView */ = {
+			isa = PBXGroup;
+			children = (
+				DF585E60289CC753005B25BA /* ClassNames_DelegateTextView.h */,
+				DF585E61289CC753005B25BA /* ClassNames_DelegateTextView.m */,
+			);
+			name = TextView;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		33AC6EF42113EB57005555C3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				331B312E212525C800544DB8 /* ClassNames_LoadingView.h in Headers */,
+				336289E021199A8800CC7D24 /* ClassNames_itemButton.h in Headers */,
+				336285932117EBC700CC7D24 /* ClassNames_BaseViewLayout.h in Headers */,
+				333AFAB0211D635300A9FA38 /* ClassNames_AutoLoginView.h in Headers */,
+				333AF949211B029B00A9FA38 /* ClassNames_InputView.h in Headers */,
+				336289CD21198AC500CC7D24 /* ClassNames_ImageEyes.h in Headers */,
+				3362856E2117E8F900CC7D24 /* ClassNames_MemberNormalRegisterModel.h in Headers */,
+				331B33D22125781200544DB8 /* UmPlatsFormGameManager.h in Headers */,
+				33333A7521212ACA00446146 /* ClassNames_FindBackPasswordView.h in Headers */,
+				3362856A2117E72300CC7D24 /* ClassNames_MemberVisitorModel.h in Headers */,
+				336285762117E9FB00CC7D24 /* ClassNames_MemberLoginModel.h in Headers */,
+				336283E32114240E00CC7D24 /* ClassNames_Color.h in Headers */,
+				336285862117EA7400CC7D24 /* ClassNames_UpdateUserLoginModel.h in Headers */,
+				331B33E82125786000544DB8 /* ClassName_IAPInfo.h in Headers */,
+				330FEA3C23014BD8008C0D0F /* ClassNames_DelegateView.h in Headers */,
+				33333BD52121727500446146 /* ClassNames_MainView.h in Headers */,
+				3362832C2114016500CC7D24 /* ClassNames_URLSessionConfigure.h in Headers */,
+				33333A7921212ADE00446146 /* ClassNames_ResetPasswordView.h in Headers */,
+				3362858E2117EAB400CC7D24 /* ClassNames_AppStoreModel.h in Headers */,
+				3362899121193E9D00CC7D24 /* ClassNames_DefaultThemeConfigure.h in Headers */,
+				331D91AD217465740049853B /* ClassNames_VideoPlayView.h in Headers */,
+				33333A6D21212A7200446146 /* ClassNames_QuickLoginView.h in Headers */,
+				336283FC21142DA600CC7D24 /* ClassNames_AnimateTool.h in Headers */,
+				331B31282124481A00544DB8 /* ClassNames_AccountTableViewCell.h in Headers */,
+				336289E82119C5E300CC7D24 /* ClassNames_ImageUser.h in Headers */,
+				331B33E22125786000544DB8 /* ClassName_IAPMain.h in Headers */,
+				331B33F121257F6B00544DB8 /* ClassNames_NavigationBarView.h in Headers */,
+				336289E42119C01A00CC7D24 /* ClassNames_ImageUpDown.h in Headers */,
+				33333A652121247A00446146 /* ClassNames_BindPhoneView.h in Headers */,
+				33628330211402D300CC7D24 /* ClassNames_URLSessionManager.h in Headers */,
+				33628341211409D300CC7D24 /* ClassNames_NotificationConfigure.h in Headers */,
+				33333BD821218A0500446146 /* ClassNames_ImageBackground.h in Headers */,
+				336285822117EA6100CC7D24 /* ClassNames_MembeRoleModel.h in Headers */,
+				339D66632329EAAC00872D27 /* ClassNames_RechargeView.h in Headers */,
+				33333A7121212AB400446146 /* ClassNames_LoginView.h in Headers */,
+				336289DB211998EC00CC7D24 /* ClassNames_PGHubView.h in Headers */,
+				336283E82114254E00CC7D24 /* ClassNames_RegularMatch.h in Headers */,
+				336289EC2119CCAC00CC7D24 /* ClassNames_ImageErrorRight.h in Headers */,
+				336285722117E90D00CC7D24 /* ClassNames_MemberRegisterModel.h in Headers */,
+				33185114221A9772003907D5 /* ClassName_AppStore.h in Headers */,
+				3362833C2114096F00CC7D24 /* ClassNames_InitGamesConfigure.h in Headers */,
+				336283F721142C3A00CC7D24 /* ClassNames_CutImage.h in Headers */,
+				331B31312125280B00544DB8 /* ClassNames_ViewTool.h in Headers */,
+				3362855D2117E1B300CC7D24 /* ClassNames_BaseModel.h in Headers */,
+				336285622117E69E00CC7D24 /* ClassNames_GameInitialiseModel.h in Headers */,
+				331B33E42125786000544DB8 /* ClassName_IAPRepair.h in Headers */,
+				3362858A2117EA8500CC7D24 /* ClassNames_MemberOrderModel.h in Headers */,
+				3362857A2117EA3300CC7D24 /* ClassNames_UpdatePSWModel.h in Headers */,
+				33333A7D21212B0100446146 /* ClassNames_NormalRegisterView.h in Headers */,
+				336289F02119CF7300CC7D24 /* ClassNames_ImagePhoneMessage.h in Headers */,
+				336285662117E6D800CC7D24 /* ClassNames_ActivateModel.h in Headers */,
+				33333A8421212B2A00446146 /* ClassNames_PhoneRegisterView.h in Headers */,
+				3362834621140A1E00CC7D24 /* ClassNames_DebugLog.h in Headers */,
+				DF585E62289CC753005B25BA /* ClassNames_DelegateTextView.h in Headers */,
+				337161E92229125E002D5BA0 /* ClassNames_SuggestView.h in Headers */,
+				336289F4211A90E400CC7D24 /* ClassNames_ImagePassword.h in Headers */,
+				33628337211407AB00CC7D24 /* ClassNames_SecurityTool.h in Headers */,
+				3362857E2117EA4700CC7D24 /* ClassNames_BackUserPSWModel.h in Headers */,
+				33ABDEEC2363012E00F9E7D5 /* ClassNames_SuspensionBallButton.h in Headers */,
+				339D665E2329EA8500872D27 /* ClassNames_loadFileManager.h in Headers */,
+				33333A61212118FB00446146 /* ClassNames_CommitButton.h in Headers */,
+				331B33E62125786000544DB8 /* ClassName_IAPFail.h in Headers */,
+				336283F22114280700CC7D24 /* ClassNames_DeviceConfigure.h in Headers */,
+				33333A692121248C00446146 /* ClassNames_BindPersonIDView.h in Headers */,
+				336283332114069000CC7D24 /* ClassNames_URLProtocol.h in Headers */,
+				330FEA3823014BD8008C0D0F /* ClassNames_CustomServerView.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		33AC6EE02113EB39005555C3 /* PlatFormGamesSDK */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 33AC6EEA2113EB39005555C3 /* Build configuration list for PBXNativeTarget "PlatFormGamesSDK" */;
+			buildPhases = (
+				33AC6EDD2113EB39005555C3 /* Sources */,
+				33AC6EDE2113EB39005555C3 /* Frameworks */,
+				33AC6EDF2113EB39005555C3 /* CopyFiles */,
+				33AC6EF42113EB57005555C3 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PlatFormGamesSDK;
+			productName = PlatFormGamesSDK;
+			productReference = 33AC6EE12113EB39005555C3 /* libPlatFormGamesSDK.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		33AC6ED92113EB39005555C3 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0930;
+				ORGANIZATIONNAME = TB;
+				TargetAttributes = {
+					33AC6EE02113EB39005555C3 = {
+						CreatedOnToolsVersion = 9.3.1;
+					};
+				};
+			};
+			buildConfigurationList = 33AC6EDC2113EB39005555C3 /* Build configuration list for PBXProject "PlatFormGamesSDK" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 33AC6ED82113EB39005555C3;
+			productRefGroup = 33AC6EE22113EB39005555C3 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				33AC6EE02113EB39005555C3 /* PlatFormGamesSDK */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		33AC6EDD2113EB39005555C3 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				33333A7221212AB400446146 /* ClassNames_LoginView.m in Sources */,
+				33333A6E21212A7200446146 /* ClassNames_QuickLoginView.m in Sources */,
+				3362856B2117E72300CC7D24 /* ClassNames_MemberVisitorModel.m in Sources */,
+				33333A8521212B2A00446146 /* ClassNames_PhoneRegisterView.m in Sources */,
+				336283F32114280700CC7D24 /* ClassNames_DeviceConfigure.m in Sources */,
+				3362857F2117EA4700CC7D24 /* ClassNames_BackUserPSWModel.m in Sources */,
+				33333A7621212ACA00446146 /* ClassNames_FindBackPasswordView.m in Sources */,
+				33333BD62121727500446146 /* ClassNames_MainView.m in Sources */,
+				3362832D2114016500CC7D24 /* ClassNames_URLSessionConfigure.m in Sources */,
+				33333A62212118FB00446146 /* ClassNames_CommitButton.m in Sources */,
+				336289E121199A8800CC7D24 /* ClassNames_itemButton.m in Sources */,
+				3362899221193E9D00CC7D24 /* ClassNames_DefaultThemeConfigure.m in Sources */,
+				331B31292124481A00544DB8 /* ClassNames_AccountTableViewCell.m in Sources */,
+				336285732117E90D00CC7D24 /* ClassNames_MemberRegisterModel.m in Sources */,
+				33628331211402D300CC7D24 /* ClassNames_URLSessionManager.m in Sources */,
+				336285672117E6D800CC7D24 /* ClassNames_ActivateModel.m in Sources */,
+				33333A662121247A00446146 /* ClassNames_BindPhoneView.m in Sources */,
+				33333A7E21212B0100446146 /* ClassNames_NormalRegisterView.m in Sources */,
+				331D91AC217465740049853B /* ClassNames_VideoPlayView.m in Sources */,
+				33185113221A9772003907D5 /* ClassName_AppStore.m in Sources */,
+				33333A6A2121248C00446146 /* ClassNames_BindPersonIDView.m in Sources */,
+				331B312D212525C800544DB8 /* ClassNames_LoadingView.m in Sources */,
+				330FEA3923014BD8008C0D0F /* ClassNames_CustomServerView.m in Sources */,
+				3362833D2114096F00CC7D24 /* ClassNames_InitGamesConfigure.m in Sources */,
+				3362855E2117E1B300CC7D24 /* ClassNames_BaseModel.m in Sources */,
+				336285942117EBC700CC7D24 /* ClassNames_BaseViewLayout.m in Sources */,
+				337161E72229125E002D5BA0 /* ClassNames_SuggestView.m in Sources */,
+				331B33F021257F6B00544DB8 /* ClassNames_NavigationBarView.m in Sources */,
+				331B33E02125786000544DB8 /* ClassName_IAPMain.m in Sources */,
+				336283E42114240E00CC7D24 /* ClassNames_Color.m in Sources */,
+				33333A7A21212ADE00446146 /* ClassNames_ResetPasswordView.m in Sources */,
+				330FEA3A23014BD8008C0D0F /* ClassNames_DelegateView.m in Sources */,
+				331B33E52125786000544DB8 /* ClassName_IAPRepair.m in Sources */,
+				33ABDEED2363012E00F9E7D5 /* ClassNames_SuspensionBallButton.m in Sources */,
+				DF585E63289CC753005B25BA /* ClassNames_DelegateTextView.m in Sources */,
+				331B33E72125786000544DB8 /* ClassName_IAPInfo.m in Sources */,
+				331B33E32125786000544DB8 /* ClassName_IAPFail.m in Sources */,
+				336285832117EA6100CC7D24 /* ClassNames_MembeRoleModel.m in Sources */,
+				3362856F2117E8F900CC7D24 /* ClassNames_MemberNormalRegisterModel.m in Sources */,
+				339D665F2329EA8500872D27 /* ClassNames_loadFileManager.m in Sources */,
+				3362858B2117EA8500CC7D24 /* ClassNames_MemberOrderModel.m in Sources */,
+				336285772117E9FB00CC7D24 /* ClassNames_MemberLoginModel.m in Sources */,
+				336285632117E69E00CC7D24 /* ClassNames_GameInitialiseModel.m in Sources */,
+				331B33D32125781200544DB8 /* UmPlatsFormGameManager.m in Sources */,
+				333AFAB1211D635300A9FA38 /* ClassNames_AutoLoginView.m in Sources */,
+				33628342211409D300CC7D24 /* ClassNames_NotificationConfigure.m in Sources */,
+				3362857B2117EA3300CC7D24 /* ClassNames_UpdatePSWModel.m in Sources */,
+				336285872117EA7400CC7D24 /* ClassNames_UpdateUserLoginModel.m in Sources */,
+				33628338211407AB00CC7D24 /* ClassNames_SecurityTool.m in Sources */,
+				333AF94A211B029B00A9FA38 /* ClassNames_InputView.m in Sources */,
+				339D66622329EAAC00872D27 /* ClassNames_RechargeView.m in Sources */,
+				336289DC211998EC00CC7D24 /* ClassNames_PGHubView.m in Sources */,
+				3362858F2117EAB400CC7D24 /* ClassNames_AppStoreModel.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		33AC6EE82113EB39005555C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		33AC6EE92113EB39005555C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		33AC6EEB2113EB39005555C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = NO;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
+				SKIP_INSTALL = YES;
+				STRIP_STYLE = "non-global";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		33AC6EEC2113EB39005555C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEAD_CODE_STRIPPING = NO;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "include/$(PROJECT_NAME)";
+				SKIP_INSTALL = YES;
+				STRIP_STYLE = "non-global";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		33AC6EDC2113EB39005555C3 /* Build configuration list for PBXProject "PlatFormGamesSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				33AC6EE82113EB39005555C3 /* Debug */,
+				33AC6EE92113EB39005555C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		33AC6EEA2113EB39005555C3 /* Build configuration list for PBXNativeTarget "PlatFormGamesSDK" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				33AC6EEB2113EB39005555C3 /* Debug */,
+				33AC6EEC2113EB39005555C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 33AC6ED92113EB39005555C3 /* Project object */;
+}
