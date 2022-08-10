@@ -10,6 +10,8 @@
 
 @property (nonatomic, readwrite, copy) void (^methodNames_loginFailure)(void);
 
+@property (nonatomic, readwrite, copy) void (^methodNames_commitBlock)(NSString *varNames_acc, NSString *varNames_pss);
+
 @property (nonatomic, readwrite, copy) void (^methodNames_servicceBlock)(void);
 
 // 协议

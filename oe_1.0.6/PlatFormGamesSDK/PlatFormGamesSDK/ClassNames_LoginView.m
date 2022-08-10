@@ -71,7 +71,8 @@
     __weak typeof(self) weakSelf = self;
     ClassNames_NavigationBarView *varNames_tmpNaviView = [[ClassNames_NavigationBarView alloc]init];
     varNames_tmpNaviView.translatesAutoresizingMaskIntoConstraints = NO;
-    [varNames_tmpNaviView methodNames_setTitle:@"账号登录" rightButtonImage:@"" rightTitle:@"客服" btnAction:^{
+    [varNames_tmpNaviView methodNames_setTitle:@"账号登录"];
+    [varNames_tmpNaviView methodNames_setRightButtonImage:@"" rightTitle:@"客服" btnAction:^{
         if (weakSelf.methodNames_servicceBlock) {
             weakSelf.methodNames_servicceBlock();
         }
@@ -108,9 +109,11 @@
     [self.varNames_delegateView addSubview:self.varNames_delegateTextView];
     
     ClassNames_CommitButton *varNames_tmpCommitBtn = [ClassNames_CommitButton methodNames_createCommitButtonWithTitle:@"一键登录" withTouchUpInsidBlock:^{
-        NSLog(@"点击一键登录");
         [weakSelf methodNames_commitAction:nil];
     }];
+    
+    
+    
     self.varNames_firstCommitBtn = varNames_tmpCommitBtn;
     
     
@@ -284,6 +287,9 @@
 //        [ClassNames_PGHubView methodNames_showErrorMessage:@"请阅读并同意 用户协议 及 隐私政策"];
         [ClassNames_PGHubView methodNames_showTip:@"请阅读并同意 用户协议 及 隐私政策"];
         return;
+    }
+    if (self.methodNames_commitBlock) {
+        self.methodNames_commitBlock(varNames_tmpaccount, varNames_tmppassword);
     }
     return;
     NSDictionary *varNames_tmppara = @{

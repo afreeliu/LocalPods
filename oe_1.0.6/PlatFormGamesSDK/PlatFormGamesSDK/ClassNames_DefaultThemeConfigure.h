@@ -48,6 +48,9 @@ FOUNDATION_EXTERN NSString *const varNames_passVideoPresentValue;
 #pragma mark ---------- 固定账号登录使用
 FOUNDATION_EXTERN NSString *const varNames_passLoginConfigKey;
 FOUNDATION_EXTERN NSString *const varNames_isPassLoginKey;
+
+#pragma mark ---------- 自动登录页面持续时间
+FOUNDATION_EXTERN NSString *const varNames_autoLoginDurationKey;
 /// plist 中没有值时候取的默认值
 FOUNDATION_EXTERN NSString *const varNames_isPassLoginValue;
 FOUNDATION_EXTERN NSString *const varNames_defaultUidKey;
@@ -564,7 +567,18 @@ static inline CGSize methodNames_getImageSize(UIImage *varNames_image) {
 static inline CGFloat methodNames_getShowHideViewAnimateDuration() {
     return 0.1f;
 }
-
+#pragma mark ---------- 自动登录页面持续时间
+static inline NSInteger methodNames_getAutoLoginViewDuration() {
+    NSDictionary *varNames_tmpDic = methodNames_getInit_config(varNames_defaultConfigKey);
+    if (varNames_tmpDic) {
+        NSNumber *varNames_autoLogin = [varNames_tmpDic objectForKey:varNames_autoLoginDurationKey];
+        if (varNames_autoLogin) {
+            return varNames_autoLogin.integerValue;
+        }
+    }
+    
+    return 5;
+}
 
 #pragma mark ---------- 悬浮球的内容配置
 static inline BOOL methodNames_showSuspensionBall() {

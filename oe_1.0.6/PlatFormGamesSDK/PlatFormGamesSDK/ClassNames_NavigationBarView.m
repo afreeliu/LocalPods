@@ -106,29 +106,78 @@
     [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_lineView methodNames_constriant:8];
     [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_lineView methodNames_constriant:8];
     [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_lineView methodNames_constriant:3];
-    
-    
-    if (!self.varNames_rightButton.hidden) {
-        [ClassNames_BaseViewLayout methodNames_layoutCenterY:self.varNames_rightButton methodNames_constriant:0];
-        [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_rightButton methodNames_constriant:8];
-        [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_rightButton methodNames_constriant:self.varNames_rightBtnWidth];
-        [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_rightButton methodNames_constriant:self.varNames_rightBtnHeight];
-    }
-    
-    if (!self.varNames_leftButton.hidden) {
-        [ClassNames_BaseViewLayout methodNames_layoutCenterY:self.varNames_leftButton methodNames_constriant:0];
-        [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_leftButton methodNames_constriant:8];
-        [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_leftButton methodNames_constriant:self.varNames_leftBtnWidth];
-        [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_leftButton methodNames_constriant:self.varNames_leftBtnHeight];
-    }
-    
 }
+// 布局左边按钮
+- (void)methodNames_layoutLeftButton {
+    [ClassNames_BaseViewLayout methodNames_layoutCenterY:self.varNames_leftButton methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_leftButton methodNames_constriant:8];
+    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_leftButton methodNames_constriant:self.varNames_leftBtnWidth];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_leftButton methodNames_constriant:self.varNames_leftBtnHeight];
+}
+
+// 布局右边按钮
+- (void)methodNames_layoutRightButton {
+    [ClassNames_BaseViewLayout methodNames_layoutCenterY:self.varNames_rightButton methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_rightButton methodNames_constriant:8];
+    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_rightButton methodNames_constriant:self.varNames_rightBtnWidth];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_rightButton methodNames_constriant:self.varNames_rightBtnHeight];
+}
+
 
 - (void)methodNames_setTitle:(NSString *)title{
     
     self.varNames_titleLabel.text = title;
     [self methodNames_layoutSubView];
 }
+
+- (void)methodNames_setLeftButtonImage:(NSString *)varNames_image lefttitle:(NSString *)varNames_tmpTitle btnAction:(void(^)(void))varNames_block {
+    self.varNames_leftBtnWidth = 0;
+    self.varNames_leftBtnHeight = 0;
+    self.varNames_leftButton.hidden = NO;
+    self.methodNames_leftBtnBlock = varNames_block;
+    if (varNames_image && varNames_image.length) {
+        
+        UIImage *varNames_img = methodNames_getImage(varNames_image);
+        self.varNames_leftBtnWidth = varNames_img.size.width/2.0;
+        self.varNames_leftBtnHeight = varNames_img.size.height/2.0;
+        [self.varNames_leftButton setBackgroundImage:varNames_img forState:UIControlStateNormal];
+    }
+    if (varNames_tmpTitle && varNames_tmpTitle.length) {
+        [self.varNames_leftButton setTitle:varNames_tmpTitle forState:UIControlStateNormal];
+        self.varNames_leftBtnWidth = varNames_tmpTitle.length * 14 + 20;
+        self.varNames_leftBtnHeight = 35;
+    }
+    
+    if (!varNames_tmpTitle.length && !varNames_image.length) {
+        self.varNames_leftButton.hidden = YES;
+    }
+    [self methodNames_layoutLeftButton];
+}
+
+- (void)methodNames_setRightButtonImage:(NSString *)varNames_image rightTitle:(NSString *)varNames_tmpTitle btnAction:(void(^)(void))varNames_block {
+    self.varNames_rightBtnWidth = 0;
+    self.varNames_rightBtnHeight = 0;
+    self.varNames_rightButton.hidden = NO;
+    self.methodNames_rightBtnBlock = varNames_block;
+    if (varNames_image && varNames_image.length) {
+        UIImage *varNames_img = methodNames_getImage(varNames_image);
+        self.varNames_rightBtnWidth = varNames_img.size.width/2.0;
+        self.varNames_rightBtnHeight = varNames_img.size.height/2.0;
+        [self.varNames_rightButton setBackgroundImage:varNames_img forState:UIControlStateNormal];
+    }
+    if (varNames_tmpTitle && varNames_tmpTitle.length) {
+        [self.varNames_rightButton setTitle:varNames_tmpTitle forState:UIControlStateNormal];
+        self.varNames_rightBtnWidth = varNames_tmpTitle.length * 14 + 20;
+        self.varNames_rightBtnHeight = 35;
+    }
+    
+    if (!varNames_tmpTitle.length && !varNames_image.length) {
+        self.varNames_rightButton.hidden = YES;
+    }
+    [self methodNames_layoutRightButton];
+}
+
+
 
 - (void)methodNames_setTitle:(NSString *)title leftButtonImage:(NSString *)varNames_image lefttitle:(NSString *)varNames_tmpTitle btnAction:(void(^)(void))varNames_block {
     

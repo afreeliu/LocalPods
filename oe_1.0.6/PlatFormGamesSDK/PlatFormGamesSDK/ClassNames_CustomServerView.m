@@ -151,7 +151,7 @@
     [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_logoImageView methodNames_constriant:self.varNames_logoWidth];
     [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_logoImageView methodNames_constriant:self.varNames_logoHeight];
     
-    [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_closeBtn methodNames_constriant:10];
+    
     [ClassNames_BaseViewLayout methodNames_layoutSubView1:self.varNames_closeBtn methodNames_attribute1:NSLayoutAttributeCenterY methodNames_layoutSubView2:self.varNames_logoImageView methodNames_attribute2:NSLayoutAttributeCenterY methodNames_constriant:0];
     [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_closeBtn methodNames_constriant:methodNames_setMargin_2base()];
     [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_closeBtn methodNames_constriant:self.varNames_closeHeight];
@@ -169,7 +169,7 @@
     UIImageView *varNames_logoImageView = [[UIImageView alloc]init];
     varNames_logoImageView.translatesAutoresizingMaskIntoConstraints = NO;
     UIImage *varNames_logoImage = methodNames_getImage(@"image_logo");
-    self.varNames_logoWidth = varNames_logoImage.size.width/3.0;
+    self.varNames_logoWidth = varNames_logoImage.size.width/2.0;
     self.varNames_logoHeight = varNames_logoImage.size.height/2.0;
     varNames_logoImageView.image = varNames_logoImage;
     self.varNames_logoImageView = varNames_logoImageView;

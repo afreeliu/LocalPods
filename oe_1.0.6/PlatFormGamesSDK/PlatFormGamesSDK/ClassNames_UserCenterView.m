@@ -1,6 +1,6 @@
 
 
-#import "ClassNames_SuggestView.h"
+#import "ClassNames_UserCenterView.h"
 #import "ClassNames_Color.h"
 #import "ClassNames_BaseViewLayout.h"
 #import "ClassNames_DefaultThemeConfigure.h"
@@ -14,7 +14,7 @@ static NSString *const varNames_btnImgKey = @"varNames_btnImgKey";
 static NSString *const varNames_btnTitleKey = @"varNames_btnTitleKey";
 
 
-@interface ClassNames_SuggestView ()
+@interface ClassNames_UserCenterView ()
 
 @property (nonatomic, readwrite, strong) ClassNames_NavigationBarView *varNames_naviView;
 
@@ -27,10 +27,10 @@ static NSString *const varNames_btnTitleKey = @"varNames_btnTitleKey";
 @end
 
 
-@implementation ClassNames_SuggestView
+@implementation ClassNames_UserCenterView
 
-+(instancetype)methodNames_createSuggestView {
-    ClassNames_SuggestView *varNames_tmpSuggestView = [[ClassNames_SuggestView alloc]init];
++(instancetype)methodNames_createUserCenterView {
+    ClassNames_UserCenterView *varNames_tmpSuggestView = [[ClassNames_UserCenterView alloc]init];
     varNames_tmpSuggestView.translatesAutoresizingMaskIntoConstraints = NO;
     return varNames_tmpSuggestView;
 }
@@ -77,19 +77,19 @@ static NSString *const varNames_btnTitleKey = @"varNames_btnTitleKey";
     [self methodNames_layoutSubViews];
     NSArray *varNames_btnArray = @[
         @{
-            varNames_btnImgKey: @"image_phone",
+            varNames_btnImgKey: @"image_lock_white",
             varNames_btnTitleKey: @"密码修改",
         },
         @{
-            varNames_btnImgKey: @"image_phone",
+            varNames_btnImgKey: @"image_phone_white",
             varNames_btnTitleKey: @"手机验证",
         },
         @{
-            varNames_btnImgKey: @"image_phone",
+            varNames_btnImgKey: @"image_realname_white",
             varNames_btnTitleKey: @"实名验证",
         },
         @{
-            varNames_btnImgKey: @"image_phone",
+            varNames_btnImgKey: @"image_exit_white",
             varNames_btnTitleKey: @"退出登录",
         },
     ];
@@ -102,8 +102,11 @@ static NSString *const varNames_btnTitleKey = @"varNames_btnTitleKey";
     ClassNames_NavigationBarView *varNames_tmpNaviView = [[ClassNames_NavigationBarView alloc]init];
     varNames_tmpNaviView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [varNames_tmpNaviView methodNames_setTitle:@"用户中心" rightButtonImage:@"image_close" rightTitle:@"" btnAction:^{
-        
+    [varNames_tmpNaviView methodNames_setTitle:@"用户中心"];
+    [varNames_tmpNaviView methodNames_setRightButtonImage:@"image_close" rightTitle:@"" btnAction:^{
+        if (weakSelf.methodNames_closeBlock) {
+            weakSelf.methodNames_closeBlock();
+        }
     }];
     
     self.varNames_naviView = varNames_tmpNaviView;
@@ -134,7 +137,7 @@ static NSString *const varNames_btnTitleKey = @"varNames_btnTitleKey";
         CGRect varNames_rect = CGRectMake(0, y, 160, 38);
         NSString *varNames_img = [obj objectForKey:varNames_btnImgKey];
         NSString *varNames_title = [obj objectForKey:varNames_btnTitleKey];
-        [varNames_skillView addSubview:[self methodNames_createButtonWithFrame:varNames_rect methodNames_img:varNames_img methodNames_title:varNames_title]];
+        [varNames_skillView addSubview:[self methodNames_createButtonWithFrame:varNames_rect methodNames_img:varNames_img methodNames_title:varNames_title methodNames_index:idx+10]];
     }];
     self.varNames_skillView = varNames_skillView;
     
@@ -148,8 +151,9 @@ static NSString *const varNames_btnTitleKey = @"varNames_btnTitleKey";
     
 }
 
-- (UIButton *)methodNames_createButtonWithFrame:(CGRect)frame methodNames_img:(NSString *)img methodNames_title:(NSString *)title {
+- (UIButton *)methodNames_createButtonWithFrame:(CGRect)frame methodNames_img:(NSString *)img methodNames_title:(NSString *)title methodNames_index:(NSInteger)index{
     UIButton *varNames_tmpbtn = [[UIButton alloc]initWithFrame:frame];
+    varNames_tmpbtn.tag = index;
     [varNames_tmpbtn setBackgroundColor:[ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_themeColor_config()]];
     [varNames_tmpbtn setTitle:title forState:UIControlStateNormal];
     UIImage *varNames_img = methodNames_getImage(img);
@@ -158,6 +162,7 @@ static NSString *const varNames_btnTitleKey = @"varNames_btnTitleKey";
     [varNames_tmpbtn setTitleColor:[ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_commitBtnFontColor_config()] forState:UIControlStateNormal];
     varNames_tmpbtn.layer.cornerRadius = 4.5;
     [varNames_tmpbtn setImageEdgeInsets:UIEdgeInsetsMake(0, 0, 0, 8)];
+    [varNames_tmpbtn addTarget:self action:@selector(methodNames_skillButtonAction:) forControlEvents:UIControlEventTouchUpInside];
     return varNames_tmpbtn;
 }
 
@@ -183,30 +188,40 @@ static NSString *const varNames_btnTitleKey = @"varNames_btnTitleKey";
     self.varNames_topMarginValue += methodNames_setMargin_2base();
 }
 #pragma mark ---------- button Action
-- (void)methodNames_firstCommitAction:(UIButton *)sender {
-    if (self.methodNames_enterGame) {
-        self.methodNames_enterGame();
-        [self methodNames_hideViewWithAnimatecomplete:^{
+- (void)methodNames_skillButtonAction:(UIButton *)sender {
+    self.hidden = YES;
+    switch (sender.tag) {
+        case 10:// 密码修改
+        {
+            if (self.methodNames_resetPassword) {
+                self.methodNames_resetPassword();
+            }
+        }
+            break;
+        case 11:// 手机验证
+        {
+            if (self.methodNames_bindPhone) {
+                self.methodNames_bindPhone();
+            }
+        }
+            break;
+        case 12:// 实名验证
+        {
+            if (self.methodNames_bindPersonID) {
+                self.methodNames_bindPersonID();
+            }
+        }
+            break;
+        case 13:// 退出登录
+        {
+            if (self.methodNames_logout) {
+                self.methodNames_logout();
+            }
+        }
+            break;
             
-        }];
-    }
-}
-
-- (void)methodNames_secondCommitAction:(UIButton *)sender {
-    if (self.methodNames_bindPhone) {
-        self.methodNames_bindPhone();
-        [self methodNames_hideViewWithAnimatecomplete:^{
-            
-        }];
-    }
-}
-
-- (void)methodNames_closeAction:(UIButton *)sender {
-    if (self.methodNames_enterGame) {
-        self.methodNames_enterGame();
-        [self methodNames_hideViewWithAnimatecomplete:^{
-            
-        }];
+        default:
+            break;
     }
 }
 

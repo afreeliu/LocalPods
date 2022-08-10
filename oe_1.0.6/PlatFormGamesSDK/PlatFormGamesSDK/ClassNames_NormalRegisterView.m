@@ -77,7 +77,8 @@
     __weak typeof(self) weakSelf = self;
     ClassNames_NavigationBarView *varNames_tmpNaviView = [[ClassNames_NavigationBarView alloc]init];
     varNames_tmpNaviView.translatesAutoresizingMaskIntoConstraints = NO;
-    [varNames_tmpNaviView methodNames_setTitle:@"账号注册" rightButtonImage:@"" rightTitle:@"客服" btnAction:^{
+    [varNames_tmpNaviView methodNames_setTitle:@"账号注册"];
+    [varNames_tmpNaviView methodNames_setRightButtonImage:@"" rightTitle:@"客服" btnAction:^{
         if (weakSelf.methodNames_servicceBlock) {
             weakSelf.methodNames_servicceBlock();
         }

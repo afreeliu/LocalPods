@@ -17,6 +17,8 @@
 #import "ClassNames_NavigationBarView.h"
 @interface ClassNames_BindPhoneView ()
 
+@property (nonatomic, readwrite, weak) UIView *varNames_fview;
+
 @property (nonatomic, readwrite, strong) ClassNames_NavigationBarView *varNames_naviView;
 
 @property (nonatomic, readwrite, strong) UILabel *varNames_accountLabel;
@@ -40,14 +42,21 @@
 @implementation ClassNames_BindPhoneView
 
 #pragma mark ---------- public methodNames
-+(instancetype)methodNames_createBindPhoneView {
++(instancetype)methodNames_createBindPhoneViewFromView:(UIView *)varNames_view {
     
     ClassNames_BindPhoneView *varNames_tmpBindPhoneView = [[ClassNames_BindPhoneView alloc]init];
     varNames_tmpBindPhoneView.translatesAutoresizingMaskIntoConstraints = NO;
-    
+    if (varNames_view) {
+        varNames_tmpBindPhoneView.varNames_fview = varNames_view;
+        [varNames_tmpBindPhoneView methodNames_addLeftButton];
+    }
     return varNames_tmpBindPhoneView;
 }
-
+- (void)methodNames_changeFromView:(UIView *)varNames_view {
+    if (varNames_view) {
+        self.varNames_fview = varNames_view;
+    }
+}
 #pragma mark --------------------------------------------------------------------------------
 
 -(instancetype)init {
@@ -121,7 +130,8 @@
     ClassNames_NavigationBarView *varNames_tmpNaviView = [[ClassNames_NavigationBarView alloc]init];
     varNames_tmpNaviView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [varNames_tmpNaviView methodNames_setTitle:@"绑定手机" rightButtonImage:@"image_close" rightTitle:@"" btnAction:^{
+    [varNames_tmpNaviView methodNames_setTitle:@"绑定手机"];
+    [varNames_tmpNaviView methodNames_setRightButtonImage:@"image_close" rightTitle:@"" btnAction:^{
         if (weakSelf.methodNames_closeBindPhoneView) {
             weakSelf.hidden = YES;
             weakSelf.methodNames_closeBindPhoneView();
@@ -209,6 +219,17 @@
     
     
     [self methodNames_caculateInputViewLocal];
+}
+
+- (void)methodNames_addLeftButton {
+    __weak typeof(self) weakSelf = self;
+    [self.varNames_naviView methodNames_setLeftButtonImage:@"image_back" lefttitle:@"" btnAction:^{
+        if (weakSelf.methodNames_backBlock) {
+            weakSelf.hidden = YES;
+            weakSelf.varNames_fview.hidden =NO;
+            weakSelf.methodNames_backBlock();
+        }
+    }];
 }
 
 #pragma mark ---------- 计算输入框的位置

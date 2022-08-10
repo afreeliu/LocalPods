@@ -16,6 +16,8 @@
 #import "ClassNames_NavigationBarView.h"
 @interface ClassNames_BindPersonIDView ()
 
+@property (nonatomic, readwrite, weak) UIView *varNames_backView;
+
 @property (nonatomic, readwrite, strong) ClassNames_NavigationBarView *varNames_naviView;
 
 @property (nonatomic, readwrite, strong) UILabel *varNames_tipLabel;
@@ -36,12 +38,16 @@
 @implementation ClassNames_BindPersonIDView
 
 #pragma mark ---------- public methodNames
-+(instancetype)methodNames_createBindPersonIDView {
++(instancetype)methodNames_createBindPersonIDViewFromView:(UIView *)varNames_view {
     ClassNames_BindPersonIDView *varNames_tmpBindPersonIDView = [[ClassNames_BindPersonIDView alloc]init];
     varNames_tmpBindPersonIDView.translatesAutoresizingMaskIntoConstraints = NO;
+    [varNames_tmpBindPersonIDView methodNames_addBackView:varNames_view];
     return varNames_tmpBindPersonIDView;
 }
 
+- (void)methodNames_changeFromView:(UIView *)varNames_view {
+    [self methodNames_addBackView:varNames_view];
+}
 
 #pragma mark ----------------------------------------------------------------------
 
@@ -100,13 +106,7 @@
     __weak typeof(self) weakSelf = self;
     ClassNames_NavigationBarView *varNames_tmpNaviView = [[ClassNames_NavigationBarView alloc]init];
     varNames_tmpNaviView.translatesAutoresizingMaskIntoConstraints = NO;
-    
-    [varNames_tmpNaviView methodNames_setTitle:@"实名验证" rightButtonImage:@"" rightTitle:@"" btnAction:^{
-        if (weakSelf.methodNames_closeBindPersonIDView) {
-            weakSelf.hidden = YES;
-            weakSelf.methodNames_closeBindPersonIDView();
-        }
-    }];
+    [varNames_tmpNaviView methodNames_setTitle:@"实名验证"];
     
     self.varNames_naviView = varNames_tmpNaviView;
     [self addSubview:varNames_tmpNaviView];
@@ -199,6 +199,24 @@
     CGRect varNames_tmprect = [varNames_view convertRect:varNames_view.bounds toView:varNames_tmpwindow];
     CGFloat varNames_textFieldMaxY = CGRectGetMaxY(varNames_tmprect);
     [varNames_view methodNames_setInputViewMaxY:varNames_textFieldMaxY];
+}
+
+- (void)methodNames_addBackView:(UIView *)varNames_view {
+    if (varNames_view) {
+        self.varNames_backView = varNames_view;
+        __weak typeof(self) weakSelf = self;
+        [self.varNames_naviView methodNames_setRightButtonImage:@"image_close" rightTitle:@"" btnAction:^{
+            if (weakSelf.methodNames_closeBlock) {
+                weakSelf.methodNames_closeBlock();
+            }
+        }];
+        [self.varNames_naviView methodNames_setLeftButtonImage:@"image_back" lefttitle:@"" btnAction:^{
+            if (weakSelf.methodNames_backBlock) {
+                weakSelf.hidden = YES;
+                weakSelf.methodNames_backBlock(weakSelf.varNames_backView);
+            }
+        }];
+    }
 }
 
 

@@ -116,8 +116,8 @@
 		336289EC2119CCAC00CC7D24 /* ClassNames_ImageErrorRight.h in Headers */ = {isa = PBXBuildFile; fileRef = 336289EA2119CCAC00CC7D24 /* ClassNames_ImageErrorRight.h */; };
 		336289F02119CF7300CC7D24 /* ClassNames_ImagePhoneMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 336289EE2119CF7300CC7D24 /* ClassNames_ImagePhoneMessage.h */; };
 		336289F4211A90E400CC7D24 /* ClassNames_ImagePassword.h in Headers */ = {isa = PBXBuildFile; fileRef = 336289F2211A90E400CC7D24 /* ClassNames_ImagePassword.h */; };
-		337161E72229125E002D5BA0 /* ClassNames_SuggestView.m in Sources */ = {isa = PBXBuildFile; fileRef = 337161E32229125E002D5BA0 /* ClassNames_SuggestView.m */; };
-		337161E92229125E002D5BA0 /* ClassNames_SuggestView.h in Headers */ = {isa = PBXBuildFile; fileRef = 337161E52229125E002D5BA0 /* ClassNames_SuggestView.h */; };
+		337161E72229125E002D5BA0 /* ClassNames_UserCenterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 337161E32229125E002D5BA0 /* ClassNames_UserCenterView.m */; };
+		337161E92229125E002D5BA0 /* ClassNames_UserCenterView.h in Headers */ = {isa = PBXBuildFile; fileRef = 337161E52229125E002D5BA0 /* ClassNames_UserCenterView.h */; };
 		339D665E2329EA8500872D27 /* ClassNames_loadFileManager.h in Headers */ = {isa = PBXBuildFile; fileRef = 339D665C2329EA8500872D27 /* ClassNames_loadFileManager.h */; };
 		339D665F2329EA8500872D27 /* ClassNames_loadFileManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 339D665D2329EA8500872D27 /* ClassNames_loadFileManager.m */; };
 		339D66622329EAAC00872D27 /* ClassNames_RechargeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 339D66602329EAAB00872D27 /* ClassNames_RechargeView.m */; };
@@ -129,6 +129,10 @@
 		33AC6EF32113EB54005555C3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AC6EF22113EB54005555C3 /* CoreGraphics.framework */; };
 		DF585E62289CC753005B25BA /* ClassNames_DelegateTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = DF585E60289CC753005B25BA /* ClassNames_DelegateTextView.h */; };
 		DF585E63289CC753005B25BA /* ClassNames_DelegateTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = DF585E61289CC753005B25BA /* ClassNames_DelegateTextView.m */; };
+		DF7C6CE328A3950800F7260D /* ClassNames_TipView.h in Headers */ = {isa = PBXBuildFile; fileRef = DF7C6CE128A3950800F7260D /* ClassNames_TipView.h */; };
+		DF7C6CE428A3950800F7260D /* ClassNames_TipView.m in Sources */ = {isa = PBXBuildFile; fileRef = DF7C6CE228A3950800F7260D /* ClassNames_TipView.m */; };
+		DF7C6CE728A3B3C400F7260D /* ClassNames_DetailCustomerServerView.h in Headers */ = {isa = PBXBuildFile; fileRef = DF7C6CE528A3B3C300F7260D /* ClassNames_DetailCustomerServerView.h */; };
+		DF7C6CE828A3B3C400F7260D /* ClassNames_DetailCustomerServerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DF7C6CE628A3B3C400F7260D /* ClassNames_DetailCustomerServerView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -260,8 +264,8 @@
 		336289EA2119CCAC00CC7D24 /* ClassNames_ImageErrorRight.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_ImageErrorRight.h; sourceTree = "<group>"; };
 		336289EE2119CF7300CC7D24 /* ClassNames_ImagePhoneMessage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_ImagePhoneMessage.h; sourceTree = "<group>"; };
 		336289F2211A90E400CC7D24 /* ClassNames_ImagePassword.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_ImagePassword.h; sourceTree = "<group>"; };
-		337161E32229125E002D5BA0 /* ClassNames_SuggestView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassNames_SuggestView.m; sourceTree = "<group>"; };
-		337161E52229125E002D5BA0 /* ClassNames_SuggestView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassNames_SuggestView.h; sourceTree = "<group>"; };
+		337161E32229125E002D5BA0 /* ClassNames_UserCenterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ClassNames_UserCenterView.m; sourceTree = "<group>"; };
+		337161E52229125E002D5BA0 /* ClassNames_UserCenterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassNames_UserCenterView.h; sourceTree = "<group>"; };
 		33733900214A6051004A5984 /* ClassNames_ImageCommitButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_ImageCommitButton.h; sourceTree = "<group>"; };
 		33733901214A71B6004A5984 /* ClassNames_ImageBackButton.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_ImageBackButton.h; sourceTree = "<group>"; };
 		339D665C2329EA8500872D27 /* ClassNames_loadFileManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ClassNames_loadFileManager.h; sourceTree = "<group>"; };
@@ -276,6 +280,10 @@
 		33AC6EF22113EB54005555C3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		DF585E60289CC753005B25BA /* ClassNames_DelegateTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_DelegateTextView.h; sourceTree = "<group>"; };
 		DF585E61289CC753005B25BA /* ClassNames_DelegateTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_DelegateTextView.m; sourceTree = "<group>"; };
+		DF7C6CE128A3950800F7260D /* ClassNames_TipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_TipView.h; sourceTree = "<group>"; };
+		DF7C6CE228A3950800F7260D /* ClassNames_TipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_TipView.m; sourceTree = "<group>"; };
+		DF7C6CE528A3B3C300F7260D /* ClassNames_DetailCustomerServerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_DetailCustomerServerView.h; sourceTree = "<group>"; };
+		DF7C6CE628A3B3C400F7260D /* ClassNames_DetailCustomerServerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_DetailCustomerServerView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -470,6 +478,8 @@
 			children = (
 				330FEA3223014BD7008C0D0F /* ClassNames_CustomServerView.h */,
 				330FEA3323014BD7008C0D0F /* ClassNames_CustomServerView.m */,
+				DF7C6CE528A3B3C300F7260D /* ClassNames_DetailCustomerServerView.h */,
+				DF7C6CE628A3B3C400F7260D /* ClassNames_DetailCustomerServerView.m */,
 				33ABDEEA2363012E00F9E7D5 /* ClassNames_SuspensionBallButton.h */,
 				33ABDEEB2363012E00F9E7D5 /* ClassNames_SuspensionBallButton.m */,
 				330FEA3623014BD7008C0D0F /* ClassNames_DelegateView.h */,
@@ -492,8 +502,10 @@
 				33333A7C21212B0100446146 /* ClassNames_NormalRegisterView.m */,
 				33333A8221212B2A00446146 /* ClassNames_PhoneRegisterView.h */,
 				33333A8321212B2A00446146 /* ClassNames_PhoneRegisterView.m */,
-				337161E52229125E002D5BA0 /* ClassNames_SuggestView.h */,
-				337161E32229125E002D5BA0 /* ClassNames_SuggestView.m */,
+				337161E52229125E002D5BA0 /* ClassNames_UserCenterView.h */,
+				337161E32229125E002D5BA0 /* ClassNames_UserCenterView.m */,
+				DF7C6CE128A3950800F7260D /* ClassNames_TipView.h */,
+				DF7C6CE228A3950800F7260D /* ClassNames_TipView.m */,
 			);
 			name = SkillView;
 			sourceTree = "<group>";
@@ -824,6 +836,7 @@
 				33333A7521212ACA00446146 /* ClassNames_FindBackPasswordView.h in Headers */,
 				3362856A2117E72300CC7D24 /* ClassNames_MemberVisitorModel.h in Headers */,
 				336285762117E9FB00CC7D24 /* ClassNames_MemberLoginModel.h in Headers */,
+				DF7C6CE728A3B3C400F7260D /* ClassNames_DetailCustomerServerView.h in Headers */,
 				336283E32114240E00CC7D24 /* ClassNames_Color.h in Headers */,
 				336285862117EA7400CC7D24 /* ClassNames_UpdateUserLoginModel.h in Headers */,
 				331B33E82125786000544DB8 /* ClassName_IAPInfo.h in Headers */,
@@ -859,6 +872,7 @@
 				3362855D2117E1B300CC7D24 /* ClassNames_BaseModel.h in Headers */,
 				336285622117E69E00CC7D24 /* ClassNames_GameInitialiseModel.h in Headers */,
 				331B33E42125786000544DB8 /* ClassName_IAPRepair.h in Headers */,
+				DF7C6CE328A3950800F7260D /* ClassNames_TipView.h in Headers */,
 				3362858A2117EA8500CC7D24 /* ClassNames_MemberOrderModel.h in Headers */,
 				3362857A2117EA3300CC7D24 /* ClassNames_UpdatePSWModel.h in Headers */,
 				33333A7D21212B0100446146 /* ClassNames_NormalRegisterView.h in Headers */,
@@ -867,7 +881,7 @@
 				33333A8421212B2A00446146 /* ClassNames_PhoneRegisterView.h in Headers */,
 				3362834621140A1E00CC7D24 /* ClassNames_DebugLog.h in Headers */,
 				DF585E62289CC753005B25BA /* ClassNames_DelegateTextView.h in Headers */,
-				337161E92229125E002D5BA0 /* ClassNames_SuggestView.h in Headers */,
+				337161E92229125E002D5BA0 /* ClassNames_UserCenterView.h in Headers */,
 				336289F4211A90E400CC7D24 /* ClassNames_ImagePassword.h in Headers */,
 				33628337211407AB00CC7D24 /* ClassNames_SecurityTool.h in Headers */,
 				3362857E2117EA4700CC7D24 /* ClassNames_BackUserPSWModel.h in Headers */,
@@ -965,7 +979,8 @@
 				3362833D2114096F00CC7D24 /* ClassNames_InitGamesConfigure.m in Sources */,
 				3362855E2117E1B300CC7D24 /* ClassNames_BaseModel.m in Sources */,
 				336285942117EBC700CC7D24 /* ClassNames_BaseViewLayout.m in Sources */,
-				337161E72229125E002D5BA0 /* ClassNames_SuggestView.m in Sources */,
+				DF7C6CE428A3950800F7260D /* ClassNames_TipView.m in Sources */,
+				337161E72229125E002D5BA0 /* ClassNames_UserCenterView.m in Sources */,
 				331B33F021257F6B00544DB8 /* ClassNames_NavigationBarView.m in Sources */,
 				331B33E02125786000544DB8 /* ClassName_IAPMain.m in Sources */,
 				336283E42114240E00CC7D24 /* ClassNames_Color.m in Sources */,
@@ -977,6 +992,7 @@
 				331B33E72125786000544DB8 /* ClassName_IAPInfo.m in Sources */,
 				331B33E32125786000544DB8 /* ClassName_IAPFail.m in Sources */,
 				336285832117EA6100CC7D24 /* ClassNames_MembeRoleModel.m in Sources */,
+				DF7C6CE828A3B3C400F7260D /* ClassNames_DetailCustomerServerView.m in Sources */,
 				3362856F2117E8F900CC7D24 /* ClassNames_MemberNormalRegisterModel.m in Sources */,
 				339D665F2329EA8500872D27 /* ClassNames_loadFileManager.m in Sources */,
 				3362858B2117EA8500CC7D24 /* ClassNames_MemberOrderModel.m in Sources */,

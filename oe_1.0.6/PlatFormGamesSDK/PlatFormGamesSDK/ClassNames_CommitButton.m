@@ -22,6 +22,18 @@
     return self;
 }
 
+- (void)methodNames_changeTitle:(NSString *)t {
+    if (t && t.length) {
+        [self setTitle:t forState:UIControlStateNormal];
+    }
+}
+
+-(void)methodNames_changeFont:(NSInteger)font {
+    if (font) {
+        self.titleLabel.font = [UIFont systemFontOfSize:font];
+    }
+}
+
 - (void)methodNames_commitAction:(UIButton *)sender {
     if (self.methodNames_commitButtonAction) {
         self.methodNames_commitButtonAction();

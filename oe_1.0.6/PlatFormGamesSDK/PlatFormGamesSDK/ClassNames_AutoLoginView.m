@@ -18,20 +18,19 @@
 @interface ClassNames_AutoLoginView ()
 
 
-@property (nonatomic, readwrite, strong) UILabel *varNames_titleLabel;
-
-@property (nonatomic, readwrite, strong) ClassNames_InputView *varNames_firstInputView;
-
-@property (nonatomic, readwrite, strong) ClassNames_InputView *varNames_secondInputView;
-
-@property (nonatomic, readwrite, strong) UIView *varNames_animatView;
-@property (nonatomic, readwrite, strong) ClassNames_LoadingView *varNames_loadingView;
+@property (nonatomic, readwrite, strong) UILabel *varNames_accountLabel;
 
 @property (nonatomic, readwrite, strong) ClassNames_CommitButton *varNames_firstCommitBtn;
 
 @property (nonatomic, readwrite, assign) CGFloat varNames_topMarginValue;
 
 @property (nonatomic, readwrite, assign) BOOL varNames_cancelAutoLogin;
+
+@property (nonatomic, readwrite, strong) NSString *varNames_userName;
+
+@property (nonatomic, readwrite, strong) NSString *varNames_password;
+
+@property (nonatomic, readwrite, assign) NSInteger varNames_timeout;
 
 @property (nonatomic, readwrite, strong) ClassNames_MemberLoginModel *varNames_loginModel;
 
@@ -47,7 +46,16 @@
     return varNames_autoLoginView;
 }
 
-
+// 从其他登录页面中点击登录后，进入该页面进行登录操作
+- (void)methodNames_loginAccount:(NSString *)account methodNames_password:(NSString *)password {
+    self.varNames_userName = account;
+    self.varNames_password = password;
+    // 获取设定的自动登录等待时间
+    self.varNames_timeout = methodNames_getAutoLoginViewDuration();
+    [self methodNames_createUI];
+    [self methodNames_refreshButtonTitle:self.varNames_timeout];
+    [self methodNames_startTimer];
+}
 
 
 #pragma mark -----------------------------------------------------------------------------
@@ -55,64 +63,45 @@
 -(instancetype)init {
     self = [super init];
     if (self) {
-        [self methodNames_createUI];
-        
         [self methodNames_setData];
-        __weak typeof(self) weakSelf = self;
-        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-            if (!weakSelf.varNames_cancelAutoLogin) {
-                [weakSelf methodNames_commitAutoLoginAction:weakSelf.varNames_firstInputView.varNames_textValue password:weakSelf.varNames_secondInputView.varNames_textValue];
-            }
-            
-        });
+        [self methodNames_createUI];
+        [self methodNames_startTimer];
+//        __weak typeof(self) weakSelf = self;
+//        dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//            if (!weakSelf.varNames_cancelAutoLogin) {
+//                [weakSelf methodNames_commitAutoLoginAction:weakSelf.varNames_userName password:weakSelf.varNames_password];
+//            }
+//
+//        });
     }
     return self;
 }
 
-- (void)layoutSubviews {
-    [super layoutSubviews];
-    [self methodNames_layoutSubViews];
-    if (CGRectGetWidth(self.varNames_animatView.frame)) {
-        self.varNames_loadingView = [ClassNames_LoadingView methodNames_showLoadingWith:self.varNames_animatView];
-    }
-}
 
 
 - (void)methodNames_createUI {
+    if (!self.varNames_accountLabel) {
+        UILabel *varNames_tmpAccountLabel = [[UILabel alloc]init];
+        varNames_tmpAccountLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        varNames_tmpAccountLabel.font = [UIFont systemFontOfSize:13];
+        varNames_tmpAccountLabel.textColor = [UIColor blackColor];
+        varNames_tmpAccountLabel.textAlignment = NSTextAlignmentCenter;
+        [self addSubview:varNames_tmpAccountLabel];
+        self.varNames_accountLabel = varNames_tmpAccountLabel;
+    }
     
-    UILabel *varNames_tmpTitleLabel = [[UILabel alloc]init];
-    varNames_tmpTitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    varNames_tmpTitleLabel.text = methodNames_getTitle_AutoLoginView_Title();
-    varNames_tmpTitleLabel.textColor = [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_titleFontColor_config()];
-    varNames_tmpTitleLabel.textAlignment = NSTextAlignmentCenter;
-    varNames_tmpTitleLabel.font = [UIFont systemFontOfSize:17];
-    self.varNames_titleLabel = varNames_tmpTitleLabel;
-    
-    ClassNames_InputView *varNames_tmpFirstInputView = [ClassNames_InputView methodNames_inputViewType:varNames_inputViewTypeAutoLoginAccount];
-    varNames_tmpFirstInputView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.varNames_firstInputView = varNames_tmpFirstInputView;
-    
-    ClassNames_InputView *varNames_tmpSecondInputView = [ClassNames_InputView methodNames_inputViewType:varNames_inputViewTypeAutoLoginPassword];
-    varNames_tmpSecondInputView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.varNames_secondInputView = varNames_tmpSecondInputView;
-    
-    UIView *varNames_tmpView = [[UIView alloc]init];
-    varNames_tmpView.translatesAutoresizingMaskIntoConstraints = NO;
-    varNames_tmpView.backgroundColor = [UIColor clearColor];
-    self.varNames_animatView = varNames_tmpView;
-    
-    
-    ClassNames_CommitButton *varNames_tmpCommitBtn = [[ClassNames_CommitButton alloc]init];
-    varNames_tmpCommitBtn.translatesAutoresizingMaskIntoConstraints = NO;
-    methodNames_drawCancelCommitImage(varNames_tmpCommitBtn, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_titleFontColor_config()]);
-    [varNames_tmpCommitBtn addTarget:self action:@selector(methodNames_cancelAutoLoginAction:) forControlEvents:UIControlEventTouchUpInside];
-    self.varNames_firstCommitBtn = varNames_tmpCommitBtn;
-    
-    [self addSubview:self.varNames_titleLabel];
-    [self addSubview:self.varNames_firstInputView];
-    [self addSubview:self.varNames_secondInputView];
-    [self addSubview:self.varNames_animatView];
-    [self addSubview:self.varNames_firstCommitBtn];
+    self.varNames_accountLabel.text = [NSString stringWithFormat:@"账号 %@ 登录中...", self.varNames_userName];
+    NSString *varNames_title = [NSString stringWithFormat:@"切换账号( %ld s)", (long)self.varNames_timeout];
+    if (!self.varNames_firstCommitBtn) {
+        __weak typeof(self) weakSelf = self;
+        ClassNames_CommitButton *varNames_tmpCommitBtn = [ClassNames_CommitButton methodNames_createCommitButtonWithTitle:varNames_title withTouchUpInsidBlock:^{
+            [weakSelf methodNames_cancelAutoLoginAction:nil];
+        }];
+        [varNames_tmpCommitBtn methodNames_changeFont:15];
+        self.varNames_firstCommitBtn = varNames_tmpCommitBtn;
+        [self addSubview:varNames_tmpCommitBtn];
+    }
+    [self methodNames_layoutSubViews];
 }
 
 #pragma mark ---------- 填充内容
@@ -120,53 +109,58 @@
     NSString *varNames_account = methodNames_readLastAccount();
     if (varNames_account && varNames_account.length) {
         NSString *varNames_password = methodNames_readPassword(varNames_account);
-        [self.varNames_firstInputView methodNames_fillContent:varNames_account methodNames_canEditing:NO];
-        [self.varNames_secondInputView methodNames_fillContent:varNames_password methodNames_canEditing:NO];
+        self.varNames_userName = varNames_account;
+        self.varNames_password = varNames_password;
     }
+    
+    // 获取设定的自动登录等待时间
+    self.varNames_timeout = methodNames_getAutoLoginViewDuration();
 }
 
 
 
 - (void)methodNames_layoutSubViews {
     
-    self.varNames_topMarginValue = methodNames_setMargin_2base();
+    self.varNames_topMarginValue = methodNames_setMargin_base();
     
-    [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_titleLabel methodNames_constriant:self.varNames_topMarginValue];
-    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_titleLabel methodNames_constriant:methodNames_setMargin_base()];
-    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_titleLabel methodNames_constriant:methodNames_setMargin_base()];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_titleLabel methodNames_constriant:methodNames_getInputView_inputView_Height()];
-    
-    self.varNames_topMarginValue += methodNames_getInputView_inputView_Height();
-    self.varNames_topMarginValue += methodNames_setMargin_base();
-    
-    [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_firstInputView methodNames_constriant:self.varNames_topMarginValue];
-    [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_firstInputView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_firstInputView methodNames_constriant:methodNames_getInputView_inputView_Width()];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_firstInputView methodNames_constriant:methodNames_getInputView_inputView_Height()];
+    [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_accountLabel methodNames_constriant:self.varNames_topMarginValue];
+    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_accountLabel methodNames_constriant:methodNames_setMargin_base()];
+    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_accountLabel methodNames_constriant:methodNames_setMargin_base()];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_accountLabel methodNames_constriant:methodNames_getInputView_inputView_Height()];
     
     self.varNames_topMarginValue += methodNames_getInputView_inputView_Height();
     self.varNames_topMarginValue += methodNames_setMargin_base();
     
-    [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_secondInputView methodNames_constriant:self.varNames_topMarginValue];
-    [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_secondInputView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_secondInputView methodNames_constriant:methodNames_getInputView_inputView_Width()];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_secondInputView methodNames_constriant:methodNames_getInputView_inputView_Height()];
-    
-    self.varNames_topMarginValue += methodNames_getInputView_inputView_Height();
-    self.varNames_topMarginValue += methodNames_setMargin_2base();
-    [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_animatView methodNames_constriant:self.varNames_topMarginValue];
-    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_animatView methodNames_constriant:methodNames_setMargin_3base()];
-    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_animatView methodNames_constriant:methodNames_setMargin_3base()];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_animatView methodNames_constriant:methodNames_getInputView_inputView_Height() + 10];
-    
-    self.varNames_topMarginValue += (methodNames_getInputView_inputView_Height() + 10);
-    self.varNames_topMarginValue += methodNames_setMargin_3base();
     [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_firstCommitBtn methodNames_constriant:self.varNames_topMarginValue];
     [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_firstCommitBtn methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_firstCommitBtn methodNames_constriant:methodNames_setCommitButtonWidth()];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_firstCommitBtn methodNames_constriant:methodNames_setCommitButtonHeight()];
-    self.varNames_topMarginValue += methodNames_getInputView_inputView_Height();
+    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_firstCommitBtn methodNames_constriant:methodNames_getInputView_inputView_Width()];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_firstCommitBtn methodNames_constriant:methodNames_getInputView_inputView_Height()];
 }
+
+
+- (void)methodNames_startTimer {
+    // 创建定时器
+    NSTimer *varNames_tmptimer = [NSTimer timerWithTimeInterval:1 target:self selector:@selector(methodNmaes_changTitle:) userInfo:nil repeats:YES];
+    // 将定时器添加到runloop中，否则定时器不会启动
+    [[NSRunLoop mainRunLoop] addTimer:varNames_tmptimer forMode:NSRunLoopCommonModes];
+}
+
+- (void)methodNmaes_changTitle:(NSTimer *)timer {
+    if (self.varNames_timeout == 0) {
+        [timer invalidate];
+//        [self methodNames_commitAutoLoginAction:self.varNames_userName password:self.varNames_password];
+    } else {
+        [self methodNames_refreshButtonTitle:self.varNames_timeout];
+        self.varNames_timeout--;
+    }
+}
+
+- (void)methodNames_refreshButtonTitle:(NSInteger)timeout {
+    NSString *varNames_title = [NSString stringWithFormat:@"切换账号( %ld s)", (long)timeout];
+    [self.varNames_firstCommitBtn setTitle:varNames_title forState:UIControlStateNormal];
+    self.varNames_firstCommitBtn.titleLabel.text = varNames_title;
+}
+
 
 #pragma mark ---------- autoLogin
 - (void)methodNames_commitAutoLoginAction:(NSString *)account password:(NSString *)password {
@@ -210,12 +204,12 @@
         methodNames_saveUserID(memberLoginModel.varNames_uid);
         methodNames_saveUserName(memberLoginModel.varNames_username);
         /// 保存账户
-        methodNames_saveAccount(self.varNames_firstInputView.varNames_textValue);
+        methodNames_saveAccount(self.varNames_userName);
         /// 保存最后登陆的账户
-        methodNames_saveLastAccount(self.varNames_firstInputView.varNames_textValue);
+        methodNames_saveLastAccount(self.varNames_userName);
         /// 保存账户密码
         methodNames_saveVisitorConnectPersonID(memberLoginModel.varNames_isRealName);
-        methodNames_savePassword(self.varNames_secondInputView.varNames_textValue, self.varNames_firstInputView.varNames_textValue);
+        methodNames_savePassword(self.varNames_password, self.varNames_userName);
 
         NSDictionary *varNames_tmpuserInfo = @{
                                    @"uid": memberLoginModel.varNames_uid,

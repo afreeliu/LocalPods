@@ -115,7 +115,7 @@
  */
 -(void)umPlatsFormLogin {
     
-    [[ClassNames_MainView methodNames_instanceMainView]methodNames_showUserCenterView];
+    [[ClassNames_MainView methodNames_instanceMainView]methodNames_showLoginView];
     return;
     
     

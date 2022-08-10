@@ -78,6 +78,9 @@ NSString *const varNames_passVideoPresentValue                    =          @"0
 #pragma mark ---------- 固定账号登录使用
 NSString *const varNames_passLoginConfigKey                =          @"passLoginConfig";
 NSString *const varNames_isPassLoginKey                    =          @"isPassLogin";
+#pragma mark ---------- 自动登录页面持续时间
+NSString *const varNames_autoLoginDurationKey              =        @"autoLoginDuration";
+
 /// plist 中没有值时候取的默认值
 NSString *const varNames_isPassLoginValue                  =          @"0";
 NSString *const varNames_defaultUidKey                     =          @"uid";

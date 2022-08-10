@@ -11,6 +11,8 @@
 
 
 + (instancetype)methodNames_instanceMainView;
+// 显示自动登录页面
+- (void)methodNames_showAutoLoginView;
 // 显示手机号登录页
 - (void)methodNames_showPhoneLoginView;
 // 显示账号登录页

@@ -45,7 +45,7 @@
 
 @implementation ClassNames_PhoneRegisterView
 #pragma mark ---------- public methodNames
-+(instancetype)methodNames_createPhoneRegisterView {
++ (instancetype)methodNames_createPhoneRegisterView {
     ClassNames_PhoneRegisterView *varNames_tmpPhoneRegisterView = [[ClassNames_PhoneRegisterView alloc]init];
     varNames_tmpPhoneRegisterView.translatesAutoresizingMaskIntoConstraints = NO;
     return varNames_tmpPhoneRegisterView;
@@ -78,7 +78,8 @@
     __weak typeof(self) weakSelf = self;
     ClassNames_NavigationBarView *varNames_tmpNaviView = [[ClassNames_NavigationBarView alloc]init];
     varNames_tmpNaviView.translatesAutoresizingMaskIntoConstraints = NO;
-    [varNames_tmpNaviView methodNames_setTitle:@"手机登录" rightButtonImage:@"" rightTitle:@"客服" btnAction:^{
+    [varNames_tmpNaviView methodNames_setTitle:@"手机登录"];
+    [varNames_tmpNaviView methodNames_setRightButtonImage:@"" rightTitle:@"客服" btnAction:^{
         if (weakSelf.methodNames_servicceBlock) {
             weakSelf.methodNames_servicceBlock();
         }
