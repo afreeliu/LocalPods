@@ -95,6 +95,13 @@ static inline CGFloat methodNames_getView_MaxY(UIView * varNames_view) {
     return CGRectGetMaxY( varNames_view.frame);
 }
 
-
+#pragma --------------- layer 转换成 image
+static inline UIImage *methodNames_translateViewLayerToImage(CALayer *varNames_viewLayer, CGSize varNames_destSize) {
+    UIGraphicsBeginImageContextWithOptions(varNames_destSize, 0, 1);
+    [varNames_viewLayer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *varNames_img = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return varNames_img;
+}
 
 

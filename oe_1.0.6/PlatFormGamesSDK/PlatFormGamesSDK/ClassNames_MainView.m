@@ -77,7 +77,7 @@
 @property (nonatomic, readwrite, strong) ClassNames_CustomServerView *varNames_serverView;
 
 /// 悬浮球中显示的客服页面
-@property (nonatomic, readwrite, strong) ClassNames_DetailCustomerServerView *varNames_detailCustomerServerVoew;
+@property (nonatomic, readwrite, strong) ClassNames_DetailCustomerServerView *varNames_detailCustomerServerView;
 
 // 协议页面
 @property (nonatomic, readwrite, strong) ClassNames_DelegateView *varNames_delegateView;
@@ -730,7 +730,8 @@
 //            [weakSelf methodNames_changeNormalViewFormPhoneRegisterView];
         };
         _varNames_phoneRegisterView.methodNames_servicceBlock = ^{
-            [weakSelf methodNames_showCustomerServerView];
+//            [weakSelf methodNames_showCustomerServerView];
+            [weakSelf methodNames_showDetailCustomerServerView];
         };
         _varNames_phoneRegisterView.methodNames_delegateBlock = ^{
             [weakSelf methodNames_showDelegateView];
@@ -909,8 +910,6 @@
     if (!self.varNames_serverView) {
         __weak typeof(self) weakSelf = self;
         ClassNames_CustomServerView *varNames_serverView = [ClassNames_CustomServerView methodNames_showCustomServerViewWithContentJson:@{}];
-        varNames_serverView.translatesAutoresizingMaskIntoConstraints = NO;
-        varNames_serverView.layer.cornerRadius = 15;
         varNames_serverView.methodNames_closeBlock = ^{
             weakSelf.varNames_backgroundView.hidden = NO;
         };
@@ -928,20 +927,23 @@
 }
 #pragma mark -------------- 从悬浮球中点击的客服
 - (void)methodNames_showDetailCustomerServerView {
-    if (!self.varNames_detailCustomerServerVoew) {
+    if (!self.varNames_detailCustomerServerView) {
+        __weak typeof(self) weakSelf = self;
         ClassNames_DetailCustomerServerView *varNames_serverView = [ClassNames_DetailCustomerServerView methodNames_showCustomServerView];
-        [self.varNames_backgroundView addSubview:varNames_serverView];
-        self.varNames_detailCustomerServerVoew = varNames_serverView;
+        [self addSubview:varNames_serverView];
+        self.varNames_detailCustomerServerView = varNames_serverView;
+        self.varNames_detailCustomerServerView.methodNames_closeBlock = ^{
+            [weakSelf removeFromSuperview];
+        };
     } else {
         
-        self.varNames_detailCustomerServerVoew.hidden = NO;
+        self.varNames_detailCustomerServerView.hidden = NO;
     }
-    
-    self.varNames_backgroundViewConstraint.constant = 250;
-    [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_serverView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutCenterY:self.varNames_serverView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_serverView methodNames_constriant:methodNames_getMainViewWidth()];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_serverView methodNames_constriant:250];
+    self.varNames_backgroundView.hidden = YES;
+    [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_detailCustomerServerView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutCenterY:self.varNames_detailCustomerServerView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_detailCustomerServerView methodNames_constriant:methodNames_getMainViewWidth()];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_detailCustomerServerView methodNames_constriant:250];
 }
 
 

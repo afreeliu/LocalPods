@@ -8,6 +8,7 @@
 #import "ClassNames_DefaultThemeConfigure.h"
 #import "ClassNames_loadFileManager.h"
 #import "ClassNames_PGHubView.h"
+#import "ClassNames_ViewTool.h"
 
 
 @interface ClassNames_CustomServerView()<UITextViewDelegate>
@@ -56,6 +57,7 @@
     NSString *varNames_thirdLine = [NSString stringWithFormat:@"客服工作时间：%@\n", self.varNames_time];
     NSString *varNames_fourthLine = [NSString stringWithFormat:@"CUSTOMER SERVICE HOURS:%@\n", self.varNames_time];
     NSString *varNames_content = [NSString stringWithFormat:@"%@%@%@%@%@%@", varNames_firstLine, varNames_qqImageText, varNames_secondLine, varNames_copyButtonText, varNames_thirdLine, varNames_fourthLine];
+    
     NSMutableParagraphStyle *varNames_paragraphStyle = [[NSMutableParagraphStyle alloc] init];
     varNames_paragraphStyle.lineSpacing= 1;
     varNames_paragraphStyle.paragraphSpacing = methodNames_setMargin_3base();
@@ -86,7 +88,7 @@
     [varNames_copyButton setTitle:@"复制qq号" forState:UIControlStateNormal];
     varNames_copyButton.titleLabel.font = [UIFont systemFontOfSize:12];
     [varNames_copyButton setTitleColor:[ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_themeColor_config()] forState:UIControlStateNormal];
-    UIImage *varNames_btnImg = [self methodNames_translateLayerToImage:varNames_copyButton.layer];
+    UIImage *varNames_btnImg = methodNames_translateViewLayerToImage(varNames_copyButton.layer, CGSizeMake(70, 30));
     
     NSTextAttachment *varNames_btnAttachment = [[NSTextAttachment alloc] init];
     varNames_btnAttachment.image = [UIImage imageWithCGImage:varNames_btnImg.CGImage scale:1.0 orientation:UIImageOrientationUp];
@@ -130,7 +132,7 @@
     if (self) {
         
         self.backgroundColor = [UIColor whiteColor];
-        
+        self.layer.cornerRadius = 15;
         self.translatesAutoresizingMaskIntoConstraints = NO;
         [self methodNames_setNavi];
         self.varNames_contentTextView = [[UITextView alloc]init];
@@ -189,18 +191,9 @@
     
 }
 - (void)methodNames_closeAction:(UIButton *)sender {
-    
-    
     if (self.methodNames_closeBlock) {
         self.hidden = YES;
         self.methodNames_closeBlock();
     }
-    
-//    [UIView animateWithDuration:0.2 animations:^{
-//        [weakSelf setFrame:CGRectMake(0, methodNames_getScreenHeight(), methodNames_getScreenWidth(), methodNames_getScreenHeight())];
-//    } completion:^(BOOL finished) {
-//        [weakSelf removeFromSuperview];
-//
-//    }];
 }
 @end
