@@ -88,6 +88,9 @@
         if (weakSelf.varNames_backView) {
             self.hidden = YES;
             weakSelf.varNames_backView.hidden = NO;
+            if (self.methodNames_backBlock) {
+                self.methodNames_backBlock();
+            }
         }
     }];
     self.varNames_naviView = varNames_tmpNaviView;

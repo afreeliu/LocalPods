@@ -115,7 +115,10 @@
  */
 -(void)umPlatsFormLogin {
     
-    [[ClassNames_MainView methodNames_instanceMainView]methodNames_showLoginView];
+//    [[ClassNames_MainView methodNames_instanceMainView]methodNames_showUserCenterView];
+//    [[ClassNames_MainView methodNames_instanceMainView]methodNames_showLoginView];
+    [[ClassNames_MainView methodNames_instanceMainView]methodNames_showNoticeView];
+    [self methodNames_showSuspensionBall];
     return;
     
     
@@ -278,6 +281,9 @@
     if (!self.varNames_suspensionBall || !self.varNames_suspensionBall.superview) {
         self.varNames_suspensionBall = [ClassNames_SuspensionBallButton methodNames_showSuspensionBallWithLanguageType:@"zh-cn"];
         self.varNames_suspensionBall.methodNames_clickBallMenu = ^(NSInteger index) {
+            [ClassNames_MainView methodNames_cleanView];
+            [[ClassNames_MainView methodNames_instanceMainView]methodNames_showUserCenterView];
+            return;
             if (index == 1) {
                 [weakSelf methodNames_showQQ];
             }

@@ -14,11 +14,12 @@
 #import "ClassNames_RegularMatch.h"
 #import "ClassNames_ImageCommitButton.h"
 #import "ClassNames_ImageBackButton.h"
+#import "ClassNames_NavigationBarView.h"
+
 @interface ClassNames_ResetPasswordView ()
+@property (nonatomic, readwrite, strong) ClassNames_NavigationBarView *varNames_naviView;
 
-@property (nonatomic, readwrite, strong) UILabel *varNames_titleLabel;
-
-@property (nonatomic, readwrite, strong) UIButton *varNames_backButton;
+@property (nonatomic, readwrite, strong) UILabel *varNames_accountLabel;
 
 @property (nonatomic, readwrite, strong) ClassNames_InputView *varNames_firstInputView;
 
@@ -62,7 +63,7 @@
     self = [super init];
     if (self) {
         
-        
+        self.backgroundColor = UIColor.yellowColor;
         [self methodNames_createUI];
     }
     return self;
@@ -75,26 +76,36 @@
 
 
 - (void)methodNames_createUI {
+    __weak typeof(self) weakSelf = self;
+    ClassNames_NavigationBarView *varNames_tmpNaviView = [[ClassNames_NavigationBarView alloc]init];
+    varNames_tmpNaviView.translatesAutoresizingMaskIntoConstraints = NO;
+    [varNames_tmpNaviView methodNames_setTitle:@"修改密码"];
+    [self.varNames_naviView methodNames_setLeftButtonImage:@"image_back" lefttitle:@"" btnAction:^{
+        if (weakSelf.methodNames_backBlock) {
+            weakSelf.hidden = YES;
+            weakSelf.methodNames_backBlock();
+        }
+    }];
+    [varNames_tmpNaviView methodNames_setLeftButtonImage:@"image_back" lefttitle:@"" btnAction:^{
+        if (weakSelf.methodNames_backBlock) {
+            weakSelf.hidden = YES;
+            weakSelf.methodNames_backBlock();
+        }
+    }];
+    [varNames_tmpNaviView methodNames_setRightButtonImage:@"image_close" rightTitle:@"" btnAction:^{
+        if (weakSelf.methodNames_closeBlock) {
+            weakSelf.hidden = YES;
+            weakSelf.methodNames_closeBlock();
+        }
+    }];
     
-    UILabel *varNames_tmpTitleLabel = [[UILabel alloc]init];
-    varNames_tmpTitleLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    varNames_tmpTitleLabel.text = methodNames_getTitle_ResetPasswordView_Title();
-    varNames_tmpTitleLabel.textColor = [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_titleFontColor_config()];
-    varNames_tmpTitleLabel.textAlignment = NSTextAlignmentCenter;
-    varNames_tmpTitleLabel.font = [UIFont systemFontOfSize:17];
-    self.varNames_titleLabel = varNames_tmpTitleLabel;
-    
-    UIButton *varNames_backButton = [[UIButton alloc]init];
-    varNames_backButton.translatesAutoresizingMaskIntoConstraints = NO;
-    methodNames_drawBackButtonImage(varNames_backButton, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_titleFontColor_config()]);
-    [varNames_backButton addTarget:self action:@selector(methodNames_backAction:) forControlEvents:UIControlEventTouchUpInside];
-    _varNames_backButton = varNames_backButton;
+    self.varNames_naviView = varNames_tmpNaviView;
     
     ClassNames_InputView *varNames_tmpFirstInputView = [ClassNames_InputView methodNames_inputViewType:varNames_inputViewTypeResetPasswordAccount];
     varNames_tmpFirstInputView.translatesAutoresizingMaskIntoConstraints = NO;
     self.varNames_firstInputView = varNames_tmpFirstInputView;
     
-    ClassNames_InputView *varNames_tmpSecondInputView = [ClassNames_InputView methodNames_inputViewType:varNames_inputViewTypeResetPasswordPassword];
+    ClassNames_InputView *varNames_tmpSecondInputView = [ClassNames_InputView methodNames_inputViewType:varNames_inputViewTypePhoneRegisterCode];
     varNames_tmpSecondInputView.translatesAutoresizingMaskIntoConstraints = NO;
     self.varNames_secondInputView = varNames_tmpSecondInputView;
     
@@ -106,21 +117,23 @@
     varNames_tmpFourthInputView.translatesAutoresizingMaskIntoConstraints = NO;
     self.varNames_fourthInputView = varNames_tmpFourthInputView;
     
-    ClassNames_CommitButton *varNames_tmpCommitBtn = [[ClassNames_CommitButton alloc]init];
-    varNames_tmpCommitBtn.translatesAutoresizingMaskIntoConstraints = NO;
-    methodNames_drawOKCommitImage(varNames_tmpCommitBtn, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_titleFontColor_config()]);
-    [varNames_tmpCommitBtn addTarget:self action:@selector(methodNames_commitAction:) forControlEvents:UIControlEventTouchUpInside];
+    ClassNames_CommitButton *varNames_tmpCommitBtn = [ClassNames_CommitButton methodNames_createCommitButtonWithTitle:@"提交" withTouchUpInsidBlock:^{
+        [weakSelf methodNames_commitAction:nil];
+    }];
+    
     self.varNames_firstCommitBtn = varNames_tmpCommitBtn;
     
-    [self addSubview:self.varNames_titleLabel];
-    [self addSubview:_varNames_backButton];
+    [self addSubview:self.varNames_naviView];
+    
+    [self methodNames_createAccountView];
+    
     [self addSubview:self.varNames_firstInputView];
     [self addSubview:self.varNames_secondInputView];
     [self addSubview:self.varNames_thirdInputView];
     [self addSubview:self.varNames_fourthInputView];
     [self addSubview:self.varNames_firstCommitBtn];
     
-    __weak typeof(self) weakSelf = self;
+    
     [self.varNames_firstInputView methodNames_setInputViewKeyboardReutrnType:varNames_keyboardReturnNext];
     [self.varNames_secondInputView methodNames_setInputViewKeyboardReutrnType:varNames_keyboardReturnNext];
     [self.varNames_thirdInputView methodNames_setInputViewKeyboardReutrnType:varNames_keyboardReturnNext];
@@ -135,61 +148,78 @@
         [weakSelf.varNames_fourthInputView methodNames_becomeFirstResponder];
     };
 }
+// 账户ID
+- (void)methodNames_createAccountView {
+    UILabel *varNames_tmpLabel = [[UILabel alloc]init];
+    varNames_tmpLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    varNames_tmpLabel.font = [UIFont systemFontOfSize:12];
+    varNames_tmpLabel.textColor = [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_fillColor_config()];
+    varNames_tmpLabel.textAlignment = NSTextAlignmentCenter;
+    varNames_tmpLabel.text = @"账户ID:1234567890";
+    self.varNames_accountLabel = varNames_tmpLabel;
+    [self addSubview:varNames_tmpLabel];
+}
 
 - (void)methodNames_layoutSubViews {
     
-    self.varNames_topMarginValue = methodNames_setMargin_base();
+    self.varNames_topMarginValue = 0;
     
-    [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_titleLabel methodNames_constriant:self.varNames_topMarginValue];
-    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_titleLabel methodNames_constriant:methodNames_setMargin_base()];
-    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_titleLabel methodNames_constriant:methodNames_setMargin_base()];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_titleLabel methodNames_constriant:methodNames_getInputView_inputView_Height() + 10];
+    [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_naviView methodNames_constriant:self.varNames_topMarginValue];
+    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_naviView methodNames_constriant:methodNames_setMargin_base()];
+    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_naviView methodNames_constriant:methodNames_setMargin_base()];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_naviView methodNames_constriant:methodNames_setNavigationBarHeight()];
     
-    [ClassNames_BaseViewLayout methodNames_layoutTop:_varNames_backButton methodNames_constriant:self.varNames_topMarginValue];
-    [ClassNames_BaseViewLayout methodNames_layoutLeft:_varNames_backButton methodNames_constriant:methodNames_setMargin_3base()];
-    [ClassNames_BaseViewLayout methodNames_layoutWidth:_varNames_backButton methodNames_constriant:methodNames_getInputView_Image_Width()];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:_varNames_backButton methodNames_constriant:methodNames_getInputView_Image_Width()];
+    self.varNames_topMarginValue += methodNames_setNavigationBarHeight();
+    self.varNames_topMarginValue += methodNames_setMargin_2base();
     
-    self.varNames_topMarginValue += methodNames_getInputView_inputView_Height() + 10;
-    self.varNames_topMarginValue += methodNames_setMargin_base();
+    [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_accountLabel methodNames_constriant:self.varNames_topMarginValue];
+    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_accountLabel methodNames_constriant:methodNames_setMargin_base()];
+    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_accountLabel methodNames_constriant:methodNames_setMargin_base()];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_accountLabel methodNames_constriant:methodNames_setMargin_3base()];
+    
+    self.varNames_topMarginValue += methodNames_setMargin_3base();
+    self.varNames_topMarginValue += methodNames_setMargin_2base();
+    
     
     [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_firstInputView methodNames_constriant:self.varNames_topMarginValue];
-    [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_firstInputView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_firstInputView methodNames_constriant:methodNames_getInputView_inputView_Width()];
+    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_firstInputView methodNames_constriant:methodNames_setMargin_2base()];
+    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_firstInputView methodNames_constriant:methodNames_setMargin_2base()];
     [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_firstInputView methodNames_constriant:methodNames_getInputView_inputView_Height()];
     
     self.varNames_topMarginValue += methodNames_getInputView_inputView_Height();
-    self.varNames_topMarginValue += methodNames_setMargin_base();
+    self.varNames_topMarginValue += methodNames_setMargin_3base();
     
     [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_secondInputView methodNames_constriant:self.varNames_topMarginValue];
-    [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_secondInputView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_secondInputView methodNames_constriant:methodNames_getInputView_inputView_Width()];
+    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_secondInputView methodNames_constriant:methodNames_setMargin_2base()];
+    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_secondInputView methodNames_constriant:methodNames_setMargin_2base()];
     [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_secondInputView methodNames_constriant:methodNames_getInputView_inputView_Height()];
     
     self.varNames_topMarginValue += methodNames_getInputView_inputView_Height();
-    self.varNames_topMarginValue += methodNames_setMargin_base();
+    self.varNames_topMarginValue += methodNames_setMargin_3base();
     
     [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_thirdInputView methodNames_constriant:self.varNames_topMarginValue];
-    [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_thirdInputView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_thirdInputView methodNames_constriant:methodNames_getInputView_inputView_Width()];
+    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_thirdInputView methodNames_constriant:methodNames_setMargin_2base()];
+    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_thirdInputView methodNames_constriant:methodNames_setMargin_2base()];
     [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_thirdInputView methodNames_constriant:methodNames_getInputView_inputView_Height()];
     
     self.varNames_topMarginValue += methodNames_getInputView_inputView_Height();
-    self.varNames_topMarginValue += methodNames_setMargin_base();
+    self.varNames_topMarginValue += methodNames_setMargin_3base();
     
     [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_fourthInputView methodNames_constriant:self.varNames_topMarginValue];
-    [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_fourthInputView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_fourthInputView methodNames_constriant:methodNames_getInputView_inputView_Width()];
+    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_fourthInputView methodNames_constriant:methodNames_setMargin_2base()];
+    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_fourthInputView methodNames_constriant:methodNames_setMargin_2base()];
     [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_fourthInputView methodNames_constriant:methodNames_getInputView_inputView_Height()];
     
     self.varNames_topMarginValue += methodNames_getInputView_inputView_Height();
     self.varNames_topMarginValue += methodNames_setMargin_2base();
     
     [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_firstCommitBtn methodNames_constriant:self.varNames_topMarginValue];
-    [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_firstCommitBtn methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_firstCommitBtn methodNames_constriant:methodNames_setCommitButtonWidth()];
+    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_firstCommitBtn methodNames_constriant:methodNames_setMargin_3base()];
+    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_firstCommitBtn methodNames_constriant:methodNames_setMargin_3base()];
     [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_firstCommitBtn methodNames_constriant:methodNames_setCommitButtonHeight()];
-    self.varNames_topMarginValue += methodNames_getInputView_inputView_Height();
+    
+    
+    
     [self methodNames_caculateInputViewLocal];
 }
 
@@ -213,15 +243,6 @@
     CGRect varNames_tmprect = [varNames_view convertRect:varNames_view.bounds toView:varNames_tmpwindow];
     CGFloat varNames_textFieldMaxY = CGRectGetMaxY(varNames_tmprect);
     [varNames_view methodNames_setInputViewMaxY:varNames_textFieldMaxY];
-}
-#pragma mark ---------- back Action
--(void)methodNames_backAction:(UIButton *)sender {
-    if (self.methodNames_backAction) {
-        [self methodNames_resetContent];
-        self.hidden = YES;
-        self.methodNames_backAction();
-        [self removeFromSuperview];
-    }
 }
 
 #pragma mark ---------- action

@@ -4,6 +4,7 @@
 #import "ClassNames_SuspensionBallButton.h"
 #import <sys/utsname.h>
 
+
 #pragma mark ---------- 所有动画所要执行的时长
 static const CGFloat varNames_suspensionBallAnimationDuration = 0.1;
 
@@ -11,8 +12,9 @@ static const CGFloat varNames_suspensionBallAnimationDuration = 0.1;
 static NSString * const varNames_suspensionBallBackgroundImage = @"image_ball";
 
 #pragma mark ---------- 菜单按钮的标题，从远到近
-static NSString * const varNames_suspensionBallMenuImage1 = @"image_closemenu";
+static NSString * const varNames_suspensionBallMenuImage1 = @"image_gift";
 static NSString * const varNames_suspensionBallMenuImage2 = @"image_service";
+static NSString * const varNames_suspensionBallMenuImage3 = @"image_usercenter";
 
 #pragma mark ---------- 悬浮球不使用的时候半隐藏的时长
 static const CGFloat varNames_suspensionBallHalfHideDuration = 5.0;
@@ -44,9 +46,11 @@ static NSString * const varNames_orientationLeft = @"LEFT";
 @property (nonatomic, readwrite, strong) UIView *varNames_menuView;
 
 @property (nonatomic, readwrite, copy) void (^methodNames_clickItemMenu)(NSInteger index);
+@property (nonatomic, readwrite, copy) void (^methodNames_finishShowMenu)(void);
 
 @property (nonatomic, readwrite, copy) NSString *varNames_firstTitle;
 @property (nonatomic, readwrite, copy) NSString *varNames_secondTitle;
+@property (nonatomic, readwrite, copy) NSString *varNames_thirdTitle;
 
 @end
 
@@ -62,8 +66,8 @@ static NSString * const varNames_orientationLeft = @"LEFT";
 -(instancetype)initWithFrame:(CGRect)frame {
     self = [super initWithFrame:frame];
     if (self) {
+        self.backgroundColor = [UIColor whiteColor];
         self.varNames_originalRect = frame;
-        self.backgroundColor = [UIColor colorWithWhite:0.78 alpha:1];
         self.layer.cornerRadius = CGRectGetWidth(frame)/2;
     }
     return self;
@@ -71,14 +75,16 @@ static NSString * const varNames_orientationLeft = @"LEFT";
 #pragma mark ---------- 根据语言类型配置显示的的标题
 - (void)methodNames_initLangeType:(NSString *)varNames_varLangType {
     if ([varNames_varLangType isEqualToString:@"zh-cn"]) {
-        self.varNames_firstTitle = @"关闭";
+        self.varNames_firstTitle = @"礼包";
         self.varNames_secondTitle = @"客服";
+        self.varNames_thirdTitle = @"用户中心";
     } else {
-        self.varNames_firstTitle = @"關閉";
+        self.varNames_firstTitle = @"礼包";
         self.varNames_secondTitle = @"客服";
+        self.varNames_thirdTitle = @"用户中心";
     }
     
-    self.varNames_titleArray = @[self.varNames_firstTitle, self.varNames_secondTitle];
+    self.varNames_titleArray = @[self.varNames_firstTitle, self.varNames_secondTitle, self.varNames_thirdTitle];
 }
 
 
@@ -145,16 +151,20 @@ static NSString * const varNames_orientationLeft = @"LEFT";
     } completion:^(BOOL finished) {
         if (finished) {
             [self methodNames_createMenuButton:self.varNames_titleArray subMethodNames_type:varNames_type];
+            if (self.methodNames_finishShowMenu) {
+                self.methodNames_finishShowMenu();
+            }
+            
         }
     }];
 }
 - (void)methodNames_createMenuButton:(NSArray *)varNames_titleArray subMethodNames_type:(varNames_showBallType)varNames_type {
     _varNames_menuView = [[UIView alloc]initWithFrame:self.bounds];
     _varNames_menuView.layer.opacity = 0.0;
-    CGFloat width = CGRectGetWidth(self.varNames_originalRect);
-    _varNames_menuView.layer.cornerRadius = width/2;
-    _varNames_menuView.backgroundColor = [UIColor colorWithWhite:0.78 alpha:1];
-    _varNames_menuView.layer.borderWidth = 3.0;
+//    CGFloat width = CGRectGetWidth(self.varNames_originalRect);
+    _varNames_menuView.layer.cornerRadius = 5;
+    _varNames_menuView.backgroundColor = [UIColor whiteColor];
+//    _varNames_menuView.layer.borderWidth = 3.0;
     _varNames_menuView.layer.borderColor = [UIColor whiteColor].CGColor;
     [self addSubview:_varNames_menuView];
     
@@ -167,8 +177,8 @@ static NSString * const varNames_orientationLeft = @"LEFT";
             varNames_tmpBtn.tag = index;
             index++;
             [varNames_tmpBtn setImage:[self methodNames_getImageForTitle:title] forState:UIControlStateNormal];
-            varNames_tmpBtn.titleLabel.font = [UIFont boldSystemFontOfSize:11];
-    
+            varNames_tmpBtn.titleLabel.font = [UIFont boldSystemFontOfSize:12];
+            [varNames_tmpBtn setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
             [varNames_tmpBtn setTitle:title forState:UIControlStateNormal];
             [varNames_tmpBtn addTarget:self action:@selector(methodNames_clickMenu:) forControlEvents:UIControlEventTouchUpInside];
             [_varNames_menuView addSubview:varNames_tmpBtn];
@@ -179,8 +189,8 @@ static NSString * const varNames_orientationLeft = @"LEFT";
             [varNames_tmpBtn addConstraint:varNames_heightconstraint];
             varNames_margin += 60;
             
-            varNames_tmpBtn.titleEdgeInsets = UIEdgeInsetsMake(varNames_tmpBtn.imageView.frame.size.height+5, -varNames_tmpBtn.imageView.bounds.size.width, 0,0);
-            varNames_tmpBtn.imageEdgeInsets = UIEdgeInsetsMake(0, varNames_tmpBtn.titleLabel.frame.size.width/2, varNames_tmpBtn.titleLabel.frame.size.height+5, -varNames_tmpBtn.titleLabel.frame.size.width/2);
+            varNames_tmpBtn.titleEdgeInsets = UIEdgeInsetsMake(varNames_tmpBtn.imageView.frame.size.height, -varNames_tmpBtn.imageView.bounds.size.width, 8,0);
+            varNames_tmpBtn.imageEdgeInsets = UIEdgeInsetsMake(-5, varNames_tmpBtn.titleLabel.frame.size.width/2, varNames_tmpBtn.titleLabel.frame.size.height+5, -varNames_tmpBtn.titleLabel.frame.size.width/2);
         }
     }
     [UIView animateWithDuration:0.1 animations:^{
@@ -241,6 +251,8 @@ static NSString * const varNames_orientationLeft = @"LEFT";
         varNames_image = [self methodNames_getImage:varNames_suspensionBallMenuImage2];
     } else if ([varNames_title isEqualToString:self.varNames_firstTitle]) {
         varNames_image = [self methodNames_getImage:varNames_suspensionBallMenuImage1];
+    } else if ([varNames_title isEqualToString:self.varNames_thirdTitle]) {
+        varNames_image = [self methodNames_getImage:varNames_suspensionBallMenuImage3];
     }
     return varNames_image;
 }
@@ -272,6 +284,7 @@ static NSString * const varNames_orientationLeft = @"LEFT";
 
 @property (nonatomic, readwrite, assign) varNames_showBallType varNames_ballType;
 @property (nonatomic, readwrite, strong) methodNames_BallMenuView *varNames_ballMenu;
+@property (nonatomic, readwrite, strong) UIButton *varNames_closeButton;
 
 @property (nonatomic, readwrite, assign) BOOL varNames_isHideMenu;
 @property (nonatomic, readwrite, strong) NSTimer *varNames_timer;
@@ -284,7 +297,9 @@ static NSString * const varNames_orientationLeft = @"LEFT";
 
 @implementation ClassNames_SuspensionBallButton
 
-
+- (void)methodNames_closeSupenBall:(UIButton *)sender {
+    NSLog(@"关闭悬浮球");
+}
 #pragma mark ---------- 悬浮球点击事件
 - (void)methodNames_showMenu:(UIButton *)sender {
     sender.selected = !sender.selected;
@@ -297,7 +312,18 @@ static NSString * const varNames_orientationLeft = @"LEFT";
         
         _varNames_ballMenu = [methodNames_BallMenuView methodNames_showBallMenu:sender.frame subMethodNames_ballType:self.varNames_ballType subMethodNames_languageType:self.varNames_languageType];
         [[UIApplication sharedApplication].keyWindow addSubview:_varNames_ballMenu];
+        
+        _varNames_closeButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(_varNames_ballMenu.frame)-10, CGRectGetMinY(_varNames_ballMenu.frame)-10, 20, 20)];
+        _varNames_closeButton.backgroundColor = [UIColor redColor];
+        _varNames_closeButton.layer.cornerRadius = 10;
+        _varNames_closeButton.hidden = YES;
+        [[UIApplication sharedApplication].keyWindow addSubview:_varNames_closeButton];
+        [_varNames_closeButton addTarget:self action:@selector(methodNames_closeSupenBall:) forControlEvents:UIControlEventTouchUpInside];
+        
         __weak typeof(self) weakSelf = self;
+        _varNames_ballMenu.methodNames_finishShowMenu = ^{
+            weakSelf.varNames_closeButton.hidden = NO;
+        };
         _varNames_ballMenu.methodNames_clickItemMenu = ^(NSInteger index) {
             if (index == 0) {
                 [weakSelf methodNames_hideSuspensionBall];
@@ -310,6 +336,7 @@ static NSString * const varNames_orientationLeft = @"LEFT";
         };
         
     } else {
+        _varNames_closeButton.hidden = YES;
         [_varNames_ballMenu methodNames_hide];
         self.varNames_isHideMenu = YES;
         [_varNames_timer setFireDate:[NSDate dateWithTimeIntervalSinceNow:varNames_suspensionBallHalfHideDuration]];
@@ -341,6 +368,7 @@ static NSString * const varNames_orientationLeft = @"LEFT";
 -(instancetype)initWithFrame:(CGRect)frame{
     self = [super initWithFrame:frame];
     if (self) {
+        
         _varNames_btnWidth = 60.0;
         _varNames_btnHeight = 60.0;
         self.backgroundColor = [UIColor whiteColor];
@@ -568,8 +596,22 @@ static NSString * const varNames_orientationLeft = @"LEFT";
     CGFloat pointX = varNames_argPoint.x;
     CGFloat pointY = varNames_argPoint.y;
     CGFloat btnX = CGRectGetMaxX(self.frame);
-    CGFloat btnWidth = 50.0;
+    CGFloat btnWidth = 60.0;
     CGFloat btnMargin = 5.0;
+    NSLog(@"第 %d  个", (int)floor(pointX/btnWidth));
+    // 先判断是否点击了关闭按钮
+    
+    
+    
+    
+    // 从左往右计算，悬浮球为0，如果pointY小于0的，或者大于60的，index都==0
+    int index = (int)floor(pointX/btnWidth);
+    if (pointX > 240 || pointY < 0 || pointY > 60) {
+        index = 0;
+        if (self.methodNames_clickBallMenu) {
+            self.methodNames_clickBallMenu(index);
+        }
+    }
     if (pointY > 0 && pointY < btnWidth * 2 + btnMargin * 2) {
         if (pointX > btnX + btnMargin && pointX < btnX + btnMargin + btnWidth) {
             if (self.methodNames_clickBallMenu) {
@@ -605,18 +647,18 @@ static NSString * const varNames_orientationLeft = @"LEFT";
     [super removeFromSuperview];
 }
 
--(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
-    UIView *view = [super hitTest:point withEvent:event];
-    if (!view) {
-        if (!self.varNames_isHideMenu) {
-            [self methodNames_touchOutSidePoint:point];
-            view = self;
-            [self methodNames_showMenu:(ClassNames_SuspensionBallButton *)view];
-            [_varNames_timer setFireDate:[NSDate dateWithTimeIntervalSinceNow:varNames_suspensionBallHalfHideDuration]];
-        }
-    }
-    return view;
-}
+//-(UIView *)hitTest:(CGPoint)point withEvent:(UIEvent *)event {
+//    UIView *view = [super hitTest:point withEvent:event];
+//    if (!view) {
+//        if (!self.varNames_isHideMenu) {
+//            [self methodNames_touchOutSidePoint:point];
+//            view = self;
+//            [self methodNames_showMenu:(ClassNames_SuspensionBallButton *)view];
+//            [_varNames_timer setFireDate:[NSDate dateWithTimeIntervalSinceNow:varNames_suspensionBallHalfHideDuration]];
+//        }
+//    }
+//    return view;
+//}
 
 -(void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event {
     [super touchesBegan:touches withEvent:event];

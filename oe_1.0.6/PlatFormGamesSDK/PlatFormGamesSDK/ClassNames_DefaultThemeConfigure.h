@@ -85,6 +85,7 @@ FOUNDATION_EXTERN NSString *const varNames_suspensionBallshowtime;
 /// 客服页面配置
 FOUNDATION_EXTERN NSString *const varNames_serverViewConfig;
 FOUNDATION_EXTERN NSString *const varNames_serverKouKouConfig;
+FOUNDATION_EXTERN NSString *const varNames_serverWechatConfig;
 FOUNDATION_EXTERN NSString *const varNames_serverTimeConfig;
 
 
@@ -614,6 +615,7 @@ static inline NSString *methodNames_getSuggestViewTip() {
 }
 
 #pragma mark ---------- 客服页面的内容配置
+// koukou 号码
 static inline NSString *methodNames_getServerKouKou() {
     NSString *varNames_koukou = @"743911535";
     NSDictionary *varNames_defaultDic = methodNames_getInit_config(varNames_defaultConfigKey);
@@ -626,6 +628,21 @@ static inline NSString *methodNames_getServerKouKou() {
     }
     return varNames_koukou;
 }
+// 宫 众 号
+static inline NSString *methodNames_getServerWchatNumber() {
+    NSString *varNames_koukou = @"心悦湾";
+    NSDictionary *varNames_defaultDic = methodNames_getInit_config(varNames_defaultConfigKey);
+    if (!varNames_defaultDic) {
+        return varNames_koukou;
+    }
+    NSDictionary *varNames_tmpDic = [varNames_defaultDic objectForKey:varNames_serverViewConfig];
+    if (varNames_tmpDic && [varNames_tmpDic objectForKey:varNames_serverWechatConfig]) {
+        varNames_koukou = [varNames_tmpDic objectForKey:varNames_serverWechatConfig];
+    }
+    return varNames_koukou;
+}
+
+
 static inline NSString *methodNames_getServerTime() {
     NSString *varNames_time = @"10:00--19:00";
     NSDictionary *varNames_defaultDic = methodNames_getInit_config(varNames_defaultConfigKey);

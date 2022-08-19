@@ -55,6 +55,7 @@
 -(instancetype)init {
     self = [super init];
     if (self) {
+        self.layer.cornerRadius = 15;
         [self methodNames_createUI];
         [self methodNames_setData];
     }

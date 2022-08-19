@@ -127,6 +127,11 @@
 		33AC6EEF2113EB4B005555C3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AC6EEE2113EB4B005555C3 /* UIKit.framework */; };
 		33AC6EF12113EB50005555C3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AC6EF02113EB4F005555C3 /* Foundation.framework */; };
 		33AC6EF32113EB54005555C3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33AC6EF22113EB54005555C3 /* CoreGraphics.framework */; };
+		889103D328A8964F00F90D5F /* ClassNames_PayView.h in Headers */ = {isa = PBXBuildFile; fileRef = 889103D128A8964F00F90D5F /* ClassNames_PayView.h */; };
+		889103D428A8964F00F90D5F /* ClassNames_PayView.m in Sources */ = {isa = PBXBuildFile; fileRef = 889103D228A8964F00F90D5F /* ClassNames_PayView.m */; };
+		889103D728A9176E00F90D5F /* ClassNames_payTypeImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 889103D528A9176E00F90D5F /* ClassNames_payTypeImage.h */; };
+		889103DB28A92EEB00F90D5F /* ClassNames_NoticeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 889103D928A92EEB00F90D5F /* ClassNames_NoticeView.h */; };
+		889103DC28A92EEB00F90D5F /* ClassNames_NoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 889103DA28A92EEB00F90D5F /* ClassNames_NoticeView.m */; };
 		DF585E62289CC753005B25BA /* ClassNames_DelegateTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = DF585E60289CC753005B25BA /* ClassNames_DelegateTextView.h */; };
 		DF585E63289CC753005B25BA /* ClassNames_DelegateTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = DF585E61289CC753005B25BA /* ClassNames_DelegateTextView.m */; };
 		DF7C6CE328A3950800F7260D /* ClassNames_TipView.h in Headers */ = {isa = PBXBuildFile; fileRef = DF7C6CE128A3950800F7260D /* ClassNames_TipView.h */; };
@@ -278,6 +283,11 @@
 		33AC6EEE2113EB4B005555C3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		33AC6EF02113EB4F005555C3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		33AC6EF22113EB54005555C3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		889103D128A8964F00F90D5F /* ClassNames_PayView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_PayView.h; sourceTree = "<group>"; };
+		889103D228A8964F00F90D5F /* ClassNames_PayView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_PayView.m; sourceTree = "<group>"; };
+		889103D528A9176E00F90D5F /* ClassNames_payTypeImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_payTypeImage.h; sourceTree = "<group>"; };
+		889103D928A92EEB00F90D5F /* ClassNames_NoticeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_NoticeView.h; sourceTree = "<group>"; };
+		889103DA28A92EEB00F90D5F /* ClassNames_NoticeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_NoticeView.m; sourceTree = "<group>"; };
 		DF585E60289CC753005B25BA /* ClassNames_DelegateTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_DelegateTextView.h; sourceTree = "<group>"; };
 		DF585E61289CC753005B25BA /* ClassNames_DelegateTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_DelegateTextView.m; sourceTree = "<group>"; };
 		DF7C6CE128A3950800F7260D /* ClassNames_TipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_TipView.h; sourceTree = "<group>"; };
@@ -506,6 +516,10 @@
 				337161E32229125E002D5BA0 /* ClassNames_UserCenterView.m */,
 				DF7C6CE128A3950800F7260D /* ClassNames_TipView.h */,
 				DF7C6CE228A3950800F7260D /* ClassNames_TipView.m */,
+				889103D128A8964F00F90D5F /* ClassNames_PayView.h */,
+				889103D228A8964F00F90D5F /* ClassNames_PayView.m */,
+				889103D928A92EEB00F90D5F /* ClassNames_NoticeView.h */,
+				889103DA28A92EEB00F90D5F /* ClassNames_NoticeView.m */,
 			);
 			name = SkillView;
 			sourceTree = "<group>";
@@ -746,6 +760,7 @@
 				335BB6CD2147ADC8003339B6 /* ClassNames_ImageSkillButton.h */,
 				33733900214A6051004A5984 /* ClassNames_ImageCommitButton.h */,
 				33733901214A71B6004A5984 /* ClassNames_ImageBackButton.h */,
+				889103D528A9176E00F90D5F /* ClassNames_payTypeImage.h */,
 			);
 			name = Image;
 			sourceTree = "<group>";
@@ -833,6 +848,7 @@
 				336289CD21198AC500CC7D24 /* ClassNames_ImageEyes.h in Headers */,
 				3362856E2117E8F900CC7D24 /* ClassNames_MemberNormalRegisterModel.h in Headers */,
 				331B33D22125781200544DB8 /* UmPlatsFormGameManager.h in Headers */,
+				889103D328A8964F00F90D5F /* ClassNames_PayView.h in Headers */,
 				33333A7521212ACA00446146 /* ClassNames_FindBackPasswordView.h in Headers */,
 				3362856A2117E72300CC7D24 /* ClassNames_MemberVisitorModel.h in Headers */,
 				336285762117E9FB00CC7D24 /* ClassNames_MemberLoginModel.h in Headers */,
@@ -871,6 +887,7 @@
 				331B31312125280B00544DB8 /* ClassNames_ViewTool.h in Headers */,
 				3362855D2117E1B300CC7D24 /* ClassNames_BaseModel.h in Headers */,
 				336285622117E69E00CC7D24 /* ClassNames_GameInitialiseModel.h in Headers */,
+				889103DB28A92EEB00F90D5F /* ClassNames_NoticeView.h in Headers */,
 				331B33E42125786000544DB8 /* ClassName_IAPRepair.h in Headers */,
 				DF7C6CE328A3950800F7260D /* ClassNames_TipView.h in Headers */,
 				3362858A2117EA8500CC7D24 /* ClassNames_MemberOrderModel.h in Headers */,
@@ -893,6 +910,7 @@
 				33333A692121248C00446146 /* ClassNames_BindPersonIDView.h in Headers */,
 				336283332114069000CC7D24 /* ClassNames_URLProtocol.h in Headers */,
 				330FEA3823014BD8008C0D0F /* ClassNames_CustomServerView.h in Headers */,
+				889103D728A9176E00F90D5F /* ClassNames_payTypeImage.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -958,6 +976,8 @@
 				3362856B2117E72300CC7D24 /* ClassNames_MemberVisitorModel.m in Sources */,
 				33333A8521212B2A00446146 /* ClassNames_PhoneRegisterView.m in Sources */,
 				336283F32114280700CC7D24 /* ClassNames_DeviceConfigure.m in Sources */,
+				889103DC28A92EEB00F90D5F /* ClassNames_NoticeView.m in Sources */,
+				889103D428A8964F00F90D5F /* ClassNames_PayView.m in Sources */,
 				3362857F2117EA4700CC7D24 /* ClassNames_BackUserPSWModel.m in Sources */,
 				33333A7621212ACA00446146 /* ClassNames_FindBackPasswordView.m in Sources */,
 				33333BD62121727500446146 /* ClassNames_MainView.m in Sources */,

@@ -137,4 +137,5 @@ NSString *const varNames_suspensionBallshowtime = @"showtime";
 /// 客服页面配置
 NSString *const varNames_serverViewConfig = @"serverConfig";
 NSString *const varNames_serverKouKouConfig = @"koukou";
+NSString *const varNames_serverWechatConfig = @"gongzhonghao";
 NSString *const varNames_serverTimeConfig = @"time";

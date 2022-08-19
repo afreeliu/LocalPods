@@ -9,6 +9,7 @@
 
 + (instancetype)methodNames_showMainView;
 
++ (void)methodNames_cleanView;
 
 + (instancetype)methodNames_instanceMainView;
 // 显示自动登录页面
@@ -23,5 +24,9 @@
 
 // 显示用户中心页
 - (void)methodNames_showUserCenterView;
+
+- (void)methodNames_showPayView;
+
+- (void)methodNames_showNoticeView;
 
 @end

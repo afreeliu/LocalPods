@@ -13,6 +13,8 @@
 
 @property (nonatomic, readwrite, copy) void(^methodNames_backBlock)(void);
 
-@property (nonatomic, readwrite, copy) void(^methodNames_closeBindPhoneView)(void);
+@property (nonatomic, readwrite, copy) void(^methodNames_closeBlock)(void);
+
+@property (nonatomic, readwrite, copy) void(^methodNames_nextBlock)(void);
 
 @end

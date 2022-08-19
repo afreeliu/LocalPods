@@ -109,7 +109,7 @@ static inline NSString *methodNames_getTitle_ResetPasswordView_inputView_title1(
     return @"账号";
 }
 static inline NSString *methodNames_getTitle_ResetPasswordView_inputView_placeholder1() {
-    return @"请输入账号";
+    return @"请输入手机号";
 }
 static inline NSString *methodNames_getTitle_ResetPasswordView_inputView_title2() {
     return @"密码";
@@ -127,7 +127,7 @@ static inline NSString *methodNames_getTitle_ResetPasswordView_inputView_title4(
     return @"重复密码";
 }
 static inline NSString *methodNames_getTitle_ResetPasswordView_inputView_placeholder4() {
-    return @"请再输入新密码";
+    return @"请重新输入新密码";
 }
 static inline NSString *methodNames_getTitle_ResetPasswordView_commitBtn_title() {
     return @"确定";

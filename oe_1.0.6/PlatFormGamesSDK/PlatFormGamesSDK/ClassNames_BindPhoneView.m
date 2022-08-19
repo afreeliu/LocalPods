@@ -17,11 +17,18 @@
 #import "ClassNames_NavigationBarView.h"
 @interface ClassNames_BindPhoneView ()
 
+@property (nonatomic, readwrite, copy) NSString *varNames_naviTitle;
+
+@property (nonatomic, readwrite, copy) NSString *varNames_commitTitle;
+
+
 @property (nonatomic, readwrite, weak) UIView *varNames_fview;
 
 @property (nonatomic, readwrite, strong) ClassNames_NavigationBarView *varNames_naviView;
 
 @property (nonatomic, readwrite, strong) UILabel *varNames_accountLabel;
+
+@property (nonatomic, readwrite, strong) UILabel *varNames_showPhoneLabel;
 
 @property (nonatomic, readwrite, strong) ClassNames_InputView *varNames_firstInputView;
 
@@ -62,10 +69,23 @@
 -(instancetype)init {
     self = [super init];
     if (self) {
+        [self methodNames_initData];
         [self methodNames_createUI];
     }
     return self;;
 }
+
+- (void)methodNames_initData {
+    if (1) {
+        // 绑定了手机
+        self.varNames_naviTitle = @"手机验证";
+        self.varNames_commitTitle = @"修改绑定";
+    } else {
+        self.varNames_naviTitle = @"绑定手机";
+        self.varNames_commitTitle = @"绑定手机";
+    }
+}
+
 
 - (void)layoutSubviews {
     [super layoutSubviews];
@@ -104,7 +124,7 @@
     
     self.varNames_secondInputView = varNames_tmpSecondInputView;
     
-    ClassNames_CommitButton *varNames_tmpCommitBtn = [ClassNames_CommitButton methodNames_createCommitButtonWithTitle:@"绑定手机" withTouchUpInsidBlock:^{
+    ClassNames_CommitButton *varNames_tmpCommitBtn = [ClassNames_CommitButton methodNames_createCommitButtonWithTitle:self.varNames_naviTitle withTouchUpInsidBlock:^{
         [weakSelf methodNames_commitAction:nil];
     }];
     
@@ -115,6 +135,7 @@
     [self addSubview:self.varNames_firstCommitBtn];
     
     [self methodNames_createTipLabelView];
+    [self methodNames_createShowPhoneLabel];
     
     
     [self.varNames_firstInputView methodNames_setInputViewKeyboardReutrnType:varNames_keyboardReturnNext];
@@ -122,6 +143,17 @@
     self.varNames_firstInputView.methodNames_nextInputView = ^{
         [weakSelf.varNames_secondInputView methodNames_becomeFirstResponder];
     };
+    
+    if (1) {
+        // 绑定了手机
+        self.varNames_firstInputView.hidden = YES;
+        self.varNames_showPhoneLabel.hidden = NO;
+    } else {
+        self.varNames_firstInputView.hidden = NO;
+        self.varNames_showPhoneLabel.hidden = YES;
+    }
+        
+    
 }
 
 - (void)methodNames_setNavi {
@@ -130,11 +162,18 @@
     ClassNames_NavigationBarView *varNames_tmpNaviView = [[ClassNames_NavigationBarView alloc]init];
     varNames_tmpNaviView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [varNames_tmpNaviView methodNames_setTitle:@"绑定手机"];
+    [varNames_tmpNaviView methodNames_setTitle:self.varNames_commitTitle];
     [varNames_tmpNaviView methodNames_setRightButtonImage:@"image_close" rightTitle:@"" btnAction:^{
-        if (weakSelf.methodNames_closeBindPhoneView) {
-            weakSelf.hidden = YES;
-            weakSelf.methodNames_closeBindPhoneView();
+        
+        if (weakSelf.varNames_fview) {
+            // 从其他页面进入的，那么关闭的时候直接关闭
+            if (weakSelf.methodNames_closeBlock) {
+                weakSelf.methodNames_closeBlock();
+            }
+        } else {
+            if (weakSelf.methodNames_nextBlock) {
+                weakSelf.methodNames_nextBlock();
+            }
         }
     }];
     
@@ -152,6 +191,19 @@
     self.varNames_accountLabel = varNames_tmpLabel;
     [self addSubview:varNames_tmpLabel];
 }
+
+// 绑定的手机号
+- (void)methodNames_createShowPhoneLabel {
+    UILabel *varNames_tmpLabel = [[UILabel alloc]init];
+    varNames_tmpLabel.translatesAutoresizingMaskIntoConstraints = NO;
+    varNames_tmpLabel.font = [UIFont systemFontOfSize:12];
+    varNames_tmpLabel.textColor = [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_fillColor_config()];
+    varNames_tmpLabel.textAlignment = NSTextAlignmentCenter;
+    varNames_tmpLabel.text = [NSString stringWithFormat:@"手机已绑定:%@", @"12345678997"];
+    self.varNames_showPhoneLabel = varNames_tmpLabel;
+    [self addSubview:varNames_tmpLabel];
+}
+
 // 安全提示
 - (void)methodNames_createTipLabelView {
     UILabel *varNames_tmpLabel = [[UILabel alloc]init];
@@ -191,6 +243,11 @@
     [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_firstInputView methodNames_constriant:methodNames_setMargin_2base()];
     [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_firstInputView methodNames_constriant:methodNames_setMargin_2base()];
     [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_firstInputView methodNames_constriant:methodNames_getInputView_inputView_Height()];
+    
+    [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_showPhoneLabel methodNames_constriant:self.varNames_topMarginValue];
+    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_showPhoneLabel methodNames_constriant:methodNames_setMargin_2base()];
+    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_showPhoneLabel methodNames_constriant:methodNames_setMargin_2base()];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_showPhoneLabel methodNames_constriant:methodNames_getInputView_inputView_Height()];
     
     self.varNames_topMarginValue += methodNames_getInputView_inputView_Height();
     self.varNames_topMarginValue += methodNames_setMargin_3base();
@@ -248,14 +305,7 @@
     [varNames_view methodNames_setInputViewMaxY:varNames_textFieldMaxY];
 }
 
-#pragma mark ---------- button Action
-- (void)methodNames_closeAction:(UIButton *)sender {
-    if (self.methodNames_closeBindPhoneView) {
-        self.hidden = YES;
-        [self removeFromSuperview];
-        self.methodNames_closeBindPhoneView();
-    }
-}
+
 
 - (void)methodNames_commitAction:(UIButton *)sender {
     NSString *varNames_tmpaccount = self.varNames_firstInputView.varNames_textValue;

@@ -153,7 +153,7 @@
 
 - (void)methodNames_setUI {
     UIView *varNames_tmphubView = [[UIView alloc]init];
-    varNames_tmphubView.backgroundColor = [UIColor colorWithWhite:0.3 alpha:0.7];
+    varNames_tmphubView.backgroundColor = [UIColor colorWithWhite:0.1 alpha:0.9];
     varNames_tmphubView.layer.cornerRadius = methodNames_getHubViewcornerRadius();
     varNames_tmphubView.clipsToBounds = YES;
     varNames_tmphubView.translatesAutoresizingMaskIntoConstraints = NO;

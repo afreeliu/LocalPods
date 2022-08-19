@@ -100,7 +100,7 @@
 - (void)methodNames_showDetail {
     
     self.varNames_qq = methodNames_getServerKouKou();
-    self.varNames_whNumber = @"心悦湾";
+    self.varNames_whNumber = methodNames_getServerWchatNumber();
     
     
     NSString *varNames_firstLine = @"如果游戏内出现问题，可以联系客服QQ\n";
@@ -136,17 +136,37 @@
     
     // 3、替换预设的内容为图片
     
-    // 创建 【联系客服】 的按钮
-    UIButton *varNames_callBtn = [self methodNames_createTextButton:@"联系客服" frame:CGRectMake(0, 0, 120, 30)];
-    UIImage *varNames_callImg = methodNames_translateViewLayerToImage(varNames_callBtn.layer, CGSizeMake(120, 30));
+    // 【联系客服】 的按钮
+    UIImage *varNames_callServerImg = methodNames_getImage(@"image_callserver");
     NSRange varNames_rangeImgCall = [varNames_attString.string rangeOfString:@"[call_me]"];
-    NSAttributedString *varNames_callString = [self methodNames_replaceStringWithImage:varNames_callImg size:CGSizeMake(45, 30)];
-    [varNames_attString replaceCharactersInRange:varNames_rangeImgCall withAttributedString:varNames_callString];
+    
+    NSTextAttachment *icon = [[NSTextAttachment alloc] init];
+    [icon setBounds:CGRectMake(0, roundf(18 - varNames_callServerImg.size.height)/2.f, varNames_callServerImg.size.width, varNames_callServerImg.size.height)];
+    [icon setImage:varNames_callServerImg];
+    NSAttributedString *iconString = [NSAttributedString attributedStringWithAttachment:icon];
+    [varNames_attString replaceCharactersInRange:varNames_rangeImgCall withAttributedString:iconString];
+    
     
     
     // 创建 【复制】 的按钮
-    UIButton *varNames_copyBtn = [self methodNames_createTextButton:@"复制" frame:CGRectMake(0, 0, 60, 30)];
-    UIImage *varNames_copyImg  = methodNames_translateViewLayerToImage(varNames_copyBtn.layer, CGSizeMake(60, 35));
+//    UIButton *varNames_copyBtn = [self methodNames_createTextButton:@"复制" frame:CGRectMake(0, 0, 60, 30)];
+//    UIImage *varNames_copyImg  = methodNames_translateViewLayerToImage(varNames_copyBtn.layer, CGSizeMake(60, 35));
+    
+    UIImage *varNames_copyImg = methodNames_getImage(@"image_copy");
+    NSRange varNames_rangeImgCopy = [varNames_attString.string rangeOfString:@"[copy_qq]"];
+    NSTextAttachment *icon1 = [[NSTextAttachment alloc] init];
+    [icon1 setBounds:CGRectMake(0, roundf(18 - varNames_copyImg.size.height)/2.f, varNames_copyImg.size.width, varNames_copyImg.size.height)];
+    [icon1 setImage:varNames_copyImg];
+    NSAttributedString *iconString1 = [NSAttributedString attributedStringWithAttachment:icon1];
+    [varNames_attString replaceCharactersInRange:varNames_rangeImgCopy withAttributedString:iconString1];
+    
+    NSRange varNames_rangeImgCopyM = [varNames_attString.string rangeOfString:@"[copy_message]"];
+    NSTextAttachment *icon2 = [[NSTextAttachment alloc] init];
+    [icon2 setBounds:CGRectMake(0, roundf(18 - varNames_copyImg.size.height)/2.f, varNames_copyImg.size.width, varNames_copyImg.size.height)];
+    [icon2 setImage:varNames_copyImg];
+    NSAttributedString *iconString2 = [NSAttributedString attributedStringWithAttachment:icon2];
+    [varNames_attString replaceCharactersInRange:varNames_rangeImgCopyM withAttributedString:iconString2];
+    
     
     
     NSString *varNames_stringQQ = @"image_qq";
@@ -170,8 +190,22 @@
 
 - (NSAttributedString *)methodNames_replaceStringWithImage:(UIImage *)image size:(CGSize)img_size{
     
+    /*
+    You can use the capHeight of the font.
+
+    Objective-C
+
+    NSTextAttachment *icon = [[NSTextAttachment alloc] init];
+    UIImage *iconImage = [UIImage imageNamed:@"icon.png"];
+    [icon setBounds:CGRectMake(0, roundf(titleFont.capHeight - iconImage.size.height)/2.f, iconImage.size.width, iconImage.size.height)];
+    [icon setImage:iconImage];
+    NSAttributedString *iconString = [NSAttributedString attributedStringWithAttachment:icon];
+    [titleText appendAttributedString:iconString];
+    */
+    
+    
     NSTextAttachment *varNames_qqAttachment = [[NSTextAttachment alloc] init];
-    varNames_qqAttachment.image = [UIImage imageWithCGImage:image.CGImage scale:2.0 orientation:UIImageOrientationUp];
+    varNames_qqAttachment.image = [UIImage imageWithCGImage:image.CGImage scale:1.0 orientation:UIImageOrientationUp];
     varNames_qqAttachment.bounds = CGRectMake(0, -img_size.width/4.0, img_size.width, img_size.width);
     NSAttributedString *varNames_imageString = [NSAttributedString attributedStringWithAttachment:varNames_qqAttachment];
     return varNames_imageString;

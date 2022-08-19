@@ -11,6 +11,8 @@
 #import "ClassNames_BindPersonIDView.h"
 #import "ClassNames_QuickLoginView.h"
 #import "ClassNames_PGHubView.h"
+#import "ClassNames_PayView.h"
+#import "ClassNames_NoticeView.h"
 
 #import "ClassNames_BaseViewLayout.h"
 #import "ClassNames_DeviceConfigure.h"
@@ -56,6 +58,10 @@
 @property (nonatomic, readwrite, strong) ClassNames_BindPhoneView *varNames_bindPhoneView;
 @property (nonatomic, readwrite, strong) ClassNames_BindPersonIDView *varNames_bindPersonIDView;
 
+@property (nonatomic, readwrite, strong) ClassNames_PayView *varNames_payView;
+
+@property (nonatomic, readwrite, strong) ClassNames_NoticeView *varNames_noticeView;
+
 // 提示手机验证页面
 @property (nonatomic, readwrite, strong) ClassNames_TipView *varNames_bindPhoneTipView;
 
@@ -89,6 +95,17 @@
 
 
 @implementation ClassNames_MainView
+
++ (void)methodNames_cleanView {
+    UIWindow *varNames_tmpWindow = methodNames_getCurrentWindow();
+    NSLog(@"window中含有的子视图为:%@", varNames_tmpWindow.subviews);
+    [varNames_tmpWindow.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+        if ([obj.class isEqual:ClassNames_MainView.class]) {
+            [obj removeFromSuperview];
+            *stop = YES;
+        }
+    }];
+}
 
 + (instancetype)methodNames_instanceMainView {
     UIWindow *varNames_tmpWindow = methodNames_getCurrentWindow();
@@ -188,13 +205,17 @@
 
 #pragma mark ---------- 主背景页面
 - (void)methodNames_createBackgroundView {
-    UIView *varNames_backgroundView = [[UIView alloc]init];
-    varNames_backgroundView.layer.cornerRadius = 15;
-    varNames_backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
-    varNames_backgroundView.backgroundColor = [UIColor whiteColor];
-    self.varNames_backgroundView = varNames_backgroundView;
-    
-    [self addSubview:self.varNames_backgroundView];
+    if (!self.varNames_backgroundView) {
+        UIView *varNames_backgroundView = [[UIView alloc]init];
+        varNames_backgroundView.layer.cornerRadius = 15;
+        varNames_backgroundView.translatesAutoresizingMaskIntoConstraints = NO;
+        varNames_backgroundView.backgroundColor = [UIColor whiteColor];
+        self.varNames_backgroundView = varNames_backgroundView;
+        
+        [self addSubview:self.varNames_backgroundView];
+    } else {
+        self.varNames_backgroundView.hidden = NO;
+    }
     
     [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_backgroundView methodNames_constriant:0];
     [ClassNames_BaseViewLayout methodNames_layoutCenterY:self.varNames_backgroundView methodNames_constriant:0];
@@ -263,15 +284,15 @@
 #pragma mark ---------- 登录页面
 - (void)methodNames_createLoginView {
     __weak typeof(self) weakSelf = self;
-    if (!_varNames_loginView) {
-        _varNames_loginView = [ClassNames_LoginView methodNames_createLoginView];
-        _varNames_loginView.clipsToBounds = YES;
-        _varNames_loginView.methodNames_commitBlock = ^(NSString *varNames_acc, NSString *varNames_pss) {
+    if (!self.varNames_loginView) {
+        self.varNames_loginView = [ClassNames_LoginView methodNames_createLoginView];
+        self.varNames_loginView.clipsToBounds = YES;
+        self.varNames_loginView.methodNames_commitBlock = ^(NSString *varNames_acc, NSString *varNames_pss) {
             weakSelf.varNames_loginView.hidden = YES;
             weakSelf.varNames_skillBtnView.hidden = YES;
             [weakSelf methodNames_createAutoLoginViewWithAccount:varNames_acc methodNames_password:varNames_pss];
         };
-        _varNames_loginView.methodNames_servicceBlock = ^{
+        self.varNames_loginView.methodNames_servicceBlock = ^{
 //            [weakSelf methodNames_showCustomerServerView];
             //测试
             weakSelf.varNames_loginView.hidden = YES;
@@ -287,15 +308,15 @@
 //        _varNames_loginView.methodNames_loginFailure = ^{
 //            NSLog(@"login error");
 //        };
-        _varNames_loginView.methodNames_delegateBlock = ^{
+        self.varNames_loginView.methodNames_delegateBlock = ^{
             [weakSelf methodNames_showDelegateView];
         };
-        _varNames_loginView.methodNames_handlebookBlock = ^{
+        self.varNames_loginView.methodNames_handlebookBlock = ^{
             [weakSelf methodNames_showHandleBookView];
         };
-        [_varNames_backgroundView addSubview:_varNames_loginView];
+        [self.varNames_backgroundView addSubview:self.varNames_loginView];
     } else {
-        _varNames_loginView.hidden = NO;
+        self.varNames_loginView.hidden = NO;
     }
     _varNames_isLoginView = YES;
     self.varNames_backgroundViewConstraint.constant = methodNames_getMainViewHeight();
@@ -630,26 +651,32 @@
 #pragma mark ---------- 重置密码按钮事件
 - (void)methodNames_createResetPasswordView{
     __weak typeof(self) weakSelf = self;
-    if (!_varNames_resetPasswordView) {
-        _varNames_resetPasswordView = [ClassNames_ResetPasswordView methodNames_createResetPasswordView];
-        _varNames_resetPasswordView.clipsToBounds = YES;
-        _varNames_resetPasswordView.hidden = NO;
-        _varNames_resetPasswordView.methodNames_resetPasswordSuccess = ^{
+    if (!self.varNames_resetPasswordView) {
+        self.varNames_resetPasswordView = [ClassNames_ResetPasswordView methodNames_createResetPasswordView];
+        self.varNames_resetPasswordView.clipsToBounds = YES;
+        self.varNames_resetPasswordView.hidden = NO;
+        self.varNames_resetPasswordView.methodNames_resetPasswordSuccess = ^{
             weakSelf.varNames_resetPasswordView.hidden = YES;
 //            [weakSelf methodNames_changeLoginViewFormResetPasswordView];
         };
-        _varNames_resetPasswordView.methodNames_backAction = ^{  
-//            [weakSelf methodNames_changeLoginViewFormResetPasswordView];
+        self.varNames_resetPasswordView.methodNames_backBlock = ^{
+            [weakSelf methodNames_showUserCenterView];
         };
+        self.varNames_resetPasswordView.methodNames_closeBlock = ^{
+            [weakSelf removeFromSuperview];
+        };
+        
+        [self.varNames_backgroundView addSubview:self.varNames_resetPasswordView];
     } else {
-        _varNames_resetPasswordView.hidden = NO;
+        self.varNames_resetPasswordView.hidden = NO;
         
     }
-    [_varNames_backgroundView addSubview:_varNames_resetPasswordView];
+    
+    self.varNames_backgroundViewConstraint.constant = 340;
+    
     [ClassNames_BaseViewLayout methodNames_layoutCenterX:_varNames_resetPasswordView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutTop:_varNames_resetPasswordView methodNames_constriant:methodNames_setMargin_2base() * 2];
     [ClassNames_BaseViewLayout methodNames_layoutWidth:_varNames_resetPasswordView methodNames_constriant:methodNames_getMainViewWidth()];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:_varNames_resetPasswordView methodNames_constriant:methodNames_getMainViewHeight()];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:_varNames_resetPasswordView methodNames_constriant:340];
     [self setNeedsLayout];
 }
 //- (void)methodNames_changeLoginViewFormResetPasswordView {
@@ -777,32 +804,36 @@
 - (void)methodNames_createBindPhoeViewFromView:(UIView *)varNames_view {
     self.varNames_skillBtnView.hidden = YES;
     __weak typeof(self) weakSelf = self;
-    if (!_varNames_bindPhoneView) {
-        _varNames_bindPhoneView = [ClassNames_BindPhoneView methodNames_createBindPhoneViewFromView:varNames_view];
-        _varNames_bindPhoneView.clipsToBounds = YES;
-        _varNames_bindPhoneView.methodNames_bindPhoneSuccess = ^{
+    if (!self.varNames_bindPhoneView) {
+        self.varNames_bindPhoneView = [ClassNames_BindPhoneView methodNames_createBindPhoneViewFromView:varNames_view];
+        self.varNames_bindPhoneView.clipsToBounds = YES;
+        self.varNames_bindPhoneView.methodNames_bindPhoneSuccess = ^{
             weakSelf.varNames_isNeedBindPhone = NO;
             [weakSelf methodNames_createBindView];
         };
-        _varNames_bindPhoneView.methodNames_closeBindPhoneView = ^{
+        self.varNames_bindPhoneView.methodNames_closeBlock = ^{
+            [weakSelf removeFromSuperview];
+        };
+        self.varNames_bindPhoneView.methodNames_nextBlock = ^{
             weakSelf.varNames_isNeedBindPhone = NO;
             weakSelf.varNames_isNeedBindPersonID = YES;
             [weakSelf methodNames_createBindView];
         };
-        _varNames_bindPhoneView.methodNames_backBlock = ^{
+        self.varNames_bindPhoneView.methodNames_backBlock = ^{
             NSLog(@"返回");
         };
-        [_varNames_backgroundView addSubview:_varNames_bindPhoneView];
+        [self.varNames_backgroundView addSubview:self.varNames_bindPhoneView];
     } else {
         [self.varNames_bindPhoneView methodNames_changeFromView:varNames_view];
         self.varNames_bindPhoneView.hidden = NO;
     }
     
+    self.varNames_backgroundViewConstraint.constant = 290;
     
-    [ClassNames_BaseViewLayout methodNames_layoutTop:_varNames_bindPhoneView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutLeft:_varNames_bindPhoneView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutRight:_varNames_bindPhoneView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:_varNames_bindPhoneView methodNames_constriant:290];
+    [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_bindPhoneView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_bindPhoneView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_bindPhoneView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_bindPhoneView methodNames_constriant:290];
     [self setNeedsLayout];
 }
 #pragma mark ---------- 绑定身份证
@@ -847,7 +878,13 @@
         };
         self.varNames_userCenterView.methodNames_resetPassword = ^{
             // 需要判断是否绑定了手机
-            [weakSelf methodNames_showBingPhoneTipViewFromView:weakSelf.varNames_userCenterView];
+            if (1) {
+                // 绑定了手机，可以重置密码
+                [weakSelf methodNames_createResetPasswordView];
+            } else {
+                [weakSelf methodNames_showBingPhoneTipViewFromView:weakSelf.varNames_userCenterView];
+            }
+            
         };
         
         self.varNames_userCenterView.methodNames_bindPhone = ^{
@@ -882,7 +919,8 @@
         self.varNames_bindPhoneTipView = varNames_bindPhoneTipView;
         
         self.varNames_bindPhoneTipView.methodNames_backBlock = ^{
-            
+            NSLog(@"返回======");
+            [weakSelf methodNames_showUserCenterView];
         };
         self.varNames_bindPhoneTipView.methodNames_closeBlock = ^{
             weakSelf.hidden = YES;
@@ -968,7 +1006,7 @@
     [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_delegateView methodNames_constriant:methodNames_getMainViewWidth()];
     [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_delegateView methodNames_constriant:375];
 }
-
+// 用户手册
 - (void)methodNames_showHandleBookView {
     if (!self.varNames_handleBookView) {
         __weak typeof(self) weakSelf = self;
@@ -989,6 +1027,63 @@
     [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_handleBookView methodNames_constriant:methodNames_getMainViewWidth()];
     [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_handleBookView methodNames_constriant:375];
 }
+
+#pragma mark ---------- PaView
+- (void)methodNames_showPayView {
+    __weak typeof(self) weakSelf = self;
+    if (!self.varNames_payView) {
+        ClassNames_PayView *varNames_payView = [ClassNames_PayView methodNames_createPayViewWithUserName:@"辛平觉" payMoney:@"648.00"];
+        
+        varNames_payView.methodNames_closeBlock = ^{
+            NSLog(@"关闭");
+            [weakSelf removeFromSuperview];
+        };
+        
+        varNames_payView.methodNames_commitBlock = ^{
+            NSLog(@"付款");
+        };
+        
+        [self.varNames_backgroundView addSubview:varNames_payView];
+        
+        
+        self.varNames_payView = varNames_payView;
+    } else {
+        self.varNames_payView.hidden = NO;
+    }
+    
+    self.varNames_backgroundViewConstraint.constant = 250;
+    
+    [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_payView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutCenterY:self.varNames_payView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_payView methodNames_constriant:methodNames_getMainViewWidth()];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_payView methodNames_constriant:250];
+
+}
+
+#pragma mark ---------- 公告页面
+- (void)methodNames_showNoticeView {
+    NSString *content = @"是领导看风景是领导会计法是领导看见弗雷斯科简单福利时间到房里睡大觉弗雷斯科大家弗雷斯科简单flask独领风骚看就懂了反抗精神独立分开就是领导减肥路上的加夫里什大家flask减肥了时间的翻领设计的浪费时间的浪费是代理反馈就是领导减肥是领导减肥是领导看风景是领导会计法联赛等级客服";
+    if (!self.varNames_noticeView) {
+        __weak typeof(self) weakSelf = self;
+        ClassNames_NoticeView *varNames_tmpNoticeView = [ClassNames_NoticeView methodNames_createNoticeViewWithtitle:@"重大喜讯" methodNames_content:content];
+        varNames_tmpNoticeView.methodNames_closeBlock = ^{
+            [weakSelf removeFromSuperview];
+        };
+        self.varNames_noticeView = varNames_tmpNoticeView;
+        
+        [self addSubview:self.varNames_noticeView];
+    }
+    
+    CGRect contentRect = [content boundingRectWithSize:CGSizeMake(methodNames_getMainViewWidth() - methodNames_setMargin_2base(), CGFLOAT_MAX) options:NSStringDrawingUsesLineFragmentOrigin attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:15]} context:nil];
+    CGFloat contentHeight = CGRectGetHeight(contentRect);
+    CGFloat viewHeight = contentHeight + methodNames_setMargin_2base() * 3 + methodNames_setNavigationBarHeight();
+    self.varNames_backgroundViewConstraint.constant = viewHeight;
+    [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_noticeView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutCenterY:self.varNames_noticeView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_noticeView methodNames_constriant:methodNames_getMainViewWidth()];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_noticeView methodNames_constriant:viewHeight];
+}
+
 
 
 

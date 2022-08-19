@@ -583,21 +583,30 @@ static CGFloat varNameS_KEYBOARDMINY = 0;
     self.varNames_itemButton.hidden = YES;
     if (!self.varNames_inputViewTitleType) {
         self.varNames_titleLabel.text = methodNames_getTitle_ResetPasswordView_inputView_title1();
+    } else {
+        UIImage *varNames_img = methodNames_getImage(@"image_phone");
+        CGSize varNames_iconSize = methodNames_getImageSize(varNames_img);
+        self.varNames_iconWidthConstraint.constant = varNames_iconSize.width/2.0;
+        self.varNames_iconHeightConstraint.constant = varNames_iconSize.height/2.0;
+        self.varNames_inputViewTypeImage.image = varNames_img;
     }
-//    self.varNames_textField.placeholder = methodNames_getTitle_ResetPasswordView_inputView_placeholder1();
     [self methodNames_confiInputViewPlaceholder:methodNames_getTitle_ResetPasswordView_inputView_placeholder1() subMethodNames_placeholdercolor:[UIColor grayColor]];
     self.varNames_textField.returnKeyType = UIReturnKeyNext;
     self.varNames_returnType = varNames_keyboardReturnNext;
     self.varNames_textFieldRight.constant = methodNames_setMargin_base();
-    methodNames_drawImageUser(self.varNames_inputViewTypeImage, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_backgroundColor_config()]);
 }
 #pragma mark ---------- 重置密码的原密码输入框
 - (void)methodNames_setInputViewTypeResetPasswordPassword {
     self.varNames_itemButton.hidden = NO;
     if (!self.varNames_inputViewTitleType) {
-        self.varNames_titleLabel.text = methodNames_getTitle_ResetPasswordView_inputView_title2();
+        self.varNames_titleLabel.text = methodNames_getTitle_LoginView_inputView_title2();
+    } else {
+        UIImage *varNames_img = methodNames_getImage(@"image_password");
+        CGSize varNames_iconSize = methodNames_getImageSize(varNames_img);
+        self.varNames_iconWidthConstraint.constant = varNames_iconSize.width/2.0;
+        self.varNames_iconHeightConstraint.constant = varNames_iconSize.height/2.0;
+        self.varNames_inputViewTypeImage.image = varNames_img;
     }
-//    self.varNames_textField.placeholder = methodNames_getTitle_ResetPasswordView_inputView_placeholder2();
     [self methodNames_confiInputViewPlaceholder:methodNames_getTitle_ResetPasswordView_inputView_placeholder2() subMethodNames_placeholdercolor:[UIColor grayColor]];
     self.varNames_textField.secureTextEntry = YES;
     self.varNames_isSecurity = YES;
@@ -605,18 +614,29 @@ static CGFloat varNameS_KEYBOARDMINY = 0;
     self.varNames_returnType = varNames_keyboardReturnNext;
     self.varNames_textFieldRight.constant = methodNames_setMargin_2base() + methodNames_getInputView_ItemButton_Width();
     
-    self.varNames_openEyesLayer = methodNames_drawOpenEyes(self.varNames_itemButton, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_backgroundColor_config()]);
-    self.varNames_closeEyesLayer = methodNames_drawCloseEye(self.varNames_itemButton, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_backgroundColor_config()]);
-    self.varNames_openEyesLayer.hidden = YES;
-    methodNames_drawImagePassword(self.varNames_inputViewTypeImage, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_backgroundColor_config()]);
-}
+    UIImage *varNames_itImg = methodNames_getImage(@"image_eye");
+    UIImage *varNames_itImg_sel = methodNames_getImage(@"image_no_eye");
+    CGSize varNames_itSize = methodNames_getImageSize(varNames_itImg);
+    self.varNames_itemWidthConstraint.constant = varNames_itSize.width/2.0;
+    self.varNames_itemHeightConstraint.constant = varNames_itSize.height/2.0;
+    [self.varNames_itemButton setImage:varNames_itImg forState:UIControlStateNormal];
+    [self.varNames_itemButton setImage:varNames_itImg_sel forState:UIControlStateSelected];
+    
+    self.varNames_textFieldRight.constant = methodNames_setMargin_2base() + varNames_itSize.width/2.0;
+    }
 #pragma mark ---------- 重置密码的新密码输入框
 - (void)methodNames_setInputViewTypeResetPasswordNewPassword {
     self.varNames_itemButton.hidden = NO;
     if (!self.varNames_inputViewTitleType) {
-        self.varNames_titleLabel.text = methodNames_getTitle_ResetPasswordView_inputView_title3();
+        self.varNames_titleLabel.text = methodNames_getTitle_LoginView_inputView_title2();
+    } else {
+        UIImage *varNames_img = methodNames_getImage(@"image_password");
+        CGSize varNames_iconSize = methodNames_getImageSize(varNames_img);
+        self.varNames_iconWidthConstraint.constant = varNames_iconSize.width/2.0;
+        self.varNames_iconHeightConstraint.constant = varNames_iconSize.height/2.0;
+        self.varNames_inputViewTypeImage.image = varNames_img;
     }
-//    self.varNames_textField.placeholder = methodNames_getTitle_ResetPasswordView_inputView_placeholder3();
+
     [self methodNames_confiInputViewPlaceholder:methodNames_getTitle_ResetPasswordView_inputView_placeholder3() subMethodNames_placeholdercolor:[UIColor grayColor]];
     self.varNames_textField.secureTextEntry = YES;
     self.varNames_isSecurity = YES;
@@ -624,18 +644,29 @@ static CGFloat varNameS_KEYBOARDMINY = 0;
     self.varNames_returnType = varNames_keyboardReturnNext;
     self.varNames_textFieldRight.constant = methodNames_setMargin_2base() + methodNames_getInputView_ItemButton_Width();
     
-    self.varNames_openEyesLayer = methodNames_drawOpenEyes(self.varNames_itemButton, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_backgroundColor_config()]);
-    self.varNames_closeEyesLayer = methodNames_drawCloseEye(self.varNames_itemButton, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_backgroundColor_config()]);
-    self.varNames_openEyesLayer.hidden = YES;
-    methodNames_drawImageResetPassword(self.varNames_inputViewTypeImage, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_backgroundColor_config()]);
+    UIImage *varNames_itImg = methodNames_getImage(@"image_eye");
+    UIImage *varNames_itImg_sel = methodNames_getImage(@"image_no_eye");
+    CGSize varNames_itSize = methodNames_getImageSize(varNames_itImg);
+    self.varNames_itemWidthConstraint.constant = varNames_itSize.width/2.0;
+    self.varNames_itemHeightConstraint.constant = varNames_itSize.height/2.0;
+    [self.varNames_itemButton setImage:varNames_itImg forState:UIControlStateNormal];
+    [self.varNames_itemButton setImage:varNames_itImg_sel forState:UIControlStateSelected];
+    
+    self.varNames_textFieldRight.constant = methodNames_setMargin_2base() + varNames_itSize.width/2.0;
 }
 #pragma mark ---------- 重置密码的重复新密码输入框
 - (void)methodNames_setInputViewTypeResetPasswordRenewPassword {
     self.varNames_itemButton.hidden = NO;
-    if (self.varNames_titleLabel) {
-        self.varNames_titleLabel.text = methodNames_getTitle_ResetPasswordView_inputView_title4();
+    if (!self.varNames_inputViewTitleType) {
+        self.varNames_titleLabel.text = methodNames_getTitle_LoginView_inputView_title2();
+    } else {
+        UIImage *varNames_img = methodNames_getImage(@"image_password");
+        CGSize varNames_iconSize = methodNames_getImageSize(varNames_img);
+        self.varNames_iconWidthConstraint.constant = varNames_iconSize.width/2.0;
+        self.varNames_iconHeightConstraint.constant = varNames_iconSize.height/2.0;
+        self.varNames_inputViewTypeImage.image = varNames_img;
     }
-//    self.varNames_textField.placeholder = methodNames_getTitle_ResetPasswordView_inputView_placeholder4();
+
     [self methodNames_confiInputViewPlaceholder:methodNames_getTitle_ResetPasswordView_inputView_placeholder4() subMethodNames_placeholdercolor:[UIColor grayColor]];
     self.varNames_textField.secureTextEntry = YES;
     self.varNames_isSecurity = YES;
@@ -643,10 +674,15 @@ static CGFloat varNameS_KEYBOARDMINY = 0;
     self.varNames_returnType = varNames_keyboardReturnDefault;
     self.varNames_textFieldRight.constant = methodNames_setMargin_2base() + methodNames_getInputView_ItemButton_Width();
     
-    self.varNames_openEyesLayer = methodNames_drawOpenEyes(self.varNames_itemButton, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_backgroundColor_config()]);
-    self.varNames_closeEyesLayer = methodNames_drawCloseEye(self.varNames_itemButton, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_backgroundColor_config()]);
-    self.varNames_openEyesLayer.hidden = YES;
-    methodNames_drawImageResetPassword(self.varNames_inputViewTypeImage, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_backgroundColor_config()]);
+    UIImage *varNames_itImg = methodNames_getImage(@"image_eye");
+    UIImage *varNames_itImg_sel = methodNames_getImage(@"image_no_eye");
+    CGSize varNames_itSize = methodNames_getImageSize(varNames_itImg);
+    self.varNames_itemWidthConstraint.constant = varNames_itSize.width/2.0;
+    self.varNames_itemHeightConstraint.constant = varNames_itSize.height/2.0;
+    [self.varNames_itemButton setImage:varNames_itImg forState:UIControlStateNormal];
+    [self.varNames_itemButton setImage:varNames_itImg_sel forState:UIControlStateSelected];
+    
+    self.varNames_textFieldRight.constant = methodNames_setMargin_2base() + varNames_itSize.width/2.0;
 }
 #pragma mark ---------- 手机注册手机号输入框
 - (void)methodNames_setInputViewTypePhoneRegisterPhone {

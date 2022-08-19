@@ -22,7 +22,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EnC-D1-j7C">
                                 <rect key="frame" x="165.5" y="318.5" width="44" height="30"/>
                                 <state key="normal" title="logout">
-                                    <color key="titleColor" red="0.60784322020000003" green="0.60784322020000003" blue="0.60784322020000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <color key="titleColor" red="0.0" green="0.62352943419999995" blue="0.92156863209999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
                                     <action selector="logout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TZe-Yd-wjw"/>

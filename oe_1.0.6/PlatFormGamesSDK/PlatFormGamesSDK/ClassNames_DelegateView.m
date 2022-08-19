@@ -11,11 +11,11 @@
 
 @property (nonatomic, readwrite, strong) ClassNames_NavigationBarView *varNames_naviView;
 
-@property (nonatomic, readwrite, strong) UIView *varNames_lineView;
-
-@property (nonatomic, readwrite, strong) UILabel *varNames_titleLabel;
-
-@property (nonatomic, readwrite, strong) UIButton *varNames_closeBtn;
+//@property (nonatomic, readwrite, strong) UIView *varNames_lineView;
+//
+//@property (nonatomic, readwrite, strong) UILabel *varNames_titleLabel;
+//
+//@property (nonatomic, readwrite, strong) UIButton *varNames_closeBtn;
 
 @property (nonatomic, readwrite, strong) UITextView *varNames_contentTextView;
 
@@ -33,9 +33,9 @@ static NSString *static_title = @"用户协议";
     static_title = title;
     ClassNames_DelegateView *varNames_tmpView = [[ClassNames_DelegateView alloc]init];
     varNames_tmpView.varNames_contentTextView.text = [[ClassNames_loadFileManager shareLoadFileManager]methodNames_initLoadTxtFile:varNames_fileName subMethodNames_getValueFromKey:@""];
-    if (title && title.length) {
-        varNames_tmpView.varNames_titleLabel.text = title;
-    }
+//    if (title && title.length) {
+//        varNames_tmpView.varNames_titleLabel.text = title;
+//    }
     
     [varNames_tmpView setNeedsLayout];
     return varNames_tmpView;
@@ -82,11 +82,13 @@ static NSString *static_title = @"用户协议";
     ClassNames_NavigationBarView *varNames_tmpNaviView = [[ClassNames_NavigationBarView alloc]init];
     varNames_tmpNaviView.translatesAutoresizingMaskIntoConstraints = NO;
     
-    [varNames_tmpNaviView methodNames_setTitle:static_title rightButtonImage:@"image_close" rightTitle:@"" btnAction:^{
+    [varNames_tmpNaviView methodNames_setTitle:static_title];
+    [varNames_tmpNaviView methodNames_setRightButtonImage:@"image_close" rightTitle:@"" btnAction:^{
         if (weakSelf.methodNames_closeBlock) {
             weakSelf.hidden = YES;
             weakSelf.methodNames_closeBlock();
         }
+        
     }];
     
     self.varNames_naviView = varNames_tmpNaviView;
