@@ -5,7 +5,9 @@
 #import <UIKit/UIKit.h>
 #import <sys/utsname.h>
 #import "ClassNames_SecurityTool.h"
-
+#import <SystemConfiguration/SystemConfiguration.h>
+#import <SystemConfiguration/CaptiveNetwork.h>
+#import <CommonCrypto/CommonDigest.h>
 /// 保存设备是否激活
 FOUNDATION_EXTERN NSString *const varNames_activateDevice;
 
@@ -17,6 +19,10 @@ FOUNDATION_EXTERN NSString *const varNames_largeScreenXDevice;
 
 FOUNDATION_EXTERN NSString *const varNames_saveDeviceCodeUUIDKey;
 FOUNDATION_EXTERN NSString *const varNames_saveDeviceCodeIDFAKey;
+
+
+/// 保存手动输入的游戏版本 game_ver
+FOUNDATION_EXTERN NSString *const varNames_saveGameVerKey;
 
 
 /// 保存设备是否激活
@@ -44,6 +50,9 @@ static inline NSString *methodNames_randUUID() {
     return uuid;
 }
 static inline NSString *methodNames_getDeviceUUID() {
+    // 每次启动都会不一样
+    return [[NSUUID UUID]UUIDString];
+    
     NSString *varNames_tmpuuid = [[[UIDevice currentDevice] identifierForVendor] UUIDString];
     if (!varNames_tmpuuid || !varNames_tmpuuid.length) {
         /// 读取保存在keychain中的
@@ -61,9 +70,19 @@ static inline NSString *methodNames_getDeviceUUID() {
 }
 /// 获取设备的IDFA
 static inline NSString *methodNames_getDeviceIDFA() {
+    
+    // 该方法获取的 UUID 每次启动都不一样，需要自己保存
+//    [[NSUUID UUID]UUIDString];
+    // 该方法获取的是IDFA，
     NSString *varNames_tmpidfaStr = [[[ASIdentifierManager sharedManager] advertisingIdentifier]UUIDString];
+    if ([varNames_tmpidfaStr isEqualToString:@"00000000-0000-0000-0000-000000000000"]) {
+        varNames_tmpidfaStr = @"";
+    }
     if (!varNames_tmpidfaStr || !varNames_tmpidfaStr.length) {
         varNames_tmpidfaStr = methodNames_readPassword(varNames_saveDeviceCodeIDFAKey);
+        if ([varNames_tmpidfaStr isEqualToString:@"00000000-0000-0000-0000-000000000000"]) {
+            varNames_tmpidfaStr = @"";
+        }
         if (!varNames_tmpidfaStr || !varNames_tmpidfaStr.length) {
             /// 还是没有就随机生成一个
             varNames_tmpidfaStr = methodNames_getDeviceUUID();
@@ -84,10 +103,78 @@ static inline NSString *methodNames_getDeviceSystemVersion() {
     NSString* varNames_tmpphoneVersion = [[UIDevice currentDevice] systemVersion];
     return varNames_tmpphoneVersion;
 }
+
+
 #pragma mark ---------- 当前游戏版本
 static inline NSString *methodNames_getProjectVersion() {
     return [[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"];
 }
+
+#pragma mark ---------------------  保存手动输入的游戏版本
+static inline void methodNames_saveGameVersion(NSString *varNames_gameVer) {
+    NSString *varNames_tmpVer = methodNames_getProjectVersion();
+    if (varNames_gameVer && varNames_gameVer.length) {
+        varNames_tmpVer = varNames_gameVer;
+    }
+    [[NSUserDefaults standardUserDefaults]setValue:varNames_tmpVer forKey:varNames_saveGameVerKey];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+}
+#pragma mark ---------------------  获取手动保存的游戏版本
+static inline NSString *methodNames_getGameVersion() {
+    NSString *varNames_v = [[NSUserDefaults standardUserDefaults]objectForKey:varNames_saveGameVerKey];
+    return varNames_v;
+}
+
+
+#pragma mark ---------------------  获取当前时间戳（毫秒）
+static inline NSString *methodNames_getCurrentTimestamp() {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init] ;
+
+        [formatter setDateStyle:NSDateFormatterMediumStyle];
+
+        [formatter setTimeStyle:NSDateFormatterShortStyle];
+
+        [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss SSS"]; // ----------设置你想要的格式,hh与HH的区别:分别表示12小时制,24小时制
+
+        //设置时区,这个对于时间的处理有时很重要
+
+        NSTimeZone* timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
+
+        [formatter setTimeZone:timeZone];
+
+        NSDate *datenow = [NSDate date];//现在时间,你可以输出来看下是什么格式
+
+        NSString *timeSp = [NSString stringWithFormat:@"%ld", (long)[datenow timeIntervalSince1970]*1000];
+
+        return timeSp;
+}
+
+static inline NSString *methodNames_getRandString() {
+    // md5 加盐字符串
+    return @"sdlfkjsqowqeiucweiour";
+}
+
+#pragma mark ---------------------  md5 加密
+static inline NSString *methodNames_md5(NSString *varNames_tmp) {
+    //传入参数,转化成char
+        const char *cStr = [varNames_tmp UTF8String];
+        //开辟一个16字节的空间
+        unsigned char result[16];
+        /*
+         extern unsigned char * CC_MD5(const void *data, CC_LONG len, unsigned char *md)官方封装好的加密方法
+         把str字符串转换成了32位的16进制数列（这个过程不可逆转） 存储到了md这个空间中
+         */
+        CC_MD5(cStr, (unsigned)strlen(cStr), result);
+        return [NSString stringWithFormat:@"%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X%02X",
+                 result[0], result[1], result[2], result[3],
+                 result[4], result[5], result[6], result[7],
+                 result[8], result[9], result[10], result[11],
+                 result[12], result[13], result[14], result[15]
+                 ];
+    
+}
+
+
 /// 获取设备品牌
 static inline NSString *methodNames_getDeviceBrand() {
     return @"苹果";
@@ -119,12 +206,33 @@ static inline NSString *methodNames_getDeviceType() {
     if ([varNames_tmpdeviceModel isEqualToString:@"iPhone9,2"])    return @"港行、国行iPhone 7 Plus";
     if ([varNames_tmpdeviceModel isEqualToString:@"iPhone9,3"])    return @"美版、台版iPhone 7";
     if ([varNames_tmpdeviceModel isEqualToString:@"iPhone9,4"])    return @"美版、台版iPhone 7 Plus";
-    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone10,1"])   return @"iPhone_8";
-    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone10,4"])   return @"iPhone_8";
-    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone10,2"])   return @"iPhone_8_Plus";
-    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone10,5"])   return @"iPhone_8_Plus";
-    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone10,3"])   return @"iPhone_X";
-    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone10,6"])   return @"iPhone_X";
+    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone10,1"])   return @"iPhone 8";
+    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone10,4"])   return @"iPhone 8";
+    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone10,2"])   return @"iPhone 8 Plus";
+    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone10,5"])   return @"iPhone 8 Plus";
+    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone10,3"])   return @"iPhone X";
+    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone10,6"])   return @"iPhone X";
+    
+    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone11,8"])   return @"iPhone XR";
+    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone11,2"])   return @"iPhone XS";
+    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone11,6"])   return @"iPhone XS Max";
+    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone11,4"])   return @"iPhone XS Max";
+    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone12,1"])   return @"iPhone 11";
+    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone12,3"])   return @"iPhone 11 Pro";
+    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone12,5"])   return @"iPhone 11 Pro Max";
+    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone12,8"])   return @"iPhone SE (2nd generation)";
+    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone13,1"])   return @"iPhone 12 mini";
+    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone13,2"])   return @"iPhone 12";
+    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone13,3"])   return @"iPhone 12 Pro";
+    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone13,4"])   return @"iPhone 12 Pro Max";
+    
+    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone14,4"])   return @"iPhone 13 mini";
+    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone14,5"])   return @"iPhone 13";
+    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone14,2"])   return @"iPhone 13 Pro";
+    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone14,3"])   return @"iPhone 13 Pro Max";
+    if ([varNames_tmpdeviceModel isEqualToString:@"iPhone14,6"])   return @"iPhone SE (3rd generation)";
+    
+    
     if ([varNames_tmpdeviceModel isEqualToString:@"iPod1,1"])      return @"iPod Touch 1G";
     if ([varNames_tmpdeviceModel isEqualToString:@"iPod2,1"])      return @"iPod Touch 2G";
     if ([varNames_tmpdeviceModel isEqualToString:@"iPod3,1"])      return @"iPod Touch 3G";
@@ -178,6 +286,23 @@ static inline NSString *methodNames_getDeviceNetType() {
     
     return @"NONE";
 }
+
+#pragma mark ---------------------   获取wifi的名称
+static inline NSString *methodNames_getWifiName() {
+    NSArray *ifs = (__bridge_transfer id)CNCopySupportedInterfaces();
+    id info = nil;
+    for (NSString *ifname in ifs) {
+        info = (__bridge_transfer id)CNCopyCurrentNetworkInfo((__bridge CFStringRef)ifname);
+        if (info && [info count]) {
+            break;
+        }
+    }
+    NSLog(@"wifi_name:%@", info);
+    return info?:@"";
+}
+
+
+
 
 /// 判断当前app启动的方向
 static inline NSInteger methodNames_getOrientation() {

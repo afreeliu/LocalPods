@@ -138,6 +138,8 @@
 		DF7C6CE428A3950800F7260D /* ClassNames_TipView.m in Sources */ = {isa = PBXBuildFile; fileRef = DF7C6CE228A3950800F7260D /* ClassNames_TipView.m */; };
 		DF7C6CE728A3B3C400F7260D /* ClassNames_DetailCustomerServerView.h in Headers */ = {isa = PBXBuildFile; fileRef = DF7C6CE528A3B3C300F7260D /* ClassNames_DetailCustomerServerView.h */; };
 		DF7C6CE828A3B3C400F7260D /* ClassNames_DetailCustomerServerView.m in Sources */ = {isa = PBXBuildFile; fileRef = DF7C6CE628A3B3C400F7260D /* ClassNames_DetailCustomerServerView.m */; };
+		DFF725DE28AF737C0078F5A3 /* ClassNames_BaseParameters.h in Headers */ = {isa = PBXBuildFile; fileRef = DFF725DC28AF737C0078F5A3 /* ClassNames_BaseParameters.h */; };
+		DFF725DF28AF737C0078F5A3 /* ClassNames_BaseParameters.m in Sources */ = {isa = PBXBuildFile; fileRef = DFF725DD28AF737C0078F5A3 /* ClassNames_BaseParameters.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -294,6 +296,8 @@
 		DF7C6CE228A3950800F7260D /* ClassNames_TipView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_TipView.m; sourceTree = "<group>"; };
 		DF7C6CE528A3B3C300F7260D /* ClassNames_DetailCustomerServerView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_DetailCustomerServerView.h; sourceTree = "<group>"; };
 		DF7C6CE628A3B3C400F7260D /* ClassNames_DetailCustomerServerView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_DetailCustomerServerView.m; sourceTree = "<group>"; };
+		DFF725DC28AF737C0078F5A3 /* ClassNames_BaseParameters.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_BaseParameters.h; sourceTree = "<group>"; };
+		DFF725DD28AF737C0078F5A3 /* ClassNames_BaseParameters.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_BaseParameters.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -532,6 +536,8 @@
 				3362832E211402D300CC7D24 /* ClassNames_URLSessionManager.h */,
 				3362832F211402D300CC7D24 /* ClassNames_URLSessionManager.m */,
 				336283322114069000CC7D24 /* ClassNames_URLProtocol.h */,
+				DFF725DC28AF737C0078F5A3 /* ClassNames_BaseParameters.h */,
+				DFF725DD28AF737C0078F5A3 /* ClassNames_BaseParameters.m */,
 			);
 			name = URLRequest;
 			sourceTree = "<group>";
@@ -873,6 +879,7 @@
 				33333A652121247A00446146 /* ClassNames_BindPhoneView.h in Headers */,
 				33628330211402D300CC7D24 /* ClassNames_URLSessionManager.h in Headers */,
 				33628341211409D300CC7D24 /* ClassNames_NotificationConfigure.h in Headers */,
+				DFF725DE28AF737C0078F5A3 /* ClassNames_BaseParameters.h in Headers */,
 				33333BD821218A0500446146 /* ClassNames_ImageBackground.h in Headers */,
 				336285822117EA6100CC7D24 /* ClassNames_MembeRoleModel.h in Headers */,
 				339D66632329EAAC00872D27 /* ClassNames_RechargeView.h in Headers */,
@@ -975,6 +982,7 @@
 				33333A6E21212A7200446146 /* ClassNames_QuickLoginView.m in Sources */,
 				3362856B2117E72300CC7D24 /* ClassNames_MemberVisitorModel.m in Sources */,
 				33333A8521212B2A00446146 /* ClassNames_PhoneRegisterView.m in Sources */,
+				DFF725DF28AF737C0078F5A3 /* ClassNames_BaseParameters.m in Sources */,
 				336283F32114280700CC7D24 /* ClassNames_DeviceConfigure.m in Sources */,
 				889103DC28A92EEB00F90D5F /* ClassNames_NoticeView.m in Sources */,
 				889103D428A8964F00F90D5F /* ClassNames_PayView.m in Sources */,

@@ -7,6 +7,12 @@
 
 +(instancetype)umPlatsFormManagerDeafaults;
 
+#pragma mark ---------------------  启动游戏调用方法
+-(void)umPlatsFormLaunchConfigGameID:(NSString *)gid WithSub_GameID:(NSString *)sub_gid WithOpr_Cid:(NSString *)opr_cid WithSdk_Ver:(NSString *)sdk_ver WithGame_Ver:(NSString *)game_ver;
+
+
+
+
 - (void)methodNames_showSuspensionBall;
 
 -(void)umPlatsFormPlayVideo:(NSString *)videoName

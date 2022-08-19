@@ -3,7 +3,10 @@
 
 #import "ClassNames_SuspensionBallButton.h"
 #import <sys/utsname.h>
-
+#import "ClassNames_BaseViewLayout.h"
+#import "ClassNames_DefaultThemeConfigure.h"
+#import "ClassNames_NavigationBarView.h"
+#import "ClassNames_Color.h"
 
 #pragma mark ---------- 所有动画所要执行的时长
 static const CGFloat varNames_suspensionBallAnimationDuration = 0.1;
@@ -46,7 +49,7 @@ static NSString * const varNames_orientationLeft = @"LEFT";
 @property (nonatomic, readwrite, strong) UIView *varNames_menuView;
 
 @property (nonatomic, readwrite, copy) void (^methodNames_clickItemMenu)(NSInteger index);
-@property (nonatomic, readwrite, copy) void (^methodNames_finishShowMenu)(void);
+@property (nonatomic, readwrite, copy) void (^methodNames_finishShowMenu)(NSInteger type);
 
 @property (nonatomic, readwrite, copy) NSString *varNames_firstTitle;
 @property (nonatomic, readwrite, copy) NSString *varNames_secondTitle;
@@ -103,8 +106,9 @@ static NSString * const varNames_orientationLeft = @"LEFT";
 
 - (void)methodNames_setMenuViewType:(varNames_showBallType)varNames_type {
     CGRect varNames_tmpRect = CGRectZero;
+    NSInteger varNames_count = self.varNames_titleArray.count + 1;
     CGFloat width = CGRectGetWidth(self.varNames_originalRect);
-    width *= (self.varNames_titleArray.count + 1);
+    width *= varNames_count;
     switch (varNames_type) {
         case 0:/// left
         {
@@ -113,12 +117,12 @@ static NSString * const varNames_orientationLeft = @"LEFT";
             break;
         case 1:/// bottom
         {
-            varNames_tmpRect = CGRectMake(CGRectGetMinX(self.varNames_originalRect), CGRectGetMinY(self.varNames_originalRect) - CGRectGetWidth(self.varNames_originalRect) * 2, CGRectGetWidth(self.varNames_originalRect), width);
+            varNames_tmpRect = CGRectMake(CGRectGetMinX(self.varNames_originalRect), CGRectGetMinY(self.varNames_originalRect) - CGRectGetWidth(self.varNames_originalRect) * varNames_count, CGRectGetWidth(self.varNames_originalRect), width);
         }
             break;
         case 2:/// right
         {
-            varNames_tmpRect = CGRectMake(CGRectGetMinX(self.varNames_originalRect) - CGRectGetWidth(self.varNames_originalRect) * 2, CGRectGetMinY(self.varNames_originalRect), width, CGRectGetHeight(self.varNames_originalRect));
+            varNames_tmpRect = CGRectMake(CGRectGetMinX(self.varNames_originalRect) - CGRectGetWidth(self.varNames_originalRect) * (varNames_count-1), CGRectGetMinY(self.varNames_originalRect), width, CGRectGetHeight(self.varNames_originalRect));
         }
             break;
         default:/// top
@@ -152,7 +156,7 @@ static NSString * const varNames_orientationLeft = @"LEFT";
         if (finished) {
             [self methodNames_createMenuButton:self.varNames_titleArray subMethodNames_type:varNames_type];
             if (self.methodNames_finishShowMenu) {
-                self.methodNames_finishShowMenu();
+                self.methodNames_finishShowMenu(varNames_type);
             }
             
         }
@@ -292,14 +296,131 @@ static NSString * const varNames_orientationLeft = @"LEFT";
 @property (nonatomic, readwrite, copy) NSString *varNames_orientation;
 
 
+
+@property (nonatomic, readwrite, strong) UIView *varNames_containTipView;
+
+
 @end
 
 
 @implementation ClassNames_SuspensionBallButton
 
+#pragma mark ---------------------  悬浮球关闭移除按钮事件
 - (void)methodNames_closeSupenBall:(UIButton *)sender {
-    NSLog(@"关闭悬浮球");
+    [self methodNames_showMenu:self];
+    [self methodNames_showTipView];
 }
+
+- (void)methodNames_showTipView {
+        self.varNames_containTipView = [[UIView alloc]initWithFrame:[UIScreen mainScreen].bounds];
+        self.varNames_containTipView.translatesAutoresizingMaskIntoConstraints = NO;
+        [[UIApplication sharedApplication].keyWindow addSubview:self.varNames_containTipView];
+        NSLayoutConstraint *varNames_Top = [NSLayoutConstraint constraintWithItem:self.varNames_containTipView attribute:NSLayoutAttributeTop relatedBy:NSLayoutRelationEqual toItem:self.varNames_containTipView.superview attribute:NSLayoutAttributeTop multiplier:1.0 constant:0];
+        NSLayoutConstraint *varNames_Left = [NSLayoutConstraint constraintWithItem:self.varNames_containTipView attribute:NSLayoutAttributeLeft relatedBy:NSLayoutRelationEqual toItem:self.varNames_containTipView.superview attribute:NSLayoutAttributeLeft multiplier:1.0 constant:0];
+        NSLayoutConstraint *varNames_Bottom = [NSLayoutConstraint constraintWithItem:self.varNames_containTipView attribute:NSLayoutAttributeBottom relatedBy:NSLayoutRelationEqual toItem:self.varNames_containTipView.superview attribute:NSLayoutAttributeBottom multiplier:1.0 constant:0];
+        NSLayoutConstraint *varNames_Right = [NSLayoutConstraint constraintWithItem:self.varNames_containTipView attribute:NSLayoutAttributeRight relatedBy:NSLayoutRelationEqual toItem:self.varNames_containTipView.superview attribute:NSLayoutAttributeRight multiplier:1.0 constant:0];
+        
+        [[UIApplication sharedApplication].keyWindow addConstraints:@[varNames_Top, varNames_Left, varNames_Bottom, varNames_Right]];
+        
+        
+        
+        
+        CGFloat varNames_viewW = 320;
+        CGFloat varNames_viewH = 180;
+        
+        UIView *varNames_contentView = [[UIView alloc]init];
+        varNames_contentView.layer.cornerRadius = 15;
+        varNames_contentView.backgroundColor = [UIColor whiteColor];
+        varNames_contentView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.varNames_containTipView addSubview:varNames_contentView];
+        NSLayoutConstraint *varNames_centerX = [NSLayoutConstraint constraintWithItem:varNames_contentView attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.varNames_containTipView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
+        NSLayoutConstraint *varNames_centerY = [NSLayoutConstraint constraintWithItem:varNames_contentView attribute:NSLayoutAttributeCenterY relatedBy:NSLayoutRelationEqual toItem:self.varNames_containTipView attribute:NSLayoutAttributeCenterY multiplier:1.0 constant:0];
+        
+        NSLayoutConstraint *varNames_width = [NSLayoutConstraint constraintWithItem:varNames_contentView attribute:NSLayoutAttributeWidth relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:varNames_viewW];
+        NSLayoutConstraint *varNames_height = [NSLayoutConstraint constraintWithItem:varNames_contentView attribute:NSLayoutAttributeHeight relatedBy:NSLayoutRelationEqual toItem:nil attribute:NSLayoutAttributeNotAnAttribute multiplier:1.0 constant:varNames_viewH];
+        
+        [self.varNames_containTipView addConstraints:@[varNames_centerX, varNames_centerY]];
+        [varNames_contentView addConstraints:@[varNames_width, varNames_height]];
+        
+        
+        
+        ClassNames_NavigationBarView *varNames_naviBar = [[ClassNames_NavigationBarView alloc]init];
+        varNames_naviBar.translatesAutoresizingMaskIntoConstraints = NO;
+        [varNames_naviBar methodNames_setTitle:@"悬浮球关闭"];
+        [varNames_contentView  addSubview:varNames_naviBar];
+        
+        [ClassNames_BaseViewLayout methodNames_layoutTop:varNames_naviBar methodNames_constriant:0];
+        [ClassNames_BaseViewLayout methodNames_layoutLeft:varNames_naviBar methodNames_constriant:methodNames_setMargin_base()];
+        [ClassNames_BaseViewLayout methodNames_layoutRight:varNames_naviBar methodNames_constriant:methodNames_setMargin_base()];
+        [ClassNames_BaseViewLayout methodNames_layoutHeight:varNames_naviBar methodNames_constriant:methodNames_setNavigationBarHeight()];
+        
+        
+        UIButton *varNames_okBtn = [[UIButton alloc]init];
+        varNames_okBtn.translatesAutoresizingMaskIntoConstraints = NO;
+        [varNames_contentView addSubview:varNames_okBtn];
+        [varNames_okBtn setTitle:@"确定" forState:UIControlStateNormal];
+        [varNames_okBtn setBackgroundColor:[ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_themeColor_config()]];
+        [varNames_okBtn setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        varNames_okBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        varNames_okBtn.layer.cornerRadius = 5;
+        [varNames_okBtn addTarget:self action:@selector(methodNames_commitCloseBall:) forControlEvents:UIControlEventTouchUpInside];
+        
+        
+        CGFloat varNames_btnWidth = 60;
+        [ClassNames_BaseViewLayout methodNames_layoutBottom:varNames_okBtn methodNames_constriant:methodNames_setMargin_2base()];
+        [ClassNames_BaseViewLayout methodNames_layoutHeight:varNames_okBtn methodNames_constriant:methodNames_getInputView_inputView_Height()];
+        [ClassNames_BaseViewLayout methodNames_layoutWidth:varNames_okBtn methodNames_constriant:varNames_btnWidth];
+        [ClassNames_BaseViewLayout methodNames_layoutCenterX:varNames_okBtn methodNames_constriant:50];
+        
+        
+        
+        
+        UIButton *varNames_cancelBtn = [[UIButton alloc]init];
+        varNames_cancelBtn.translatesAutoresizingMaskIntoConstraints = NO;
+        [varNames_contentView addSubview:varNames_cancelBtn];
+        
+        [varNames_cancelBtn setTitle:@"取消" forState:UIControlStateNormal];
+        [varNames_cancelBtn setBackgroundColor:[UIColor whiteColor]];
+        [varNames_cancelBtn setTitleColor:[ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_themeColor_config()] forState:UIControlStateNormal];
+        varNames_cancelBtn.titleLabel.font = [UIFont systemFontOfSize:15];
+        varNames_cancelBtn.layer.cornerRadius = 5;
+        varNames_cancelBtn.layer.borderColor = [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_themeColor_config()].CGColor;
+        varNames_cancelBtn.layer.borderWidth = 1;
+        [varNames_cancelBtn addTarget:self action:@selector(methodNames_cancelCloseBall:) forControlEvents:UIControlEventTouchUpInside];
+        
+        [ClassNames_BaseViewLayout methodNames_layoutBottom:varNames_cancelBtn methodNames_constriant:methodNames_setMargin_2base()];
+        [ClassNames_BaseViewLayout methodNames_layoutHeight:varNames_cancelBtn methodNames_constriant:methodNames_getInputView_inputView_Height()];
+        [ClassNames_BaseViewLayout methodNames_layoutWidth:varNames_cancelBtn methodNames_constriant:varNames_btnWidth];
+        [ClassNames_BaseViewLayout methodNames_layoutCenterX:varNames_cancelBtn methodNames_constriant:-50];
+        
+        
+        UILabel *varNames_tipLabel = [[UILabel alloc]init];
+        [varNames_contentView addSubview:varNames_tipLabel];
+        varNames_tipLabel.translatesAutoresizingMaskIntoConstraints = NO;
+        varNames_tipLabel.textColor = [UIColor blackColor];
+        varNames_tipLabel.text = @"是否在本次登录关闭悬浮球，悬浮球重新开启需要重新登陆游戏";
+        varNames_tipLabel.textAlignment = NSTextAlignmentLeft;
+        varNames_tipLabel.numberOfLines = 0;
+        varNames_tipLabel.font = [UIFont systemFontOfSize:15];
+        
+        [ClassNames_BaseViewLayout methodNames_layoutSubView1:varNames_tipLabel methodNames_attribute1:NSLayoutAttributeTop methodNames_layoutSubView2:varNames_naviBar methodNames_attribute2:NSLayoutAttributeBottom methodNames_constriant:methodNames_setMargin_base()];
+        [ClassNames_BaseViewLayout methodNames_layoutLeft:varNames_tipLabel methodNames_constriant:methodNames_setMargin_2base()];
+        [ClassNames_BaseViewLayout methodNames_layoutRight:varNames_tipLabel methodNames_constriant:methodNames_setMargin_2base()];
+        [ClassNames_BaseViewLayout methodNames_layoutSubView1:varNames_tipLabel methodNames_attribute1:NSLayoutAttributeBottom methodNames_layoutSubView2:varNames_okBtn methodNames_attribute2:NSLayoutAttributeTop methodNames_constriant:methodNames_setMargin_base()];
+}
+
+- (void)methodNames_commitCloseBall:(UIButton *)sender {
+    [self.varNames_containTipView removeFromSuperview];
+    [self removeFromSuperview];
+}
+
+- (void)methodNames_cancelCloseBall:(UIButton *)sender {
+    [self.varNames_containTipView removeFromSuperview];
+}
+
+
+
+
 #pragma mark ---------- 悬浮球点击事件
 - (void)methodNames_showMenu:(UIButton *)sender {
     sender.selected = !sender.selected;
@@ -314,14 +435,39 @@ static NSString * const varNames_orientationLeft = @"LEFT";
         [[UIApplication sharedApplication].keyWindow addSubview:_varNames_ballMenu];
         
         _varNames_closeButton = [[UIButton alloc]initWithFrame:CGRectMake(CGRectGetMaxX(_varNames_ballMenu.frame)-10, CGRectGetMinY(_varNames_ballMenu.frame)-10, 20, 20)];
-        _varNames_closeButton.backgroundColor = [UIColor redColor];
+        [_varNames_closeButton setBackgroundImage:[self methodNames_getImage:@"image_close_round"] forState:UIControlStateNormal];
         _varNames_closeButton.layer.cornerRadius = 10;
+        [_varNames_closeButton setBackgroundColor:[UIColor colorWithWhite:0.7 alpha:0.3]];
         _varNames_closeButton.hidden = YES;
         [[UIApplication sharedApplication].keyWindow addSubview:_varNames_closeButton];
         [_varNames_closeButton addTarget:self action:@selector(methodNames_closeSupenBall:) forControlEvents:UIControlEventTouchUpInside];
         
         __weak typeof(self) weakSelf = self;
-        _varNames_ballMenu.methodNames_finishShowMenu = ^{
+        _varNames_ballMenu.methodNames_finishShowMenu = ^(NSInteger type){
+            
+            switch (type) {
+                case 0:/// left
+                {
+                    [weakSelf.varNames_closeButton setFrame:CGRectMake(CGRectGetMaxX(weakSelf.varNames_ballMenu.frame)-10, CGRectGetMinY(weakSelf.varNames_ballMenu.frame)-10, 20, 20)];
+                }
+                    break;
+                case 1:/// bottom
+                {
+                    [weakSelf.varNames_closeButton setFrame:CGRectMake(CGRectGetMinX(weakSelf.varNames_ballMenu.frame)-10, CGRectGetMinY(weakSelf.varNames_ballMenu.frame)-10, 20, 20)];
+                }
+                    break;
+                case 2:/// right
+                {
+                    [weakSelf.varNames_closeButton setFrame:CGRectMake(CGRectGetMinX(weakSelf.varNames_ballMenu.frame)-10, CGRectGetMinY(weakSelf.varNames_ballMenu.frame)-10, 20, 20)];
+                }
+                    break;
+                default:/// top
+                {
+                    [weakSelf.varNames_closeButton setFrame:CGRectMake(CGRectGetMaxX(weakSelf.varNames_ballMenu.frame)+10, CGRectGetMaxY(weakSelf.varNames_ballMenu.frame)+10, 20, 20)];
+                }
+                    break;
+            }
+            
             weakSelf.varNames_closeButton.hidden = NO;
         };
         _varNames_ballMenu.methodNames_clickItemMenu = ^(NSInteger index) {

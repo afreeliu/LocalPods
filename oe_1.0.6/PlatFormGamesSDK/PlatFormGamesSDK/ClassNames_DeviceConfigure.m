@@ -15,3 +15,6 @@ NSString *const varNames_saveDeviceCodeUUIDKey = @"DeviceCodeUUIDKey";
 NSString *const varNames_saveDeviceCodeIDFAKey = @"DeviceCodeIDFAKey";
 
 NSString *const varNames_saveDeviceCodeServiceKey = @"varNames_saveDeviceCodeServiceKey";
+
+
+NSString *const varNames_saveGameVerKey = @"game_ver";

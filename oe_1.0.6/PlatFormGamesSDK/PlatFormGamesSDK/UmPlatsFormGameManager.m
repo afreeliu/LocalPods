@@ -28,6 +28,9 @@
 #import "ClassNames_SuspensionBallButton.h"
 
 #import "ClassNames_RechargeView.h"
+
+
+#import "ClassNames_BaseParameters.h"
 @interface UmPlatsFormGameManager ()
 
 @property (nonatomic, readwrite, strong) UIWindow *varNames_window;
@@ -75,6 +78,64 @@
     });
     return varNames_umPlatsForm;
 }
+
+#pragma mark ---------------------  启动游戏调用方法
+-(void)umPlatsFormLaunchConfigGameID:(NSString *)gid WithSub_GameID:(NSString *)sub_gid WithOpr_Cid:(NSString *)opr_cid WithSdk_Ver:(NSString *)sdk_ver WithGame_Ver:(NSString *)game_ver{
+    if (!gid) {
+        
+        methodNames_debugLog(@"gameId...NOT NULL");
+        return ;
+    } else {
+        methodNames_saveGameID(gid);
+    }
+    if (!sub_gid) {
+        methodNames_debugLog(@"subGame...NOT NULL");
+        return ;
+    } else {
+        methodNames_saveSubGameID(sub_gid);
+    }
+    if (!opr_cid) {
+        methodNames_debugLog(@"opr_cid...NOT NULL");
+    } else {
+        methodNames_saveChannelID(opr_cid);
+    }
+    if (!game_ver) {
+        methodNames_debugLog(@"game_ver...NOT NULL");
+    } else {
+        methodNames_saveGameVersion(game_ver);
+    }
+    NSMutableDictionary *varNames_parameters = [ClassNames_BaseParameters methodNames_getBaseParameters];
+    __weak typeof(self) weakSelf = self;
+    [self.varNames_gameInitModel methodNames_fetchDataWithdURL:@"http://domain.com/sdk/init" parameters:varNames_parameters];
+    self.varNames_gameInitModel.methodNames_completeFetchData = ^(id object) {
+        
+        ClassNames_GameInitialiseModel *model = (ClassNames_GameInitialiseModel *)object;
+        methodNames_saveNeedFastLogin(model.varNames_switch_1login);
+        methodNames_saveNeedConnectPhone(model.varNames_switch_bind);
+        methodNames_saveProtocolSwitch(model.varNames_is_protocol);
+        methodNames_saveProtocolURL(model.varNames_url);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            /// 是否发送了初始化的通知,如果没有发送，那么这里发送一次
+            weakSelf.varNames_appleCheck = model.varNames_switch_appleCheck;
+            [weakSelf methodNames_postInitNotiModel:model];
+        });
+    };
+    self.varNames_gameInitModel.methodNames_FetchError = ^(NSError *error) {
+        NSLog(@"error:%@", error.userInfo);
+        dispatch_async(dispatch_get_main_queue(), ^{
+            /// 是否发送了初始化的通知,如果没有发送，那么这里发送一次
+            [weakSelf methodNames_postInitNotiModel:nil];
+        });
+    };
+    
+    
+    
+}
+
+
+
+
+
 
 #pragma mark ---------- 在登陆页面显示前插入视频
 -(void)umPlatsFormPlayVideo:(NSString *)videoName
@@ -546,6 +607,7 @@
  */
 
 -(void)umPlatsFormLaunchConfigGameID:(NSString *)gid WithSub_GameID:(NSString *)sub_gid {
+    return;
     NSMutableDictionary *varNames_tmppara = [NSMutableDictionary dictionary];
     if (!gid) {
         
