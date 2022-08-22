@@ -3,7 +3,8 @@
 #import <Foundation/Foundation.h>
 
 
-FOUNDATION_EXTERN NSString *const varNames_initConnectPhonePersonIDKey;
+FOUNDATION_EXTERN NSString *const varNames_initBindPhoneKey;
+FOUNDATION_EXTERN NSString *const varNames_initBindPersonIDKey;
 
 FOUNDATION_EXTERN NSString *const varNames_initFastLoginKey;
 
@@ -26,20 +27,37 @@ FOUNDATION_EXTERN NSString *const varNames_protocolURLKey;
 
 FOUNDATION_EXTERN NSString *const varNames_appleCheckKey;
 
+FOUNDATION_EXTERN NSString *const varNames_verticalKey;
+
+FOUNDATION_EXTERN NSString *const varNames_softBallKey;
 
 
 
 
-/// 保存初始化时候返回的是否需要绑定手机身份证类型
-/// 0:手机身份证  1:都不需要  2:身份证  3:手机
-static inline void methodNames_saveNeedConnectPhone(NSString *connetPhoneType) {
-    [[NSUserDefaults standardUserDefaults] setObject:connetPhoneType forKey:varNames_initConnectPhonePersonIDKey];
+
+/// 保存初始化时候返回的是否需要绑定手机类型
+/// 是否绑定手机号 1 为关闭 ， 2 为开启,
+static inline void methodNames_saveNeedBindPhone(NSString *varNames_type) {
+    [[NSUserDefaults standardUserDefaults] setObject:varNames_type forKey:varNames_initBindPhoneKey];
     [[NSUserDefaults standardUserDefaults]synchronize];
 }
-/// 读取初始化是否需要绑定手机身份证类型
-static inline NSString *methodNames_readConnectPhoneType(){
-    return [[NSUserDefaults standardUserDefaults] objectForKey:varNames_initConnectPhonePersonIDKey];
+/// 读取初始化是否需要绑定手机类型
+static inline NSString *methodNames_readBindPhoneType(){
+    return [[NSUserDefaults standardUserDefaults] objectForKey:varNames_initBindPhoneKey];
 }
+
+/// 保存初始化时候返回的是否需要绑定身份证类型
+/// 是否绑定手机号 1 为关闭 ， 2 为开启,
+static inline void methodNames_saveNeedBindPersonID(NSString *varNames_type) {
+    [[NSUserDefaults standardUserDefaults] setObject:varNames_type forKey:varNames_initBindPersonIDKey];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+}
+/// 读取初始化是否需要绑定身份证类型
+static inline NSString *methodNames_readBindPsersonIDType(){
+    return [[NSUserDefaults standardUserDefaults] objectForKey:varNames_initBindPersonIDKey];
+}
+
+
 /// 保存初始化时候返回的是否需要一键登陆
 static inline void methodNames_saveNeedFastLogin(NSString *connetPersonIDType) {
     /// 1 ： 不需要一键登陆
@@ -163,3 +181,28 @@ static inline BOOL methodNames_readAppleCheck() {
 }
 
 
+/// 版式  1:横版 2：竖版,
+static inline void methodNames_saveVertical(NSString *varNames_vertical) {
+    
+    if (varNames_vertical) {
+        [[NSUserDefaults standardUserDefaults] setObject:varNames_vertical forKey:varNames_verticalKey];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    }
+}
+/// 获取版式
+static inline NSString *methodNames_readVertical() {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:varNames_verticalKey];
+}
+
+// 悬浮球 1 为关闭 ， 2 为开启,
+static inline void methodNames_saveSoftBall(NSString *varNames_softBall) {
+    
+    if (varNames_softBall) {
+        [[NSUserDefaults standardUserDefaults] setObject:varNames_softBall forKey:varNames_softBallKey];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    }
+}
+/// 获取版式
+static inline NSString *methodNames_readSoftBall() {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:varNames_softBallKey];
+}

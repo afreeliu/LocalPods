@@ -105,18 +105,17 @@
         methodNames_saveGameVersion(game_ver);
     }
     NSMutableDictionary *varNames_parameters = [ClassNames_BaseParameters methodNames_getBaseParameters];
+    [varNames_parameters setValue:@"10086" forKey:@"sid"];
     __weak typeof(self) weakSelf = self;
-    [self.varNames_gameInitModel methodNames_fetchDataWithdURL:@"http://domain.com/sdk/init" parameters:varNames_parameters];
+    [self.varNames_gameInitModel methodNames_fetchDataWithdURL:@"https://cgcccp.dunwang.com/sdk/init" parameters:varNames_parameters];
     self.varNames_gameInitModel.methodNames_completeFetchData = ^(id object) {
         
         ClassNames_GameInitialiseModel *model = (ClassNames_GameInitialiseModel *)object;
-        methodNames_saveNeedFastLogin(model.varNames_switch_1login);
-        methodNames_saveNeedConnectPhone(model.varNames_switch_bind);
-        methodNames_saveProtocolSwitch(model.varNames_is_protocol);
-        methodNames_saveProtocolURL(model.varNames_url);
+        
+        NSLog(@"model:%@", model.description);
         dispatch_async(dispatch_get_main_queue(), ^{
             /// 是否发送了初始化的通知,如果没有发送，那么这里发送一次
-            weakSelf.varNames_appleCheck = model.varNames_switch_appleCheck;
+//            weakSelf.varNames_appleCheck = model.varNames_switch_appleCheck;
             [weakSelf methodNames_postInitNotiModel:model];
         });
     };
@@ -128,10 +127,55 @@
         });
     };
     
-    
+    // 激活游戏
+    [self methodNames_initDevice];
     
 }
 
+#pragma mark -------------------- 激活
+- (void)methodNames_initDevice {
+    
+    /// 激活设备
+    if (!methodNames_readActivateDevice()) {
+        NSMutableDictionary *varNames_tmppara = [ClassNames_BaseParameters methodNames_getBaseParameters];
+        [[ClassNames_URLSessionManager methodNames_shareSessionManager]methodNames_requestWithUrl:methodNames_gameSipequ() parameters:varNames_tmppara success:^(NSDictionary *responseData) {
+            methodNames_saveActivateDevice();
+            NSLog(@"激活设备返回内容:%@", responseData);
+        } error:^(NSError *error) {
+            methodNames_debugLog(error.userInfo);
+        }];
+    } else {
+        NSLog(@"不激活设备");
+    }
+    
+}
+
+
+
+#pragma mark ------------------ 初始化成功，配置初始化信息
+- (void)methodNames_configInitGame {
+    
+    if (self.varNames_gameInitModel.varNames_status == ClassNames_FetchDataStatusSuccess) {
+        // 是否开启快速登陆 1 为关闭 ， 2 为开启,
+        methodNames_saveNeedFastLogin(self.varNames_gameInitModel.varNames_quick_login);
+        // 是否绑定手机号 1 为关闭 ， 2 为开启,
+        methodNames_saveNeedBindPhone(self.varNames_gameInitModel.varNames_bind_phone);
+        // 是否实名制 1 为关闭 ， 2 为开启,
+        methodNames_saveNeedBindPersonID(self.varNames_gameInitModel.varNames_bind_idcard);
+        // 苹果校验
+        methodNames_saveAppleCheck(self.varNames_gameInitModel.varNames_apple_check);
+        // 版式  1:横版 2：竖版,
+        methodNames_saveVertical(self.varNames_gameInitModel.varNames_is_vertical);
+        // 悬浮球 1 为关闭 ， 2 为开启,
+        methodNames_saveSoftBall(self.varNames_gameInitModel.varNames_soft_ball);
+        
+    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        /// 是否发送了初始化的通知,如果没有发送，那么这里发送一次
+        [self methodNames_postInitNotiModel:self.varNames_gameInitModel];
+    });
+    
+}
 
 
 
@@ -182,10 +226,6 @@
     [self methodNames_showSuspensionBall];
     return;
     
-    
-    
-    methodNames_readGameBundleID();
-    
     [ClassNames_PGHubView methodNames_showIndicatorWithTitlte:@"加载中..."];
     NSDictionary *varNames_tmppara = @{
                            @"gid": methodNames_readGameID(),
@@ -197,17 +237,21 @@
     [varNames_tmpinitModel methodNames_fetchDataWithdURL:methodNames_gameinitialiseURL() parameters:varNames_tmppara];
     varNames_tmpinitModel.methodNames_completeFetchData = ^(id object) {
         ClassNames_GameInitialiseModel *model = (ClassNames_GameInitialiseModel *)object;
-        methodNames_saveNeedFastLogin(model.varNames_switch_1login);
-        methodNames_saveNeedConnectPhone(model.varNames_switch_bind);
-        methodNames_saveProtocolSwitch(model.varNames_is_protocol);
-        methodNames_saveProtocolURL(model.varNames_url);
-        methodNames_saveAppleCheck(model.varNames_switch_appleCheck);
+        
+        
+//        methodNames_saveNeedFastLogin(model.varNames_switch_1login);
+//        methodNames_saveNeedBindPhone(model.varNames_switch_bind);
+//        methodNames_saveProtocolSwitch(model.varNames_is_protocol);
+//        methodNames_saveProtocolURL(model.varNames_url);
+//        methodNames_saveAppleCheck(model.varNames_switch_appleCheck);
+        
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             [ClassNames_PGHubView methodNames_hide];
             
             /// 是否发送了初始化的通知,如果没有发送，那么这里发送一次
             if (!weakSelf.varNames_isSendInitNOti) {
-                weakSelf.varNames_appleCheck = model.varNames_switch_appleCheck;
+//                weakSelf.varNames_appleCheck = model.varNames_switch_appleCheck;
                 [weakSelf methodNames_postInitNotiModel:model];
             }
             
@@ -268,42 +312,43 @@
 
 
 
-/// 激活设备
-- (void)methodNames_initDevice {
-    
-    /// 激活设备
-    if (!methodNames_readActivateDevice()) {
-        
-        NSDictionary *varNames_tmppara = @{
-                               @"gid": methodNames_readGameID(),
-                               @"sub_gid": methodNames_readSubGameID(),
-                               @"adv_id": methodNames_readAdvID(),
-                               @"channel_id": methodNames_readChannelID(),
-                               @"platform_id": methodNames_readPlatformID(),
-                               @"device_code": methodNames_getDeviceIDFA(),
-                               @"mac": @"0",
-                               @"game_version": methodNames_getProjectVersion(),
-                               @"model_type": methodNames_getDeviceType(),
-                               @"model_no": methodNames_getDeviceType(),
-                               @"resolution": methodNames_getDeviceResolution(),
-                               @"os_version": methodNames_getDeviceSystemVersion(),
-                               @"brand": methodNames_getDeviceBrand(),
-                               @"net": methodNames_getDeviceNetType(),
-                               @"other": @"0",
-                               @"idfv":methodNames_getDeviceUUID(),
-                               @"sdk_ver": methodNames_getSDKVersion_config()
-                               };
-        [[ClassNames_URLSessionManager methodNames_shareSessionManager]methodNames_requestWithUrl:methodNames_activateURL() parameters:varNames_tmppara success:^(NSDictionary *responseData) {
-            methodNames_saveActivateDevice();
-            NSLog(@"激活设备返回内容:%@", responseData);
-        } error:^(NSError *error) {
-            methodNames_debugLog(error.userInfo);
-        }];
-    } else {
-//        NSLog(@"不激活设备");
-    }
-    
-}
+
+///// 激活设备
+//- (void)methodNames_initDevice {
+//
+//    /// 激活设备
+//    if (!methodNames_readActivateDevice()) {
+//
+//        NSDictionary *varNames_tmppara = @{
+//                               @"gid": methodNames_readGameID(),
+//                               @"sub_gid": methodNames_readSubGameID(),
+//                               @"adv_id": methodNames_readAdvID(),
+//                               @"channel_id": methodNames_readChannelID(),
+//                               @"platform_id": methodNames_readPlatformID(),
+//                               @"device_code": methodNames_getDeviceIDFA(),
+//                               @"mac": @"0",
+//                               @"game_version": methodNames_getProjectVersion(),
+//                               @"model_type": methodNames_getDeviceType(),
+//                               @"model_no": methodNames_getDeviceType(),
+//                               @"resolution": methodNames_getDeviceResolution(),
+//                               @"os_version": methodNames_getDeviceSystemVersion(),
+//                               @"brand": methodNames_getDeviceBrand(),
+//                               @"net": methodNames_getDeviceNetType(),
+//                               @"other": @"0",
+//                               @"idfv":methodNames_getDeviceUUID(),
+//                               @"sdk_ver": methodNames_getSDKVersion_config()
+//                               };
+//        [[ClassNames_URLSessionManager methodNames_shareSessionManager]methodNames_requestWithUrl:methodNames_activateURL() parameters:varNames_tmppara success:^(NSDictionary *responseData) {
+//            methodNames_saveActivateDevice();
+//            NSLog(@"激活设备返回内容:%@", responseData);
+//        } error:^(NSError *error) {
+//            methodNames_debugLog(error.userInfo);
+//        }];
+//    } else {
+////        NSLog(@"不激活设备");
+//    }
+//
+//}
 
 
 #pragma mark ---------- 接收登陆成功的通知
@@ -317,19 +362,19 @@
     if (varNames_tmpuid.length && varNames_tmpusername.length) {
         [varNames_tmploginDict setValue:@"1" forKey:@"result"];
         [varNames_tmploginDict setValue:@"登陆成功" forKey:@"msg"];
-        [varNames_tmploginDict setValue:self.varNames_gameInitModel.varNames_switch_appleCheck forKey:@"appleCheck"];
+//        [varNames_tmploginDict setValue:self.varNames_gameInitModel.varNames_switch_appleCheck forKey:@"appleCheck"];
         dispatch_async(dispatch_get_main_queue(), ^{
             [self methodNames_loginNotification:YES subMethodNames_callMessage:varNames_tmploginDict];
             [ClassName_IAPFail methodNames_CheckIAPFailOrders];
             weakSelf.varNames_window.hidden = YES;
             weakSelf.varNames_window = nil;
-            if ([self.varNames_gameInitModel.varNames_is_ball isEqualToString:@"1"]) {
-                /// 过了
-                NSInteger varNames_showballduration = methodNames_willshowBallAfterSecond();
-                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(varNames_showballduration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-                    [weakSelf methodNames_showSuspensionBall];
-                });
-            }
+//            if ([self.varNames_gameInitModel.varNames_is_ball isEqualToString:@"1"]) {
+//                /// 过了
+//                NSInteger varNames_showballduration = methodNames_willshowBallAfterSecond();
+//                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(varNames_showballduration * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//                    [weakSelf methodNames_showSuspensionBall];
+//                });
+//            }
             
         });
     } else {
@@ -630,13 +675,16 @@
     [self.varNames_gameInitModel methodNames_fetchDataWithdURL:methodNames_gameinitialiseURL() parameters:varNames_tmppara];
     self.varNames_gameInitModel.methodNames_completeFetchData = ^(id object) {
         ClassNames_GameInitialiseModel *model = (ClassNames_GameInitialiseModel *)object;
-        methodNames_saveNeedFastLogin(model.varNames_switch_1login);
-        methodNames_saveNeedConnectPhone(model.varNames_switch_bind);
-        methodNames_saveProtocolSwitch(model.varNames_is_protocol);
-        methodNames_saveProtocolURL(model.varNames_url);
+        
+        
+//        methodNames_saveNeedFastLogin(model.varNames_switch_1login);
+//        methodNames_saveNeedBindPhone(model.varNames_switch_bind);
+//        methodNames_saveProtocolSwitch(model.varNames_is_protocol);
+//        methodNames_saveProtocolURL(model.varNames_url);
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             /// 是否发送了初始化的通知,如果没有发送，那么这里发送一次
-            weakSelf.varNames_appleCheck = model.varNames_switch_appleCheck;
+//            weakSelf.varNames_appleCheck = model.varNames_switch_appleCheck;
             [weakSelf methodNames_postInitNotiModel:model];
         });
     };
@@ -657,13 +705,12 @@
         
         [varNames_tmpDic setValue:@"1" forKey:@"result"];
         [varNames_tmpDic setValue:@"init....success" forKey:@"msg"];
-        [varNames_tmpDic setValue:varNames_argModel.varNames_switch_appleCheck forKey:@"appleCheck"];
-        [varNames_tmpDic setValue:varNames_argModel.varNames_set_url forKey:@"set_url"];
-        [varNames_tmpDic setValue:varNames_argModel.varNames_format forKey:@"format"];
+        [varNames_tmpDic setValue:varNames_argModel.varNames_apple_check forKey:@"appleCheck"];
+        // 致富回调url
+        [varNames_tmpDic setValue:varNames_argModel.varNames_pay_notify_url forKey:@"set_url"];
     } else {
         [varNames_tmpDic setValue:@"0" forKey:@"result"];
         [varNames_tmpDic setValue:@"" forKey:@"set_url"];
-        [varNames_tmpDic setValue:@"" forKey:@"format"];
         [varNames_tmpDic setValue:@"1" forKey:@"appleCheck"];
         [varNames_tmpDic setValue:@"init....fail" forKey:@"msg"];
     }

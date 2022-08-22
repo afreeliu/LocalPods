@@ -7,9 +7,20 @@
 #import "ClassNames_URLProtocol.h"
 #import "ClassNames_DebugLog.h"
 #import "ClassNames_PGHubView.h"
+
+
+typedef NS_ENUM(NSUInteger, ClassNames_FetchDataStatus) {
+    ClassNames_FetchDataStatusNone,// 初始化了，但没进行网络请求
+    ClassNames_FetchDataStatusIng,
+    ClassNames_FetchDataStatusSuccess,
+    ClassNames_FetchDataStatusError,
+};
+
 typedef void(^methodNames_successCompleteFetchData)(id object);
 
 @interface ClassNames_BaseModel : NSObject <ClassNames_URLProtocol>
+
+@property (nonatomic, readonly, assign) ClassNames_FetchDataStatus varNames_status;
 
 @property (nonatomic, readonly, assign) NSInteger varNames_code;
 @property (nonatomic, readonly, copy) NSString *varNames_msg;

@@ -214,3 +214,110 @@ static inline NSString *methodNames_suspensionWalkThroughURL() {
     NSString *varNames_tmptype = methodNames_getRequestConfigValueForKey(varNames_type);
     return [NSString stringWithFormat:@"%@/%@/%@", methodNames_baseURL(), varNames_tmpwalkthrough?:@"walkThrough", varNames_tmptype?:@"login"];
 }
+
+#pragma mark -------------------- domain
+static inline  NSString *methodNames_domain() {
+    NSString *varNames_domain = methodNames_getRequestConfigValueForKey(@"domain");
+    return varNames_domain ? : @"https://cgcccp.dunwang.com";
+}
+
+#pragma mark -------------------- 初始化 /sdk/init
+static inline NSString *methodNames_gameInit() {
+    NSString *varNames_tmpInit = methodNames_getRequestConfigValueForKey(@"init")?:@"/sdk/init";
+    NSString *varNames_tmpInitUrl = [NSString stringWithFormat:@"%@%@", methodNames_domain(), varNames_tmpInit];
+    return varNames_tmpInitUrl;
+}
+#pragma mark -------------------- 激活 /sdk/sipequ
+static inline NSString *methodNames_gameSipequ() {
+    NSString *varNames_tmpInit = methodNames_getRequestConfigValueForKey(@"sipequ")?:@"/sdk/sipequ";
+    NSString *varNames_tmpInitUrl = [NSString stringWithFormat:@"%@%@", methodNames_domain(), varNames_tmpInit];
+    return varNames_tmpInitUrl;
+}
+
+#pragma mark -------------------- 手机注册、登录 /sdk/phonelogin
+static inline NSString *methodNames_gamePhoneLogin() {
+    NSString *varNames_tmpInit = methodNames_getRequestConfigValueForKey(@"phonelogin")?:@"/sdk/phonelogin";
+    NSString *varNames_tmpInitUrl = [NSString stringWithFormat:@"%@%@", methodNames_domain(), varNames_tmpInit];
+    return varNames_tmpInitUrl;
+}
+#pragma mark -------------------- 账号密码注册 /sdk/acctreg/2
+static inline NSString *methodNames_gameAcctreg_2() {
+    NSString *varNames_tmpInit = methodNames_getRequestConfigValueForKey(@"acctreg_2")?:@"/sdk/acctreg/2";
+    NSString *varNames_tmpInitUrl = [NSString stringWithFormat:@"%@%@", methodNames_domain(), varNames_tmpInit];
+    return varNames_tmpInitUrl;
+}
+#pragma mark -------------------- 账号密码登录 /sdk/ulogin/a # 此接口用于有密码框的时候请求
+static inline NSString *methodNames_gameUlogin_a() {
+    NSString *varNames_tmpInit = methodNames_getRequestConfigValueForKey(@"ulogin_a")?:@"/sdk/ulogin/a";
+    NSString *varNames_tmpInitUrl = [NSString stringWithFormat:@"%@%@", methodNames_domain(), varNames_tmpInit];
+    return varNames_tmpInitUrl;
+}
+#pragma mark -------------------- 账号密码登录 /sdk/ulogin/f# 此接口用于切换账号时 一键登录界面 进行请求，为了区别使用 手机号 一键登录时，后台加的校验
+static inline NSString *methodNames_gameUlogin_f() {
+    NSString *varNames_tmpInit = methodNames_getRequestConfigValueForKey(@"ulogin_f")?:@"/sdk/ulogin/f";
+    NSString *varNames_tmpInitUrl = [NSString stringWithFormat:@"%@%@", methodNames_domain(), varNames_tmpInit];
+    return varNames_tmpInitUrl;
+}
+#pragma mark -------------------- iOS 吓蛋 /order/iosplace
+static inline NSString *methodNames_gameIosplace() {
+    NSString *varNames_tmpInit = methodNames_getRequestConfigValueForKey(@"iosplace")?:@"/order/iosplace";
+    NSString *varNames_tmpInitUrl = [NSString stringWithFormat:@"%@%@", methodNames_domain(), varNames_tmpInit];
+    return varNames_tmpInitUrl;
+}
+#pragma mark -------------------- iOS原生致富 /order/iosnotify
+static inline NSString *methodNames_gameIosnotify() {
+    NSString *varNames_tmpInit = methodNames_getRequestConfigValueForKey(@"iosnotify")?:@"/order/iosnotify";
+    NSString *varNames_tmpInitUrl = [NSString stringWithFormat:@"%@%@", methodNames_domain(), varNames_tmpInit];
+    return varNames_tmpInitUrl;
+}
+#pragma mark -------------------- 手机号绑定/sdk/pbind
+static inline NSString *methodNames_gamePbind() {
+    NSString *varNames_tmpInit = methodNames_getRequestConfigValueForKey(@"pbind")?:@"/sdk/pbind";
+    NSString *varNames_tmpInitUrl = [NSString stringWithFormat:@"%@%@", methodNames_domain(), varNames_tmpInit];
+    return varNames_tmpInitUrl;
+}
+#pragma mark -------------------- 手机验证码
+#pragma mark -------------------- 登陆请求验证码接口: http://domain.com/sdk/getcode/login
+static inline NSString *methodNames_gameGetcode_login() {
+    NSString *varNames_tmpInit = methodNames_getRequestConfigValueForKey(@"getcode_login")?:@"/sdk/getcode/login";
+    NSString *varNames_tmpInitUrl = [NSString stringWithFormat:@"%@%@", methodNames_domain(), varNames_tmpInit];
+    return varNames_tmpInitUrl;
+}
+#pragma mark -------------------- 绑定请求验证码接口: http://domain.com/sdk/getcode/bind
+static inline NSString *methodNames_gameGetcode_bind() {
+    NSString *varNames_tmpInit = methodNames_getRequestConfigValueForKey(@"getcode_bind")?:@"/sdk/getcode/bind";
+    NSString *varNames_tmpInitUrl = [NSString stringWithFormat:@"%@%@", methodNames_domain(), varNames_tmpInit];
+    return varNames_tmpInitUrl;
+}
+#pragma mark -------------------- 重置密码接口: http://domain.com/sdk/getcode/resetpwd
+static inline NSString *methodNames_gameGetcode_resetpwd() {
+    NSString *varNames_tmpInit = methodNames_getRequestConfigValueForKey(@"getcode_resetpwd")?:@"/sdk/getcode/resetpwd";
+    NSString *varNames_tmpInitUrl = [NSString stringWithFormat:@"%@%@", methodNames_domain(), varNames_tmpInit];
+    return varNames_tmpInitUrl;
+}
+#pragma mark -------------------- 修改密码 /sdk/resetpwd
+static inline NSString *methodNames_gameResetpwd() {
+    NSString *varNames_tmpInit = methodNames_getRequestConfigValueForKey(@"resetpwd")?:@"/sdk/resetpwd";
+    NSString *varNames_tmpInitUrl = [NSString stringWithFormat:@"%@%@", methodNames_domain(), varNames_tmpInit];
+    return varNames_tmpInitUrl;
+}
+#pragma mark -------------------- 用户协议 /sdk/agreement
+static inline NSString *methodNames_gameAgreement() {
+    NSString *varNames_tmpInit = methodNames_getRequestConfigValueForKey(@"agreement")?:@"/sdk/agreement";
+    NSString *varNames_tmpInitUrl = [NSString stringWithFormat:@"%@%@", methodNames_domain(), varNames_tmpInit];
+    return varNames_tmpInitUrl;
+}
+#pragma mark -------------------- 隐私协议 /sdk/privacy
+static inline NSString *methodNames_gamePrivacy() {
+    NSString *varNames_tmpInit = methodNames_getRequestConfigValueForKey(@"privacy")?:@"/sdk/privacy";
+    NSString *varNames_tmpInitUrl = [NSString stringWithFormat:@"%@%@", methodNames_domain(), varNames_tmpInit];
+    return varNames_tmpInitUrl;
+}
+#pragma mark -------------------- 实名审核 /sdk/wcnbind
+static inline NSString *methodNames_gameWcnbind() {
+    NSString *varNames_tmpInit = methodNames_getRequestConfigValueForKey(@"wcnbind")?:@"/sdk/wcnbind";
+    NSString *varNames_tmpInitUrl = [NSString stringWithFormat:@"%@%@", methodNames_domain(), varNames_tmpInit];
+    return varNames_tmpInitUrl;
+}
+
+

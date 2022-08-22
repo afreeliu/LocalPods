@@ -2,7 +2,12 @@
 
 #import "ClassNames_BaseModel.h"
 
+
+
+
 @interface ClassNames_BaseModel ()
+
+@property (nonatomic, readwrite, assign) ClassNames_FetchDataStatus varNames_status;
 
 @property (nonatomic, readwrite, assign) NSInteger varNames_code;
 @property (nonatomic, readwrite, copy) NSString *varNames_msg;
@@ -15,10 +20,13 @@
 @implementation ClassNames_BaseModel
 - (void)methodNames_fetchDataWithdURL:(NSString *)url parameters:(NSDictionary *)para {
     __weak typeof(self) weakSelf = self;
+    self.varNames_status = ClassNames_FetchDataStatusIng;
     [self methodNames_fetchDataWithURL:url parameters:para success:nil failure:^(NSError *error) {
         NSLog(@"这里时方法中调用回调的block");
         
         if (weakSelf.methodNames_FetchError) {
+            // 网络不同回调的错误
+            weakSelf.varNames_status = ClassNames_FetchDataStatusError;
             weakSelf.methodNames_FetchError(error);
         }
     }];
@@ -69,6 +77,11 @@
         self.varNames_data = @"";
     } else {
         self.varNames_data = [dict objectForKey:@"data"];
+    }
+    if (self.varNames_code == 200) {
+        self.varNames_status = ClassNames_FetchDataStatusSuccess;
+    } else {
+        self.varNames_status = ClassNames_FetchDataStatusError;
     }
     if (self.methodNames_completeFetchData) {
         self.methodNames_completeFetchData(self);

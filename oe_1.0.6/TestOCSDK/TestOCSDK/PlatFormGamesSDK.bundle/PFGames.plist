@@ -84,8 +84,6 @@
 	<dict>
 		<key>member</key>
 		<string>login</string>
-		<key>port</key>
-		<string>11002</string>
 		<key>interFace</key>
 		<string>userua</string>
 		<key>appstore</key>
@@ -95,15 +93,15 @@
 		<key>updateuserlogin</key>
 		<string>ulog</string>
 		<key>gameinitialise</key>
-		<string>init</string>
+		<string>/sdk/init</string>
 		<key>type</key>
 		<string>login</string>
 		<key>memberorder</key>
 		<string>genorder</string>
-		<key>ip</key>
-		<string>101.132.113.84</string>
 		<key>activate</key>
-		<string>act</string>
+		<string>/sdk/sipequ</string>
+		<key>domain</key>
+		<string>https://cgcccp.dunwang.com</string>
 	</dict>
 </dict>
 </plist>
