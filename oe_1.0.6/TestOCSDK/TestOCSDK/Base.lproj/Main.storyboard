@@ -19,29 +19,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EnC-D1-j7C">
-                                <rect key="frame" x="165.5" y="318.5" width="44" height="30"/>
-                                <state key="normal" title="logout">
-                                    <color key="titleColor" red="0.0" green="0.62352943419999995" blue="0.92156863209999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                </state>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dEH-CR-Xh4">
+                                <rect key="frame" x="161" y="271" width="53" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="登录"/>
                                 <connections>
-                                    <action selector="logout:" destination="BYZ-38-t0r" eventType="touchUpInside" id="TZe-Yd-wjw"/>
+                                    <action selector="loginAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KPX-oq-7HY"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hvq-z5-2zu">
-                                <rect key="frame" x="164.5" y="374" width="46" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eDX-kv-pB4">
+                                <rect key="frame" x="146.5" y="318" width="82" height="31"/>
                                 <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="退出登录"/>
                                 <connections>
-                                    <action selector="chongzhi:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CbG-va-O3K"/>
+                                    <action selector="logoutAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="T8a-jT-4un"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="StX-hd-5hm">
+                                <rect key="frame" x="161" y="365" width="53" height="31"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="充值"/>
+                                <connections>
+                                    <action selector="payAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="AVm-zE-WCf"/>
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.20392156862745098" green="0.13725490196078433" blue="0.062745098039215685" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="EnC-D1-j7C" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8Lp-z4-qWh"/>
-                            <constraint firstItem="EnC-D1-j7C" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="IHT-vn-nEV"/>
-                            <constraint firstItem="Hvq-z5-2zu" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="koC-SS-o6j"/>
-                            <constraint firstItem="Hvq-z5-2zu" firstAttribute="top" secondItem="EnC-D1-j7C" secondAttribute="bottom" constant="25.5" id="nYY-bA-bcU"/>
+                            <constraint firstItem="eDX-kv-pB4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="47Q-zl-lBw"/>
+                            <constraint firstItem="eDX-kv-pB4" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="NP3-X2-8ox"/>
+                            <constraint firstItem="eDX-kv-pB4" firstAttribute="top" secondItem="dEH-CR-Xh4" secondAttribute="bottom" constant="16" id="Qrf-oM-wtI"/>
+                            <constraint firstItem="StX-hd-5hm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bB2-dt-eA9"/>
+                            <constraint firstItem="dEH-CR-Xh4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="xud-gb-E9S"/>
+                            <constraint firstItem="StX-hd-5hm" firstAttribute="top" secondItem="eDX-kv-pB4" secondAttribute="bottom" constant="16" id="zI4-7R-veD"/>
                         </constraints>
                     </view>
                 </viewController>

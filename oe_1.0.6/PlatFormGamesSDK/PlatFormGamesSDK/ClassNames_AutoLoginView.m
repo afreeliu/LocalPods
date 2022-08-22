@@ -208,7 +208,7 @@
         /// 保存最后登陆的账户
         methodNames_saveLastAccount(self.varNames_userName);
         /// 保存账户密码
-        methodNames_saveVisitorConnectPersonID(memberLoginModel.varNames_isRealName);
+        methodNames_saveVisitorConnectPersonID(memberLoginModel.varNames_isBindCard);
         methodNames_savePassword(self.varNames_password, self.varNames_userName);
 
         NSDictionary *varNames_tmpuserInfo = @{
@@ -218,11 +218,11 @@
         methodNames_postNotification(varNames_userLoginSuceessNoti, nil, varNames_tmpuserInfo);
         BOOL varNames_needBindPhone = NO;
         BOOL varNames_needBindPersonID = NO;
-        if ([memberLoginModel.varNames_isbind isEqualToString:@"1"]) {
+        if ([memberLoginModel.varNames_isbindPhone isEqualToString:@"2"]) {
             /// 没有绑定手机
             varNames_needBindPhone = YES;
         }
-        if ([memberLoginModel.varNames_isRealName isEqualToString:@"1"]) {
+        if ([memberLoginModel.varNames_isBindCard isEqualToString:@"2"]) {
             /// 没有绑定身份证
             varNames_needBindPersonID = YES;
         }

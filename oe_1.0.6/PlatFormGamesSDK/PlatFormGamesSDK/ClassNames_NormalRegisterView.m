@@ -317,7 +317,7 @@
     methodNames_saveUserID(memberRegisterModel.varNames_uid);
     /// 保存用户名称
     methodNames_saveUserName(memberRegisterModel.varNames_username);
-    methodNames_saveVisitorConnectPersonID(memberRegisterModel.varNames_isRealName);
+    methodNames_saveVisitorConnectPersonID(memberRegisterModel.varNames_isBindCard);
     NSDictionary *varNames_tmpuserInfo = @{
                                @"uid": memberRegisterModel.varNames_uid,
                                @"username": memberRegisterModel.varNames_username
@@ -326,11 +326,11 @@
     
     BOOL varNames_needBindPhone = NO;
     BOOL varNames_needBindPersonID = NO;
-    if ([memberRegisterModel.varNames_isbind isEqualToString:@"1"]) {
+    if ([memberRegisterModel.varNames_isbindPhone isEqualToString:@"2"]) {
         /// 没有绑定手机
         varNames_needBindPhone = YES;
     }
-    if ([memberRegisterModel.varNames_isRealName isEqualToString:@"1"]) {
+    if ([memberRegisterModel.varNames_isBindCard isEqualToString:@"2"]) {
         /// 没有绑定身份证
         varNames_needBindPersonID = YES;
     }

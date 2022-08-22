@@ -16,6 +16,7 @@
 #import "ClassNames_SecurityTool.h"
 #import "ClassNames_Title.h"
 #import "ClassNames_ImageCommitButton.h"
+#import "ClassNames_BaseParameters.h"
 
 @interface ClassNames_LoginView ()<UITextViewDelegate>
 
@@ -202,8 +203,11 @@
     __weak typeof(self) weakSelf = self;
     NSString *varNames_tmpAccount = methodNames_readLastAccount();
     NSString *varNames_tmpPassword = @"";
-    if (varNames_tmpAccount) {
+    if (varNames_tmpAccount && varNames_tmpAccount.length) {
          varNames_tmpPassword = methodNames_readPassword(varNames_tmpAccount);
+    } else {
+        varNames_tmpAccount = methodNames_getRandAccountAndPwd(0);
+        varNames_tmpPassword = methodNames_getRandAccountAndPwd(1);
     }
     
     [self.varNames_firstInputView methodNames_fillContent:varNames_tmpAccount methodNames_canEditing:YES];
@@ -292,21 +296,24 @@
     if (self.methodNames_commitBlock) {
         self.methodNames_commitBlock(varNames_tmpaccount, varNames_tmppassword);
     }
-    return;
-    NSDictionary *varNames_tmppara = @{
-                           @"user_name": varNames_tmpaccount,
-                           @"password": varNames_tmppassword,
-                           @"adv_id": methodNames_readAdvID(),
-                           @"channel_id": methodNames_readChannelID(),
-                           @"material_id": @"0",
-                           @"gid": methodNames_readGameID(),
-                           @"sub_gid": methodNames_readSubGameID(),
-                           @"platform_id": @"0",
-                           @"device_code": methodNames_getDeviceIDFA()
-                           };
+    
+    NSDictionary *varNames_tmppara = [ClassNames_BaseParameters methodNames_getBaseParameters];
+    [varNames_tmppara setValue:varNames_tmpaccount forKey:@"uname"];
+    [varNames_tmppara setValue:varNames_tmppassword forKey:@"pwd"];
+//    NSDictionary *varNames_tmppara = @{
+//                           @"user_name": varNames_tmpaccount,
+//                           @"password": varNames_tmppassword,
+//                           @"adv_id": methodNames_readAdvID(),
+//                           @"channel_id": methodNames_readChannelID(),
+//                           @"material_id": @"0",
+//                           @"gid": methodNames_readGameID(),
+//                           @"sub_gid": methodNames_readSubGameID(),
+//                           @"platform_id": @"0",
+//                           @"device_code": methodNames_getDeviceIDFA()
+//                           };
     __weak typeof(self) weakSelf = self;
     [ClassNames_PGHubView methodNames_showIndicatorWithTitlte:@"登陆中..."];
-    [self.varNames_loginModel methodNames_fetchDataWithdURL:methodNames_memberLoginURL() parameters:varNames_tmppara];
+    [self.varNames_loginModel methodNames_fetchDataWithdURL:methodNames_gameUlogin_a() parameters:varNames_tmppara];
     self.varNames_loginModel.methodNames_completeFetchData = ^(ClassNames_MemberLoginModel *object) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [ClassNames_PGHubView methodNames_hide];
@@ -332,7 +339,7 @@
         /// 保存最后登陆的账户
         methodNames_saveLastAccount(self.varNames_firstInputView.varNames_textValue);
         /// 保存账户密码
-        methodNames_saveVisitorConnectPersonID(memberLoginModel.varNames_isRealName);
+        methodNames_saveVisitorConnectPersonID(memberLoginModel.varNames_isBindCard);
         methodNames_savePassword(self.varNames_secondInputView.varNames_textValue, self.varNames_firstInputView.varNames_textValue);
         
         NSDictionary *varNames_tmpuserInfo = @{
@@ -343,11 +350,11 @@
         
         BOOL varNames_needBindPhone = NO;
         BOOL varNames_needBindPersonID = NO;
-        if ([memberLoginModel.varNames_isbind isEqualToString:@"1"]) {
+        if ([memberLoginModel.varNames_isbindPhone isEqualToString:@"2"]) {
             /// 没有绑定手机
             varNames_needBindPhone = YES;
         }
-        if ([memberLoginModel.varNames_isRealName isEqualToString:@"1"]) {
+        if ([memberLoginModel.varNames_isBindCard isEqualToString:@"2"]) {
             /// 没有绑定身份证
             varNames_needBindPersonID = YES;
         }

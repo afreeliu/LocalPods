@@ -6,8 +6,8 @@
 
 @property (nonatomic, readonly, copy) NSString *varNames_uid;
 @property (nonatomic, readonly, copy) NSString *varNames_username;
-@property (nonatomic, readonly, copy) NSString *varNames_isbind;
-@property (nonatomic, readonly, copy) NSString *varNames_isRealName;
-@property (nonatomic, readonly, copy) NSString *varNames_isRealNameBind;
+@property (nonatomic, readonly, copy) NSString *varNames_isbindPhone;
+@property (nonatomic, readonly, copy) NSString *varNames_isBindCard;
+@property (nonatomic, readonly, copy) NSString *varNames_realName;
 
 @end

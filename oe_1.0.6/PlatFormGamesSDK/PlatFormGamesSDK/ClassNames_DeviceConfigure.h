@@ -175,6 +175,43 @@ static inline NSString *methodNames_md5(NSString *varNames_tmp) {
 }
 
 
+#pragma mark ---------------------  随机生成账号
+// 字符串转 16 进制
+static inline NSString *methodNames_translateStringToHex(NSString *varNames_s) {
+    NSData *myD = [varNames_s dataUsingEncoding:NSUTF8StringEncoding];
+    Byte *bytes = (Byte *)[myD bytes];
+    NSMutableString *resultS = [[NSMutableString alloc]init];
+    for (int i= 0; i < [myD length]; i++) {
+        NSString *newHexStr = [NSString stringWithFormat:@"%x", bytes[i] & 0xff];
+        if ([newHexStr length] == 1) {
+            newHexStr = [NSString stringWithFormat:@"0%@", newHexStr];
+        }
+        [resultS appendString:newHexStr];
+    }
+    return resultS;
+}
+
+static inline NSString *methodNames_getRandAccountAndPwd(NSInteger i) {
+    NSString *charset = @"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    NSString *key = methodNames_getDeviceUUID();
+    NSString *time = methodNames_getCurrentTimestamp();
+    NSString *hash = methodNames_md5([NSString stringWithFormat:@"%@%@", key, time]);
+    NSInteger len = hash.length;
+    NSInteger start = (i * len)/4;
+    NSString *hashPiece = [hash substringWithRange:NSMakeRange(start, start+len/4)];
+    return hashPiece;
+//    for (NSInteger i = 0; i < 2; i++) {
+//        NSInteger start = (i * len)/4;
+//        NSString *hashPiece = [hash substringWithRange:NSMakeRange(start, start+len/4)];
+//        NSString *pasreInt = methodNames_translateStringToHex(hashPiece);
+//        NSLog(@"hashPiece:%@, parseInt:%@", hashPiece, pasreInt);
+//    }
+//
+//    return @"";
+//        const codeList = []
+}
+
+
 /// 获取设备品牌
 static inline NSString *methodNames_getDeviceBrand() {
     return @"苹果";

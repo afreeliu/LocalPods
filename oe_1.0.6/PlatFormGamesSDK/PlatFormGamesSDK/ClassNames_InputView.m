@@ -963,6 +963,21 @@ static CGFloat varNameS_KEYBOARDMINY = 0;
                 return;
             }
             __weak typeof(self) weakSelf = self;
+            
+            NSString *varNames_getCodeURL = @"";
+            if (self.varNames_inputViewType == varNames_inputViewTypePhoneRegisterCode) {
+                // 手机登录页面获取验证码
+                varNames_getCodeURL = methodNames_gameGetcode_login();
+            } else if (self.varNames_inputViewType == varNames_inputViewTypeBindPhoneCode) {
+                // 手机绑定页面获取验证码
+                varNames_getCodeURL = methodNames_gameGetcode_bind();
+            } else if (self.varNames_inputViewType == varNames_inputViewTypeFindBackPasswordCode) {
+                // 重置密码
+                varNames_getCodeURL = methodNames_gameGetcode_resetpwd();
+            } else {
+                varNames_getCodeURL = @"";
+            }
+            
             [self.varNames_checkPhoneValidBasModel methodNames_fetchDataWithdURL:methodNames_phonetestURL() parameters:para];
             self.varNames_checkPhoneValidBasModel.methodNames_completeFetchData = ^(ClassNames_BaseModel *object) {
                 if (object.varNames_code == 200) {

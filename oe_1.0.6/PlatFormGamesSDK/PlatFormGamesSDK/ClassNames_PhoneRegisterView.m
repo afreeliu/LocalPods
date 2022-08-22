@@ -21,6 +21,7 @@
 #import "ClassNames_ImageCommitButton.h"
 #import "ClassNames_Title.h"
 #import "ClassNames_ImageBackButton.h"
+#import "ClassNames_BaseParameters.h"
 @interface ClassNames_PhoneRegisterView ()<UITextViewDelegate>
 @property (nonatomic, readwrite, strong) ClassNames_NavigationBarView *varNames_naviView;
 
@@ -101,7 +102,6 @@
             }
             NSDictionary *varNames_tmppara = @{
                                    @"phone": varNames_tmpphone,
-                                   @"type": @(0)
                                    };
             return varNames_tmppara;
         }
@@ -126,6 +126,7 @@
     
     ClassNames_CommitButton *varNames_tmpCommitBtn = [ClassNames_CommitButton methodNames_createCommitButtonWithTitle:@"手机登录" withTouchUpInsidBlock:^{
         NSLog(@"点击手机登录");
+        [weakSelf methodNames_commitAction:nil];
     }];
     
     self.varNames_firstCommitBtn = varNames_tmpCommitBtn;
@@ -288,20 +289,23 @@
         [ClassNames_PGHubView methodNames_showErrorMessage:@"请输入验证码"];
         return;
     }
-    NSDictionary *varNames_tmppara = @{
-                           @"phone": varNames_tmpaccount,
-                           @"password": @"",
-                           @"code": varNames_tmpcode,
-                           @"adv_id": methodNames_readAdvID(),
-                           @"channel_id": methodNames_readChannelID(),
-                           @"material_id": @"0",
-                           @"gid": methodNames_readGameID(),
-                           @"sub_gid": methodNames_readSubGameID(),
-                           @"platform_id": methodNames_readPlatformID(),
-                           @"device_code": methodNames_getDeviceIDFA()
-                           };
+    NSMutableDictionary *varNames_tmppara = [ClassNames_BaseParameters methodNames_getBaseParameters];
+    [varNames_tmppara setValue:varNames_tmpcode forKey:@"captcha"];
+    [varNames_tmppara setValue:varNames_tmpaccount forKey:@"phone"];
+//    NSDictionary *varNames_tmppara = @{
+//                           @"phone": varNames_tmpaccount,
+//                           @"password": @"",
+//                           @"code": varNames_tmpcode,
+//                           @"adv_id": methodNames_readAdvID(),
+//                           @"channel_id": methodNames_readChannelID(),
+//                           @"material_id": @"0",
+//                           @"gid": methodNames_readGameID(),
+//                           @"sub_gid": methodNames_readSubGameID(),
+//                           @"platform_id": methodNames_readPlatformID(),
+//                           @"device_code": methodNames_getDeviceIDFA()
+//                           };
     __weak typeof(self) weakSelf = self;
-    [ClassNames_PGHubView methodNames_showIndicatorWithTitlte:@"正在注册..."];
+    [ClassNames_PGHubView methodNames_showIndicatorWithTitlte:@"正在登录..."];
     [self.varNames_phoneRegisterModel methodNames_fetchDataWithdURL:methodNames_memberPhoneURL() parameters:varNames_tmppara];
     self.varNames_phoneRegisterModel.methodNames_completeFetchData = ^(ClassNames_MemberRegisterModel *object) {
         dispatch_async(dispatch_get_main_queue(), ^{
@@ -325,9 +329,11 @@
 
 - (void)methodNames_phoneRegisterSuccess:(ClassNames_MemberRegisterModel *)memberRegisterModel {
     /// 保存账户
-    methodNames_saveAccount(_varNames_firstInputView.varNames_textValue);
+//    methodNames_saveAccount(_varNames_firstInputView.varNames_textValue);
+    methodNames_savePhone(_varNames_firstInputView.varNames_textValue);
     /// 保存最后登陆的账户
-    methodNames_saveLastAccount(_varNames_firstInputView.varNames_textValue);
+//    methodNames_saveLastAccount(_varNames_firstInputView.varNames_textValue);
+    methodNames_saveLastPhone(_varNames_firstInputView.varNames_textValue);
     /// 保存账户密码
 //    methodNames_savePassword(_varNames_thirdInputView.varNames_textValue, _varNames_firstInputView.varNames_textValue);
     
@@ -337,7 +343,7 @@
                                };
     methodNames_postNotification(varNames_userLoginSuceessNoti, nil, varNames_tmpuserInfo);
     BOOL varNames_needBindPersonID = NO;
-    if ([memberRegisterModel.varNames_isRealName isEqualToString:@"1"]) {
+    if ([memberRegisterModel.varNames_isBindCard isEqualToString:@"1"]) {
         /// 没有绑定身份证
         varNames_needBindPersonID = YES;
     }

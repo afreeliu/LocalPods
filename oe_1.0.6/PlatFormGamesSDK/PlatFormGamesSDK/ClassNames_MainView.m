@@ -184,6 +184,13 @@
         _varNames_canQuickLogin = methodNames_readFastLogin();
         
         [self methodNames_createBackgroundView];
+        
+        if (_varNames_isAutoLogin) {
+            [self methodNames_showAutoLoginView];
+        } else {
+            [self methodNames_showLoginView];
+        }
+        
         UITapGestureRecognizer *varNames_tmptap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(methodNames_endEditing:)];
         self.userInteractionEnabled = YES;
         [self addGestureRecognizer:varNames_tmptap];
@@ -287,27 +294,24 @@
     if (!self.varNames_loginView) {
         self.varNames_loginView = [ClassNames_LoginView methodNames_createLoginView];
         self.varNames_loginView.clipsToBounds = YES;
-        self.varNames_loginView.methodNames_commitBlock = ^(NSString *varNames_acc, NSString *varNames_pss) {
-            weakSelf.varNames_loginView.hidden = YES;
-            weakSelf.varNames_skillBtnView.hidden = YES;
-            [weakSelf methodNames_createAutoLoginViewWithAccount:varNames_acc methodNames_password:varNames_pss];
-        };
-        self.varNames_loginView.methodNames_servicceBlock = ^{
-//            [weakSelf methodNames_showCustomerServerView];
-            //测试
-            weakSelf.varNames_loginView.hidden = YES;
-            [weakSelf methodNames_createBindPhoeViewFromView:nil];
-        };
-//        _varNames_loginView.methodNames_loginSuccess = ^(BOOL varNames_isNeedBindPhone, BOOL varNames_isNeedBindPersonID) {
-//            weakSelf.varNames_isNeedBindPhone = varNames_isNeedBindPhone;
-//            weakSelf.varNames_isNeedBindPersonID = varNames_isNeedBindPersonID;
+//        self.varNames_loginView.methodNames_commitBlock = ^(NSString *varNames_acc, NSString *varNames_pss) {
 //            weakSelf.varNames_loginView.hidden = YES;
-//            [weakSelf.varNames_loginView removeFromSuperview];
-//            [weakSelf methodNames_createBindView];
+//            weakSelf.varNames_skillBtnView.hidden = YES;
+//            [weakSelf methodNames_createAutoLoginViewWithAccount:varNames_acc methodNames_password:varNames_pss];
 //        };
-//        _varNames_loginView.methodNames_loginFailure = ^{
-//            NSLog(@"login error");
-//        };
+        self.varNames_loginView.methodNames_servicceBlock = ^{
+            [weakSelf methodNames_showCustomerServerView];
+        };
+        _varNames_loginView.methodNames_loginSuccess = ^(BOOL varNames_isNeedBindPhone, BOOL varNames_isNeedBindPersonID) {
+            weakSelf.varNames_isNeedBindPhone = varNames_isNeedBindPhone;
+            weakSelf.varNames_isNeedBindPersonID = varNames_isNeedBindPersonID;
+            weakSelf.varNames_loginView.hidden = YES;
+            [weakSelf.varNames_loginView removeFromSuperview];
+            [weakSelf methodNames_createBindView];
+        };
+        _varNames_loginView.methodNames_loginFailure = ^{
+            NSLog(@"login error");
+        };
         self.varNames_loginView.methodNames_delegateBlock = ^{
             [weakSelf methodNames_showDelegateView];
         };
@@ -561,10 +565,10 @@
     methodNames_saveUserID(model.varNames_uid);
     methodNames_saveUserName(model.varNames_username);
     methodNames_saveVisitorFirstLogin(model.varNames_password.length? YES : NO);
-    methodNames_saveVisitorConnectPhone(model.varNames_isbind);
-    methodNames_saveVisitorConnectPersonID(model.varNames_isRealName);
-    self.varNames_isNeedBindPhone = [model.varNames_isbind isEqualToString:@"1"];
-    self.varNames_isNeedBindPersonID = [model.varNames_isRealName isEqualToString:@"1"];
+    methodNames_saveVisitorConnectPhone(model.varNames_isbindPhone);
+    methodNames_saveVisitorConnectPersonID(model.varNames_isBindCard);
+    self.varNames_isNeedBindPhone = [model.varNames_isbindPhone isEqualToString:@"2"];
+    self.varNames_isNeedBindPersonID = [model.varNames_isBindCard isEqualToString:@"2"];
     NSDictionary *varNames_tmpuserInfo = @{
                                @"uid": model.varNames_uid,
                                @"username": model.varNames_username

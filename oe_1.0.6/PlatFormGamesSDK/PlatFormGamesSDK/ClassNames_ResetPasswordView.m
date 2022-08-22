@@ -105,7 +105,7 @@
     varNames_tmpFirstInputView.translatesAutoresizingMaskIntoConstraints = NO;
     self.varNames_firstInputView = varNames_tmpFirstInputView;
     
-    ClassNames_InputView *varNames_tmpSecondInputView = [ClassNames_InputView methodNames_inputViewType:varNames_inputViewTypePhoneRegisterCode];
+    ClassNames_InputView *varNames_tmpSecondInputView = [ClassNames_InputView methodNames_inputViewType:varNames_inputViewTypeFindBackPasswordCode];
     varNames_tmpSecondInputView.translatesAutoresizingMaskIntoConstraints = NO;
     self.varNames_secondInputView = varNames_tmpSecondInputView;
     

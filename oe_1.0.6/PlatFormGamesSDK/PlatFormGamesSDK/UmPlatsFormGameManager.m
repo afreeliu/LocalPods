@@ -105,17 +105,16 @@
         methodNames_saveGameVersion(game_ver);
     }
     NSMutableDictionary *varNames_parameters = [ClassNames_BaseParameters methodNames_getBaseParameters];
+    // 这个 sid 的值需要再确定
     [varNames_parameters setValue:@"10086" forKey:@"sid"];
     __weak typeof(self) weakSelf = self;
-    [self.varNames_gameInitModel methodNames_fetchDataWithdURL:@"https://cgcccp.dunwang.com/sdk/init" parameters:varNames_parameters];
+    [self.varNames_gameInitModel methodNames_fetchDataWithdURL:methodNames_gameInit() parameters:varNames_parameters];
     self.varNames_gameInitModel.methodNames_completeFetchData = ^(id object) {
         
         ClassNames_GameInitialiseModel *model = (ClassNames_GameInitialiseModel *)object;
         
-        NSLog(@"model:%@", model.description);
         dispatch_async(dispatch_get_main_queue(), ^{
             /// 是否发送了初始化的通知,如果没有发送，那么这里发送一次
-//            weakSelf.varNames_appleCheck = model.varNames_switch_appleCheck;
             [weakSelf methodNames_postInitNotiModel:model];
         });
     };
@@ -140,6 +139,7 @@
         NSMutableDictionary *varNames_tmppara = [ClassNames_BaseParameters methodNames_getBaseParameters];
         [[ClassNames_URLSessionManager methodNames_shareSessionManager]methodNames_requestWithUrl:methodNames_gameSipequ() parameters:varNames_tmppara success:^(NSDictionary *responseData) {
             methodNames_saveActivateDevice();
+            // 409 则为当前数据已存在
             NSLog(@"激活设备返回内容:%@", responseData);
         } error:^(NSError *error) {
             methodNames_debugLog(error.userInfo);
@@ -176,6 +176,155 @@
     });
     
 }
+
+
+#pragma mark --------------------- SDK 登录入口
+-(void)umPlatsFormLogin {
+    [ClassNames_PGHubView methodNames_showIndicatorWithTitlte:@"加载中..."];
+    NSDictionary *varNames_tmppara = [ClassNames_BaseParameters methodNames_getBaseParameters];
+    __weak typeof(self) weakSelf = self;
+    
+    if (self.varNames_gameInitModel.varNames_status == ClassNames_FetchDataStatusSuccess) {
+        [self methodNames_handleGameInit];
+    } else {
+        // 初始化出错了
+        methodNames_debugLog(@"初始化出错了");
+        methodNames_debugLog(@"需要进行初始化请求");
+        
+        [self.varNames_gameInitModel methodNames_fetchDataWithdURL:methodNames_gameinitialiseURL() parameters:varNames_tmppara];
+        self.varNames_gameInitModel.methodNames_completeFetchData = ^(id object) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [weakSelf methodNames_handleGameInit];
+            });
+        };
+        self.varNames_gameInitModel.methodNames_FetchError = ^(NSError *error) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [ClassNames_PGHubView methodNames_hide];
+                [weakSelf methodNames_createLoginView];
+                [weakSelf methodNames_postInitNotiModel:nil];
+                [ClassNames_PGHubView methodNames_showErrorMessage:@"网络出了小差!!!"];
+            });
+        };
+    }
+    
+    
+    
+//    ClassNames_GameInitialiseModel *varNames_tmpinitModel = [[ClassNames_GameInitialiseModel alloc]init];
+//    [varNames_tmpinitModel methodNames_fetchDataWithdURL:methodNames_gameinitialiseURL() parameters:varNames_tmppara];
+//    varNames_tmpinitModel.methodNames_completeFetchData = ^(id object) {
+//        ClassNames_GameInitialiseModel *model = (ClassNames_GameInitialiseModel *)object;
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [ClassNames_PGHubView methodNames_hide];
+//
+//            /// 是否发送了初始化的通知,如果没有发送，那么这里发送一次
+//            if (!weakSelf.varNames_isSendInitNOti) {
+////                weakSelf.varNames_appleCheck = model.varNames_switch_appleCheck;
+//                [weakSelf methodNames_postInitNotiModel:model];
+//            }
+//
+//            if (!methodNames_getDefault_isPassLogin_config()) {
+//                /// 不进行登录的隐藏
+////                methodNames_debugLog(@"plist中isPassLogin设置为0");
+//                [weakSelf methodNames_createLoginView];
+//            } else {
+//                methodNames_debugLog(@"plist中isPassLogin设置为1");
+//                /// 是否需要隐藏登录还需根据 是否正在审----------核
+//                if (!methodNames_readAppleCheck()) {
+//                    /// 通过审----------核
+//                    [weakSelf methodNames_createLoginView];
+//                    methodNames_debugLog(@"审通过了");
+//                } else {
+//                    methodNames_debugLog(@"审中");
+//                    NSString *varNames_tmpUid = methodNames_getDefault_uid();
+//                    NSString *varNames_tmpUsername = methodNames_getDefault_userName();
+//                    if (!varNames_tmpUid.length || !varNames_tmpUsername.length) {
+//                        NSLog(@"没有设置bundle的plist中uid和username的值");
+//                        return ;
+//                    }
+//                    NSDictionary *userInfo = @{
+//                                               @"uid": varNames_tmpUid,
+//                                               @"username": varNames_tmpUsername
+//                                               };
+//                    methodNames_saveUserID(varNames_tmpUid);
+//                    methodNames_saveUserName(varNames_tmpUsername);
+//                    methodNames_postNotification(varNames_userLoginSuceessNoti, nil, userInfo);
+//                }
+//            }
+//
+//
+//        });
+//    };
+//    varNames_tmpinitModel.methodNames_FetchError = ^(NSError *error) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [ClassNames_PGHubView methodNames_hide];
+//            [weakSelf methodNames_createLoginView];
+//            [weakSelf methodNames_postInitNotiModel:nil];
+//            [ClassNames_PGHubView methodNames_showErrorMessage:@"网络出了小差!!!"];
+//        });
+//    };
+//    self.varNames_loginInitModel = varNames_tmpinitModel;
+}
+
+- (void)methodNames_handleGameInit {
+    // 初始化成功了
+    [ClassNames_PGHubView methodNames_hide];
+    /// 是否发送了初始化的通知,如果没有发送，那么这里发送一次
+    if (!self.varNames_isSendInitNOti) {
+        [self methodNames_postInitNotiModel:self.varNames_gameInitModel];
+    }
+    
+    if (!methodNames_getDefault_isPassLogin_config()) {
+        /// 不进行登录的隐藏。即需要进行登录
+        //methodNames_debugLog(@"plist中isPassLogin设置为0");
+        [self methodNames_createLoginView];
+    } else {
+        //methodNames_debugLog(@"plist中isPassLogin设置为1");
+        /// 是否需要隐藏登录还需根据 是否正在审----------核
+        if (!methodNames_readAppleCheck()) {
+            /// 通过审----------核
+            [self methodNames_createLoginView];
+            methodNames_debugLog(@"审通过了");
+        } else {
+            methodNames_debugLog(@"审中");
+            NSString *varNames_tmpUid = methodNames_getDefault_uid();
+            NSString *varNames_tmpUsername = methodNames_getDefault_userName();
+            if (!varNames_tmpUid.length || !varNames_tmpUsername.length) {
+                NSLog(@"没有设置bundle的plist中uid和username的值");
+                return ;
+            }
+            NSDictionary *userInfo = @{
+                                       @"uid": varNames_tmpUid,
+                                       @"username": varNames_tmpUsername
+                                       };
+            methodNames_saveUserID(varNames_tmpUid);
+            methodNames_saveUserName(varNames_tmpUsername);
+            methodNames_postNotification(varNames_userLoginSuceessNoti, nil, userInfo);
+        }
+    }
+    
+    
+}
+
+
+#pragma mark --------------------- 创建登录页面
+- (void)methodNames_createLoginView {
+    
+    self.varNames_mainView = [ClassNames_MainView methodNames_showMainView];
+    self.varNames_mainView.translatesAutoresizingMaskIntoConstraints = NO;
+    self.varNames_topConstraint = [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_mainView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_mainView methodNames_constriant:0];
+    self.varNames_bottomConstraint = [ClassNames_BaseViewLayout methodNames_layoutBottom:self.varNames_mainView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_mainView methodNames_constriant:0];
+    // 设备激活
+    [self methodNames_initDevice];
+}
+
+
+
+
+
+
+
 
 
 
@@ -215,100 +364,100 @@
     }
 }
 
-/**
- * SDK 登录入口
- */
--(void)umPlatsFormLogin {
-    
-//    [[ClassNames_MainView methodNames_instanceMainView]methodNames_showUserCenterView];
-//    [[ClassNames_MainView methodNames_instanceMainView]methodNames_showLoginView];
-    [[ClassNames_MainView methodNames_instanceMainView]methodNames_showNoticeView];
-    [self methodNames_showSuspensionBall];
-    return;
-    
-    [ClassNames_PGHubView methodNames_showIndicatorWithTitlte:@"加载中..."];
-    NSDictionary *varNames_tmppara = @{
-                           @"gid": methodNames_readGameID(),
-                           @"sub_gid": methodNames_readSubGameID(),
-                           @"game_ver": methodNames_getProjectVersion()
-                           };
-    __weak typeof(self) weakSelf = self;
-    ClassNames_GameInitialiseModel *varNames_tmpinitModel = [[ClassNames_GameInitialiseModel alloc]init];
-    [varNames_tmpinitModel methodNames_fetchDataWithdURL:methodNames_gameinitialiseURL() parameters:varNames_tmppara];
-    varNames_tmpinitModel.methodNames_completeFetchData = ^(id object) {
-        ClassNames_GameInitialiseModel *model = (ClassNames_GameInitialiseModel *)object;
-        
-        
-//        methodNames_saveNeedFastLogin(model.varNames_switch_1login);
-//        methodNames_saveNeedBindPhone(model.varNames_switch_bind);
-//        methodNames_saveProtocolSwitch(model.varNames_is_protocol);
-//        methodNames_saveProtocolURL(model.varNames_url);
-//        methodNames_saveAppleCheck(model.varNames_switch_appleCheck);
-        
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [ClassNames_PGHubView methodNames_hide];
-            
-            /// 是否发送了初始化的通知,如果没有发送，那么这里发送一次
-            if (!weakSelf.varNames_isSendInitNOti) {
-//                weakSelf.varNames_appleCheck = model.varNames_switch_appleCheck;
-                [weakSelf methodNames_postInitNotiModel:model];
-            }
-            
-            if (!methodNames_getDefault_isPassLogin_config()) {
-                /// 不进行登录的隐藏
-//                methodNames_debugLog(@"plist中isPassLogin设置为0");
-                [weakSelf methodNames_createLoginView];
-            } else {
-                methodNames_debugLog(@"plist中isPassLogin设置为1");
-                /// 是否需要隐藏登录还需根据 是否正在审----------核
-                if (!methodNames_readAppleCheck()) {
-                    /// 通过审----------核
-                    [weakSelf methodNames_createLoginView];
-                    methodNames_debugLog(@"审通过了");
-                } else {
-                    methodNames_debugLog(@"审中");
-                    NSString *varNames_tmpUid = methodNames_getDefault_uid();
-                    NSString *varNames_tmpUsername = methodNames_getDefault_userName();
-                    if (!varNames_tmpUid.length || !varNames_tmpUsername.length) {
-                        NSLog(@"没有设置bundle的plist中uid和username的值");
-                        return ;
-                    }
-                    NSDictionary *userInfo = @{
-                                               @"uid": varNames_tmpUid,
-                                               @"username": varNames_tmpUsername
-                                               };
-                    methodNames_saveUserID(varNames_tmpUid);
-                    methodNames_saveUserName(varNames_tmpUsername);
-                    methodNames_postNotification(varNames_userLoginSuceessNoti, nil, userInfo);
-                }
-            }
-            
-            
-        });
-    };
-    varNames_tmpinitModel.methodNames_FetchError = ^(NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [ClassNames_PGHubView methodNames_hide];
-            [weakSelf methodNames_createLoginView];
-            [weakSelf methodNames_postInitNotiModel:nil];
-            [ClassNames_PGHubView methodNames_showErrorMessage:@"网络出了小差!!!"];
-        });
-    };
-    self.varNames_loginInitModel = varNames_tmpinitModel;
-}
+///**
+// * SDK 登录入口
+// */
+//-(void)umPlatsFormLogin {
+//
+////    [[ClassNames_MainView methodNames_instanceMainView]methodNames_showUserCenterView];
+////    [[ClassNames_MainView methodNames_instanceMainView]methodNames_showLoginView];
+//    [[ClassNames_MainView methodNames_instanceMainView]methodNames_showNoticeView];
+//    [self methodNames_showSuspensionBall];
+//    return;
+//
+//    [ClassNames_PGHubView methodNames_showIndicatorWithTitlte:@"加载中..."];
+//    NSDictionary *varNames_tmppara = @{
+//                           @"gid": methodNames_readGameID(),
+//                           @"sub_gid": methodNames_readSubGameID(),
+//                           @"game_ver": methodNames_getProjectVersion()
+//                           };
+//    __weak typeof(self) weakSelf = self;
+//    ClassNames_GameInitialiseModel *varNames_tmpinitModel = [[ClassNames_GameInitialiseModel alloc]init];
+//    [varNames_tmpinitModel methodNames_fetchDataWithdURL:methodNames_gameinitialiseURL() parameters:varNames_tmppara];
+//    varNames_tmpinitModel.methodNames_completeFetchData = ^(id object) {
+//        ClassNames_GameInitialiseModel *model = (ClassNames_GameInitialiseModel *)object;
+//
+//
+////        methodNames_saveNeedFastLogin(model.varNames_switch_1login);
+////        methodNames_saveNeedBindPhone(model.varNames_switch_bind);
+////        methodNames_saveProtocolSwitch(model.varNames_is_protocol);
+////        methodNames_saveProtocolURL(model.varNames_url);
+////        methodNames_saveAppleCheck(model.varNames_switch_appleCheck);
+//
+//
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [ClassNames_PGHubView methodNames_hide];
+//
+//            /// 是否发送了初始化的通知,如果没有发送，那么这里发送一次
+//            if (!weakSelf.varNames_isSendInitNOti) {
+////                weakSelf.varNames_appleCheck = model.varNames_switch_appleCheck;
+//                [weakSelf methodNames_postInitNotiModel:model];
+//            }
+//
+//            if (!methodNames_getDefault_isPassLogin_config()) {
+//                /// 不进行登录的隐藏
+////                methodNames_debugLog(@"plist中isPassLogin设置为0");
+//                [weakSelf methodNames_createLoginView];
+//            } else {
+//                methodNames_debugLog(@"plist中isPassLogin设置为1");
+//                /// 是否需要隐藏登录还需根据 是否正在审----------核
+//                if (!methodNames_readAppleCheck()) {
+//                    /// 通过审----------核
+//                    [weakSelf methodNames_createLoginView];
+//                    methodNames_debugLog(@"审通过了");
+//                } else {
+//                    methodNames_debugLog(@"审中");
+//                    NSString *varNames_tmpUid = methodNames_getDefault_uid();
+//                    NSString *varNames_tmpUsername = methodNames_getDefault_userName();
+//                    if (!varNames_tmpUid.length || !varNames_tmpUsername.length) {
+//                        NSLog(@"没有设置bundle的plist中uid和username的值");
+//                        return ;
+//                    }
+//                    NSDictionary *userInfo = @{
+//                                               @"uid": varNames_tmpUid,
+//                                               @"username": varNames_tmpUsername
+//                                               };
+//                    methodNames_saveUserID(varNames_tmpUid);
+//                    methodNames_saveUserName(varNames_tmpUsername);
+//                    methodNames_postNotification(varNames_userLoginSuceessNoti, nil, userInfo);
+//                }
+//            }
+//
+//
+//        });
+//    };
+//    varNames_tmpinitModel.methodNames_FetchError = ^(NSError *error) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            [ClassNames_PGHubView methodNames_hide];
+//            [weakSelf methodNames_createLoginView];
+//            [weakSelf methodNames_postInitNotiModel:nil];
+//            [ClassNames_PGHubView methodNames_showErrorMessage:@"网络出了小差!!!"];
+//        });
+//    };
+//    self.varNames_loginInitModel = varNames_tmpinitModel;
+//}
 
-- (void)methodNames_createLoginView {
-    
-    self.varNames_mainView = [ClassNames_MainView methodNames_showMainView];
-    self.varNames_mainView.translatesAutoresizingMaskIntoConstraints = NO;
-    self.varNames_topConstraint = [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_mainView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_mainView methodNames_constriant:0];
-    self.varNames_bottomConstraint = [ClassNames_BaseViewLayout methodNames_layoutBottom:self.varNames_mainView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_mainView methodNames_constriant:0];
-    // 设备激活
-    [self methodNames_initDevice];
-}
+//- (void)methodNames_createLoginView {
+//
+//    self.varNames_mainView = [ClassNames_MainView methodNames_showMainView];
+//    self.varNames_mainView.translatesAutoresizingMaskIntoConstraints = NO;
+//    self.varNames_topConstraint = [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_mainView methodNames_constriant:0];
+//    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_mainView methodNames_constriant:0];
+//    self.varNames_bottomConstraint = [ClassNames_BaseViewLayout methodNames_layoutBottom:self.varNames_mainView methodNames_constriant:0];
+//    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_mainView methodNames_constriant:0];
+//    // 设备激活
+//    [self methodNames_initDevice];
+//}
 
 
 

@@ -6,9 +6,9 @@
 @property (nonatomic, readwrite, copy) NSString *varNames_uid;
 @property (nonatomic, readwrite, copy) NSString *varNames_username;
 @property (nonatomic, readwrite, copy) NSString *varNames_password;
-@property (nonatomic, readwrite, copy) NSString *varNames_isbind;
-@property (nonatomic, readwrite, copy) NSString *varNames_isRealName;
-@property (nonatomic, readwrite, copy) NSString *varNames_isRealNameBind;
+@property (nonatomic, readwrite, copy) NSString *varNames_isbindPhone;
+@property (nonatomic, readwrite, copy) NSString *varNames_isBindCard;
+@property (nonatomic, readwrite, copy) NSString *varNames_realName;
 @end
 
 @implementation ClassNames_MemberVisitorModel
@@ -47,19 +47,19 @@
             self.varNames_password = [dataDic objectForKey:@"password"];
         }
         if ([dataDic objectForKey:@"isbind"] == nil || [[dataDic objectForKey:@"isbind"] isKindOfClass:NSNull.class]) {
-            self.varNames_isbind = @"";
+            self.varNames_isbindPhone = @"";
         } else {
-            self.varNames_isbind = [dataDic objectForKey:@"isbind"];
+            self.varNames_isbindPhone = [dataDic objectForKey:@"isbind"];
         }
         if ([dataDic objectForKey:@"isRealName"] == nil || [[dataDic objectForKey:@"isRealName"] isKindOfClass:NSNull.class]) {
-            self.varNames_isRealName = @"";
+            self.varNames_isBindCard = @"";
         } else {
-            self.varNames_isRealName = [dataDic objectForKey:@"isRealName"];
+            self.varNames_isBindCard = [dataDic objectForKey:@"isRealName"];
         }
         if ([dataDic objectForKey:@"isRealNameBind"] == nil || [[dataDic objectForKey:@"isRealNameBind"] isKindOfClass:NSNull.class]) {
-            self.varNames_isRealNameBind = @"";
+            self.varNames_realName = @"";
         } else {
-            self.varNames_isRealNameBind = [dataDic objectForKey:@"isRealNameBind"];
+            self.varNames_realName = [dataDic objectForKey:@"isRealNameBind"];
         }
     }
     [super methodNames_modelWithDict:dict];

@@ -43,32 +43,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3B39E328-DE33-415E-A229-6B38FE25C530"
+            uuid = "3A644D91-80BF-4864-8D34-59255BB6F47F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/UmPlatsFormGameManager.m"
+            filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/ClassNames_LoginView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
-            landmarkName = "-umPlatsFormLaunchConfigGameID:WithSub_GameID:WithOpr_Cid:WithSdk_Ver:WithGame_Ver:"
+            startingLineNumber = "316"
+            endingLineNumber = "316"
+            landmarkName = "-methodNames_commitAction:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "825FFA0E-CB5A-45EF-9485-FE8C8088BF08"
+            uuid = "C18F492B-3F6E-4DE4-B303-93E6C4EEA716"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/UmPlatsFormGameManager.m"
+            filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/ClassNames_LoginView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "-umPlatsFormLaunchConfigGameID:WithSub_GameID:WithOpr_Cid:WithSdk_Ver:WithGame_Ver:"
+            startingLineNumber = "334"
+            endingLineNumber = "334"
+            landmarkName = "-methodNames_loginsuccess:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

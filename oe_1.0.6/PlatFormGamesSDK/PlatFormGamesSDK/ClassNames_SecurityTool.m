@@ -3,7 +3,6 @@
 #import "ClassNames_SecurityTool.h"
 
 NSString *const varNames_lastAccountKey = @"varNames_lastAccountKey";
-NSString *const varNames_keychainservice = @"com.Service_PFGamesSDK.www";
 NSString *const varNames_keychainAccessGroup = @"PlatFormGamesGroup";
 
 
@@ -17,8 +16,10 @@ NSString *const varNames_visitorConnectPersonIDKey = @"varNames_visitorConnectPe
 /// 保存登陆过的账户的列表
 NSString *const varNames_haveLoginAccountKey = @"varNames_haveLoginAccountKey";
 
-
-
+/// 保存使用手机号登陆过的列表
+NSString *const varNames_haveLoginPhoneKey = @"varNames_haveLoginPhoneKey";
+NSString *const varNames_lastLoginPhoneKey = @"varNames_lastLoginPhoneKey";
+NSString *const varNames_keyChainPhoneAccessGroup = @"varNames_keyChainPhoneAccessGroup";
 
 
 

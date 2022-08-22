@@ -17,13 +17,13 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(notiInit:) name:@"umplatformgameinit" object:nil];
-    [[UmPlatsFormGameManager umPlatsFormManagerDeafaults]umPlatsFormLaunchConfigGameID:@"1" WithSub_GameID:@"1044"];
     
     [[UmPlatsFormGameManager umPlatsFormManagerDeafaults]umPlatsFormLaunchConfigGameID:@"8012" WithSub_GameID:@"8088" WithOpr_Cid:@"80001" WithSdk_Ver:@"1.0.0" WithGame_Ver:@"1.0.0"];
     
     return YES;
 }
 
+#pragma mark ---------------------  初始化通知
 - (void)notiInit:(NSNotification *)noti {
     NSLog(@"初始化好了：%@", noti.userInfo);
 }
