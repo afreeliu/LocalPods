@@ -14,6 +14,7 @@
 #import "ClassNames_ImageCommitButton.h"
 #import "ClassNames_ImageErrorRight.h"
 #import "ClassNames_NavigationBarView.h"
+#import "ClassNames_BaseParameters.h"
 @interface ClassNames_BindPersonIDView ()
 
 @property (nonatomic, readwrite, weak) UIView *varNames_backView;
@@ -82,7 +83,6 @@
     
     __weak typeof(self) weakSelf = self;
     ClassNames_CommitButton *varNames_tmpCommitBtn = [ClassNames_CommitButton methodNames_createCommitButtonWithTitle:@"实名认证" withTouchUpInsidBlock:^{
-        NSLog(@"实名认证");
         [weakSelf methodNames_commitAction:nil];
     }];
     
@@ -237,32 +237,37 @@
         [ClassNames_PGHubView methodNames_showErrorMessage:@"请输入真实姓名"];
         return;
     }
-    if (!methodNames_chineseNameRegular(varNames_tmpname)) {
-        [ClassNames_PGHubView methodNames_showErrorMessage:@"姓名格式有误"];
-        return;
-    }
+//    if (!methodNames_chineseNameRegular(varNames_tmpname)) {
+//        [ClassNames_PGHubView methodNames_showErrorMessage:@"姓名格式有误"];
+//        return;
+//    }
     if (!varNames_tmppersonid || !varNames_tmppersonid.length) {
         [ClassNames_PGHubView methodNames_showErrorMessage:@"请输入身份证号码"];
         return;
     }
     
-    if (!methodNames_personIDRegular(varNames_tmppersonid)) {
-        [ClassNames_PGHubView methodNames_showErrorMessage:@"身份证格式有误"];
-        return;
-    }
-    NSDictionary *varNames_tmppara = @{
-                           @"user_name": methodNames_readUserName(),
-                           @"real_name": varNames_tmpname,
-                           @"idcard": varNames_tmppersonid
-                           };
-    
+//    if (!methodNames_personIDRegular(varNames_tmppersonid)) {
+//        [ClassNames_PGHubView methodNames_showErrorMessage:@"身份证格式有误"];
+//        return;
+//    }
+    NSDictionary *varNames_tmppara = [ClassNames_BaseParameters methodNames_getBaseParameters];
+//    NSDictionary *varNames_tmppara = @{
+//                           @"user_name": methodNames_readUserName(),
+//                           @"real_name": varNames_tmpname,
+//                           @"idcard": varNames_tmppersonid
+//                           };
+    [varNames_tmppara setValue:methodNames_readUserID() forKey:@"uid"];
+    [varNames_tmppara setValue:methodNames_readUserName() forKey:@"uname"];
+    [varNames_tmppara setValue:varNames_tmpname forKey:@"cn_name"];
+    [varNames_tmppara setValue:varNames_tmppersonid forKey:@"id_card"];
     __weak typeof(self) weakSelf = self;
     [ClassNames_PGHubView methodNames_showIndicatorWithTitlte:@"正在绑定..."];
-    [self.varNames_bindPersonIDModel methodNames_fetchDataWithdURL:methodNames_bindidcardURL() parameters:varNames_tmppara];
+    [self.varNames_bindPersonIDModel methodNames_fetchDataWithdURL:methodNames_gameCbind() parameters:varNames_tmppara];
     self.varNames_bindPersonIDModel.methodNames_completeFetchData = ^(ClassNames_BaseModel *object) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [ClassNames_PGHubView methodNames_hide];
-            if (object.varNames_code == 200) { 
+            if (object.varNames_code == 200) {
+                [ClassNames_PGHubView methodNames_showErrorMessage:object.varNames_msg];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     if (weakSelf.methodNames_bindPersonIDSuccess) {
                         weakSelf.methodNames_bindPersonIDSuccess();

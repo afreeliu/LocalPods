@@ -14,73 +14,25 @@
             filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/UmPlatsFormGameManager.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "390"
-            endingLineNumber = "390"
-            landmarkName = "-methodNames_showSuspensionBall"
-            landmarkType = "7">
+            startingLineNumber = "398"
+            endingLineNumber = "398"
+            landmarkName = "UmPlatsFormGameManager"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "F9F50A2F-09B5-4794-8522-61D9B4A43642"
+            uuid = "EA41F111-7E69-45BD-B082-97E4C6BCEB7F"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/UmPlatsFormGameManager.m"
+            filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/ClassNames_MainView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "-umPlatsFormLaunchConfigGameID:WithSub_GameID:WithOpr_Cid:WithSdk_Ver:WithGame_Ver:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "1C7EA4C2-D6A5-4220-B4B4-D6D22D89C7D0"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/UmPlatsFormGameManager.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
-            landmarkName = "-methodNames_initDevice"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C9810A7D-DCD0-479E-8A2A-A4C20E9447DC"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/UmPlatsFormGameManager.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
-            landmarkName = "-methodNames_initDevice"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F750AE42-C64A-4C48-9579-D149C006C3B7"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/UmPlatsFormGameManager.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
-            landmarkName = "-methodNames_initDevice"
+            startingLineNumber = "310"
+            endingLineNumber = "310"
+            landmarkName = "-methodNames_createLoginView"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

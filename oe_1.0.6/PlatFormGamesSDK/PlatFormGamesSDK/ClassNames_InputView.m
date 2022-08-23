@@ -951,17 +951,17 @@ static CGFloat varNameS_KEYBOARDMINY = 0;
         self.varNames_itemButton.enabled = NO;
         if (self.methodNames_getPhoneNumber) {
             NSDictionary *para = self.methodNames_getPhoneNumber(sender.enabled);
-            if (!para) {
-                self.varNames_itemButton.enabled = YES;
-                [ClassNames_PGHubView methodNames_showErrorMessage:@"请先填写手机号"];
-                return;
-            }
+//            if (!para) {
+//                self.varNames_itemButton.enabled = YES;
+//                [ClassNames_PGHubView methodNames_showErrorMessage:@"请先填写手机号"];
+//                return;
+//            }
             NSString *phone = [para objectForKey:@"phone"];
-            if (!methodNames_phoneNumberRegular(phone)) {
-                self.varNames_itemButton.enabled = YES;
-                [ClassNames_PGHubView methodNames_showErrorMessage:@"手机号格式有误"];
-                return;
-            }
+//            if (!methodNames_phoneNumberRegular(phone)) {
+//                self.varNames_itemButton.enabled = YES;
+//                [ClassNames_PGHubView methodNames_showErrorMessage:@"手机号格式有误"];
+//                return;
+//            }
             __weak typeof(self) weakSelf = self;
             
             NSString *varNames_getCodeURL = @"";
@@ -978,7 +978,7 @@ static CGFloat varNameS_KEYBOARDMINY = 0;
                 varNames_getCodeURL = @"";
             }
             
-            [self.varNames_checkPhoneValidBasModel methodNames_fetchDataWithdURL:methodNames_phonetestURL() parameters:para];
+            [self.varNames_checkPhoneValidBasModel methodNames_fetchDataWithdURL:varNames_getCodeURL parameters:para];
             self.varNames_checkPhoneValidBasModel.methodNames_completeFetchData = ^(ClassNames_BaseModel *object) {
                 if (object.varNames_code == 200) {
                     [weakSelf methodNames_afterPhoneTestGetCode:phone];

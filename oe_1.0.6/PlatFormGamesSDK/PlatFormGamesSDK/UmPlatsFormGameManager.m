@@ -112,7 +112,7 @@
     self.varNames_gameInitModel.methodNames_completeFetchData = ^(id object) {
         
         ClassNames_GameInitialiseModel *model = (ClassNames_GameInitialiseModel *)object;
-        
+        [weakSelf methodNames_saveInitData:model];
         dispatch_async(dispatch_get_main_queue(), ^{
             /// 是否发送了初始化的通知,如果没有发送，那么这里发送一次
             [weakSelf methodNames_postInitNotiModel:model];
@@ -129,6 +129,14 @@
     // 激活游戏
     [self methodNames_initDevice];
     
+}
+
+#pragma mark -------------------- 保存初始化的内容
+- (void)methodNames_saveInitData:(ClassNames_GameInitialiseModel *)model {
+    methodNames_saveNeedFastLogin(model.varNames_quick_login);
+    methodNames_saveNeedBindPhone(model.varNames_bind_phone);
+    methodNames_saveNeedBindPersonID(model.varNames_bind_idcard);
+    methodNames_saveAppleCheck(model.varNames_apple_check);
 }
 
 #pragma mark -------------------- 激活

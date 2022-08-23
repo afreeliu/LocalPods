@@ -4,7 +4,7 @@
 
 #import "ClassNames_NavigationBarView.h"
 
-#import "ClassNames_MemberRegisterModel.h"
+#import "ClassNames_MemberLoginModel.h"
 
 #import "ClassNames_CommitButton.h"
 #import "ClassNames_InputView.h"
@@ -35,7 +35,7 @@
 
 @property (nonatomic, readwrite, assign) CGFloat varNames_topMarginValue;
 
-@property (nonatomic, readwrite, strong) ClassNames_MemberRegisterModel *varNames_phoneRegisterModel;
+@property (nonatomic, readwrite, strong) ClassNames_MemberLoginModel *varNames_loginModel;
 
 // 协议相关
 @property (nonatomic, readwrite, strong) UIView *varNames_delegateView;
@@ -125,7 +125,6 @@
     
     
     ClassNames_CommitButton *varNames_tmpCommitBtn = [ClassNames_CommitButton methodNames_createCommitButtonWithTitle:@"手机登录" withTouchUpInsidBlock:^{
-        NSLog(@"点击手机登录");
         [weakSelf methodNames_commitAction:nil];
     }];
     
@@ -306,8 +305,8 @@
 //                           };
     __weak typeof(self) weakSelf = self;
     [ClassNames_PGHubView methodNames_showIndicatorWithTitlte:@"正在登录..."];
-    [self.varNames_phoneRegisterModel methodNames_fetchDataWithdURL:methodNames_memberPhoneURL() parameters:varNames_tmppara];
-    self.varNames_phoneRegisterModel.methodNames_completeFetchData = ^(ClassNames_MemberRegisterModel *object) {
+    [self.varNames_loginModel methodNames_fetchDataWithdURL:methodNames_gamePhoneLogin() parameters:varNames_tmppara];
+    self.varNames_loginModel.methodNames_completeFetchData = ^(ClassNames_MemberLoginModel *object) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [ClassNames_PGHubView methodNames_hide];
             if (object.varNames_code == 200) {
@@ -316,10 +315,15 @@
                 if (object.varNames_msg) {
                     [ClassNames_PGHubView methodNames_showErrorMessage:object.varNames_msg];
                 }
+                if (weakSelf.methodNames_phoneRegisterSuccess) {
+                    weakSelf.hidden = YES;
+                    [weakSelf removeFromSuperview];
+                    weakSelf.methodNames_phoneRegisterSuccess(YES);
+                }
             }
         });
     };
-    self.varNames_phoneRegisterModel.methodNames_FetchError = ^(NSError *error) {
+    self.varNames_loginModel.methodNames_FetchError = ^(NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [ClassNames_PGHubView methodNames_hide];
             [ClassNames_PGHubView methodNames_showErrorMessage:@"网络出了小差!!!"];
@@ -327,23 +331,31 @@
     };
 }
 
-- (void)methodNames_phoneRegisterSuccess:(ClassNames_MemberRegisterModel *)memberRegisterModel {
+- (void)methodNames_phoneRegisterSuccess:(ClassNames_MemberLoginModel *)loginModel {
+    
+    // 手机登录成功会有密码字段信息返回，可以保存该密码字段
+    /*
+        
+            "pwd": "d12332",
+            "token": "token",
+            "id_card": 1,            // 2 表示绑定，1 为不绑定
+            "uname": "手机号",
+            "uid": "300001"
+     */
     /// 保存账户
-//    methodNames_saveAccount(_varNames_firstInputView.varNames_textValue);
     methodNames_savePhone(_varNames_firstInputView.varNames_textValue);
     /// 保存最后登陆的账户
-//    methodNames_saveLastAccount(_varNames_firstInputView.varNames_textValue);
     methodNames_saveLastPhone(_varNames_firstInputView.varNames_textValue);
     /// 保存账户密码
-//    methodNames_savePassword(_varNames_thirdInputView.varNames_textValue, _varNames_firstInputView.varNames_textValue);
+    methodNames_savePhonePassword(loginModel.varNames_password, _varNames_firstInputView.varNames_textValue);
     
     NSDictionary *varNames_tmpuserInfo = @{
-                               @"uid": memberRegisterModel.varNames_uid,
-                               @"username": memberRegisterModel.varNames_username
+                               @"uid": loginModel.varNames_uid,
+                               @"username": loginModel.varNames_username
                                };
     methodNames_postNotification(varNames_userLoginSuceessNoti, nil, varNames_tmpuserInfo);
     BOOL varNames_needBindPersonID = NO;
-    if ([memberRegisterModel.varNames_isBindCard isEqualToString:@"1"]) {
+    if ([loginModel.varNames_isBindCard isEqualToString:@"2"]) {
         /// 没有绑定身份证
         varNames_needBindPersonID = YES;
     }
@@ -356,11 +368,11 @@
 
 
 
--(ClassNames_MemberRegisterModel *)varNames_phoneRegisterModel {
-    if (!_varNames_phoneRegisterModel) {
-        _varNames_phoneRegisterModel = [[ClassNames_MemberRegisterModel alloc]init];
+-(ClassNames_MemberLoginModel *)varNames_loginModel {
+    if (!_varNames_loginModel) {
+        _varNames_loginModel = [[ClassNames_MemberLoginModel alloc]init];
     }
-    return _varNames_phoneRegisterModel;
+    return _varNames_loginModel;
 }
 
 @end

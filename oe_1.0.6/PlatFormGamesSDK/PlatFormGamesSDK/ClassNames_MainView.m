@@ -307,7 +307,19 @@
             weakSelf.varNames_isNeedBindPersonID = varNames_isNeedBindPersonID;
             weakSelf.varNames_loginView.hidden = YES;
             [weakSelf.varNames_loginView removeFromSuperview];
-            [weakSelf methodNames_createBindView];
+            if (varNames_isNeedBindPhone && [methodNames_readBindPhoneType() isEqualToString:@"2"]) {
+                // 登录账号需要绑定手机 && 初始化时候开启了绑定手机功能
+                [weakSelf methodNames_createBindView];
+            } else {
+                // 不管什么原因，如果不需要绑定手机了，那么再判断是否需要实名制
+                if (varNames_isNeedBindPersonID && [methodNames_readBindPsersonIDType() isEqualToString:@"2"]) {
+                    [weakSelf methodNames_createBindPersonIDViewFromView:nil];
+                } else {
+                    // 最后 不需要绑定手机，不需要实名
+                    [weakSelf removeFromSuperview];
+                }
+            }
+            
         };
         _varNames_loginView.methodNames_loginFailure = ^{
             NSLog(@"login error");
@@ -761,14 +773,22 @@
 //            [weakSelf methodNames_changeNormalViewFormPhoneRegisterView];
         };
         _varNames_phoneRegisterView.methodNames_servicceBlock = ^{
-//            [weakSelf methodNames_showCustomerServerView];
-            [weakSelf methodNames_showDetailCustomerServerView];
+            [weakSelf methodNames_showCustomerServerView];
         };
         _varNames_phoneRegisterView.methodNames_delegateBlock = ^{
             [weakSelf methodNames_showDelegateView];
         };
         _varNames_phoneRegisterView.methodNames_handlebookBlock = ^{
             [weakSelf methodNames_showHandleBookView];
+        };
+        _varNames_phoneRegisterView.methodNames_phoneRegisterSuccess = ^(BOOL varNames_isNeedBindPersonID) {
+            [weakSelf methodNames_createBindPersonIDViewFromView:nil];
+//            if ([methodNames_readBindPsersonIDType() isEqualToString:@"2"] && varNames_isNeedBindPersonID) {
+//                // 开启了实名制 && 当前登录账户需要进行实名制
+//                [weakSelf methodNames_createBindPersonIDViewFromView:nil];
+//            } else {
+//                [weakSelf removeFromSuperview];
+//            }
         };
         _varNames_phoneRegisterView.clipsToBounds = YES;
         [_varNames_backgroundView addSubview:_varNames_phoneRegisterView];
@@ -843,6 +863,7 @@
 #pragma mark ---------- 绑定身份证
 - (void)methodNames_createBindPersonIDViewFromView:(UIView *)varNames_view {
     __weak typeof(self) weakSelf = self;
+    self.varNames_skillBtnView.hidden = YES;
     if (!_varNames_bindPersonIDView) {
         _varNames_bindPersonIDView = [ClassNames_BindPersonIDView methodNames_createBindPersonIDViewFromView:varNames_view];
         _varNames_bindPersonIDView.clipsToBounds = YES;
@@ -850,7 +871,7 @@
             backView.hidden = NO;
         };
         _varNames_bindPersonIDView.methodNames_bindPersonIDSuccess = ^{
-            
+            [weakSelf removeFromSuperview];
         };
         _varNames_bindPersonIDView.methodNames_closeBindPersonIDView = ^{
             weakSelf.varNames_isNeedBindPersonID = NO;
@@ -965,7 +986,7 @@
     [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_serverView methodNames_constriant:0];
     [ClassNames_BaseViewLayout methodNames_layoutCenterY:self.varNames_serverView methodNames_constriant:0];
     [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_serverView methodNames_constriant:methodNames_getMainViewWidth()];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_serverView methodNames_constriant:220];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_serverView methodNames_constriant:265];
 }
 #pragma mark -------------- 从悬浮球中点击的客服
 - (void)methodNames_showDetailCustomerServerView {

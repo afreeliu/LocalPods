@@ -162,7 +162,7 @@
     [ClassNames_BaseViewLayout methodNames_layoutSubView1:self.varNames_contentTextView methodNames_attribute1:NSLayoutAttributeTop methodNames_layoutSubView2:self.varNames_logoImageView methodNames_attribute2:NSLayoutAttributeBottom methodNames_constriant:methodNames_setMargin_2base()];
     [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_contentTextView methodNames_constriant:0];
     [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_contentTextView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutBottom:self.varNames_contentTextView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutBottom:self.varNames_contentTextView methodNames_constriant:methodNames_setMargin_3base()];
 }
 
 

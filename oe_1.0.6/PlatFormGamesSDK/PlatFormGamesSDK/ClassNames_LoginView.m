@@ -365,6 +365,9 @@
         if (memberLoginModel.varNames_msg) {
             [ClassNames_PGHubView methodNames_showErrorMessage:memberLoginModel.varNames_msg];
         }
+        if (self.methodNames_loginSuccess) {
+            self.methodNames_loginSuccess(YES, YES);
+        }
         if (self.methodNames_loginFailure) {
             self.methodNames_loginFailure();
         }

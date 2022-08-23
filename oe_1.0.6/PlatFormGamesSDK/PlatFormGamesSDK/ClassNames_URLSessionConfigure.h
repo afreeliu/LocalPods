@@ -276,6 +276,12 @@ static inline NSString *methodNames_gamePbind() {
     NSString *varNames_tmpInitUrl = [NSString stringWithFormat:@"%@%@", methodNames_domain(), varNames_tmpInit];
     return varNames_tmpInitUrl;
 }
+#pragma mark -------------------- 实名绑定/sdk/cbind
+static inline NSString *methodNames_gameCbind() {
+    NSString *varNames_tmpInit = methodNames_getRequestConfigValueForKey(@"cbind")?:@"/sdk/cbind";
+    NSString *varNames_tmpInitUrl = [NSString stringWithFormat:@"%@%@", methodNames_domain(), varNames_tmpInit];
+    return varNames_tmpInitUrl;
+}
 #pragma mark -------------------- 手机验证码
 #pragma mark -------------------- 登陆请求验证码接口: http://domain.com/sdk/getcode/login
 static inline NSString *methodNames_gameGetcode_login() {

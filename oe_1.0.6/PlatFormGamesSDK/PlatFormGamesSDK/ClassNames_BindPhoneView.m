@@ -15,6 +15,7 @@
 
 #import "ClassNames_ImageCommitButton.h"
 #import "ClassNames_NavigationBarView.h"
+#import "ClassNames_BaseParameters.h"
 @interface ClassNames_BindPhoneView ()
 
 @property (nonatomic, readwrite, copy) NSString *varNames_naviTitle;
@@ -319,29 +320,37 @@
         [ClassNames_PGHubView methodNames_showErrorMessage:@"请输入验证码"];
         return;
     }
-    NSDictionary *varNames_tmppara = @{
-                           @"user_name": methodNames_readUserName(),
-                           @"phone": varNames_tmpaccount,
-                           @"code": varNames_tmpcode
-                           };
+    NSDictionary *varNames_tmppara = [ClassNames_BaseParameters methodNames_getBaseParameters];
+//    NSDictionary *varNames_tmppara = @{
+//                           @"user_name": methodNames_readUserName(),
+//                           @"phone": varNames_tmpaccount,
+//                           @"code": varNames_tmpcode
+//                           };
+    [varNames_tmppara setValue:varNames_tmpaccount forKey:@"phone"];
+    [varNames_tmppara setValue:varNames_tmpcode forKey:@"captcha"];
+    [varNames_tmppara setValue:methodNames_readUserID() forKey:@"uid"];
+    [varNames_tmppara setValue:methodNames_readUserName() forKey:@"uname"];
     
     __weak typeof(self) weakSelf = self;
     [ClassNames_PGHubView methodNames_showIndicatorWithTitlte:@"正在绑定..."];
-    [self.varNames_connectPhoneModel methodNames_fetchDataWithdURL:methodNames_bindphoneURL() parameters:varNames_tmppara];
+    [self.varNames_connectPhoneModel methodNames_fetchDataWithdURL:methodNames_gamePbind() parameters:varNames_tmppara];
     self.varNames_connectPhoneModel.methodNames_completeFetchData = ^(ClassNames_BaseModel *object) {
+        
         dispatch_async(dispatch_get_main_queue(), ^{
             [ClassNames_PGHubView methodNames_hide];
-            if (object.varNames_code == 200) { 
-                if (weakSelf.methodNames_bindPhoneSuccess) {
-                    weakSelf.methodNames_bindPhoneSuccess();
-                }
+            if (object.varNames_code == 200) {
+                [ClassNames_PGHubView methodNames_showErrorMessage:object.varNames_msg];
+                dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                    if (weakSelf.methodNames_bindPhoneSuccess) {
+                        weakSelf.methodNames_bindPhoneSuccess();
+                    }
+                });
             } else {
                 if (object.varNames_msg) {
                     [ClassNames_PGHubView methodNames_showErrorMessage:object.varNames_msg];
                 }
             }
         });
-        
     };
     self.varNames_connectPhoneModel.methodNames_FetchError = ^(NSError *error) {
         dispatch_async(dispatch_get_main_queue(), ^{
