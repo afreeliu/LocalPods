@@ -470,14 +470,11 @@ static NSString * const varNames_orientationLeft = @"LEFT";
             
             weakSelf.varNames_closeButton.hidden = NO;
         };
+        #pragma mark ---------------------  点击悬浮球按钮事件
         _varNames_ballMenu.methodNames_clickItemMenu = ^(NSInteger index) {
-            if (index == 0) {
-                [weakSelf methodNames_hideSuspensionBall];
-            } else {
-                if (weakSelf.methodNames_clickBallMenu) {
-                    [weakSelf methodNames_showMenu:weakSelf];
-                    weakSelf.methodNames_clickBallMenu(index);
-                }
+            if (weakSelf.methodNames_clickBallMenu) {
+                [weakSelf methodNames_showMenu:weakSelf];
+                weakSelf.methodNames_clickBallMenu(index);
             }
         };
         

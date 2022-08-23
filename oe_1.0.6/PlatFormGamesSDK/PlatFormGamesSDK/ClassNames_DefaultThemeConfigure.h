@@ -85,7 +85,10 @@ FOUNDATION_EXTERN NSString *const varNames_suspensionBallshowtime;
 /// 客服页面配置
 FOUNDATION_EXTERN NSString *const varNames_serverViewConfig;
 FOUNDATION_EXTERN NSString *const varNames_serverKouKouConfig;
-FOUNDATION_EXTERN NSString *const varNames_serverWechatConfig;
+FOUNDATION_EXTERN NSString *const varNames_serverwxIDConfig;
+FOUNDATION_EXTERN NSString *const varNames_serverWechatIDConfig;
+FOUNDATION_EXTERN NSString *const varNames_serverWechatNameConfig;
+FOUNDATION_EXTERN NSString *const varNames_serverCodeDataConfig;
 FOUNDATION_EXTERN NSString *const varNames_serverTimeConfig;
 
 
@@ -615,32 +618,134 @@ static inline NSString *methodNames_getSuggestViewTip() {
 }
 
 #pragma mark ---------- 客服页面的内容配置
+static inline void methodNames_saveKouKou(NSString *varNames_koukou) {
+    if (varNames_koukou && varNames_koukou.length) {
+        [[NSUserDefaults standardUserDefaults]setValue:varNames_koukou forKey:varNames_serverKouKouConfig];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    }
+}
 // koukou 号码
 static inline NSString *methodNames_getServerKouKou() {
-    NSString *varNames_koukou = @"743911535";
-    NSDictionary *varNames_defaultDic = methodNames_getInit_config(varNames_defaultConfigKey);
-    if (!varNames_defaultDic) {
-        return varNames_koukou;
+    
+    NSString *varNames_koukou = [[NSUserDefaults standardUserDefaults]objectForKey:varNames_serverKouKouConfig];
+    if (!varNames_koukou || !varNames_koukou.length) {
+        // 后端没有数据，则从plist拿
+        NSDictionary *varNames_defaultDic = methodNames_getInit_config(varNames_defaultConfigKey);
+        if (!varNames_defaultDic) {
+            return varNames_koukou;
+        }
+        NSDictionary *varNames_tmpDic = [varNames_defaultDic objectForKey:varNames_serverViewConfig];
+        if (varNames_tmpDic && [varNames_tmpDic objectForKey:varNames_serverKouKouConfig]) {
+            varNames_koukou = [varNames_tmpDic objectForKey:varNames_serverKouKouConfig];
+        }
     }
-    NSDictionary *varNames_tmpDic = [varNames_defaultDic objectForKey:varNames_serverViewConfig];
-    if (varNames_tmpDic && [varNames_tmpDic objectForKey:varNames_serverKouKouConfig]) {
-        varNames_koukou = [varNames_tmpDic objectForKey:varNames_serverKouKouConfig];
+    if (!varNames_koukou || !varNames_koukou.length) {
+        varNames_koukou = @"743911535";
     }
     return varNames_koukou;
 }
-// 宫 众 号
+
+static inline void methodNames_savewxID(NSString *varNames_wxId) {
+    if (varNames_wxId && varNames_wxId.length) {
+        [[NSUserDefaults standardUserDefaults]setValue:varNames_wxId forKey:varNames_serverwxIDConfig];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    }
+}
+// w x ID
+static inline NSString *methodNames_getwxID() {
+    
+    NSString *varNames_koukou = [[NSUserDefaults standardUserDefaults]objectForKey:varNames_serverwxIDConfig];
+    
+    if (varNames_koukou || !varNames_koukou.length) {
+        NSDictionary *varNames_defaultDic = methodNames_getInit_config(varNames_defaultConfigKey);
+        if (!varNames_defaultDic) {
+            return varNames_koukou;
+        }
+        NSDictionary *varNames_tmpDic = [varNames_defaultDic objectForKey:varNames_serverViewConfig];
+        if (varNames_tmpDic && [varNames_tmpDic objectForKey:varNames_serverwxIDConfig]) {
+            varNames_koukou = [varNames_tmpDic objectForKey:varNames_serverwxIDConfig];
+        }
+    }
+    
+    if (varNames_koukou || !varNames_koukou.length) {
+        varNames_koukou = @"xinquwangame";
+    }
+    
+    return varNames_koukou;
+}
+
+
+static inline void methodNames_saveServerWchatNumber(NSString *varNames_mpId) {
+    if (varNames_mpId && varNames_mpId.length) {
+        [[NSUserDefaults standardUserDefaults]setValue:varNames_mpId forKey:varNames_serverWechatIDConfig];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    }
+}
+// 宫 众 号 ID
 static inline NSString *methodNames_getServerWchatNumber() {
-    NSString *varNames_koukou = @"心悦湾";
-    NSDictionary *varNames_defaultDic = methodNames_getInit_config(varNames_defaultConfigKey);
-    if (!varNames_defaultDic) {
-        return varNames_koukou;
+    
+    NSString *varNames_koukou = [[NSUserDefaults standardUserDefaults]objectForKey:varNames_serverWechatIDConfig];
+    
+    if (varNames_koukou || !varNames_koukou.length) {
+        NSDictionary *varNames_defaultDic = methodNames_getInit_config(varNames_defaultConfigKey);
+        if (!varNames_defaultDic) {
+            return varNames_koukou;
+        }
+        NSDictionary *varNames_tmpDic = [varNames_defaultDic objectForKey:varNames_serverViewConfig];
+        if (varNames_tmpDic && [varNames_tmpDic objectForKey:varNames_serverWechatIDConfig]) {
+            varNames_koukou = [varNames_tmpDic objectForKey:varNames_serverWechatIDConfig];
+        }
     }
-    NSDictionary *varNames_tmpDic = [varNames_defaultDic objectForKey:varNames_serverViewConfig];
-    if (varNames_tmpDic && [varNames_tmpDic objectForKey:varNames_serverWechatConfig]) {
-        varNames_koukou = [varNames_tmpDic objectForKey:varNames_serverWechatConfig];
+    
+    if (varNames_koukou || !varNames_koukou.length) {
+        varNames_koukou = @"xinquwangame";
     }
+    
     return varNames_koukou;
 }
+
+static inline void methodNames_saveServerWchatName(NSString *varNames_mpname) {
+    if (varNames_mpname && varNames_mpname.length) {
+        [[NSUserDefaults standardUserDefaults]setValue:varNames_mpname forKey:varNames_serverWechatNameConfig];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    }
+}
+// 宫 众 号 名 称
+static inline NSString *methodNames_getServerWchatName() {
+    
+    NSString *varNames_koukou = [[NSUserDefaults standardUserDefaults]objectForKey:varNames_serverWechatNameConfig];
+    
+    if (varNames_koukou || !varNames_koukou.length) {
+        NSDictionary *varNames_defaultDic = methodNames_getInit_config(varNames_defaultConfigKey);
+        if (!varNames_defaultDic) {
+            return varNames_koukou;
+        }
+        NSDictionary *varNames_tmpDic = [varNames_defaultDic objectForKey:varNames_serverViewConfig];
+        if (varNames_tmpDic && [varNames_tmpDic objectForKey:varNames_serverWechatNameConfig]) {
+            varNames_koukou = [varNames_tmpDic objectForKey:varNames_serverWechatNameConfig];
+        }
+    }
+    
+    if (varNames_koukou || !varNames_koukou.length) {
+        varNames_koukou = @"新趣网戏";
+    }
+    
+    return varNames_koukou;
+}
+
+static inline void methodNames_saveServerCodeData(NSString *varNames_url) {
+    dispatch_async(dispatch_get_global_queue(QOS_CLASS_BACKGROUND, DISPATCH_QUEUE_PRIORITY_DEFAULT), ^{
+        NSData *varNames_data = [NSData dataWithContentsOfURL:[NSURL URLWithString:varNames_url]];
+        [[NSUserDefaults standardUserDefaults]setValue:varNames_data forKey:varNames_serverCodeDataConfig];
+        [[NSUserDefaults standardUserDefaults]synchronize];
+    });
+}
+// 获取二 维 码 data
+static inline NSData *methodNames_getServerCodeData() {
+    NSData *varNames_data = [[NSUserDefaults standardUserDefaults]objectForKey:varNames_serverCodeDataConfig];
+    return varNames_data;
+}
+
 
 
 static inline NSString *methodNames_getServerTime() {

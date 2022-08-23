@@ -31,7 +31,7 @@
 #import "ClassNames_DelegateView.h"
 #import "ClassNames_TipView.h"
 #import "ClassNames_DetailCustomerServerView.h"
-
+#import "ClassNames_GiftView.h"
 
 @interface ClassNames_MainView ()
 
@@ -61,6 +61,8 @@
 @property (nonatomic, readwrite, strong) ClassNames_PayView *varNames_payView;
 
 @property (nonatomic, readwrite, strong) ClassNames_NoticeView *varNames_noticeView;
+
+@property (nonatomic, readwrite, strong) ClassNames_GiftView *varNames_giftView;
 
 // 提示手机验证页面
 @property (nonatomic, readwrite, strong) ClassNames_TipView *varNames_bindPhoneTipView;
@@ -148,8 +150,14 @@
 - (void)methodNames_showUserCenterView {
     [self methodNames_createUserCenterView];
 }
-
-
+// 显示悬浮球中的客服
+- (void)methodNames_showDetailCustomerView {
+    [self methodNames_showDetailCustomerServerView];
+}
+// 礼包中心
+- (void)methodNames_showCustomerGiftView {
+    [self methodNames_showGiftView];
+}
 
 
 
@@ -316,7 +324,9 @@
                     [weakSelf methodNames_createBindPersonIDViewFromView:nil];
                 } else {
                     // 最后 不需要绑定手机，不需要实名
+                    [weakSelf.varNames_loginView removeFromSuperview];
                     [weakSelf removeFromSuperview];
+                    [[NSNotificationCenter defaultCenter]postNotificationName:varNames_userLoginSuceessNoti object:nil];
                 }
             }
             
@@ -1009,6 +1019,27 @@
     [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_detailCustomerServerView methodNames_constriant:250];
 }
 
+
+#pragma mark ---------------------  礼包
+- (void)methodNames_showGiftView {
+    if (!self.varNames_giftView) {
+        __weak typeof(self) weakSelf = self;
+        ClassNames_GiftView *varNames_giftView = [ClassNames_GiftView methodNames_createGiftView];
+        [self addSubview:varNames_giftView];
+        self.varNames_giftView = varNames_giftView;
+        self.varNames_giftView.methodNames_closeBlock = ^{
+            [weakSelf removeFromSuperview];
+        };
+    } else {
+        
+        self.varNames_giftView.hidden = NO;
+    }
+    
+    [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_giftView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutCenterY:self.varNames_giftView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_giftView methodNames_constriant:methodNames_getMainViewWidth()];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_giftView methodNames_constriant:260];
+}
 
 #pragma mark -------------- 协议和用户手册
 - (void)methodNames_showDelegateView {

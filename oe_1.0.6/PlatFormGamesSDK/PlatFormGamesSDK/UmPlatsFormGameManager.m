@@ -110,13 +110,7 @@
     __weak typeof(self) weakSelf = self;
     [self.varNames_gameInitModel methodNames_fetchDataWithdURL:methodNames_gameInit() parameters:varNames_parameters];
     self.varNames_gameInitModel.methodNames_completeFetchData = ^(id object) {
-        
-        ClassNames_GameInitialiseModel *model = (ClassNames_GameInitialiseModel *)object;
-        [weakSelf methodNames_saveInitData:model];
-        dispatch_async(dispatch_get_main_queue(), ^{
-            /// 是否发送了初始化的通知,如果没有发送，那么这里发送一次
-            [weakSelf methodNames_postInitNotiModel:model];
-        });
+        [weakSelf methodNames_configInitGame];
     };
     self.varNames_gameInitModel.methodNames_FetchError = ^(NSError *error) {
         NSLog(@"error:%@", error.userInfo);
@@ -176,6 +170,16 @@
         methodNames_saveVertical(self.varNames_gameInitModel.varNames_is_vertical);
         // 悬浮球 1 为关闭 ， 2 为开启,
         methodNames_saveSoftBall(self.varNames_gameInitModel.varNames_soft_ball);
+        // qq 客服
+        methodNames_saveKouKou(self.varNames_gameInitModel.varNames_qqId);
+        // wx id
+        methodNames_savewxID(self.varNames_gameInitModel.varNames_wxId);
+        // 宫众号ID
+        methodNames_saveServerWchatNumber(self.varNames_gameInitModel.varNames_mpId);
+        // 宫众号名称
+        methodNames_saveServerWchatName(self.varNames_gameInitModel.varNames_mpName);
+        // 二维码
+        methodNames_saveServerCodeData(self.varNames_gameInitModel.varNames_follow_wechat_url);
         
     }
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -272,6 +276,15 @@
 //    };
 //    self.varNames_loginInitModel = varNames_tmpinitModel;
 }
+
+
+
+#pragma mark --------------------------------------------------------------------
+
+
+
+
+
 
 - (void)methodNames_handleGameInit {
     // 初始化成功了
@@ -525,6 +538,11 @@
             [ClassName_IAPFail methodNames_CheckIAPFailOrders];
             weakSelf.varNames_window.hidden = YES;
             weakSelf.varNames_window = nil;
+            if ([weakSelf.varNames_gameInitModel.varNames_soft_ball isEqualToString:@"methodNames_showSuspensionBall"]) {
+                [weakSelf methodNames_showSuspensionBall];
+            }
+            
+            
 //            if ([self.varNames_gameInitModel.varNames_is_ball isEqualToString:@"1"]) {
 //                /// 过了
 //                NSInteger varNames_showballduration = methodNames_willshowBallAfterSecond();
@@ -536,6 +554,7 @@
         });
     } else {
         methodNames_debugLog(@"接收不到登录成功的信息");
+        [weakSelf methodNames_showSuspensionBall];
     }
 }
 
@@ -545,13 +564,12 @@
         self.varNames_suspensionBall = [ClassNames_SuspensionBallButton methodNames_showSuspensionBallWithLanguageType:@"zh-cn"];
         self.varNames_suspensionBall.methodNames_clickBallMenu = ^(NSInteger index) {
             [ClassNames_MainView methodNames_cleanView];
-            [[ClassNames_MainView methodNames_instanceMainView]methodNames_showUserCenterView];
-            return;
-            if (index == 1) {
-                [weakSelf methodNames_showQQ];
-            }
             if (index == 0) {
-                [weakSelf.varNames_suspensionBall methodNames_hideSuspensionBall];
+                [[ClassNames_MainView methodNames_instanceMainView] methodNames_showCustomerGiftView];
+            } else if (index == 1) {
+                [[ClassNames_MainView methodNames_instanceMainView]methodNames_showUserCenterView];
+            } else if (index == 2) {
+                [[ClassNames_MainView methodNames_instanceMainView] methodNames_showDetailCustomerView];
             }
         };
     }

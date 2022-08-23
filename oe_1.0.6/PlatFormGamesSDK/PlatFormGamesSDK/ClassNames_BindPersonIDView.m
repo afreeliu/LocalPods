@@ -55,6 +55,8 @@
 -(instancetype)init {
     self = [super init];
     if (self) {
+        self.backgroundColor = [UIColor whiteColor];
+        self.layer.cornerRadius = 15;
         [self methodNames_createUI];
     }
     return self;

@@ -100,14 +100,14 @@
 - (void)methodNames_showDetail {
     
     self.varNames_qq = methodNames_getServerKouKou();
-    self.varNames_whNumber = methodNames_getServerWchatNumber();
+    self.varNames_whNumber = methodNames_getServerWchatName();
     
     
     NSString *varNames_firstLine = @"如果游戏内出现问题，可以联系客服QQ\n";
     NSString *varNames_secondLine = @"关注微信公众号，可以领取专属礼包码\n";
     NSString *varNames_thirdLine = @"在线客服: [call_me] \n";
     NSString *varNames_fourLine = [NSString stringWithFormat:@" image_qq QQ客服：%@ \t [copy_qq] \n", self.varNames_qq];
-    NSString *varNames_fiveLine = [NSString stringWithFormat:@" image_message ：微信公众号：%@ \t [copy_message] \n", self.varNames_whNumber];
+    NSString *varNames_fiveLine = [NSString stringWithFormat:@" image_message 微信公众号：%@ \t [copy_message] \n", self.varNames_whNumber];
     
     NSString *varNames_content = [NSString stringWithFormat:@"%@%@%@%@%@", varNames_firstLine, varNames_secondLine, varNames_thirdLine, varNames_fourLine, varNames_fiveLine];
     

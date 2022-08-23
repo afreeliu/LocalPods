@@ -37,7 +37,11 @@
 			<dict>
 				<key>koukou</key>
 				<string>286882356</string>
-				<key>gongzhonghao</key>
+				<key>wxid</key>
+				<string>wxnam</string>
+				<key>gongzhonghaoid</key>
+				<string>xinyuewang</string>
+				<key>gongzhonghaoname</key>
 				<string>心悦湾</string>
 				<key>time</key>
 				<string>9:00--19:00</string>

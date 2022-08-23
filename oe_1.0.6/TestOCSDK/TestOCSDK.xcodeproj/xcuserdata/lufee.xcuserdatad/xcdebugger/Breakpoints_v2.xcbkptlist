@@ -43,32 +43,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3A644D91-80BF-4864-8D34-59255BB6F47F"
+            uuid = "DE75ADEB-0FFC-45EA-9CD4-FE1D07CF5D4A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/ClassNames_LoginView.m"
+            filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/UmPlatsFormGameManager.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "316"
-            endingLineNumber = "316"
-            landmarkName = "-methodNames_commitAction:"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C18F492B-3F6E-4DE4-B303-93E6C4EEA716"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/ClassNames_LoginView.m"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "334"
-            endingLineNumber = "334"
-            landmarkName = "-methodNames_loginsuccess:"
+            startingLineNumber = "541"
+            endingLineNumber = "541"
+            landmarkName = "-methodNames_loginNoti:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

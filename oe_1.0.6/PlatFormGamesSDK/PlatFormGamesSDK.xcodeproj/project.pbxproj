@@ -132,6 +132,8 @@
 		889103D728A9176E00F90D5F /* ClassNames_payTypeImage.h in Headers */ = {isa = PBXBuildFile; fileRef = 889103D528A9176E00F90D5F /* ClassNames_payTypeImage.h */; };
 		889103DB28A92EEB00F90D5F /* ClassNames_NoticeView.h in Headers */ = {isa = PBXBuildFile; fileRef = 889103D928A92EEB00F90D5F /* ClassNames_NoticeView.h */; };
 		889103DC28A92EEB00F90D5F /* ClassNames_NoticeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 889103DA28A92EEB00F90D5F /* ClassNames_NoticeView.m */; };
+		DF2FBB5328B5073D00D55358 /* ClassNames_GiftView.h in Headers */ = {isa = PBXBuildFile; fileRef = DF2FBB5128B5073D00D55358 /* ClassNames_GiftView.h */; };
+		DF2FBB5428B5073D00D55358 /* ClassNames_GiftView.m in Sources */ = {isa = PBXBuildFile; fileRef = DF2FBB5228B5073D00D55358 /* ClassNames_GiftView.m */; };
 		DF585E62289CC753005B25BA /* ClassNames_DelegateTextView.h in Headers */ = {isa = PBXBuildFile; fileRef = DF585E60289CC753005B25BA /* ClassNames_DelegateTextView.h */; };
 		DF585E63289CC753005B25BA /* ClassNames_DelegateTextView.m in Sources */ = {isa = PBXBuildFile; fileRef = DF585E61289CC753005B25BA /* ClassNames_DelegateTextView.m */; };
 		DF7C6CE328A3950800F7260D /* ClassNames_TipView.h in Headers */ = {isa = PBXBuildFile; fileRef = DF7C6CE128A3950800F7260D /* ClassNames_TipView.h */; };
@@ -290,6 +292,8 @@
 		889103D528A9176E00F90D5F /* ClassNames_payTypeImage.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_payTypeImage.h; sourceTree = "<group>"; };
 		889103D928A92EEB00F90D5F /* ClassNames_NoticeView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_NoticeView.h; sourceTree = "<group>"; };
 		889103DA28A92EEB00F90D5F /* ClassNames_NoticeView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_NoticeView.m; sourceTree = "<group>"; };
+		DF2FBB5128B5073D00D55358 /* ClassNames_GiftView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_GiftView.h; sourceTree = "<group>"; };
+		DF2FBB5228B5073D00D55358 /* ClassNames_GiftView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_GiftView.m; sourceTree = "<group>"; };
 		DF585E60289CC753005B25BA /* ClassNames_DelegateTextView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_DelegateTextView.h; sourceTree = "<group>"; };
 		DF585E61289CC753005B25BA /* ClassNames_DelegateTextView.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ClassNames_DelegateTextView.m; sourceTree = "<group>"; };
 		DF7C6CE128A3950800F7260D /* ClassNames_TipView.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ClassNames_TipView.h; sourceTree = "<group>"; };
@@ -524,6 +528,8 @@
 				889103D228A8964F00F90D5F /* ClassNames_PayView.m */,
 				889103D928A92EEB00F90D5F /* ClassNames_NoticeView.h */,
 				889103DA28A92EEB00F90D5F /* ClassNames_NoticeView.m */,
+				DF2FBB5128B5073D00D55358 /* ClassNames_GiftView.h */,
+				DF2FBB5228B5073D00D55358 /* ClassNames_GiftView.m */,
 			);
 			name = SkillView;
 			sourceTree = "<group>";
@@ -889,6 +895,7 @@
 				336289EC2119CCAC00CC7D24 /* ClassNames_ImageErrorRight.h in Headers */,
 				336285722117E90D00CC7D24 /* ClassNames_MemberRegisterModel.h in Headers */,
 				33185114221A9772003907D5 /* ClassName_AppStore.h in Headers */,
+				DF2FBB5328B5073D00D55358 /* ClassNames_GiftView.h in Headers */,
 				3362833C2114096F00CC7D24 /* ClassNames_InitGamesConfigure.h in Headers */,
 				336283F721142C3A00CC7D24 /* ClassNames_CutImage.h in Headers */,
 				331B31312125280B00544DB8 /* ClassNames_ViewTool.h in Headers */,
@@ -1018,6 +1025,7 @@
 				33ABDEED2363012E00F9E7D5 /* ClassNames_SuspensionBallButton.m in Sources */,
 				DF585E63289CC753005B25BA /* ClassNames_DelegateTextView.m in Sources */,
 				331B33E72125786000544DB8 /* ClassName_IAPInfo.m in Sources */,
+				DF2FBB5428B5073D00D55358 /* ClassNames_GiftView.m in Sources */,
 				331B33E32125786000544DB8 /* ClassName_IAPFail.m in Sources */,
 				336285832117EA6100CC7D24 /* ClassNames_MembeRoleModel.m in Sources */,
 				DF7C6CE828A3B3C400F7260D /* ClassNames_DetailCustomerServerView.m in Sources */,
@@ -1093,7 +1101,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1145,7 +1153,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;

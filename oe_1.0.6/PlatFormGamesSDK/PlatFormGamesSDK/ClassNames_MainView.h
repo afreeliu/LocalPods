@@ -24,6 +24,10 @@
 
 // 显示用户中心页
 - (void)methodNames_showUserCenterView;
+// 显示悬浮球中的客服
+- (void)methodNames_showDetailCustomerView;
+// 礼包中心
+- (void)methodNames_showCustomerGiftView;
 
 - (void)methodNames_showPayView;
 
