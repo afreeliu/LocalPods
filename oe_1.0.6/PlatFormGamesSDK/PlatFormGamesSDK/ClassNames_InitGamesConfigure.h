@@ -16,6 +16,14 @@ FOUNDATION_EXTERN NSString *const varNames_userNameKey;
 
 FOUNDATION_EXTERN NSString *const varNames_userIDKey;
 
+FOUNDATION_EXTERN NSString *const varNames_userPhoneKey;
+
+FOUNDATION_EXTERN NSString *const varNames_userPhoneHideKey;
+
+FOUNDATION_EXTERN NSString *const varNames_userBindPhoneKey;
+
+FOUNDATION_EXTERN NSString *const varNames_userBindPersonIDKey;
+
 FOUNDATION_EXTERN NSString *const varNames_channelIDKey;
 
 FOUNDATION_EXTERN NSString *const varNames_advIDKey;
@@ -38,7 +46,7 @@ FOUNDATION_EXTERN NSString *const varNames_softBallKey;
 /// 保存初始化时候返回的是否需要绑定手机类型
 /// 是否绑定手机号 1 为关闭 ， 2 为开启,
 static inline void methodNames_saveNeedBindPhone(NSString *varNames_type) {
-    [[NSUserDefaults standardUserDefaults] setObject:varNames_type forKey:varNames_initBindPhoneKey];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@", varNames_type] forKey:varNames_initBindPhoneKey];
     [[NSUserDefaults standardUserDefaults]synchronize];
 }
 /// 读取初始化是否需要绑定手机类型
@@ -49,7 +57,7 @@ static inline NSString *methodNames_readBindPhoneType(){
 /// 保存初始化时候返回的是否需要绑定身份证类型
 /// 是否绑定手机号 1 为关闭 ， 2 为开启,
 static inline void methodNames_saveNeedBindPersonID(NSString *varNames_type) {
-    [[NSUserDefaults standardUserDefaults] setObject:varNames_type forKey:varNames_initBindPersonIDKey];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@", varNames_type] forKey:varNames_initBindPersonIDKey];
     [[NSUserDefaults standardUserDefaults]synchronize];
 }
 /// 读取初始化是否需要绑定身份证类型
@@ -140,6 +148,49 @@ static inline void methodNames_saveUserID(NSString *userID) {
 static inline NSString *methodNames_readUserID() {
     return [[NSUserDefaults standardUserDefaults] objectForKey:varNames_userIDKey];
 }
+
+/// 保存用户手机
+static inline void methodNames_saveUserPhone(NSString *userID) {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@", userID] forKey:varNames_userPhoneKey];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+}
+/// 读取用户手机
+static inline NSString *methodNames_readUserPhone() {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:varNames_userPhoneKey];
+}
+/// 保存用户手机隐式
+static inline void methodNames_saveUserPhoneHide(NSString *userID) {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@", userID] forKey:varNames_userPhoneHideKey];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+}
+/// 读取用户手机隐式
+static inline NSString *methodNames_readUserPhoneHide() {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:varNames_userPhoneHideKey];
+}
+
+
+
+
+
+/// 保存用户绑定手机类型
+static inline void methodNames_saveUserBindPhone(NSString *bphone) {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@", bphone] forKey:varNames_userBindPhoneKey];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+}
+/// 读取用户绑定手机类型
+static inline NSString *methodNames_readUserBindPhone() {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:varNames_userBindPhoneKey];
+}
+/// 保存用户绑定身份证类型
+static inline void methodNames_saveUserBindPersonID(NSString *bcardid) {
+    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%@", bcardid] forKey:varNames_userBindPersonIDKey];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+}
+/// 读取用户绑定身份证类型
+static inline NSString *methodNames_readUserBindPersonID() {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:varNames_userBindPersonIDKey];
+}
+
 /// platform ID
 static inline NSString *methodNames_readPlatformID() {
     ///0:ios  1:andriod

@@ -15,6 +15,9 @@
 #import "ClassNames_InitGamesConfigure.h"
 #import "ClassNames_NotificationConfigure.h"
 #import "ClassNames_ImageCommitButton.h"
+#import "ClassNames_BaseParameters.h"
+
+
 @interface ClassNames_AutoLoginView ()
 
 
@@ -148,7 +151,10 @@
 - (void)methodNmaes_changTitle:(NSTimer *)timer {
     if (self.varNames_timeout == 0) {
         [timer invalidate];
-//        [self methodNames_commitAutoLoginAction:self.varNames_userName password:self.varNames_password];
+        if (!self.varNames_cancelAutoLogin) {
+            [self methodNames_commitAutoLoginAction:self.varNames_userName password:self.varNames_password];
+        }
+        
     } else {
         [self methodNames_refreshButtonTitle:self.varNames_timeout];
         self.varNames_timeout--;
@@ -166,20 +172,24 @@
 - (void)methodNames_commitAutoLoginAction:(NSString *)account password:(NSString *)password {
     NSAssert(account, @"account nil");
     NSAssert(password, @"account nil");
-    NSDictionary *varNames_tmppara = @{
-                           @"user_name": account,
-                           @"password": password,
-                           @"adv_id": methodNames_readAdvID(),
-                           @"channel_id": methodNames_readChannelID(),
-                           @"material_id": @"0",
-                           @"gid": methodNames_readGameID(),
-                           @"sub_gid": methodNames_readSubGameID(),
-                           @"platform_id": @"0",
-                           @"device_code": methodNames_getDeviceIDFA()
-                           };
+    
+    
+    NSDictionary *varNames_tmppara = [ClassNames_BaseParameters methodNames_getBaseParameters];
+//                           @"user_name": account,
+//                           @"password": password,
+//                           @"adv_id": methodNames_readAdvID(),
+//                           @"channel_id": methodNames_readChannelID(),
+//                           @"material_id": @"0",
+//                           @"gid": methodNames_readGameID(),
+//                           @"sub_gid": methodNames_readSubGameID(),
+//                           @"platform_id": @"0",
+//                           @"device_code": methodNames_getDeviceIDFA()
+//                           };
+    [varNames_tmppara setValue:account forKey:@"uname"];
+    [varNames_tmppara setValue:password forKey:@"pwd"];
     __weak typeof(self) weakSelf = self;
     [ClassNames_PGHubView methodNames_showIndicatorWithTitlte:@"登陆中..."];
-    [self.varNames_loginModel methodNames_fetchDataWithdURL:methodNames_memberLoginURL() parameters:varNames_tmppara];
+    [self.varNames_loginModel methodNames_fetchDataWithdURL:methodNames_gameUlogin_a() parameters:varNames_tmppara];
     self.varNames_loginModel.methodNames_completeFetchData = ^(ClassNames_MemberLoginModel *object) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [ClassNames_PGHubView methodNames_hide];
@@ -211,6 +221,13 @@
         methodNames_saveVisitorConnectPersonID(memberLoginModel.varNames_isBindCard);
         methodNames_savePassword(self.varNames_password, self.varNames_userName);
 
+        methodNames_saveUserBindPhone(memberLoginModel.varNames_isbindPhone);
+        methodNames_saveUserBindPersonID(memberLoginModel.varNames_isBindCard);
+        
+        methodNames_saveUserPhone(memberLoginModel.varNames_phone);
+        methodNames_saveUserPhoneHide(memberLoginModel.varNames_phoneHide); 
+        
+        
         NSDictionary *varNames_tmpuserInfo = @{
                                    @"uid": memberLoginModel.varNames_uid,
                                    @"username": memberLoginModel.varNames_username

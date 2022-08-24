@@ -656,7 +656,7 @@ static inline NSString *methodNames_getwxID() {
     
     NSString *varNames_koukou = [[NSUserDefaults standardUserDefaults]objectForKey:varNames_serverwxIDConfig];
     
-    if (varNames_koukou || !varNames_koukou.length) {
+    if (!varNames_koukou || !varNames_koukou.length) {
         NSDictionary *varNames_defaultDic = methodNames_getInit_config(varNames_defaultConfigKey);
         if (!varNames_defaultDic) {
             return varNames_koukou;
@@ -667,7 +667,7 @@ static inline NSString *methodNames_getwxID() {
         }
     }
     
-    if (varNames_koukou || !varNames_koukou.length) {
+    if (!varNames_koukou || !varNames_koukou.length) {
         varNames_koukou = @"xinquwangame";
     }
     
@@ -686,7 +686,7 @@ static inline NSString *methodNames_getServerWchatNumber() {
     
     NSString *varNames_koukou = [[NSUserDefaults standardUserDefaults]objectForKey:varNames_serverWechatIDConfig];
     
-    if (varNames_koukou || !varNames_koukou.length) {
+    if (!varNames_koukou || !varNames_koukou.length) {
         NSDictionary *varNames_defaultDic = methodNames_getInit_config(varNames_defaultConfigKey);
         if (!varNames_defaultDic) {
             return varNames_koukou;
@@ -697,7 +697,7 @@ static inline NSString *methodNames_getServerWchatNumber() {
         }
     }
     
-    if (varNames_koukou || !varNames_koukou.length) {
+    if (!varNames_koukou || !varNames_koukou.length) {
         varNames_koukou = @"xinquwangame";
     }
     
@@ -715,7 +715,7 @@ static inline NSString *methodNames_getServerWchatName() {
     
     NSString *varNames_koukou = [[NSUserDefaults standardUserDefaults]objectForKey:varNames_serverWechatNameConfig];
     
-    if (varNames_koukou || !varNames_koukou.length) {
+    if (!varNames_koukou || !varNames_koukou.length) {
         NSDictionary *varNames_defaultDic = methodNames_getInit_config(varNames_defaultConfigKey);
         if (!varNames_defaultDic) {
             return varNames_koukou;
@@ -726,8 +726,8 @@ static inline NSString *methodNames_getServerWchatName() {
         }
     }
     
-    if (varNames_koukou || !varNames_koukou.length) {
-        varNames_koukou = @"新趣网戏";
+    if (!varNames_koukou || !varNames_koukou.length) {
+        varNames_koukou = @"新趣";
     }
     
     return varNames_koukou;

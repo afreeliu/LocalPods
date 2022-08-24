@@ -18,3 +18,5 @@ NSString *const varNames_userLoginSuceessNoti = @"varNames_userLoginSuceessNoti"
 NSString *const varNames_IapPayResultNoti = @"varNames_IapPayResultNoti";
 /// 苹果支付通知
 NSString *const varNames_appleResultNoti = @"varNames_appleResultNoti";
+/// 弹出悬浮球通知
+NSString *const varNames_showSuspensionBallNoti = @"varNames_showSuspensionBallNoti";

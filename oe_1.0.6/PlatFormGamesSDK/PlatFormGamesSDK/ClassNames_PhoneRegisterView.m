@@ -349,6 +349,12 @@
     /// 保存账户密码
     methodNames_savePhonePassword(loginModel.varNames_password, _varNames_firstInputView.varNames_textValue);
     
+    methodNames_saveUserBindPhone(loginModel.varNames_isbindPhone);
+    methodNames_saveUserBindPersonID(loginModel.varNames_isBindCard);
+    
+    methodNames_saveUserPhone(loginModel.varNames_phone);
+    methodNames_saveUserPhoneHide(loginModel.varNames_phoneHide);
+    
     NSDictionary *varNames_tmpuserInfo = @{
                                @"uid": loginModel.varNames_uid,
                                @"username": loginModel.varNames_username
@@ -357,6 +363,7 @@
     BOOL varNames_needBindPersonID = NO;
     if ([loginModel.varNames_isBindCard isEqualToString:@"2"]) {
         /// 没有绑定身份证
+        ///  切初始化时候开启绑定身份证功能
         varNames_needBindPersonID = YES;
     }
     if (_methodNames_phoneRegisterSuccess) {

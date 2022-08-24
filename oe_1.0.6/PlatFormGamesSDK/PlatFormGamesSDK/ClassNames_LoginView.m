@@ -313,7 +313,7 @@
 //                           };
     __weak typeof(self) weakSelf = self;
     [ClassNames_PGHubView methodNames_showIndicatorWithTitlte:@"登陆中..."];
-    [self.varNames_loginModel methodNames_fetchDataWithdURL:methodNames_gameUlogin_a() parameters:varNames_tmppara];
+    [self.varNames_loginModel methodNames_fetchDataWithdURL:methodNames_gameUlogin_f() parameters:varNames_tmppara];
     self.varNames_loginModel.methodNames_completeFetchData = ^(ClassNames_MemberLoginModel *object) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [ClassNames_PGHubView methodNames_hide];
@@ -342,6 +342,13 @@
         methodNames_saveVisitorConnectPersonID(memberLoginModel.varNames_isBindCard);
         methodNames_savePassword(self.varNames_secondInputView.varNames_textValue, self.varNames_firstInputView.varNames_textValue);
         
+        methodNames_saveUserBindPhone(memberLoginModel.varNames_isbindPhone);
+        methodNames_saveUserBindPersonID(memberLoginModel.varNames_isBindCard);
+        
+        methodNames_saveUserPhone(memberLoginModel.varNames_phone);
+        methodNames_saveUserPhoneHide(memberLoginModel.varNames_phoneHide);
+        
+        
         NSDictionary *varNames_tmpuserInfo = @{
                                    @"uid": memberLoginModel.varNames_uid,
                                    @"username": memberLoginModel.varNames_username
@@ -352,10 +359,12 @@
         BOOL varNames_needBindPersonID = NO;
         if ([memberLoginModel.varNames_isbindPhone isEqualToString:@"2"]) {
             /// 没有绑定手机
+            ///  且初始化时候需要开启绑定手机功能
             varNames_needBindPhone = YES;
         }
         if ([memberLoginModel.varNames_isBindCard isEqualToString:@"2"]) {
             /// 没有绑定身份证
+            ///  且 初始化需要开启绑定身份证功能
             varNames_needBindPersonID = YES;
         }
         if (self.methodNames_loginSuccess) {

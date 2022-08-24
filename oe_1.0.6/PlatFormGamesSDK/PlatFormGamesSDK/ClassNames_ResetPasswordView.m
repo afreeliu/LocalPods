@@ -15,7 +15,8 @@
 #import "ClassNames_ImageCommitButton.h"
 #import "ClassNames_ImageBackButton.h"
 #import "ClassNames_NavigationBarView.h"
-
+#import "ClassNames_BaseParameters.h"
+#import "ClassNames_InitGamesConfigure.h"
 @interface ClassNames_ResetPasswordView ()
 @property (nonatomic, readwrite, strong) ClassNames_NavigationBarView *varNames_naviView;
 
@@ -108,6 +109,20 @@
     
     ClassNames_InputView *varNames_tmpSecondInputView = [ClassNames_InputView methodNames_inputViewType:varNames_inputViewTypeFindBackPasswordCode];
     varNames_tmpSecondInputView.translatesAutoresizingMaskIntoConstraints = NO;
+    varNames_tmpSecondInputView.methodNames_getPhoneNumber = ^NSDictionary *(BOOL enable) {
+        if (!enable) {
+            NSString *varNames_tmpphone = @"";
+            if (weakSelf.varNames_firstInputView.varNames_textValue.length) {
+                varNames_tmpphone = weakSelf.varNames_firstInputView.varNames_textValue;
+            }
+            NSDictionary *varNames_tmppara = @{
+                                   @"phone": varNames_tmpphone,
+                                   @"type": @(0)
+                                   };
+            return varNames_tmppara;
+        }
+        return nil;
+    };
     self.varNames_secondInputView = varNames_tmpSecondInputView;
     
     ClassNames_InputView *varNames_tmpThirdInputView = [ClassNames_InputView methodNames_inputViewType:varNames_inputViewTypeResetPasswordNewPassword];
@@ -156,7 +171,7 @@
     varNames_tmpLabel.font = [UIFont systemFontOfSize:12];
     varNames_tmpLabel.textColor = [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_fillColor_config()];
     varNames_tmpLabel.textAlignment = NSTextAlignmentCenter;
-    varNames_tmpLabel.text = @"账户ID:1234567890";
+    varNames_tmpLabel.text = [NSString stringWithFormat:@"账户ID:%@", methodNames_readUserID()];
     self.varNames_accountLabel = varNames_tmpLabel;
     [self addSubview:varNames_tmpLabel];
 }
@@ -249,21 +264,21 @@
 #pragma mark ---------- action
 - (void)methodNames_commitAction:(UIButton *)sender {
     NSString *varNames_tmpaccount = self.varNames_firstInputView.varNames_textValue;
-    NSString *varNames_tmppassword = self.varNames_secondInputView.varNames_textValue;
+    NSString *varNames_tmpcode = self.varNames_secondInputView.varNames_textValue;
     NSString *varNames_tmpnewPassword = self.varNames_thirdInputView.varNames_textValue;
     NSString *varNames_tmprenewPassword = self.varNames_fourthInputView.varNames_textValue;
     if (!varNames_tmpaccount || !varNames_tmpaccount.length) {
         [ClassNames_PGHubView methodNames_showErrorMessage:@"请输入账号"];
         return;
     }
-    if (!varNames_tmppassword || !varNames_tmppassword.length) {
+    if (!varNames_tmpcode || !varNames_tmpcode.length) {
         [ClassNames_PGHubView methodNames_showErrorMessage:@"请输入密码"];
         return;
     }
-    if (!methodNames_numberLetterRegular(varNames_tmppassword)) {
-        [ClassNames_PGHubView methodNames_showErrorMessage:@"密码格式有误"];
-        return;
-    }
+//    if (!methodNames_numberLetterRegular(varNames_tmppassword)) {
+//        [ClassNames_PGHubView methodNames_showErrorMessage:@"密码格式有误"];
+//        return;
+//    }
     if (!varNames_tmpnewPassword || !varNames_tmpnewPassword.length) {
         [ClassNames_PGHubView methodNames_showErrorMessage:@"请输入新的密码"];
         return;
@@ -276,19 +291,23 @@
         [ClassNames_PGHubView methodNames_showErrorMessage:@"两次输入的密码不正确"];
         return;
     }
-    if (!methodNames_numberLetterRegular(varNames_tmpnewPassword) || !methodNames_numberLetterRegular(varNames_tmprenewPassword)) {
-        [ClassNames_PGHubView methodNames_showErrorMessage:@"密码格式有误"];
-        return;
-    }
-    NSDictionary *varNames_tmppara = @{
-                           @"user_name": varNames_tmpaccount,
-                           @"psw": varNames_tmppassword,
-                           @"new_psw": varNames_tmpnewPassword,
-                           @"confirm_psw": varNames_tmprenewPassword
-                           };
+//    if (!methodNames_numberLetterRegular(varNames_tmpnewPassword) || !methodNames_numberLetterRegular(varNames_tmprenewPassword)) {
+//        [ClassNames_PGHubView methodNames_showErrorMessage:@"密码格式有误"];
+//        return;
+//    }
+    NSDictionary *varNames_tmppara = [ClassNames_BaseParameters methodNames_getBaseParameters];
+//    NSDictionary *varNames_tmppara = @{
+//                           @"user_name": varNames_tmpaccount,
+//                           @"psw": varNames_tmppassword,
+//                           @"new_psw": varNames_tmpnewPassword,
+//                           @"confirm_psw": varNames_tmprenewPassword
+//                           };
+    [varNames_tmppara setValue:varNames_tmpaccount forKey:@"phone"];
+    [varNames_tmppara setValue:varNames_tmpcode forKey:@"captcha"];
+    [varNames_tmppara setValue:varNames_tmpnewPassword forKey:@"pwd"];
     __weak typeof(self) weakSelf = self;
     [ClassNames_PGHubView methodNames_showIndicatorWithTitlte:@"正在重置..."];
-    [self.varNames_resetPasswordModel methodNames_fetchDataWithdURL:methodNames_updatepswURL() parameters:varNames_tmppara];
+    [self.varNames_resetPasswordModel methodNames_fetchDataWithdURL:methodNames_gameResetpwd() parameters:varNames_tmppara];
     self.varNames_resetPasswordModel.methodNames_completeFetchData = ^(ClassNames_BaseModel *object) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [ClassNames_PGHubView methodNames_hide];

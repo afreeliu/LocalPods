@@ -241,16 +241,6 @@
         } else {
             self.varNames_can_reg = [varNames_tmpDic objectForKey:@"can_reg"];
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
     }
     [super methodNames_modelWithDict:dict];
 }

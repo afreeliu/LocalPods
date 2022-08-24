@@ -71,6 +71,7 @@
     dispatch_once(&onceToken, ^{
         varNames_umPlatsForm = [[UmPlatsFormGameManager alloc]init];
         
+        [[NSNotificationCenter defaultCenter] addObserver:varNames_umPlatsForm selector:@selector(methodNames_showSuspensionBallNoti:) name:varNames_showSuspensionBallNoti object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:varNames_umPlatsForm selector:@selector(methodNames_loginNoti:) name:varNames_userLoginSuceessNoti object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:varNames_umPlatsForm selector:@selector(methodNames_iapResultCall:) name:varNames_IapPayResultNoti object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:varNames_umPlatsForm selector:@selector(methodNames_appleResultCall:) name:varNames_appleResultNoti object:nil];
@@ -110,7 +111,7 @@
     __weak typeof(self) weakSelf = self;
     [self.varNames_gameInitModel methodNames_fetchDataWithdURL:methodNames_gameInit() parameters:varNames_parameters];
     self.varNames_gameInitModel.methodNames_completeFetchData = ^(id object) {
-        [weakSelf methodNames_configInitGame];
+        [weakSelf methodNames_configInitGame:object];
     };
     self.varNames_gameInitModel.methodNames_FetchError = ^(NSError *error) {
         NSLog(@"error:%@", error.userInfo);
@@ -155,7 +156,7 @@
 
 
 #pragma mark ------------------ 初始化成功，配置初始化信息
-- (void)methodNames_configInitGame {
+- (void)methodNames_configInitGame:(ClassNames_GameInitialiseModel *)varNames_gameInitModel {
     
     if (self.varNames_gameInitModel.varNames_status == ClassNames_FetchDataStatusSuccess) {
         // 是否开启快速登陆 1 为关闭 ， 2 为开启,
@@ -297,13 +298,15 @@
     if (!methodNames_getDefault_isPassLogin_config()) {
         /// 不进行登录的隐藏。即需要进行登录
         //methodNames_debugLog(@"plist中isPassLogin设置为0");
-        [self methodNames_createLoginView];
+//        [self methodNames_createLoginView];
+        [[ClassNames_MainView methodNames_instanceMainView]methodNames_showLoginView];
     } else {
         //methodNames_debugLog(@"plist中isPassLogin设置为1");
         /// 是否需要隐藏登录还需根据 是否正在审----------核
         if (!methodNames_readAppleCheck()) {
             /// 通过审----------核
-            [self methodNames_createLoginView];
+//            [self methodNames_createLoginView];
+            [[ClassNames_MainView methodNames_instanceMainView]methodNames_showLoginView];
             methodNames_debugLog(@"审通过了");
         } else {
             methodNames_debugLog(@"审中");
@@ -538,9 +541,6 @@
             [ClassName_IAPFail methodNames_CheckIAPFailOrders];
             weakSelf.varNames_window.hidden = YES;
             weakSelf.varNames_window = nil;
-            if ([weakSelf.varNames_gameInitModel.varNames_soft_ball isEqualToString:@"methodNames_showSuspensionBall"]) {
-                [weakSelf methodNames_showSuspensionBall];
-            }
             
             
 //            if ([self.varNames_gameInitModel.varNames_is_ball isEqualToString:@"1"]) {
@@ -558,6 +558,13 @@
     }
 }
 
+- (void)methodNames_showSuspensionBallNoti:(NSNotification *)noti {
+    [self methodNames_showSuspensionBall];
+    if (self.varNames_gameInitModel.varNames_soft_ball.integerValue == 2) {
+        [self methodNames_showSuspensionBall];
+    }
+}
+
 - (void)methodNames_showSuspensionBall {
     __weak typeof(self) weakSelf = self;
     if (!self.varNames_suspensionBall || !self.varNames_suspensionBall.superview) {
@@ -567,9 +574,9 @@
             if (index == 0) {
                 [[ClassNames_MainView methodNames_instanceMainView] methodNames_showCustomerGiftView];
             } else if (index == 1) {
-                [[ClassNames_MainView methodNames_instanceMainView]methodNames_showUserCenterView];
-            } else if (index == 2) {
                 [[ClassNames_MainView methodNames_instanceMainView] methodNames_showDetailCustomerView];
+            } else if (index == 2) {
+                [[ClassNames_MainView methodNames_instanceMainView]methodNames_showUserCenterView];
             }
         };
     }

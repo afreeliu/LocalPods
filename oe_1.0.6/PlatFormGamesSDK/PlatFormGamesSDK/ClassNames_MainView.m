@@ -136,8 +136,13 @@
 
 // 显示账号登陆页
 - (void)methodNames_showLoginView {
-    [self methodNames_createLoginView];
-    [self methodNames_switchSkillViewWithDefaultButtonTap:11];
+    
+    if (_varNames_isAutoLogin) {
+        [self methodNames_showAutoLoginView];
+    } else {
+        [self methodNames_createLoginView];
+        [self methodNames_switchSkillViewWithDefaultButtonTap:11];
+    }
 }
 // 显示账号注册页
 - (void)methodNames_showRegisterView {
@@ -193,11 +198,7 @@
         
         [self methodNames_createBackgroundView];
         
-        if (_varNames_isAutoLogin) {
-            [self methodNames_showAutoLoginView];
-        } else {
-            [self methodNames_showLoginView];
-        }
+        
         
         UITapGestureRecognizer *varNames_tmptap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(methodNames_endEditing:)];
         self.userInteractionEnabled = YES;
@@ -280,19 +281,20 @@
     
 }
 
+#pragma mark -------------------- 登录后进行判断是否需要绑定手机，绑定身份证
 #pragma mark ---------- 绑定提示信息相关的 手机绑定和身份证绑定
 - (void)methodNames_createBindView {
     
+    self.varNames_backgroundView.hidden = YES;
     if (_varNames_isNeedBindPhone) {
-//        [self methodNames_createBindPhoeView];
-        [self methodNames_createUserCenterView];
+        [self methodNames_createBindPhoeViewFromView:nil];
         return;
     }
     if (_varNames_isNeedBindPersonID) {
         [self methodNames_createBindPersonIDViewFromView:nil];
         return;
     }
-    _varNames_backgroundView.hidden = YES;
+    methodNames_postNotification(varNames_showSuspensionBallNoti, self, nil);
     [self removeFromSuperview];
 }
 
@@ -302,33 +304,27 @@
     if (!self.varNames_loginView) {
         self.varNames_loginView = [ClassNames_LoginView methodNames_createLoginView];
         self.varNames_loginView.clipsToBounds = YES;
-//        self.varNames_loginView.methodNames_commitBlock = ^(NSString *varNames_acc, NSString *varNames_pss) {
-//            weakSelf.varNames_loginView.hidden = YES;
-//            weakSelf.varNames_skillBtnView.hidden = YES;
-//            [weakSelf methodNames_createAutoLoginViewWithAccount:varNames_acc methodNames_password:varNames_pss];
-//        };
         self.varNames_loginView.methodNames_servicceBlock = ^{
             [weakSelf methodNames_showCustomerServerView];
         };
         _varNames_loginView.methodNames_loginSuccess = ^(BOOL varNames_isNeedBindPhone, BOOL varNames_isNeedBindPersonID) {
             weakSelf.varNames_isNeedBindPhone = varNames_isNeedBindPhone;
             weakSelf.varNames_isNeedBindPersonID = varNames_isNeedBindPersonID;
-            weakSelf.varNames_loginView.hidden = YES;
-            [weakSelf.varNames_loginView removeFromSuperview];
-            if (varNames_isNeedBindPhone && [methodNames_readBindPhoneType() isEqualToString:@"2"]) {
-                // 登录账号需要绑定手机 && 初始化时候开启了绑定手机功能
-                [weakSelf methodNames_createBindView];
-            } else {
-                // 不管什么原因，如果不需要绑定手机了，那么再判断是否需要实名制
-                if (varNames_isNeedBindPersonID && [methodNames_readBindPsersonIDType() isEqualToString:@"2"]) {
-                    [weakSelf methodNames_createBindPersonIDViewFromView:nil];
-                } else {
-                    // 最后 不需要绑定手机，不需要实名
-                    [weakSelf.varNames_loginView removeFromSuperview];
-                    [weakSelf removeFromSuperview];
-                    [[NSNotificationCenter defaultCenter]postNotificationName:varNames_userLoginSuceessNoti object:nil];
-                }
-            }
+            [weakSelf methodNames_createBindView];
+//            if (varNames_isNeedBindPhone && [methodNames_readBindPhoneType() isEqualToString:@"2"]) {
+//                // 登录账号需要绑定手机 && 初始化时候开启了绑定手机功能
+//                [weakSelf methodNames_createBindView];
+//            } else {
+//                // 不管什么原因，如果不需要绑定手机了，那么再判断是否需要实名制
+//                if (varNames_isNeedBindPersonID && [methodNames_readBindPsersonIDType() isEqualToString:@"2"]) {
+//                    [weakSelf methodNames_createBindPersonIDViewFromView:nil];
+//                } else {
+//                    // 最后 不需要绑定手机，不需要实名
+//                    weakSelf.varNames_backgroundView.hidden = YES;
+//                    [weakSelf removeFromSuperview];
+//                    [[NSNotificationCenter defaultCenter]postNotificationName:varNames_userLoginSuceessNoti object:nil];
+//                }
+//            }
             
         };
         _varNames_loginView.methodNames_loginFailure = ^{
@@ -692,15 +688,16 @@
             [weakSelf removeFromSuperview];
         };
         
-        [self.varNames_backgroundView addSubview:self.varNames_resetPasswordView];
+        [self addSubview:self.varNames_resetPasswordView];
     } else {
         self.varNames_resetPasswordView.hidden = NO;
         
     }
     
-    self.varNames_backgroundViewConstraint.constant = 340;
+    self.varNames_backgroundView.hidden = YES;
     
     [ClassNames_BaseViewLayout methodNames_layoutCenterX:_varNames_resetPasswordView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutCenterY:_varNames_resetPasswordView methodNames_constriant:0];
     [ClassNames_BaseViewLayout methodNames_layoutWidth:_varNames_resetPasswordView methodNames_constriant:methodNames_getMainViewWidth()];
     [ClassNames_BaseViewLayout methodNames_layoutHeight:_varNames_resetPasswordView methodNames_constriant:340];
     [self setNeedsLayout];
@@ -732,9 +729,6 @@
             weakSelf.varNames_isNeedBindPhone = varNames_isNeedBindPhone;
             weakSelf.varNames_isNeedBindPersonID = varNames_isNeedBindPersonID;
             [weakSelf methodNames_createBindView];
-//            [weakSelf methodNames_hideSkillView:^{
-//                [weakSelf methodNames_createBindView];
-//            }];
         };
         _varNames_normalRegisterView.methodNames_servicceBlock = ^{
             [weakSelf methodNames_showCustomerServerView];
@@ -836,7 +830,6 @@
 
 #pragma mark ---------- 绑定手机号
 - (void)methodNames_createBindPhoeViewFromView:(UIView *)varNames_view {
-    self.varNames_skillBtnView.hidden = YES;
     __weak typeof(self) weakSelf = self;
     if (!self.varNames_bindPhoneView) {
         self.varNames_bindPhoneView = [ClassNames_BindPhoneView methodNames_createBindPhoneViewFromView:varNames_view];
@@ -847,6 +840,8 @@
         };
         self.varNames_bindPhoneView.methodNames_closeBlock = ^{
             [weakSelf removeFromSuperview];
+            weakSelf.varNames_isNeedBindPhone = NO;
+            [weakSelf methodNames_createBindView];
         };
         self.varNames_bindPhoneView.methodNames_nextBlock = ^{
             weakSelf.varNames_isNeedBindPhone = NO;
@@ -856,46 +851,50 @@
         self.varNames_bindPhoneView.methodNames_backBlock = ^{
             NSLog(@"返回");
         };
-        [self.varNames_backgroundView addSubview:self.varNames_bindPhoneView];
+        [self addSubview:self.varNames_bindPhoneView];
     } else {
         [self.varNames_bindPhoneView methodNames_changeFromView:varNames_view];
         self.varNames_bindPhoneView.hidden = NO;
     }
     
-    self.varNames_backgroundViewConstraint.constant = 290;
-    
-    [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_bindPhoneView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_bindPhoneView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_bindPhoneView methodNames_constriant:0];
+    self.varNames_backgroundView.hidden = YES;
+    [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_bindPhoneView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutCenterY:self.varNames_bindPhoneView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_bindPhoneView methodNames_constriant:methodNames_getMainViewWidth()];
     [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_bindPhoneView methodNames_constriant:290];
     [self setNeedsLayout];
 }
 #pragma mark ---------- 绑定身份证
 - (void)methodNames_createBindPersonIDViewFromView:(UIView *)varNames_view {
     __weak typeof(self) weakSelf = self;
-    self.varNames_skillBtnView.hidden = YES;
-    if (!_varNames_bindPersonIDView) {
-        _varNames_bindPersonIDView = [ClassNames_BindPersonIDView methodNames_createBindPersonIDViewFromView:varNames_view];
-        _varNames_bindPersonIDView.clipsToBounds = YES;
-        _varNames_bindPersonIDView.methodNames_backBlock = ^(UIView *backView) {
+    if (!self.varNames_bindPersonIDView) {
+        self.varNames_bindPersonIDView = [ClassNames_BindPersonIDView methodNames_createBindPersonIDViewFromView:varNames_view];
+        self.varNames_bindPersonIDView.clipsToBounds = YES;
+        self.varNames_bindPersonIDView.methodNames_backBlock = ^(UIView *backView) {
             backView.hidden = NO;
         };
-        _varNames_bindPersonIDView.methodNames_bindPersonIDSuccess = ^{
+        self.varNames_bindPersonIDView.methodNames_bindPersonIDSuccess = ^{
             [weakSelf removeFromSuperview];
         };
-        _varNames_bindPersonIDView.methodNames_closeBindPersonIDView = ^{
+        self.varNames_bindPersonIDView.methodNames_closeBindPersonIDView = ^{
             weakSelf.varNames_isNeedBindPersonID = NO;
             [weakSelf methodNames_createBindView];
         };
-        [_varNames_backgroundView addSubview:_varNames_bindPersonIDView];
+        self.varNames_bindPersonIDView.methodNames_closeBlock = ^{
+            weakSelf.varNames_isNeedBindPersonID = NO;
+            [weakSelf methodNames_createBindView];
+        };
+        [self addSubview:self.varNames_bindPersonIDView];
     } else {
         self.varNames_bindPersonIDView.hidden = NO;
         [self.varNames_bindPersonIDView methodNames_changeFromView:varNames_view];
     }
     
-    [ClassNames_BaseViewLayout methodNames_layoutTop:_varNames_bindPersonIDView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutLeft:_varNames_bindPersonIDView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutRight:_varNames_bindPersonIDView methodNames_constriant:0];
+    self.varNames_backgroundView.hidden = YES;
+    
+    [ClassNames_BaseViewLayout methodNames_layoutCenterX:_varNames_bindPersonIDView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutCenterY:_varNames_bindPersonIDView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutWidth:_varNames_bindPersonIDView methodNames_constriant:methodNames_getMainViewWidth()];
     [ClassNames_BaseViewLayout methodNames_layoutHeight:_varNames_bindPersonIDView methodNames_constriant:290];
     [self setNeedsLayout];
 }
@@ -905,7 +904,7 @@
     if (!self.varNames_userCenterView) {
         __weak typeof(self) weakSelf = self;
         self.varNames_userCenterView = [ClassNames_UserCenterView methodNames_createUserCenterView];
-        [self.varNames_backgroundView addSubview:self.varNames_userCenterView];
+        [self addSubview:self.varNames_userCenterView];
         self.varNames_userCenterView.methodNames_closeBlock = ^{
             weakSelf.hidden = YES;
             weakSelf.varNames_backgroundView.hidden = YES;
@@ -938,10 +937,10 @@
     } else {
         self.varNames_userCenterView.hidden = NO;
     }
-    self.varNames_backgroundViewConstraint.constant = 280;
-    [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_userCenterView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_userCenterView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_userCenterView methodNames_constriant:0];
+    self.varNames_backgroundView.hidden = YES;
+    [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_userCenterView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutCenterY:self.varNames_userCenterView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_userCenterView methodNames_constriant:methodNames_getMainViewWidth()];
     [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_userCenterView methodNames_constriant:280];
 }
 
@@ -1016,7 +1015,7 @@
     [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_detailCustomerServerView methodNames_constriant:0];
     [ClassNames_BaseViewLayout methodNames_layoutCenterY:self.varNames_detailCustomerServerView methodNames_constriant:0];
     [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_detailCustomerServerView methodNames_constriant:methodNames_getMainViewWidth()];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_detailCustomerServerView methodNames_constriant:250];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_detailCustomerServerView methodNames_constriant:270];
 }
 
 
@@ -1034,7 +1033,7 @@
         
         self.varNames_giftView.hidden = NO;
     }
-    
+    self.varNames_backgroundView.hidden = YES;
     [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_giftView methodNames_constriant:0];
     [ClassNames_BaseViewLayout methodNames_layoutCenterY:self.varNames_giftView methodNames_constriant:0];
     [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_giftView methodNames_constriant:methodNames_getMainViewWidth()];

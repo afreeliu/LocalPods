@@ -12,7 +12,7 @@
 #import "ClassNames_DefaultThemeConfigure.h"
 #import "ClassNames_ViewTool.h"
 #import "ClassNames_Color.h"
-
+#import "ClassNames_PGHubView.h"
 
 @interface ClassNames_DetailCustomerServerView()<UITextViewDelegate>
 
@@ -146,6 +146,8 @@
     NSAttributedString *iconString = [NSAttributedString attributedStringWithAttachment:icon];
     [varNames_attString replaceCharactersInRange:varNames_rangeImgCall withAttributedString:iconString];
     
+    [varNames_attString addAttribute:NSLinkAttributeName value:@"callme://" range:varNames_rangeImgCall];
+    
     
     
     // 创建 【复制】 的按钮
@@ -159,6 +161,7 @@
     [icon1 setImage:varNames_copyImg];
     NSAttributedString *iconString1 = [NSAttributedString attributedStringWithAttachment:icon1];
     [varNames_attString replaceCharactersInRange:varNames_rangeImgCopy withAttributedString:iconString1];
+    [varNames_attString addAttribute:NSLinkAttributeName value:@"copykoukou://" range:NSMakeRange(varNames_rangeImgCopy.location, 1)];
     
     NSRange varNames_rangeImgCopyM = [varNames_attString.string rangeOfString:@"[copy_message]"];
     NSTextAttachment *icon2 = [[NSTextAttachment alloc] init];
@@ -166,7 +169,7 @@
     [icon2 setImage:varNames_copyImg];
     NSAttributedString *iconString2 = [NSAttributedString attributedStringWithAttachment:icon2];
     [varNames_attString replaceCharactersInRange:varNames_rangeImgCopyM withAttributedString:iconString2];
-    
+    [varNames_attString addAttribute:NSLinkAttributeName value:@"copywxmap://" range:NSMakeRange(varNames_rangeImgCopyM.location, 1)];
     
     
     NSString *varNames_stringQQ = @"image_qq";
@@ -224,6 +227,25 @@
     return varNames_btn;
 }
 
+#pragma mark 富文本点击事件
+-(BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)URL inRange:(NSRange)characterRange {
+    if ([[URL scheme] isEqualToString:@"callme"]) {
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = self.varNames_qq;
+        [ClassNames_PGHubView methodNames_showSuccessMessage:@"打电话"];
+    }
+    if ([[URL scheme] isEqualToString:@"copykoukou"]) {
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = self.varNames_qq;
+        [ClassNames_PGHubView methodNames_showSuccessMessage:@"复制成功！"];
+    }
+    if ([[URL scheme] isEqualToString:@"copywxmap"]) {
+        UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
+        pasteboard.string = self.varNames_whNumber;
+        [ClassNames_PGHubView methodNames_showSuccessMessage:@"复制成功！"];
+    }
+    return NO;
+}
 
 
 @end

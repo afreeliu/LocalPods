@@ -10,9 +10,18 @@
 @property (nonatomic, readonly, copy) NSString *varNames_username;  // 如果是手机登录的用户，该值为手机号
 @property (nonatomic, readonly, copy) NSString *varNames_uid;
 
+//phone = 13824472562;
+@property (nonatomic, readonly, copy) NSString *varNames_phone;
+//"phone_hide" = "138*****562";
+@property (nonatomic, readonly, copy) NSString *varNames_phoneHide;
+//pwd = 123456;
+@property (nonatomic, readonly, copy) NSString *varNames_pwd;
 
 @property (nonatomic, readonly, copy) NSString *varNames_realName;
 @property (nonatomic, readonly, copy) NSString *varNames_carId;
+@property (nonatomic, readonly, copy) NSString *varNames_age; // 登录成功后需要传给研发,年龄
+@property (nonatomic, readonly, copy) NSString *varNames_limit; // 登录成功后需要传给研发
+
 
 @property (nonatomic, readonly, copy) NSString *varNames_password; // 手机号登录的会返回密码
 @property (nonatomic, readonly, copy) NSString *varNames_token;// 只有在 acctreg/2 的情况下返回

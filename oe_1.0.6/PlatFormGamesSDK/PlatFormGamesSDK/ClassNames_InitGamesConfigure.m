@@ -17,6 +17,14 @@ NSString *const varNames_userNameKey = @"varNames_userNameKey";
 
 NSString *const varNames_userIDKey = @"varNames_userIDKey";
 
+NSString *const varNames_userPhoneKey = @"varNames_userPhoneKey";
+
+NSString *const varNames_userPhoneHideKey = @"varNames_userPhoneHideKey";
+
+NSString *const varNames_userBindPhoneKey = @"varNames_userBindPhoneKey";
+
+NSString *const varNames_userBindPersonIDKey = @"varNames_userBindPersonIDKey";
+
 NSString *const varNames_channelIDKey = @"varNames_channelIDKey";
 
 NSString *const varNames_advIDKey = @"varNames_advIDKey";

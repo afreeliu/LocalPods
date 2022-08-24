@@ -55,8 +55,9 @@
     ClassNames_BindPhoneView *varNames_tmpBindPhoneView = [[ClassNames_BindPhoneView alloc]init];
     varNames_tmpBindPhoneView.translatesAutoresizingMaskIntoConstraints = NO;
     if (varNames_view) {
-        varNames_tmpBindPhoneView.varNames_fview = varNames_view;
-        [varNames_tmpBindPhoneView methodNames_addLeftButton];
+        [varNames_tmpBindPhoneView methodNames_showFromView:varNames_view];
+//        varNames_tmpBindPhoneView.varNames_fview = varNames_view;
+//        [varNames_tmpBindPhoneView methodNames_addLeftButton];
     }
     return varNames_tmpBindPhoneView;
 }
@@ -79,13 +80,13 @@
 }
 
 - (void)methodNames_initData {
-    if (1) {
+    if (!methodNames_readUserPhone()) {
+        self.varNames_naviTitle = @"绑定手机";
+        self.varNames_commitTitle = @"绑定手机";
+    } else {
         // 绑定了手机
         self.varNames_naviTitle = @"手机验证";
         self.varNames_commitTitle = @"修改绑定";
-    } else {
-        self.varNames_naviTitle = @"绑定手机";
-        self.varNames_commitTitle = @"绑定手机";
     }
 }
 
@@ -138,7 +139,6 @@
     [self addSubview:self.varNames_firstCommitBtn];
     
     [self methodNames_createTipLabelView];
-    [self methodNames_createShowPhoneLabel];
     
     
     [self.varNames_firstInputView methodNames_setInputViewKeyboardReutrnType:varNames_keyboardReturnNext];
@@ -147,13 +147,14 @@
         [weakSelf.varNames_secondInputView methodNames_becomeFirstResponder];
     };
     
-    if (1) {
+    if (!methodNames_readUserPhone()) {
+        // 没有绑定手机
+        self.varNames_firstInputView.hidden = NO;
+        self.varNames_showPhoneLabel.hidden = YES;
+    } else {
         // 绑定了手机
         self.varNames_firstInputView.hidden = YES;
         self.varNames_showPhoneLabel.hidden = NO;
-    } else {
-        self.varNames_firstInputView.hidden = NO;
-        self.varNames_showPhoneLabel.hidden = YES;
     }
         
     
@@ -190,7 +191,7 @@
     varNames_tmpLabel.font = [UIFont systemFontOfSize:12];
     varNames_tmpLabel.textColor = [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_fillColor_config()];
     varNames_tmpLabel.textAlignment = NSTextAlignmentCenter;
-    varNames_tmpLabel.text = @"账户ID:1234567890";
+    varNames_tmpLabel.text = [NSString stringWithFormat:@"账户ID:%@", methodNames_readUserID()];
     self.varNames_accountLabel = varNames_tmpLabel;
     [self addSubview:varNames_tmpLabel];
 }
@@ -202,7 +203,7 @@
     varNames_tmpLabel.font = [UIFont systemFontOfSize:12];
     varNames_tmpLabel.textColor = [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_fillColor_config()];
     varNames_tmpLabel.textAlignment = NSTextAlignmentCenter;
-    varNames_tmpLabel.text = [NSString stringWithFormat:@"手机已绑定:%@", @"12345678997"];
+    varNames_tmpLabel.text = [NSString stringWithFormat:@"手机已绑定:%@", methodNames_readUserPhoneHide()];
     self.varNames_showPhoneLabel = varNames_tmpLabel;
     [self addSubview:varNames_tmpLabel];
 }
@@ -242,15 +243,21 @@
     self.varNames_topMarginValue += methodNames_setMargin_2base();
     
     
-    [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_firstInputView methodNames_constriant:self.varNames_topMarginValue];
-    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_firstInputView methodNames_constriant:methodNames_setMargin_2base()];
-    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_firstInputView methodNames_constriant:methodNames_setMargin_2base()];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_firstInputView methodNames_constriant:methodNames_getInputView_inputView_Height()];
     
-    [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_showPhoneLabel methodNames_constriant:self.varNames_topMarginValue];
-    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_showPhoneLabel methodNames_constriant:methodNames_setMargin_2base()];
-    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_showPhoneLabel methodNames_constriant:methodNames_setMargin_2base()];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_showPhoneLabel methodNames_constriant:methodNames_getInputView_inputView_Height()];
+    
+    if (!methodNames_readUserBindPhone()) {
+        // 没绑定手机
+        [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_firstInputView methodNames_constriant:self.varNames_topMarginValue];
+        [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_firstInputView methodNames_constriant:methodNames_setMargin_2base()];
+        [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_firstInputView methodNames_constriant:methodNames_setMargin_2base()];
+        [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_firstInputView methodNames_constriant:methodNames_getInputView_inputView_Height()];
+    } else {
+        [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_showPhoneLabel methodNames_constriant:self.varNames_topMarginValue];
+        [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_showPhoneLabel methodNames_constriant:methodNames_setMargin_2base()];
+        [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_showPhoneLabel methodNames_constriant:methodNames_setMargin_2base()];
+        [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_showPhoneLabel methodNames_constriant:methodNames_getInputView_inputView_Height()];
+    }
+   
     
     self.varNames_topMarginValue += methodNames_getInputView_inputView_Height();
     self.varNames_topMarginValue += methodNames_setMargin_3base();
@@ -279,6 +286,18 @@
     
     
     [self methodNames_caculateInputViewLocal];
+}
+
+
+- (void)methodNames_showFromView:(UIView *)view {
+    [self methodNames_addLeftButton];
+    self.varNames_fview = view;
+    if ([methodNames_readUserBindPhone() isEqualToString:@"2"]) {
+        // 没绑定手机
+    } else {
+        [self methodNames_createShowPhoneLabel];
+    }
+    
 }
 
 - (void)methodNames_addLeftButton {
@@ -323,11 +342,16 @@
         return;
     }
     NSDictionary *varNames_tmppara = [ClassNames_BaseParameters methodNames_getBaseParameters];
-//    NSDictionary *varNames_tmppara = @{
-//                           @"user_name": methodNames_readUserName(),
-//                           @"phone": varNames_tmpaccount,
-//                           @"code": varNames_tmpcode
-//                           };
+
+    
+    NSString *varNames_tmpUrl = methodNames_gamePbind();
+    if ([methodNames_readUserBindPhone() isEqualToString:@"2"]) {
+        // 没有绑定，这时候不能换绑
+    } else {
+        // 已经绑定过手机了
+        varNames_tmpUrl = methodNames_gameVerifyphone();
+    }
+    
     [varNames_tmppara setValue:varNames_tmpaccount forKey:@"phone"];
     [varNames_tmppara setValue:varNames_tmpcode forKey:@"captcha"];
     [varNames_tmppara setValue:methodNames_readUserID() forKey:@"uid"];
@@ -335,7 +359,7 @@
     
     __weak typeof(self) weakSelf = self;
     [ClassNames_PGHubView methodNames_showIndicatorWithTitlte:@"正在绑定..."];
-    [self.varNames_connectPhoneModel methodNames_fetchDataWithdURL:methodNames_gamePbind() parameters:varNames_tmppara];
+    [self.varNames_connectPhoneModel methodNames_fetchDataWithdURL:varNames_tmpUrl parameters:varNames_tmppara];
     self.varNames_connectPhoneModel.methodNames_completeFetchData = ^(ClassNames_BaseModel *object) {
         
         dispatch_async(dispatch_get_main_queue(), ^{

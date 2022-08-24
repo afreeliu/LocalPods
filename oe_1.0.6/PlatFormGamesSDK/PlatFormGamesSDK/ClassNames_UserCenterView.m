@@ -9,6 +9,7 @@
 #import "ClassNames_ImageCommitButton.h"
 #import "ClassNames_PGHubView.h"
 #import "ClassNames_NavigationBarView.h"
+#import "ClassNames_InitGamesConfigure.h"
 
 static NSString *const varNames_btnImgKey = @"varNames_btnImgKey";
 static NSString *const varNames_btnTitleKey = @"varNames_btnTitleKey";
@@ -121,7 +122,7 @@ static NSString *const varNames_btnTitleKey = @"varNames_btnTitleKey";
     varNames_tmpLabel.font = [UIFont systemFontOfSize:12];
     varNames_tmpLabel.textColor = [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_fillColor_config()];
     varNames_tmpLabel.textAlignment = NSTextAlignmentCenter;
-    varNames_tmpLabel.text = @"账户ID:1234567890";
+    varNames_tmpLabel.text = [NSString stringWithFormat:@"账户ID:%@", methodNames_readUserID()];
     self.varNames_accountLabel = varNames_tmpLabel;
     [self addSubview:varNames_tmpLabel];
 }

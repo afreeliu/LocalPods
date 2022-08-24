@@ -548,15 +548,27 @@ static CGFloat varNameS_KEYBOARDMINY = 0;
 - (void)methodNames_setInputViewTypeFindBackPasswordCode {
     self.varNames_itemButton.hidden = NO;
     if (!self.varNames_inputViewTitleType) {
-        self.varNames_titleLabel.text = methodNames_getTitle_FindBackPasswordView_inputView_title2();
+        self.varNames_titleLabel.text = methodNames_getTitle_PhoneRegisterView_inputView_title2();
+    } else {
+        UIImage *varNames_img = methodNames_getImage(@"image_code");
+        CGSize varNames_iconSize = methodNames_getImageSize(varNames_img);
+        self.varNames_iconWidthConstraint.constant = varNames_iconSize.width/2.0;
+        self.varNames_iconHeightConstraint.constant = varNames_iconSize.height/2.0;
+        self.varNames_inputViewTypeImage.image = varNames_img;
     }
-//    self.varNames_textField.placeholder = methodNames_getTitle_FindBackPasswordView_inputView_placeholder2();
-    [self methodNames_confiInputViewPlaceholder:methodNames_getTitle_FindBackPasswordView_inputView_placeholder2() subMethodNames_placeholdercolor:[UIColor grayColor]];
-    self.varNames_textFieldRight.constant = methodNames_setMargin_base() + methodNames_getInputView_ItemButton_Width();
+    [self methodNames_confiInputViewPlaceholder:methodNames_getTitle_PhoneRegisterView_inputView_placeholder2() subMethodNames_placeholdercolor:[UIColor grayColor]];
     self.varNames_textField.returnKeyType = UIReturnKeyNext;
     self.varNames_returnType = varNames_keyboardReturnNext;
-    self.varNames_codeLayer = methodNames_drawImageMessage(self.varNames_itemButton, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_backgroundColor_config()]);
-    methodNames_drawCode(self.varNames_inputViewTypeImage, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_backgroundColor_config()]);
+    self.varNames_textFieldRight.constant = methodNames_setMargin_2base() + methodNames_getInputView_ItemButton_Width();
+    
+    [self.varNames_itemButton setTitle:@"获取验证码" forState:UIControlStateNormal];
+    self.varNames_itemButton.titleLabel.font = [UIFont systemFontOfSize:13];
+    [self.varNames_itemButton setTitleColor:[ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_themeColor_config()] forState:UIControlStateNormal];
+    self.varNames_itemButton.layer.borderColor = [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_themeColor_config()].CGColor;
+    self.varNames_itemButton.layer.borderWidth = 1.0;
+    self.varNames_itemButton.layer.cornerRadius = 4.5;
+    self.varNames_itemWidthConstraint.constant = 80;
+    self.varNames_itemHeightConstraint.constant = 30;
 }
 #pragma mark ---------- 找回密码的密码输入框
 - (void)methodNames_setInputViewTypeFindBackPasswordPassword {

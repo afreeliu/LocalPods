@@ -112,6 +112,16 @@
     
     self.varNames_naviView = varNames_tmpNaviView;
     [self addSubview:varNames_tmpNaviView];
+    
+    if (DEBUG) {
+        __weak typeof(self) weakSelf = self;
+        [self.varNames_naviView methodNames_setRightButtonImage:@"image_close" rightTitle:@"" btnAction:^{
+            if (weakSelf.methodNames_closeBlock) {
+                weakSelf.methodNames_closeBlock();
+            }
+        }];
+    }
+    
 }
 
 - (void)methodNames_createTipLabel {
@@ -269,7 +279,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             [ClassNames_PGHubView methodNames_hide];
             if (object.varNames_code == 200) {
-                [ClassNames_PGHubView methodNames_showErrorMessage:object.varNames_msg];
+                [ClassNames_PGHubView methodNames_showSuccessMessage:object.varNames_msg];
                 dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.8 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
                     if (weakSelf.methodNames_bindPersonIDSuccess) {
                         weakSelf.methodNames_bindPersonIDSuccess();

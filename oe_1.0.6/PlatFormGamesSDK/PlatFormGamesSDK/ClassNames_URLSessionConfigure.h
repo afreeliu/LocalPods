@@ -276,6 +276,12 @@ static inline NSString *methodNames_gamePbind() {
     NSString *varNames_tmpInitUrl = [NSString stringWithFormat:@"%@%@", methodNames_domain(), varNames_tmpInit];
     return varNames_tmpInitUrl;
 }
+#pragma mark -------------------- 手机号换绑定/sdk/verifyphone
+static inline NSString *methodNames_gameVerifyphone() {
+    NSString *varNames_tmpInit = methodNames_getRequestConfigValueForKey(@"verifyphone")?:@"/sdk/verifyphone";
+    NSString *varNames_tmpInitUrl = [NSString stringWithFormat:@"%@%@", methodNames_domain(), varNames_tmpInit];
+    return varNames_tmpInitUrl;
+}
 #pragma mark -------------------- 实名绑定/sdk/cbind
 static inline NSString *methodNames_gameCbind() {
     NSString *varNames_tmpInit = methodNames_getRequestConfigValueForKey(@"cbind")?:@"/sdk/cbind";

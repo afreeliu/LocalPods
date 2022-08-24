@@ -3,7 +3,6 @@
 #import "ClassNames_NormalRegisterView.h"
 #import "ClassNames_NavigationBarView.h"
 #import "ClassNames_Title.h"
-#import "ClassNames_MemberNormalRegisterModel.h"
 
 #import "ClassNames_CommitButton.h"
 #import "ClassNames_InputView.h"
@@ -18,7 +17,8 @@
 #import "ClassNames_DelegateView.h"
 #import "ClassNames_URLSessionConfigure.h"
 #import "ClassNames_ImageCommitButton.h"
-
+#import "ClassNames_BaseParameters.h"
+#import "ClassNames_MemberLoginModel.h"
 @interface ClassNames_NormalRegisterView ()<UITextViewDelegate>
 
 @property (nonatomic, readwrite, strong) ClassNames_NavigationBarView *varNames_naviView;
@@ -31,7 +31,7 @@
 
 @property (nonatomic, readwrite, assign) CGFloat varNames_topMarginValue;
 
-@property (nonatomic, readwrite, strong) ClassNames_MemberNormalRegisterModel *varNames_normalRegisterModel;
+@property (nonatomic, readwrite, strong) ClassNames_MemberLoginModel *varNames_normalRegisterModel;
 
 // 协议相关
 @property (nonatomic, readwrite, strong) UIView *varNames_delegateView;
@@ -115,7 +115,7 @@
     [self.varNames_delegateView addSubview:self.varNames_delegateTextView];
     
     ClassNames_CommitButton *varNames_tmpCommitBtn = [ClassNames_CommitButton methodNames_createCommitButtonWithTitle:@"一键注册" withTouchUpInsidBlock:^{
-        NSLog(@"点击一键注册");
+        [weakSelf methodNames_commitAction:nil];
     }];
     self.varNames_firstCommitBtn = varNames_tmpCommitBtn;
     
@@ -264,25 +264,28 @@
         [ClassNames_PGHubView methodNames_showErrorMessage:@"请输入密码"];
         return;
     }
-    if (!methodNames_numberLetterRegular(varNames_tmppassword) || !methodNames_numberLetterRegular(varNames_tmppassword)) {
-        [ClassNames_PGHubView methodNames_showErrorMessage:@"密码格式有误"];
-        return;
-    }
-    NSDictionary *varNames_tmppara = @{
-                           @"user_name": varNames_tmpaccount,
-                           @"password": varNames_tmppassword,
-                           @"adv_id": methodNames_readAdvID(),
-                           @"channel_id": methodNames_readChannelID(),
-                           @"material_id": @"0",
-                           @"gid": methodNames_readGameID(),
-                           @"sub_gid": methodNames_readSubGameID(),
-                           @"platform_id": methodNames_readPlatformID(),
-                           @"device_code": methodNames_getDeviceIDFA()
-                           };
+//    if (!methodNames_numberLetterRegular(varNames_tmppassword) || !methodNames_numberLetterRegular(varNames_tmppassword)) {
+//        [ClassNames_PGHubView methodNames_showErrorMessage:@"密码格式有误"];
+//        return;
+//    }
+    NSDictionary *varNames_tmppara = [ClassNames_BaseParameters methodNames_getBaseParameters];
+    [varNames_tmppara setValue:varNames_tmpaccount forKey:@"uname"];
+    [varNames_tmppara setValue:varNames_tmppassword forKey:@"pwd"];
+//    NSDictionary *varNames_tmppara = @{
+//                           @"user_name": varNames_tmpaccount,
+//                           @"password": varNames_tmppassword,
+//                           @"adv_id": methodNames_readAdvID(),
+//                           @"channel_id": methodNames_readChannelID(),
+//                           @"material_id": @"0",
+//                           @"gid": methodNames_readGameID(),
+//                           @"sub_gid": methodNames_readSubGameID(),
+//                           @"platform_id": methodNames_readPlatformID(),
+//                           @"device_code": methodNames_getDeviceIDFA()
+//                           };
     __weak typeof(self) weakSelf = self;
     [ClassNames_PGHubView methodNames_showIndicatorWithTitlte:@"正在注册..."];
-    [self.varNames_normalRegisterModel methodNames_fetchDataWithdURL:methodNames_memberRegisterURL() parameters:varNames_tmppara];
-    self.varNames_normalRegisterModel.methodNames_completeFetchData = ^(ClassNames_MemberNormalRegisterModel *object) {
+    [self.varNames_normalRegisterModel methodNames_fetchDataWithdURL:methodNames_gameAcctreg_2() parameters:varNames_tmppara];
+    self.varNames_normalRegisterModel.methodNames_completeFetchData = ^(ClassNames_MemberLoginModel *object) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [ClassNames_PGHubView methodNames_hide];
             if (object.varNames_code == 200) {
@@ -306,7 +309,7 @@
 }
 
 /// 注册成功返回执行的方法
-- (void)methodNames_normalRegisterSuccess:(ClassNames_MemberNormalRegisterModel *)memberRegisterModel {
+- (void)methodNames_normalRegisterSuccess:(ClassNames_MemberLoginModel *)memberRegisterModel {
     /// 保存账户
     methodNames_saveAccount(_varNames_firstInputView.varNames_textValue);
     /// 保存最后登陆的账户
@@ -318,6 +321,13 @@
     /// 保存用户名称
     methodNames_saveUserName(memberRegisterModel.varNames_username);
     methodNames_saveVisitorConnectPersonID(memberRegisterModel.varNames_isBindCard);
+    
+    methodNames_saveUserBindPhone(memberRegisterModel.varNames_isbindPhone);
+    methodNames_saveUserBindPersonID(memberRegisterModel.varNames_isBindCard);
+    
+    methodNames_saveUserPhone(memberRegisterModel.varNames_phone);
+    methodNames_saveUserPhoneHide(memberRegisterModel.varNames_phoneHide);
+    
     NSDictionary *varNames_tmpuserInfo = @{
                                @"uid": memberRegisterModel.varNames_uid,
                                @"username": memberRegisterModel.varNames_username
@@ -328,10 +338,12 @@
     BOOL varNames_needBindPersonID = NO;
     if ([memberRegisterModel.varNames_isbindPhone isEqualToString:@"2"]) {
         /// 没有绑定手机
+        ///  且初始化时候需要开启绑定手机功能
         varNames_needBindPhone = YES;
     }
     if ([memberRegisterModel.varNames_isBindCard isEqualToString:@"2"]) {
         /// 没有绑定身份证
+        ///  且 初始化需要开启绑定身份证功能
         varNames_needBindPersonID = YES;
     }
     if (_methodNames_normalRegisterSuccess) {
@@ -346,9 +358,9 @@
 
 
 
--(ClassNames_MemberNormalRegisterModel *)varNames_normalRegisterModel {
+-(ClassNames_MemberLoginModel *)varNames_normalRegisterModel {
     if (!_varNames_normalRegisterModel) {
-        _varNames_normalRegisterModel = [[ClassNames_MemberNormalRegisterModel alloc]init];
+        _varNames_normalRegisterModel = [[ClassNames_MemberLoginModel alloc]init];
     }
     return _varNames_normalRegisterModel;
 }
