@@ -189,7 +189,7 @@
     [varNames_tmppara setValue:password forKey:@"pwd"];
     __weak typeof(self) weakSelf = self;
     [ClassNames_PGHubView methodNames_showIndicatorWithTitlte:@"登陆中..."];
-    [self.varNames_loginModel methodNames_fetchDataWithdURL:methodNames_gameUlogin_a() parameters:varNames_tmppara];
+    [self.varNames_loginModel methodNames_fetchDataWithdURL:methodNames_gameUlogin_f() parameters:varNames_tmppara];
     self.varNames_loginModel.methodNames_completeFetchData = ^(ClassNames_MemberLoginModel *object) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [ClassNames_PGHubView methodNames_hide];
