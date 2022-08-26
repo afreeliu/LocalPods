@@ -80,7 +80,7 @@
 }
 
 - (void)methodNames_initData {
-    if (!methodNames_readUserPhone()) {
+    if (!methodNames_readUserPhone().length) {
         self.varNames_naviTitle = @"绑定手机";
         self.varNames_commitTitle = @"绑定手机";
     } else {
@@ -102,7 +102,7 @@
     
     [self methodNames_setNavi];
     [self methodNames_createAccountView];
-    
+    [self methodNames_createShowPhoneLabel];
     ClassNames_InputView *varNames_tmpFirstInputView = [ClassNames_InputView methodNames_inputViewType:varNames_inputViewTypeBindPhonePhone];
     varNames_tmpFirstInputView.translatesAutoresizingMaskIntoConstraints = NO;
     self.varNames_firstInputView = varNames_tmpFirstInputView;
@@ -147,7 +147,7 @@
         [weakSelf.varNames_secondInputView methodNames_becomeFirstResponder];
     };
     
-    if (!methodNames_readUserPhone()) {
+    if (!methodNames_readUserPhone().length) {
         // 没有绑定手机
         self.varNames_firstInputView.hidden = NO;
         self.varNames_showPhoneLabel.hidden = YES;
@@ -205,6 +205,7 @@
     varNames_tmpLabel.textAlignment = NSTextAlignmentCenter;
     varNames_tmpLabel.text = [NSString stringWithFormat:@"手机已绑定:%@", methodNames_readUserPhoneHide()];
     self.varNames_showPhoneLabel = varNames_tmpLabel;
+    varNames_tmpLabel.hidden = YES;
     [self addSubview:varNames_tmpLabel];
 }
 
@@ -245,18 +246,17 @@
     
     
     
-    if (!methodNames_readUserBindPhone()) {
         // 没绑定手机
-        [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_firstInputView methodNames_constriant:self.varNames_topMarginValue];
-        [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_firstInputView methodNames_constriant:methodNames_setMargin_2base()];
-        [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_firstInputView methodNames_constriant:methodNames_setMargin_2base()];
-        [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_firstInputView methodNames_constriant:methodNames_getInputView_inputView_Height()];
-    } else {
-        [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_showPhoneLabel methodNames_constriant:self.varNames_topMarginValue];
-        [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_showPhoneLabel methodNames_constriant:methodNames_setMargin_2base()];
-        [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_showPhoneLabel methodNames_constriant:methodNames_setMargin_2base()];
-        [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_showPhoneLabel methodNames_constriant:methodNames_getInputView_inputView_Height()];
-    }
+    [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_firstInputView methodNames_constriant:self.varNames_topMarginValue];
+    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_firstInputView methodNames_constriant:methodNames_setMargin_2base()];
+    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_firstInputView methodNames_constriant:methodNames_setMargin_2base()];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_firstInputView methodNames_constriant:methodNames_getInputView_inputView_Height()];
+
+    [ClassNames_BaseViewLayout methodNames_layoutTop:self.varNames_showPhoneLabel methodNames_constriant:self.varNames_topMarginValue];
+    [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_showPhoneLabel methodNames_constriant:methodNames_setMargin_2base()];
+    [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_showPhoneLabel methodNames_constriant:methodNames_setMargin_2base()];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_showPhoneLabel methodNames_constriant:methodNames_getInputView_inputView_Height()];
+    
    
     
     self.varNames_topMarginValue += methodNames_getInputView_inputView_Height();
@@ -292,12 +292,12 @@
 - (void)methodNames_showFromView:(UIView *)view {
     [self methodNames_addLeftButton];
     self.varNames_fview = view;
-    if ([methodNames_readUserBindPhone() isEqualToString:@"2"]) {
-        // 没绑定手机
+//    [self methodNames_createShowPhoneLabel];
+    if (!methodNames_readUserPhone().length) {
+        self.varNames_showPhoneLabel.hidden = YES;
     } else {
-        [self methodNames_createShowPhoneLabel];
+        self.varNames_showPhoneLabel.hidden = NO;
     }
-    
 }
 
 - (void)methodNames_addLeftButton {

@@ -304,7 +304,7 @@
 //                           @"user_name": varNames_tmpaccount,
 //                           @"password": varNames_tmppassword,
 //                           @"adv_id": methodNames_readAdvID(),
-//                           @"channel_id": methodNames_readChannelID(),
+//                           @"channel_id": methodNames_readOpr_CID(),
 //                           @"material_id": @"0",
 //                           @"gid": methodNames_readGameID(),
 //                           @"sub_gid": methodNames_readSubGameID(),
@@ -313,7 +313,7 @@
 //                           };
     __weak typeof(self) weakSelf = self;
     [ClassNames_PGHubView methodNames_showIndicatorWithTitlte:@"登陆中..."];
-    [self.varNames_loginModel methodNames_fetchDataWithdURL:methodNames_gameUlogin_f() parameters:varNames_tmppara];
+    [self.varNames_loginModel methodNames_fetchDataWithdURL:methodNames_gameUlogin_a() parameters:varNames_tmppara];
     self.varNames_loginModel.methodNames_completeFetchData = ^(ClassNames_MemberLoginModel *object) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [ClassNames_PGHubView methodNames_hide];
@@ -332,6 +332,10 @@
 /// 登陆成功
 - (void)methodNames_loginsuccess:(ClassNames_MemberLoginModel *)memberLoginModel {
     if (memberLoginModel.varNames_code == 200) {
+        
+        // 保存登录的方式
+        methodNames_saveLoginType(2);
+        
         methodNames_saveUserID(memberLoginModel.varNames_uid);
         methodNames_saveUserName(memberLoginModel.varNames_username);
         /// 保存账户
@@ -351,7 +355,7 @@
         
         NSDictionary *varNames_tmpuserInfo = @{
                                    @"uid": memberLoginModel.varNames_uid,
-                                   @"username": memberLoginModel.varNames_username
+                                   @"token": memberLoginModel.varNames_token
                                    };
         methodNames_postNotification(varNames_userLoginSuceessNoti, nil, varNames_tmpuserInfo);
         
@@ -373,9 +377,6 @@
     } else {
         if (memberLoginModel.varNames_msg) {
             [ClassNames_PGHubView methodNames_showErrorMessage:memberLoginModel.varNames_msg];
-        }
-        if (self.methodNames_loginSuccess) {
-            self.methodNames_loginSuccess(YES, YES);
         }
         if (self.methodNames_loginFailure) {
             self.methodNames_loginFailure();

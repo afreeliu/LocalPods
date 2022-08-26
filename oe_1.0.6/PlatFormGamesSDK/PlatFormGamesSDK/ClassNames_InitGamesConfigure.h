@@ -156,7 +156,7 @@ static inline void methodNames_saveUserPhone(NSString *userID) {
 }
 /// 读取用户手机
 static inline NSString *methodNames_readUserPhone() {
-    return [[NSUserDefaults standardUserDefaults] objectForKey:varNames_userPhoneKey];
+    return [[NSUserDefaults standardUserDefaults] objectForKey:varNames_userPhoneKey]?:@"";
 }
 /// 保存用户手机隐式
 static inline void methodNames_saveUserPhoneHide(NSString *userID) {
@@ -202,7 +202,7 @@ static inline void methodNames_saveAdvID(NSString *adv_id) {
     [[NSUserDefaults standardUserDefaults]synchronize];
 }
 static inline NSString *methodNames_readAdvID() {
-    return [[NSUserDefaults standardUserDefaults]objectForKey:varNames_advIDKey]?:@"0";
+    return [[NSUserDefaults standardUserDefaults]objectForKey:varNames_advIDKey]?:@"101";
 }
 /// channel_id
 static inline void methodNames_saveChannelID(NSString *channel_id) {
@@ -210,8 +210,8 @@ static inline void methodNames_saveChannelID(NSString *channel_id) {
     [[NSUserDefaults standardUserDefaults]synchronize];
 }
 
-static inline NSString *methodNames_readChannelID() {
-    return [[NSUserDefaults standardUserDefaults]objectForKey:varNames_channelIDKey]?:@"0";
+static inline NSString *methodNames_readOpr_CID() {
+    return [[NSUserDefaults standardUserDefaults]objectForKey:varNames_channelIDKey]?:@"80001";
 }
 
 

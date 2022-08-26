@@ -14,8 +14,8 @@
             filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/UmPlatsFormGameManager.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "401"
-            endingLineNumber = "401"
+            startingLineNumber = "403"
+            endingLineNumber = "403"
             landmarkName = "UmPlatsFormGameManager"
             landmarkType = "3">
          </BreakpointContent>
@@ -42,8 +42,8 @@
             filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/ClassNames_MainView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "676"
-            endingLineNumber = "676"
+            startingLineNumber = "688"
+            endingLineNumber = "688"
             landmarkName = "-methodNames_createResetPasswordView"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,8 +58,8 @@
             filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/UmPlatsFormGameManager.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "131"
-            endingLineNumber = "131"
+            startingLineNumber = "133"
+            endingLineNumber = "133"
             landmarkName = "-methodNames_saveInitData:"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,9 +74,41 @@
             filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/ClassNames_MainView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "880"
-            endingLineNumber = "880"
+            startingLineNumber = "896"
+            endingLineNumber = "896"
             landmarkName = "-methodNames_createBindPersonIDViewFromView:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "506A062D-B0DA-48E1-8343-1FF496EA7D86"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/ClassNames_AutoLoginView.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
+            landmarkName = "-methodNames_commitAutoLoginAction:password:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "36A2B126-EDE0-4142-B901-65B11608A719"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/ClassNames_AutoLoginView.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "192"
+            endingLineNumber = "192"
+            landmarkName = "-methodNames_commitAutoLoginAction:password:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

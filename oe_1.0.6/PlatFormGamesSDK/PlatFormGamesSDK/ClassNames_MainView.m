@@ -137,11 +137,22 @@
 // 显示账号登陆页
 - (void)methodNames_showLoginView {
     
-    if (_varNames_isAutoLogin) {
-        [self methodNames_showAutoLoginView];
+    if (!methodNames_readLoginType()) {
+        // 没有保存过登录方式的，那么就是第一次进入游戏，显示的账号注册页面
+        [self methodNames_createNormalRegisterView];
+        [self methodNames_switchSkillViewWithDefaultButtonTap:12];
     } else {
-        [self methodNames_createLoginView];
-        [self methodNames_switchSkillViewWithDefaultButtonTap:11];
+        if (_varNames_isAutoLogin) {
+            [self methodNames_showAutoLoginView];
+        } else {
+            if (methodNames_readUserPhone().length) {
+                [self methodNames_createPhoneRegisterView];
+                [self methodNames_switchSkillViewWithDefaultButtonTap:10];
+            } else {
+                [self methodNames_createLoginView];
+                [self methodNames_switchSkillViewWithDefaultButtonTap:11];
+            }
+        }
     }
 }
 // 显示账号注册页
@@ -196,7 +207,7 @@
         /// 是否支持快速登陆
         _varNames_canQuickLogin = methodNames_readFastLogin();
         
-        [self methodNames_createBackgroundView];
+//        [self methodNames_createBackgroundView];
         
         
         
@@ -229,6 +240,7 @@
         self.varNames_backgroundView = varNames_backgroundView;
         
         [self addSubview:self.varNames_backgroundView];
+        [self methodNames_switchSkillViewWithDefaultButtonTap:12];
     } else {
         self.varNames_backgroundView.hidden = NO;
     }
@@ -247,37 +259,37 @@
 #pragma mark ---------- 自动登录页面  . 初始化进入则不需要 account，password。 各登录页面登录后，会进行页面的显示并最终在该页面实现登录
 - (void)methodNames_createAutoLoginViewWithAccount:(NSString *)account methodNames_password:(NSString *)password {
     __weak typeof(self) weakSelf = self;
-    if (!_varNames_autoLoginView) {
-        _varNames_autoLoginView = [ClassNames_AutoLoginView methodNames_createAutoLoginView];
-        _varNames_autoLoginView.methodNames_cancelAutoLoginBlock = ^{
+    if (!self.varNames_autoLoginView) {
+        self.varNames_autoLoginView = [ClassNames_AutoLoginView methodNames_createAutoLoginView];
+        self.varNames_autoLoginView.methodNames_cancelAutoLoginBlock = ^{
             weakSelf.varNames_autoLoginView.hidden = YES;
             weakSelf.varNames_backgroundViewConstraint.constant = methodNames_getMainViewHeight();
-            [weakSelf methodNames_showLoginView];
+            [weakSelf methodNames_createLoginView];
         };
-        _varNames_autoLoginView.methodNames_autoLoginSuccess = ^(BOOL varNames_isNeedBindPhone, BOOL varNames_isNeedBindPersonID) {
+        self.varNames_autoLoginView.methodNames_autoLoginSuccess = ^(BOOL varNames_isNeedBindPhone, BOOL varNames_isNeedBindPersonID) {
             weakSelf.varNames_isNeedBindPhone = varNames_isNeedBindPhone;
             weakSelf.varNames_isNeedBindPersonID = varNames_isNeedBindPersonID;
             weakSelf.varNames_autoLoginView.hidden = YES;
             [weakSelf methodNames_createBindView];
         };
-        _varNames_autoLoginView.methodNames_autoLoginFailure = ^{
+        self.varNames_autoLoginView.methodNames_autoLoginFailure = ^{
             weakSelf.varNames_autoLoginView.hidden = YES;
+            weakSelf.varNames_backgroundViewConstraint.constant = methodNames_getMainViewHeight();
             [weakSelf methodNames_createLoginView];
         };
 
-        [_varNames_backgroundView addSubview:_varNames_autoLoginView];
+        [self addSubview:self.varNames_autoLoginView];
     } else {
         self.varNames_autoLoginView.hidden = NO;
     }
     if (account.length && password.length) {
         [self.varNames_autoLoginView methodNames_loginAccount:account methodNames_password:password];
     }
-    
-    self.varNames_backgroundViewConstraint.constant = 90;
-    [ClassNames_BaseViewLayout methodNames_layoutCenterX:_varNames_autoLoginView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutTop:_varNames_autoLoginView methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutWidth:_varNames_autoLoginView methodNames_constriant:260];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:_varNames_autoLoginView methodNames_constriant:90];
+    self.varNames_backgroundView.hidden = YES;
+    [ClassNames_BaseViewLayout methodNames_layoutCenterX:self.varNames_autoLoginView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutCenterY:self.varNames_autoLoginView methodNames_constriant:0];
+    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_autoLoginView methodNames_constriant:methodNames_getMainViewWidth()];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_autoLoginView methodNames_constriant:90];
     
 }
 
@@ -301,33 +313,22 @@
 #pragma mark ---------- 登录页面
 - (void)methodNames_createLoginView {
     __weak typeof(self) weakSelf = self;
+    self.varNames_backgroundView.hidden = NO;
+    [self methodNames_createBackgroundView];
+    [self methodNames_switchSkillViewWithDefaultButtonTap:11];
     if (!self.varNames_loginView) {
         self.varNames_loginView = [ClassNames_LoginView methodNames_createLoginView];
         self.varNames_loginView.clipsToBounds = YES;
         self.varNames_loginView.methodNames_servicceBlock = ^{
             [weakSelf methodNames_showCustomerServerView];
         };
-        _varNames_loginView.methodNames_loginSuccess = ^(BOOL varNames_isNeedBindPhone, BOOL varNames_isNeedBindPersonID) {
+        self.varNames_loginView.methodNames_loginSuccess = ^(BOOL varNames_isNeedBindPhone, BOOL varNames_isNeedBindPersonID) {
             weakSelf.varNames_isNeedBindPhone = varNames_isNeedBindPhone;
             weakSelf.varNames_isNeedBindPersonID = varNames_isNeedBindPersonID;
             [weakSelf methodNames_createBindView];
-//            if (varNames_isNeedBindPhone && [methodNames_readBindPhoneType() isEqualToString:@"2"]) {
-//                // 登录账号需要绑定手机 && 初始化时候开启了绑定手机功能
-//                [weakSelf methodNames_createBindView];
-//            } else {
-//                // 不管什么原因，如果不需要绑定手机了，那么再判断是否需要实名制
-//                if (varNames_isNeedBindPersonID && [methodNames_readBindPsersonIDType() isEqualToString:@"2"]) {
-//                    [weakSelf methodNames_createBindPersonIDViewFromView:nil];
-//                } else {
-//                    // 最后 不需要绑定手机，不需要实名
-//                    weakSelf.varNames_backgroundView.hidden = YES;
-//                    [weakSelf removeFromSuperview];
-//                    [[NSNotificationCenter defaultCenter]postNotificationName:varNames_userLoginSuceessNoti object:nil];
-//                }
-//            }
             
         };
-        _varNames_loginView.methodNames_loginFailure = ^{
+        self.varNames_loginView.methodNames_loginFailure = ^{
             NSLog(@"login error");
         };
         self.varNames_loginView.methodNames_delegateBlock = ^{
@@ -392,42 +393,53 @@
 #pragma mark ---------- 功能按钮
 - (void)methodNames_switchSkillViewWithDefaultButtonTap:(NSInteger)index {
     
-    if (!_varNames_skillBtnView) {
-        _varNames_skillBtnView = [[UIView alloc]init];
-        _varNames_skillBtnView.layer.cornerRadius = 15;
-        _varNames_skillBtnView.translatesAutoresizingMaskIntoConstraints = NO;
-        [self.varNames_backgroundView addSubview:_varNames_skillBtnView];
+    
+    __block UIButton *varNames_selectBtn;
+    if (!self.varNames_skillBtnView) {
+        self.varNames_skillBtnView = [[UIView alloc]init];
+        self.varNames_skillBtnView.layer.cornerRadius = 15;
+        self.varNames_skillBtnView.translatesAutoresizingMaskIntoConstraints = NO;
+        [self.varNames_backgroundView addSubview:self.varNames_skillBtnView];
+        
+        
+        CGFloat varNames_btnwidth = (320 - methodNames_setMargin_3base() * 2 - 20 * 2)/3.0;
+        CGFloat varNames_btnY = 10;
+        UIButton *varNames_tmptmpBtn = [self methodNames_createButton:CGRectMake(methodNames_setMargin_3base(), varNames_btnY, varNames_btnwidth, 35) methodNames_title:@"手机登录"];
+        varNames_tmptmpBtn.tag = 10;
+        [varNames_tmptmpBtn addTarget:self action:@selector(methodNames_switchSkillView:) forControlEvents:UIControlEventTouchUpInside];
+        [self.varNames_skillBtnView addSubview:varNames_tmptmpBtn];
+        if (index == varNames_tmptmpBtn.tag) {
+            varNames_selectBtn = varNames_tmptmpBtn;
+        }
+        
+        UIButton *varNames_tmptmpBtn2 = [self methodNames_createButton:CGRectMake(CGRectGetMaxX(varNames_tmptmpBtn.frame) + 20, varNames_btnY, varNames_btnwidth, 35) methodNames_title:@"账号登录"];
+        varNames_tmptmpBtn2.tag = 11;
+        [varNames_tmptmpBtn2 addTarget:self action:@selector(methodNames_switchSkillView:) forControlEvents:UIControlEventTouchUpInside];
+        [self.varNames_skillBtnView addSubview:varNames_tmptmpBtn2];
+        if (index == varNames_tmptmpBtn2.tag) {
+            varNames_selectBtn = varNames_tmptmpBtn2;
+        }
+        
+        UIButton *varNames_tmptmpBtn3 = [self methodNames_createButton:CGRectMake((CGRectGetMaxX(varNames_tmptmpBtn2.frame) + 20), varNames_btnY, varNames_btnwidth, 35) methodNames_title:@"账号注册"];
+        varNames_tmptmpBtn3.tag = 12;
+        [varNames_tmptmpBtn3 addTarget:self action:@selector(methodNames_switchSkillView:) forControlEvents:UIControlEventTouchUpInside];
+        [self.varNames_skillBtnView addSubview:varNames_tmptmpBtn3];
+        if (index == varNames_tmptmpBtn3.tag) {
+            varNames_selectBtn = varNames_tmptmpBtn3;
+        }
     } else {
+        [self.varNames_skillBtnView.subviews enumerateObjectsUsingBlock:^(__kindof UIView * _Nonnull obj, NSUInteger idx, BOOL * _Nonnull stop) {
+            if ([obj isKindOfClass:[UIButton class]]) {
+                NSInteger tag = obj.tag;
+                if (tag == index) {
+                    varNames_selectBtn = (UIButton *)obj;
+                }
+            }
+        }];
         self.varNames_skillBtnView.hidden = NO;
     }
     
-    UIButton *varNames_selectBtn;
-    
-    CGFloat varNames_btnwidth = (320 - methodNames_setMargin_3base() * 2 - 20 * 2)/3.0;
-    CGFloat varNames_btnY = 10;
-    UIButton *varNames_tmptmpBtn = [self methodNames_createButton:CGRectMake(methodNames_setMargin_3base(), varNames_btnY, varNames_btnwidth, 35) methodNames_title:@"手机登录"];
-    varNames_tmptmpBtn.tag = 10;
-    [varNames_tmptmpBtn addTarget:self action:@selector(methodNames_switchSkillView:) forControlEvents:UIControlEventTouchUpInside];
-    [_varNames_skillBtnView addSubview:varNames_tmptmpBtn];
-    if (index == varNames_tmptmpBtn.tag) {
-        varNames_selectBtn = varNames_tmptmpBtn;
-    }
-    
-    UIButton *varNames_tmptmpBtn2 = [self methodNames_createButton:CGRectMake(CGRectGetMaxX(varNames_tmptmpBtn.frame) + 20, varNames_btnY, varNames_btnwidth, 35) methodNames_title:@"账号登录"];
-    varNames_tmptmpBtn2.tag = 11;
-    [varNames_tmptmpBtn2 addTarget:self action:@selector(methodNames_switchSkillView:) forControlEvents:UIControlEventTouchUpInside];
-    [_varNames_skillBtnView addSubview:varNames_tmptmpBtn2];
-    if (index == varNames_tmptmpBtn2.tag) {
-        varNames_selectBtn = varNames_tmptmpBtn2;
-    }
-    
-    UIButton *varNames_tmptmpBtn3 = [self methodNames_createButton:CGRectMake((CGRectGetMaxX(varNames_tmptmpBtn2.frame) + 20), varNames_btnY, varNames_btnwidth, 35) methodNames_title:@"账号注册"];
-    varNames_tmptmpBtn3.tag = 12;
-    [varNames_tmptmpBtn3 addTarget:self action:@selector(methodNames_switchSkillView:) forControlEvents:UIControlEventTouchUpInside];
-    [_varNames_skillBtnView addSubview:varNames_tmptmpBtn3];
-    if (index == varNames_tmptmpBtn3.tag) {
-        varNames_selectBtn = varNames_tmptmpBtn3;
-    }
+    [self methodNames_resetSkillButtonStatus:varNames_selectBtn];
     
     [ClassNames_BaseViewLayout methodNames_layoutCenterX:_varNames_skillBtnView methodNames_constriant:0];
     [ClassNames_BaseViewLayout methodNames_layoutBottom:_varNames_skillBtnView methodNames_constriant:0];
@@ -436,7 +448,7 @@
     
     [self bringSubviewToFront:_varNames_backgroundView];
     
-    [self methodNames_resetSkillButtonStatus:varNames_selectBtn];
+    
 }
 // 创建单个功能按钮
 - (UIButton *)methodNames_createButton:(CGRect)frame methodNames_title:(NSString *)varNames_title {
@@ -509,7 +521,7 @@
 - (void)methodNames_commitQuickLogin {
     NSDictionary *varNames_tmppara = @{
                            @"adv_id": methodNames_readAdvID(),
-                           @"channel_id": methodNames_readChannelID(),
+                           @"channel_id": methodNames_readOpr_CID(),
                            @"material_id": @"0",
                            @"gid": methodNames_readGameID(),
                            @"sub_gid": methodNames_readSubGameID(),
@@ -723,27 +735,29 @@
 #pragma mark ---------- 账号注册View
 - (void)methodNames_createNormalRegisterView {
     __weak typeof(self) weakSelf = self;
-    if (!_varNames_normalRegisterView) {
-        _varNames_normalRegisterView = [ClassNames_NormalRegisterView methodNames_createNormalRegisterView];
-        _varNames_normalRegisterView.methodNames_normalRegisterSuccess = ^(BOOL varNames_isNeedBindPhone, BOOL varNames_isNeedBindPersonID) {
+    [self methodNames_createBackgroundView];
+    [self methodNames_switchSkillViewWithDefaultButtonTap:12];
+    if (!self.varNames_normalRegisterView) {
+        self.varNames_normalRegisterView = [ClassNames_NormalRegisterView methodNames_createNormalRegisterView];
+        self.varNames_normalRegisterView.methodNames_normalRegisterSuccess = ^(BOOL varNames_isNeedBindPhone, BOOL varNames_isNeedBindPersonID) {
             weakSelf.varNames_isNeedBindPhone = varNames_isNeedBindPhone;
             weakSelf.varNames_isNeedBindPersonID = varNames_isNeedBindPersonID;
             [weakSelf methodNames_createBindView];
         };
-        _varNames_normalRegisterView.methodNames_servicceBlock = ^{
+        self.varNames_normalRegisterView.methodNames_servicceBlock = ^{
             [weakSelf methodNames_showCustomerServerView];
         };
-        _varNames_normalRegisterView.methodNames_delegateBlock = ^{
+        self.varNames_normalRegisterView.methodNames_delegateBlock = ^{
             [weakSelf methodNames_showDelegateView];
         };
-        _varNames_normalRegisterView.methodNames_handlebookBlock = ^{
+        self.varNames_normalRegisterView.methodNames_handlebookBlock = ^{
             [weakSelf methodNames_showHandleBookView];
         };
-        _varNames_normalRegisterView.clipsToBounds = YES;
+        self.varNames_normalRegisterView.clipsToBounds = YES;
         
-        [_varNames_backgroundView addSubview:_varNames_normalRegisterView];
+        [self.varNames_backgroundView addSubview:_varNames_normalRegisterView];
     } else {
-        _varNames_normalRegisterView.hidden = NO;
+        self.varNames_normalRegisterView.hidden = NO;
     }
     
     [ClassNames_BaseViewLayout methodNames_layoutTop:_varNames_normalRegisterView methodNames_constriant:0];
@@ -766,6 +780,8 @@
 #pragma mark ---------- 手机注册View
 - (void)methodNames_createPhoneRegisterView {
     __weak typeof(self) weakSelf = self;
+    [self methodNames_createBackgroundView];
+    [self methodNames_switchSkillViewWithDefaultButtonTap:10];
     if (!_varNames_phoneRegisterView) {
         _varNames_phoneRegisterView = [ClassNames_PhoneRegisterView methodNames_createPhoneRegisterView];
         _varNames_phoneRegisterView.methodNames_phoneRegisterSuccess = ^(BOOL varNames_isNeedBindPersonID) {

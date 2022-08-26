@@ -252,12 +252,21 @@ static inline NSString *methodNames_gameUlogin_a() {
     NSString *varNames_tmpInitUrl = [NSString stringWithFormat:@"%@%@", methodNames_domain(), varNames_tmpInit];
     return varNames_tmpInitUrl;
 }
-#pragma mark -------------------- 账号密码登录 /sdk/ulogin/f# 此接口用于切换账号时 一键登录界面 进行请求，为了区别使用 手机号 一键登录时，后台加的校验
-static inline NSString *methodNames_gameUlogin_f() {
-    NSString *varNames_tmpInit = methodNames_getRequestConfigValueForKey(@"ulogin_f")?:@"/sdk/ulogin/f";
+#pragma mark -------------------- 账号密码登录 /sdk/againPhoneLogin # 此接口用于手机号登录，即自动登录中如果是手机号，那么使用该接口，密码为第一次登录后台返回的密码
+static inline NSString *methodNames_gameAgainPhoneLogin() {
+    NSString *varNames_tmpInit = methodNames_getRequestConfigValueForKey(@"againPhoneLogin")?:@"/sdk/againPhoneLogin";
     NSString *varNames_tmpInitUrl = [NSString stringWithFormat:@"%@%@", methodNames_domain(), varNames_tmpInit];
     return varNames_tmpInitUrl;
 }
+
+
+
+#pragma mark -------------------- 账号密码登录 /sdk/ulogin/f# 此接口用于切换账号时 一键登录界面 进行请求，为了区别使用 手机号 一键登录时，后台加的校验
+//static inline NSString *methodNames_gameUlogin_f() {
+//    NSString *varNames_tmpInit = methodNames_getRequestConfigValueForKey(@"ulogin_f")?:@"/sdk/ulogin/f";
+//    NSString *varNames_tmpInitUrl = [NSString stringWithFormat:@"%@%@", methodNames_domain(), varNames_tmpInit];
+//    return varNames_tmpInitUrl;
+//}
 #pragma mark -------------------- iOS 吓蛋 /order/iosplace
 static inline NSString *methodNames_gameIosplace() {
     NSString *varNames_tmpInit = methodNames_getRequestConfigValueForKey(@"iosplace")?:@"/order/iosplace";

@@ -64,10 +64,8 @@ NSString *const varNames_os_Key = @"os"; // 系统类型， 1 iOS； 2 安卓；
     NSMutableDictionary *varNames_tmpDic = [NSMutableDictionary dictionary];
     [varNames_tmpDic setValue:methodNames_readGameID() forKey:varNames_gid_Key];
     [varNames_tmpDic setValue:methodNames_readSubGameID() forKey:varNames_sub_gid_Key];
-//    [varNames_tmpDic setValue:methodNames_readChannelID() forKey:varNames_opr_cid_Key];
-    [varNames_tmpDic setValue:@"512" forKey:varNames_opr_cid_Key];
-//    [varNames_tmpDic setValue:methodNames_readAdvID() forKey:varNames_adv_cid_Key];
-    [varNames_tmpDic setValue:@"123" forKey:varNames_adv_cid_Key];
+    [varNames_tmpDic setValue:methodNames_readOpr_CID() forKey:varNames_opr_cid_Key];
+    [varNames_tmpDic setValue:methodNames_readAdvID() forKey:varNames_adv_cid_Key];
     [varNames_tmpDic setValue:@"0" forKey:varNames_pkg_id_Key];
     [varNames_tmpDic setValue:methodNames_getDeviceType() forKey:varNames_model_type_Key];
     [varNames_tmpDic setValue:methodNames_getDeviceIDFA() forKey:varNames_device_code_Key];

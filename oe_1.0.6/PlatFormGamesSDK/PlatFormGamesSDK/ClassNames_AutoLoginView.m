@@ -66,6 +66,8 @@
 -(instancetype)init {
     self = [super init];
     if (self) {
+        self.backgroundColor = [UIColor whiteColor];
+        self.layer.cornerRadius = 15;
         [self methodNames_setData];
         [self methodNames_createUI];
         [self methodNames_startTimer];
@@ -109,7 +111,15 @@
 
 #pragma mark ---------- 填充内容
 - (void)methodNames_setData {
+    
     NSString *varNames_account = methodNames_readLastAccount();
+    if (methodNames_readLoginType() == 1) {
+        varNames_account = methodNames_readLastPhone();
+    } else if(methodNames_readLoginType() == 2) {
+        varNames_account = methodNames_readLastAccount();
+    }
+    
+    
     if (varNames_account && varNames_account.length) {
         NSString *varNames_password = methodNames_readPassword(varNames_account);
         self.varNames_userName = varNames_account;
@@ -175,21 +185,21 @@
     
     
     NSDictionary *varNames_tmppara = [ClassNames_BaseParameters methodNames_getBaseParameters];
-//                           @"user_name": account,
-//                           @"password": password,
-//                           @"adv_id": methodNames_readAdvID(),
-//                           @"channel_id": methodNames_readChannelID(),
-//                           @"material_id": @"0",
-//                           @"gid": methodNames_readGameID(),
-//                           @"sub_gid": methodNames_readSubGameID(),
-//                           @"platform_id": @"0",
-//                           @"device_code": methodNames_getDeviceIDFA()
-//                           };
-    [varNames_tmppara setValue:account forKey:@"uname"];
     [varNames_tmppara setValue:password forKey:@"pwd"];
     __weak typeof(self) weakSelf = self;
     [ClassNames_PGHubView methodNames_showIndicatorWithTitlte:@"登陆中..."];
-    [self.varNames_loginModel methodNames_fetchDataWithdURL:methodNames_gameUlogin_a() parameters:varNames_tmppara];
+    NSString *varNames_url = methodNames_gameUlogin_a();
+    if (methodNames_readLoginType() == 1) {
+        // 手机登录
+        varNames_url = methodNames_gameAgainPhoneLogin();
+        [varNames_tmppara setValue:account forKey:@"phone"];
+        
+    } else {
+        varNames_url = methodNames_gameUlogin_a();
+        [varNames_tmppara setValue:account forKey:@"uname"];
+    }
+    
+    [self.varNames_loginModel methodNames_fetchDataWithdURL:varNames_url parameters:varNames_tmppara];
     self.varNames_loginModel.methodNames_completeFetchData = ^(ClassNames_MemberLoginModel *object) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [ClassNames_PGHubView methodNames_hide];
@@ -211,6 +221,17 @@
 /// 登陆成功
 - (void)methodNames_loginsuccess:(ClassNames_MemberLoginModel *)memberLoginModel {
     if (memberLoginModel.varNames_code == 200) {
+        
+        if (methodNames_readLoginType() == 1) {
+            // 手机登录
+            methodNames_saveLastPhone(self.varNames_userName);
+            methodNames_savePhonePassword(self.varNames_password, self.varNames_userName);
+        } else {
+            
+        }
+        
+        
+        
         methodNames_saveUserID(memberLoginModel.varNames_uid);
         methodNames_saveUserName(memberLoginModel.varNames_username);
         /// 保存账户
@@ -230,7 +251,7 @@
         
         NSDictionary *varNames_tmpuserInfo = @{
                                    @"uid": memberLoginModel.varNames_uid,
-                                   @"username": memberLoginModel.varNames_username
+                                   @"token": memberLoginModel.varNames_token
                                    };
         methodNames_postNotification(varNames_userLoginSuceessNoti, nil, varNames_tmpuserInfo);
         BOOL varNames_needBindPhone = NO;

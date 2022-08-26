@@ -194,7 +194,7 @@ static NSString * const varNames_orientationLeft = @"LEFT";
             varNames_margin += 60;
             
             varNames_tmpBtn.titleEdgeInsets = UIEdgeInsetsMake(varNames_tmpBtn.imageView.frame.size.height, -varNames_tmpBtn.imageView.bounds.size.width, 8,0);
-            varNames_tmpBtn.imageEdgeInsets = UIEdgeInsetsMake(-5, varNames_tmpBtn.titleLabel.frame.size.width/2, varNames_tmpBtn.titleLabel.frame.size.height+5, -varNames_tmpBtn.titleLabel.frame.size.width/2);
+            varNames_tmpBtn.imageEdgeInsets = UIEdgeInsetsMake(3, varNames_tmpBtn.titleLabel.frame.size.width/2+3, varNames_tmpBtn.titleLabel.frame.size.height+3, -varNames_tmpBtn.titleLabel.frame.size.width/2+5);
         }
     }
     [UIView animateWithDuration:0.1 animations:^{

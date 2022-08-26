@@ -1284,17 +1284,17 @@ static CGFloat varNameS_KEYBOARDMINY = 0;
 
 - (void)methodNmaes_changTitle:(NSTimer *)timer {
     self.varNames_codeLayer.hidden = YES;
-    [self.varNames_itemButton setTitle:[NSString stringWithFormat:@"%ld", (long)self.varNames_getCodeTitle] forState:UIControlStateDisabled];
-    [self.varNames_itemButton setTitleColor:[ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_backgroundColor_config()] forState:UIControlStateDisabled];
-    self.varNames_itemButton.titleLabel.text = [NSString stringWithFormat:@"%ld", (long)self.varNames_getCodeTitle];
+    [self.varNames_itemButton setTitle:[NSString stringWithFormat:@"%lds", (long)self.varNames_getCodeTitle] forState:UIControlStateDisabled];
+    [self.varNames_itemButton setTitleColor:[ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_fillColor_config()] forState:UIControlStateDisabled];
+    self.varNames_itemButton.titleLabel.text = [NSString stringWithFormat:@"%lds", (long)self.varNames_getCodeTitle];
     if (self.varNames_getCodeTitle == 0) {
         self.varNames_itemButton.enabled = YES;
         self.varNames_codeLayer.hidden = NO;
         self.varNames_getCodeTitle = methodNames_setGetCodeBtnMaxTitle();
         [timer invalidate];
     } else {
-        [self.varNames_itemButton setTitle:[NSString stringWithFormat:@"%ld", (long)self.varNames_getCodeTitle] forState:UIControlStateDisabled];
-        self.varNames_itemButton.titleLabel.text = [NSString stringWithFormat:@"%ld", (long)self.varNames_getCodeTitle];
+        [self.varNames_itemButton setTitle:[NSString stringWithFormat:@"%lds", (long)self.varNames_getCodeTitle] forState:UIControlStateDisabled];
+        self.varNames_itemButton.titleLabel.text = [NSString stringWithFormat:@"%lds", (long)self.varNames_getCodeTitle];
         self.varNames_getCodeTitle--;
     }
 }

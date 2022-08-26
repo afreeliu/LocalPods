@@ -32,7 +32,7 @@
             break;
         case varNames_ItemButtonTypeDelete:
         {
-            methodNames_drawDelete(varNames_button, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_backgroundColor_config()]);
+            methodNames_drawDelete(varNames_button, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_themeColor_config()]);
         }
             break;
         case varNames_ItemButtonTypeRight:

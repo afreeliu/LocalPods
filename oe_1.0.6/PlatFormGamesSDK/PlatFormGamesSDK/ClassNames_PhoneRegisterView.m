@@ -296,7 +296,7 @@
 //                           @"password": @"",
 //                           @"code": varNames_tmpcode,
 //                           @"adv_id": methodNames_readAdvID(),
-//                           @"channel_id": methodNames_readChannelID(),
+//                           @"channel_id": methodNames_readOpr_CID(),
 //                           @"material_id": @"0",
 //                           @"gid": methodNames_readGameID(),
 //                           @"sub_gid": methodNames_readSubGameID(),
@@ -342,6 +342,9 @@
             "uname": "手机号",
             "uid": "300001"
      */
+    /// 保存登录的方式
+    methodNames_saveLoginType(1);
+    
     /// 保存账户
     methodNames_savePhone(_varNames_firstInputView.varNames_textValue);
     /// 保存最后登陆的账户
@@ -357,7 +360,7 @@
     
     NSDictionary *varNames_tmpuserInfo = @{
                                @"uid": loginModel.varNames_uid,
-                               @"username": loginModel.varNames_username
+                               @"token": loginModel.varNames_token
                                };
     methodNames_postNotification(varNames_userLoginSuceessNoti, nil, varNames_tmpuserInfo);
     BOOL varNames_needBindPersonID = NO;

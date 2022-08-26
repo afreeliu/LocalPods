@@ -82,6 +82,8 @@
 
 #pragma mark ---------------------  启动游戏调用方法
 -(void)umPlatsFormLaunchConfigGameID:(NSString *)gid WithSub_GameID:(NSString *)sub_gid WithOpr_Cid:(NSString *)opr_cid WithSdk_Ver:(NSString *)sdk_ver WithGame_Ver:(NSString *)game_ver{
+    NSLog(@"最后登录的方式:%ld", methodNames_readLoginType());
+    
     if (!gid) {
         
         methodNames_debugLog(@"gameId...NOT NULL");
@@ -496,7 +498,7 @@
 //                               @"gid": methodNames_readGameID(),
 //                               @"sub_gid": methodNames_readSubGameID(),
 //                               @"adv_id": methodNames_readAdvID(),
-//                               @"channel_id": methodNames_readChannelID(),
+//                               @"channel_id": methodNames_readOpr_CID(),
 //                               @"platform_id": methodNames_readPlatformID(),
 //                               @"device_code": methodNames_getDeviceIDFA(),
 //                               @"mac": @"0",
@@ -697,7 +699,7 @@
     varNames_tmpparams[@"cp_server_id"] = serverId;
     varNames_tmpparams[@"server_name"] = serverName;
     varNames_tmpparams[@"platform_id"] = methodNames_readPlatformID();
-    varNames_tmpparams[@"channel_id"] = methodNames_readChannelID();
+    varNames_tmpparams[@"channel_id"] = methodNames_readOpr_CID();
     varNames_tmpparams[@"pay_money"] = money;
     varNames_tmpparams[@"product_name"] = ProductName;
     varNames_tmpparams[@"game_grade"] = roleLevel;
@@ -794,7 +796,7 @@
     varNames_tmpparams[@"gid"] = methodNames_readGameID();
     varNames_tmpparams[@"sub_gid"] = methodNames_readSubGameID();
     varNames_tmpparams[@"game_grade"] = roleLevel;
-    varNames_tmpparams[@"channel_id"] = methodNames_readChannelID();
+    varNames_tmpparams[@"channel_id"] = methodNames_readOpr_CID();
     varNames_tmpparams[@"cp_server_id"] = serverId;
     varNames_tmpparams[@"vip"] = vipLevel;
     varNames_tmpparams[@"game_coin"] = coin;

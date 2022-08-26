@@ -275,7 +275,7 @@
 //                           @"user_name": varNames_tmpaccount,
 //                           @"password": varNames_tmppassword,
 //                           @"adv_id": methodNames_readAdvID(),
-//                           @"channel_id": methodNames_readChannelID(),
+//                           @"channel_id": methodNames_readOpr_CID(),
 //                           @"material_id": @"0",
 //                           @"gid": methodNames_readGameID(),
 //                           @"sub_gid": methodNames_readSubGameID(),
@@ -310,6 +310,10 @@
 
 /// 注册成功返回执行的方法
 - (void)methodNames_normalRegisterSuccess:(ClassNames_MemberLoginModel *)memberRegisterModel {
+    
+    // 保存登录的方式
+    methodNames_saveLoginType(2);
+    
     /// 保存账户
     methodNames_saveAccount(_varNames_firstInputView.varNames_textValue);
     /// 保存最后登陆的账户
@@ -330,7 +334,7 @@
     
     NSDictionary *varNames_tmpuserInfo = @{
                                @"uid": memberRegisterModel.varNames_uid,
-                               @"username": memberRegisterModel.varNames_username
+                               @"token": memberRegisterModel.varNames_token
                                };
     methodNames_postNotification(varNames_userLoginSuceessNoti, nil, varNames_tmpuserInfo);
     

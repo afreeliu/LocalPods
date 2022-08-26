@@ -22,5 +22,10 @@ NSString *const varNames_lastLoginPhoneKey = @"varNames_lastLoginPhoneKey";
 NSString *const varNames_keyChainPhoneAccessGroup = @"varNames_keyChainPhoneAccessGroup";
 
 
+// 是否支持自动登录
+NSString *const varNames_CanAutoLogin = @"varNames_CanAutoLogin";
+
+// 保存最后一次登录的方式。手机登录/账号登录
+NSString *const varNames_loginTypeKey = @"varNames_loginTypeKey";
 
 

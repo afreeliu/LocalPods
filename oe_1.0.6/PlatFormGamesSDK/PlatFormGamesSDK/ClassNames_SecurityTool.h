@@ -22,6 +22,11 @@ FOUNDATION_EXTERN NSString *const varNames_haveLoginPhoneKey;
 FOUNDATION_EXTERN NSString *const varNames_lastLoginPhoneKey;
 FOUNDATION_EXTERN NSString *const varNames_keyChainPhoneAccessGroup;
 
+// 是否支持自动登录
+FOUNDATION_EXTERN NSString *const varNames_CanAutoLogin;
+// 保存最后一次登录的方式。手机登录/账号登录
+FOUNDATION_EXTERN NSString *const varNames_loginTypeKey;
+
 /// 获取使用SDK项目bundleID
 static inline NSString *methodNames_readGameBundleID() {
     NSString *varNames_tmpbundleID = [[[NSBundle mainBundle] infoDictionary] objectForKey:(NSString *)kCFBundleIdentifierKey];
@@ -199,13 +204,26 @@ static inline BOOL methodNames_readVisitorConnectPersonID() {
 }
 #pragma mark ---------- 是否支持自动登录，如果游戏是新下载的就不支持
 static inline void methodNames_saveAutoLogin(BOOL canAuto) {
-    [[NSUserDefaults standardUserDefaults]setBool:canAuto forKey:@"varNames_CanAutoLogin"];
+    [[NSUserDefaults standardUserDefaults]setBool:canAuto forKey:varNames_CanAutoLogin];
     [[NSUserDefaults standardUserDefaults]synchronize];
 }
 
 static inline BOOL methodNames_canAutoLogin() {
-    return [[NSUserDefaults standardUserDefaults]boolForKey:@"varNames_CanAutoLogin"];
+    return [[NSUserDefaults standardUserDefaults]boolForKey:varNames_CanAutoLogin];
 }
+
+#pragma mark ---------- 保存最后一次登录的方式，以便自动登录时候判断使用什么接口
+/// varNames_type = 0(首次进入游戏没有登录，也就是不支持自动登录) 1（手机登录）2（账号登录）
+static inline void methodNames_saveLoginType(NSInteger varNames_type) {
+    [[NSUserDefaults standardUserDefaults]setInteger:varNames_type forKey:varNames_loginTypeKey];
+    [[NSUserDefaults standardUserDefaults]synchronize];
+}
+
+static inline NSInteger methodNames_readLoginType() {
+    return [[NSUserDefaults standardUserDefaults]boolForKey:varNames_loginTypeKey];
+}
+
+
 #pragma mark ---------- 保存登陆的账户
 /// 读取登陆过的账户
 static inline NSArray *methodNames_readLoginedAccount() {

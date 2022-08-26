@@ -56,7 +56,7 @@
     
     UILabel *varNames_tmpcontentLabel = [[UILabel alloc]init];
     varNames_tmpcontentLabel.translatesAutoresizingMaskIntoConstraints = NO;
-    varNames_tmpcontentLabel.textColor = [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_backgroundColor_config()];
+    varNames_tmpcontentLabel.textColor = [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_themeColor_config()];
     varNames_tmpcontentLabel.textAlignment = NSTextAlignmentLeft;
     varNames_tmpcontentLabel.font = [UIFont systemFontOfSize:14];
     self.varNames_contentLabel = varNames_tmpcontentLabel;
