@@ -486,7 +486,7 @@ static CGFloat varNameS_KEYBOARDMINY = 0;
     self.varNames_textField.returnKeyType = UIReturnKeyNext;
     self.varNames_returnType = varNames_keyboardReturnNext;
     
-    NSArray *varNames_tmpAccountArray = methodNames_getAllAccount();
+    NSArray *varNames_tmpAccountArray = methodNames_getAllLoginAccount(2);
     UIImage *varNames_itImg = methodNames_getImage(@"image_drop_down");
     CGSize varNames_itSize = methodNames_getImageSize(varNames_itImg);
     self.varNames_itemWidthConstraint.constant = varNames_itSize.width/2.0;
@@ -494,10 +494,8 @@ static CGFloat varNameS_KEYBOARDMINY = 0;
     [self.varNames_itemButton setImage:varNames_itImg forState:UIControlStateNormal];
     if (varNames_tmpAccountArray.count) {
         self.varNames_itemButtonContainView.hidden = NO;
-//        self.varNames_itemButton.hidden = NO;
         self.varNames_textFieldRight.constant = methodNames_setMargin_2base() + varNames_itSize.width/2.0;
     } else {
-//        self.varNames_itemButton.hidden = YES;
         self.varNames_itemButtonContainView.hidden = YES;
         self.varNames_textFieldRight.constant = methodNames_setMargin_base();
     }
@@ -698,7 +696,6 @@ static CGFloat varNameS_KEYBOARDMINY = 0;
 }
 #pragma mark ---------- 手机注册手机号输入框
 - (void)methodNames_setInputViewTypePhoneRegisterPhone {
-    self.varNames_itemButton.hidden = YES;
     if (!self.varNames_inputViewTitleType) {
         self.varNames_titleLabel.text = methodNames_getTitle_PhoneRegisterView_inputView_title1();
     } else {
@@ -712,6 +709,23 @@ static CGFloat varNameS_KEYBOARDMINY = 0;
     self.varNames_textField.returnKeyType = UIReturnKeyNext;
     self.varNames_returnType = varNames_keyboardReturnNext;
     self.varNames_textFieldRight.constant = methodNames_setMargin_base();
+    
+    
+    NSArray *varNames_tmpAccountArray = methodNames_getAllLoginAccount(1);
+    UIImage *varNames_itImg = methodNames_getImage(@"image_drop_down");
+    CGSize varNames_itSize = methodNames_getImageSize(varNames_itImg);
+    self.varNames_itemWidthConstraint.constant = varNames_itSize.width/2.0;
+    self.varNames_itemHeightConstraint.constant = varNames_itSize.height/2.0;
+    [self.varNames_itemButton setImage:varNames_itImg forState:UIControlStateNormal];
+    if (varNames_tmpAccountArray.count) {
+        self.varNames_itemButtonContainView.hidden = NO;
+        self.varNames_textFieldRight.constant = methodNames_setMargin_2base() + varNames_itSize.width/2.0;
+    } else {
+        self.varNames_itemButtonContainView.hidden = YES;
+        self.varNames_textFieldRight.constant = methodNames_setMargin_base();
+    }
+    
+    
 }
 #pragma mark ---------- 手机注册验证码号输入框
 - (void)methodNames_setInputViewTypePhoneRegisterCode {
@@ -738,6 +752,9 @@ static CGFloat varNameS_KEYBOARDMINY = 0;
     self.varNames_itemButton.layer.cornerRadius = 4.5;
     self.varNames_itemWidthConstraint.constant = 80;
     self.varNames_itemHeightConstraint.constant = 30;
+    
+    self.varNames_textFieldRight.constant = methodNames_setMargin_2base() + 80;
+    
 }
 #pragma mark ---------- 手机注册密码输入框
 - (void)methodNames_setInputViewTypePhoneRegisterPassword {
@@ -761,37 +778,59 @@ static CGFloat varNameS_KEYBOARDMINY = 0;
 }
 #pragma mark ---------- 普通注册的账户输入框
 - (void)methodNames_setInputViewTypeNormalRegisterAccount {
-    self.varNames_itemButton.hidden = YES;
     if (!self.varNames_inputViewTitleType) {
-        self.varNames_titleLabel.text = methodNames_getTitle_NormalRegisterView_inputView_title1();
+        self.varNames_titleLabel.text = methodNames_getTitle_LoginView_inputView_title1();
+    } else {
+        UIImage *varNames_img = methodNames_getImage(@"image_account");
+        CGSize varNames_iconSize = methodNames_getImageSize(varNames_img);
+        self.varNames_iconWidthConstraint.constant = varNames_iconSize.width/2.0;
+        self.varNames_iconHeightConstraint.constant = varNames_iconSize.height/2.0;
+        self.varNames_inputViewTypeImage.image = varNames_img;
     }
-//    self.varNames_textField.placeholder = methodNames_getTitle_NormalRegisterView_inputView_placeholder1();
-    [self methodNames_confiInputViewPlaceholder:methodNames_getTitle_NormalRegisterView_inputView_placeholder1() subMethodNames_placeholdercolor:[UIColor grayColor]];
+    
+    [self methodNames_confiInputViewPlaceholder:methodNames_getTitle_LoginView_inputView_placeholder1() subMethodNames_placeholdercolor:[UIColor grayColor]];
     self.varNames_textField.returnKeyType = UIReturnKeyNext;
     self.varNames_returnType = varNames_keyboardReturnNext;
-    self.varNames_textFieldRight.constant = methodNames_setMargin_base();
     
-    methodNames_drawImageUser(self.varNames_inputViewTypeImage, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_backgroundColor_config()]);
+    NSArray *varNames_tmpAccountArray = methodNames_getAllAccount();
+    UIImage *varNames_itImg = methodNames_getImage(@"image_drop_down");
+    CGSize varNames_itSize = methodNames_getImageSize(varNames_itImg);
+    self.varNames_itemWidthConstraint.constant = varNames_itSize.width/2.0;
+    self.varNames_itemHeightConstraint.constant = varNames_itSize.height/2.0;
+    [self.varNames_itemButton setImage:varNames_itImg forState:UIControlStateNormal];
+    self.varNames_itemButtonContainView.hidden = YES;
+    self.varNames_textFieldRight.constant = methodNames_setMargin_base();
 }
 #pragma mark ---------- 普通注册的密码输入框
 - (void)methodNames_setInputViewTypeNormalRegisterPassword {
-    self.varNames_itemButton.hidden = NO;
+    
     if (!self.varNames_inputViewTitleType) {
-        self.varNames_titleLabel.text = methodNames_getTitle_NormalRegisterView_inputView_title2();
+        self.varNames_titleLabel.text = methodNames_getTitle_LoginView_inputView_title2();
+    } else {
+        UIImage *varNames_img = methodNames_getImage(@"image_password");
+        CGSize varNames_iconSize = methodNames_getImageSize(varNames_img);
+        self.varNames_iconWidthConstraint.constant = varNames_iconSize.width/2.0;
+        self.varNames_iconHeightConstraint.constant = varNames_iconSize.height/2.0;
+        self.varNames_inputViewTypeImage.image = varNames_img;
     }
-//    self.varNames_textField.placeholder = methodNames_getTitle_NormalRegisterView_inputView_placeholder2();
-    [self methodNames_confiInputViewPlaceholder:methodNames_getTitle_NormalRegisterView_inputView_placeholder2() subMethodNames_placeholdercolor:[UIColor grayColor]];
+    
+    [self methodNames_confiInputViewPlaceholder:methodNames_getTitle_LoginView_inputView_placeholder2() subMethodNames_placeholdercolor:[UIColor grayColor]];
     self.varNames_textField.secureTextEntry = YES;
     self.varNames_isSecurity = YES;
     self.varNames_textField.returnKeyType = UIReturnKeyDefault;
     self.varNames_returnType = varNames_keyboardReturnDefault;
-    self.varNames_textFieldRight.constant = methodNames_setMargin_2base() + methodNames_getInputView_ItemButton_Width();
+    self.varNames_textFieldRight.constant = methodNames_setMargin_base();
     
-    self.varNames_openEyesLayer = methodNames_drawOpenEyes(self.varNames_itemButton, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_backgroundColor_config()]);
-    self.varNames_closeEyesLayer = methodNames_drawCloseEye(self.varNames_itemButton, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_backgroundColor_config()]);
-    self.varNames_openEyesLayer.hidden = YES;
+    UIImage *varNames_itImg = methodNames_getImage(@"image_eye");
+    UIImage *varNames_itImg_sel = methodNames_getImage(@"image_no_eye");
+    CGSize varNames_itSize = methodNames_getImageSize(varNames_itImg);
+    self.varNames_itemWidthConstraint.constant = varNames_itSize.width/2.0;
+    self.varNames_itemHeightConstraint.constant = varNames_itSize.height/2.0;
+    [self.varNames_itemButton setImage:varNames_itImg forState:UIControlStateNormal];
+    [self.varNames_itemButton setImage:varNames_itImg_sel forState:UIControlStateSelected];
     
-    methodNames_drawImagePassword(self.varNames_inputViewTypeImage, [ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_backgroundColor_config()]);
+    self.varNames_textFieldRight.constant = methodNames_setMargin_2base() + varNames_itSize.width/2.0;
+    
 }
 #pragma mark ---------- 快速登陆账户输入框
 - (void)methodNames_setInputViewTypeQuickLoginAccount {
@@ -938,7 +977,7 @@ static CGFloat varNameS_KEYBOARDMINY = 0;
 - (void)methodNames_inputViewItemButtonAction:(UIButton *)sender {
     
     /// 展示更多账户
-    if (self.varNames_inputViewType == varNames_inputViewTypeLoginAccount) {
+    if (self.varNames_inputViewType == varNames_inputViewTypeLoginAccount || self.varNames_inputViewType == varNames_inputViewTypePhoneRegisterPhone) {
         if ([varNames_INPUTVIEWEDITING isEqualToString:@"1"]) {
             [self.superview endEditing:YES];
             NSDictionary *varNames_tmpobject = @{
@@ -993,7 +1032,12 @@ static CGFloat varNameS_KEYBOARDMINY = 0;
             [self.varNames_checkPhoneValidBasModel methodNames_fetchDataWithdURL:varNames_getCodeURL parameters:para];
             self.varNames_checkPhoneValidBasModel.methodNames_completeFetchData = ^(ClassNames_BaseModel *object) {
                 if (object.varNames_code == 200) {
-                    [weakSelf methodNames_afterPhoneTestGetCode:phone];
+//                    [weakSelf methodNames_afterPhoneTestGetCode:phone];
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [weakSelf methodNames_startTimer];
+                        [ClassNames_PGHubView methodNames_hide];
+                        [ClassNames_PGHubView methodNames_showSuccessMessage:object.varNames_msg];
+                    });
                 } else {
                     
                     if (object.varNames_msg) {
@@ -1051,7 +1095,11 @@ static CGFloat varNameS_KEYBOARDMINY = 0;
 
 #pragma mark ---------- 旋转登陆页面中的展示更多账户的按钮
 - (void)methodNames_rotateView {
-    NSArray *varNames_tmptmpArray = methodNames_readLoginedAccount();
+    NSInteger varNames_tmpType = 2;
+    if (self.varNames_inputViewType == varNames_inputViewTypePhoneRegisterPhone) {
+        varNames_tmpType = 1;
+    }
+    NSArray *varNames_tmptmpArray = methodNames_getAllLoginAccount(varNames_tmpType);
     self.varNames_accountArray = [[varNames_tmptmpArray reverseObjectEnumerator]allObjects];
     methodNames_debugLog(self.varNames_accountArray);
     UIWindow *varNames_tmpwindow = methodNames_getCurrentWindow();
@@ -1212,7 +1260,12 @@ static CGFloat varNameS_KEYBOARDMINY = 0;
 #pragma mark ---------- 删除记录的账户账户
 - (void)methodNames_deleteAccount:(NSString *)account {
     methodNames_deleteAccount(account);
-    self.varNames_accountArray = methodNames_readLoginedAccount();
+    NSInteger varNames_type = 2; // 默认普通账号
+    if (self.varNames_inputViewType == varNames_inputViewTypePhoneRegisterPhone) {
+        varNames_type = 1;
+    }
+//    self.varNames_accountArray = methodNames_readLoginedAccount();
+    self.varNames_accountArray = methodNames_getAllLoginAccount(varNames_type);
     if (self.varNames_accountArray.count) {
         UIWindow *varNames_tmpwindow = methodNames_getCurrentWindow();
         CGRect varNames_tmprect = [self convertRect:self.bounds toView:varNames_tmpwindow];
@@ -1239,41 +1292,41 @@ static CGFloat varNameS_KEYBOARDMINY = 0;
 }
 
 
-#pragma mark ---------- 获取验证码
-- (void)methodNames_afterPhoneTestGetCode:(NSString *)phone {
-    NSDictionary *varNames_tmppara = @{
-                           @"phone": phone
-                           };
-    __weak typeof(self) weakSelf = self;
-    [self.varNames_getCodeModel methodNames_fetchDataWithdURL:methodNames_verifyURL() parameters:varNames_tmppara];
-    self.varNames_getCodeModel.methodNames_completeFetchData = ^(ClassNames_BaseModel * object) {
-        if (object.varNames_code == 200) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [ClassNames_PGHubView methodNames_hide];
-                [weakSelf methodNames_startTimer];
-            });
-        } else {
-            dispatch_async(dispatch_get_main_queue(), ^{
-                weakSelf.varNames_itemButton.enabled = YES;
-                [ClassNames_PGHubView methodNames_hide];
-                if (object.varNames_msg) {
-                    [ClassNames_PGHubView methodNames_showErrorMessage:object.varNames_msg];
-                } else {
-                    [ClassNames_PGHubView methodNames_showErrorMessage:@"验证码发送失败"];
-                }
-            });
-        }
-    };
-    self.varNames_getCodeModel.methodNames_FetchError = ^(NSError *error) {
-        dispatch_async(dispatch_get_main_queue(), ^{
-            weakSelf.varNames_itemButton.enabled = YES;
-            [ClassNames_PGHubView methodNames_hide];
-            [ClassNames_PGHubView methodNames_showErrorMessage:@"网络出了小差!!!"];
-        });
-    };
-    
-    
-}
+//#pragma mark ---------- 获取验证码
+//- (void)methodNames_afterPhoneTestGetCode:(NSString *)phone {
+//    NSDictionary *varNames_tmppara = @{
+//                           @"phone": phone
+//                           };
+//    __weak typeof(self) weakSelf = self;
+//    [self.varNames_getCodeModel methodNames_fetchDataWithdURL:methodNames_verifyURL() parameters:varNames_tmppara];
+//    self.varNames_getCodeModel.methodNames_completeFetchData = ^(ClassNames_BaseModel * object) {
+//        if (object.varNames_code == 200) {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                [ClassNames_PGHubView methodNames_hide];
+//                [weakSelf methodNames_startTimer];
+//            });
+//        } else {
+//            dispatch_async(dispatch_get_main_queue(), ^{
+//                weakSelf.varNames_itemButton.enabled = YES;
+//                [ClassNames_PGHubView methodNames_hide];
+//                if (object.varNames_msg) {
+//                    [ClassNames_PGHubView methodNames_showErrorMessage:object.varNames_msg];
+//                } else {
+//                    [ClassNames_PGHubView methodNames_showErrorMessage:@"验证码发送失败"];
+//                }
+//            });
+//        }
+//    };
+//    self.varNames_getCodeModel.methodNames_FetchError = ^(NSError *error) {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            weakSelf.varNames_itemButton.enabled = YES;
+//            [ClassNames_PGHubView methodNames_hide];
+//            [ClassNames_PGHubView methodNames_showErrorMessage:@"网络出了小差!!!"];
+//        });
+//    };
+//    
+//    
+//}
 
 - (void)methodNames_startTimer {
     // 创建定时器
@@ -1285,7 +1338,7 @@ static CGFloat varNameS_KEYBOARDMINY = 0;
 - (void)methodNmaes_changTitle:(NSTimer *)timer {
     self.varNames_codeLayer.hidden = YES;
     [self.varNames_itemButton setTitle:[NSString stringWithFormat:@"%lds", (long)self.varNames_getCodeTitle] forState:UIControlStateDisabled];
-    [self.varNames_itemButton setTitleColor:[ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_fillColor_config()] forState:UIControlStateDisabled];
+    [self.varNames_itemButton setTitleColor:[ClassNames_Color methodNames_colorWithHexString:methodNames_getDefault_themeColor_config()] forState:UIControlStateDisabled];
     self.varNames_itemButton.titleLabel.text = [NSString stringWithFormat:@"%lds", (long)self.varNames_getCodeTitle];
     if (self.varNames_getCodeTitle == 0) {
         self.varNames_itemButton.enabled = YES;

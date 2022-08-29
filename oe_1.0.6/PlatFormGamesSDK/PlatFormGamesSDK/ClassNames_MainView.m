@@ -32,6 +32,7 @@
 #import "ClassNames_TipView.h"
 #import "ClassNames_DetailCustomerServerView.h"
 #import "ClassNames_GiftView.h"
+#import "ClassNames_RechargeView.h"
 
 @interface ClassNames_MainView ()
 
@@ -1058,6 +1059,10 @@
 
 #pragma mark -------------- 协议和用户手册
 - (void)methodNames_showDelegateView {
+    
+    [ClassNames_RechargeView methodNames_showPayWebViewWithURL:methodNames_gameAgreement()];
+    return;
+    
     if (!self.varNames_delegateView) {
         __weak typeof(self) weakSelf = self;
         ClassNames_DelegateView *varNames_delegateView = [ClassNames_DelegateView methodNames_showDelegateOrHandleBookViewWithFileName:@"ClassNames_delegateContent" methodNames_viewTitle:@"用户协议"];
@@ -1132,11 +1137,11 @@
 }
 
 #pragma mark ---------- 公告页面
-- (void)methodNames_showNoticeView {
-    NSString *content = @"是领导看风景是领导会计法是领导看见弗雷斯科简单福利时间到房里睡大觉弗雷斯科大家弗雷斯科简单flask独领风骚看就懂了反抗精神独立分开就是领导减肥路上的加夫里什大家flask减肥了时间的翻领设计的浪费时间的浪费是代理反馈就是领导减肥是领导减肥是领导看风景是领导会计法联赛等级客服";
+- (void)methodNames_showNoticeViewWithTitle:(NSString *)title methodNames_content:(NSString *)content {
+//    NSString *content = @"是领导看风景是领导会计法是领导看见弗雷斯科简单福利时间到房里睡大觉弗雷斯科大家弗雷斯科简单flask独领风骚看就懂了反抗精神独立分开就是领导减肥路上的加夫里什大家flask减肥了时间的翻领设计的浪费时间的浪费是代理反馈就是领导减肥是领导减肥是领导看风景是领导会计法联赛等级客服";
     if (!self.varNames_noticeView) {
         __weak typeof(self) weakSelf = self;
-        ClassNames_NoticeView *varNames_tmpNoticeView = [ClassNames_NoticeView methodNames_createNoticeViewWithtitle:@"重大喜讯" methodNames_content:content];
+        ClassNames_NoticeView *varNames_tmpNoticeView = [ClassNames_NoticeView methodNames_createNoticeViewWithtitle:title methodNames_content:content];
         varNames_tmpNoticeView.methodNames_closeBlock = ^{
             [weakSelf removeFromSuperview];
         };

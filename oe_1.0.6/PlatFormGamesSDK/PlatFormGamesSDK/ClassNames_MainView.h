@@ -31,6 +31,6 @@
 
 - (void)methodNames_showPayView;
 
-- (void)methodNames_showNoticeView;
+- (void)methodNames_showNoticeViewWithTitle:(NSString *)title methodNames_content:(NSString *)content;
 
 @end

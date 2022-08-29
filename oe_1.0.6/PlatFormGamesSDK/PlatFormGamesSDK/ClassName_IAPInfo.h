@@ -8,4 +8,5 @@
 @property (nonatomic,copy) NSString *varNames_orderID;
 @property (nonatomic,copy) NSString *varNames_orderMoney;
 
+
 @end

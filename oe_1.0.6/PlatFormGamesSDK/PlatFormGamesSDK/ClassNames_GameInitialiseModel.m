@@ -55,7 +55,8 @@
 @property (nonatomic, readwrite, copy) NSString *varNames_mpName;
 //        "can_reg": "1", //注册限制：1允许注册；2禁止注册
 @property (nonatomic, readwrite, copy) NSString *varNames_can_reg;
-
+// 公告
+@property (nonatomic, readwrite, copy) NSDictionary *varNames_notice;
 
 
 @end
@@ -235,6 +236,11 @@
             self.varNames_mpName = @"";
         } else {
             self.varNames_mpName = [varNames_tmpDic objectForKey:@"mpName"];
+        }
+        if ([varNames_tmpDic objectForKey:@"notice"] == nil || [[varNames_tmpDic objectForKey:@"notice"] isKindOfClass:NSNull.class]) {
+            self.varNames_notice = @{};
+        } else {
+            self.varNames_notice = [varNames_tmpDic objectForKey:@"notice"];
         }
         if ([varNames_tmpDic objectForKey:@"can_reg"] == nil || [[varNames_tmpDic objectForKey:@"can_reg"] isKindOfClass:NSNull.class]) {
             self.varNames_can_reg = @"";

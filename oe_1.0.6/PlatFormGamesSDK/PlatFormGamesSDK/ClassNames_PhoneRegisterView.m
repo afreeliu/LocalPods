@@ -223,8 +223,8 @@
     
     [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_agreeButton methodNames_constriant:methodNames_setMargin_base()];
     [ClassNames_BaseViewLayout methodNames_layoutCenterY:self.varNames_agreeButton methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_agreeButton methodNames_constriant:15];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_agreeButton methodNames_constriant:15];
+    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_agreeButton methodNames_constriant:22];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_agreeButton methodNames_constriant:22];
     
     [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_delegateTextView methodNames_constriant:methodNames_setMargin_base() * 5];
     [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_delegateTextView methodNames_constriant:0];
@@ -314,11 +314,6 @@
             } else {
                 if (object.varNames_msg) {
                     [ClassNames_PGHubView methodNames_showErrorMessage:object.varNames_msg];
-                }
-                if (weakSelf.methodNames_phoneRegisterSuccess) {
-                    weakSelf.hidden = YES;
-                    [weakSelf removeFromSuperview];
-                    weakSelf.methodNames_phoneRegisterSuccess(YES);
                 }
             }
         });

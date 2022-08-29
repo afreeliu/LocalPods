@@ -103,6 +103,23 @@ static inline void methodNames_savePassword(NSString *password, NSString *accoun
         }
     }
 }
+
+/// 获取保存账号登录的账号
+///  手机号：type ==1。账号：type == 2
+static inline NSArray *methodNames_getAllLoginAccount(NSInteger type) {
+    NSString *varNames_tmpKey = @"";
+    if (type == 1) {
+        varNames_tmpKey = varNames_haveLoginPhoneKey;
+    } else {
+        varNames_tmpKey = varNames_haveLoginAccountKey;
+    }
+    NSArray *varNames_arr = [[NSUserDefaults standardUserDefaults]objectForKey:varNames_tmpKey];
+    
+    return [NSMutableArray arrayWithArray:varNames_arr?:@[]];
+}
+
+
+
 /// 获取保存的账户列表
 static inline NSArray *methodNames_getAllAccount() {
     
@@ -150,7 +167,8 @@ static inline NSString *methodNames_readLastAccount() {
     if (varNames_tmplastAccount && varNames_tmplastAccount.length) {
         return varNames_tmplastAccount;
     } else {
-        NSArray *varNames_tmptmp = methodNames_getAllAccount();
+//        NSArray *varNames_tmptmp = methodNames_getAllAccount();
+        NSArray *varNames_tmptmp = methodNames_getAllLoginAccount(2);
         if (varNames_tmptmp.count) {
             NSDictionary *varNames_tmpdic = [varNames_tmptmp lastObject];
             varNames_tmplastAccount = [varNames_tmpdic objectForKey:(__bridge id)kSecAttrAccount];
@@ -220,7 +238,7 @@ static inline void methodNames_saveLoginType(NSInteger varNames_type) {
 }
 
 static inline NSInteger methodNames_readLoginType() {
-    return [[NSUserDefaults standardUserDefaults]boolForKey:varNames_loginTypeKey];
+    return [[NSUserDefaults standardUserDefaults]integerForKey:varNames_loginTypeKey];
 }
 
 
@@ -228,11 +246,15 @@ static inline NSInteger methodNames_readLoginType() {
 /// 读取登陆过的账户
 static inline NSArray *methodNames_readLoginedAccount() {
     
-    NSArray *varNames_tmptmp = methodNames_getAllAccount();
+//    NSArray *varNames_tmptmp = methodNames_getAllAccount();
+    NSArray *varNames_tmptmp = methodNames_getAllLoginAccount(2);
     NSMutableArray *varNames_tmparr = [NSMutableArray array];
     if (varNames_tmptmp.count) {
-        for (NSDictionary *varNames_tmpdic in varNames_tmptmp) {
-            NSString *varNames_tmpaccount = [varNames_tmpdic objectForKey:(__bridge id)kSecAttrAccount];
+//        for (NSDictionary *varNames_tmpdic in varNames_tmptmp) {
+//            NSString *varNames_tmpaccount = [varNames_tmpdic objectForKey:(__bridge id)kSecAttrAccount];
+//            [varNames_tmparr addObject:varNames_tmpaccount];
+//        }
+        for (NSString *varNames_tmpaccount in varNames_tmptmp) {
             [varNames_tmparr addObject:varNames_tmpaccount];
         }
     }
@@ -380,11 +402,12 @@ static inline NSArray *methodNames_getAllPhone() {
 /// 读取登陆过的手机号
 static inline NSArray *methodNames_readLoginedPhone() {
     
-    NSArray *varNames_tmptmp = methodNames_getAllAccount();
+//    NSArray *varNames_tmptmp = methodNames_getAllAccount();
+    NSArray *varNames_tmptmp = methodNames_getAllLoginAccount(1);
     NSMutableArray *varNames_tmparr = [NSMutableArray array];
     if (varNames_tmptmp.count) {
-        for (NSDictionary *varNames_tmpdic in varNames_tmptmp) {
-            NSString *varNames_tmpaccount = [varNames_tmpdic objectForKey:(__bridge id)kSecAttrAccount];
+        for (NSString *varNames_tmpaccount in varNames_tmptmp) {
+            
             [varNames_tmparr addObject:varNames_tmpaccount];
         }
     }
@@ -436,7 +459,8 @@ static inline NSString *methodNames_readLastPhone() {
     if (varNames_tmplastAccount && varNames_tmplastAccount.length) {
         return varNames_tmplastAccount;
     } else {
-        NSArray *varNames_tmptmp = methodNames_getAllPhone();
+//        NSArray *varNames_tmptmp = methodNames_getAllPhone();
+        NSArray *varNames_tmptmp = methodNames_getAllLoginAccount(1);
         if (varNames_tmptmp.count) {
             NSDictionary *varNames_tmpdic = [varNames_tmptmp lastObject];
             varNames_tmplastAccount = [varNames_tmpdic objectForKey:(__bridge id)kSecAttrAccount];

@@ -56,7 +56,8 @@
 @property (nonatomic, readonly, copy) NSString *varNames_mpName;
 //        "can_reg": "1", //注册限制：1允许注册；2禁止注册
 @property (nonatomic, readonly, copy) NSString *varNames_can_reg;
-
+// 公告
+@property (nonatomic, readonly, copy) NSDictionary *varNames_notice;
 
 
 @end

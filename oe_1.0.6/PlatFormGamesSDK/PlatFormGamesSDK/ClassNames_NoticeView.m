@@ -44,7 +44,7 @@
     self = [super init];
     if (self) {
         self.layer.cornerRadius = 15;
-        self.backgroundColor = [UIColor yellowColor];
+        self.backgroundColor = [UIColor whiteColor];
         [self methodNames_createUI];
     }
     return self;

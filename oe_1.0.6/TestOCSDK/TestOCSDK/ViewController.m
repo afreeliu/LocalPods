@@ -49,6 +49,7 @@
 }
 #pragma mark ---------------------  致富
 - (IBAction)payAction:(UIButton *)sender {
+    [[UmPlatsFormGameManager umPlatsFormManagerDeafaults]umPlatsFormProductId:@"" WithProductName:@"" withProductDesc:@"" withPayMoney:@"" withCpOrderId:@"" withCpServerID:@"" withCpServerName:@"" withRoleId:@"" withRoleName:@"" withLevel:@"" withVipLv:@"" withGender:@"" withGold:@"" withCoin:@"" withExt:@""];
 }
 
 
@@ -67,6 +68,8 @@
 #pragma mark --------------------- 致富通知
 - (void)notificationPayCallBack:(NSNotification *)noti {
     NSLog(@"appStoreBack:%@", noti.userInfo);
+    
+    
 }
 
 @end

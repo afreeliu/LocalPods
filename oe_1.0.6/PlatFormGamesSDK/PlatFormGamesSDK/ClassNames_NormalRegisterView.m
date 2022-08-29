@@ -62,6 +62,7 @@
     self = [super init];
     if (self) {
         [self methodNames_createUI];
+        [self methodNames_setData];
     }
     return self;
 }
@@ -87,15 +88,15 @@
     self.varNames_naviView = varNames_tmpNaviView;
     
     
-    ClassNames_InputView *varNames_tmpFirstInputView = [ClassNames_InputView methodNames_inputViewType:varNames_inputViewTypeLoginAccount];
+    ClassNames_InputView *varNames_tmpFirstInputView = [ClassNames_InputView methodNames_inputViewType:varNames_inputViewTypeNormalRegisterAccount];
     varNames_tmpFirstInputView.translatesAutoresizingMaskIntoConstraints = NO;
-    varNames_tmpFirstInputView.methodNames_changeAccount = ^(NSString *account) {
-        NSString *password = methodNames_readPassword(account);
-        [weakSelf.varNames_secondInputView methodNames_fillContent:password methodNames_canEditing:YES];
-    };
+//    varNames_tmpFirstInputView.methodNames_changeAccount = ^(NSString *account) {
+//        NSString *password = methodNames_readPassword(account);
+//        [weakSelf.varNames_secondInputView methodNames_fillContent:password methodNames_canEditing:YES];
+//    };
     self.varNames_firstInputView = varNames_tmpFirstInputView;
     
-    ClassNames_InputView *varNames_tmpSecondInputView = [ClassNames_InputView methodNames_inputViewType:varNames_inputViewTypeLoginPassword];
+    ClassNames_InputView *varNames_tmpSecondInputView = [ClassNames_InputView methodNames_inputViewType:varNames_inputViewTypeNormalRegisterPassword];
     varNames_tmpSecondInputView.translatesAutoresizingMaskIntoConstraints = NO;
     varNames_tmpSecondInputView.methodNames_loginViewPasswordInputViewBecomeFirstRespond = ^{
         [weakSelf.varNames_firstInputView methodNames_hidMoreAccountTableView];
@@ -127,7 +128,21 @@
     [self addSubview:self.varNames_firstCommitBtn];
 }
 
-
+#pragma mark ---------- setData
+- (void)methodNames_setData {
+    __weak typeof(self) weakSelf = self;
+    NSString *varNames_randString = methodNames_getRandAccountAndPwd(21);
+    NSString *varNames_tmpAccount = [varNames_randString substringWithRange:NSMakeRange(0, 6)];
+    NSString *varNames_tmpPassword = [varNames_randString substringWithRange:NSMakeRange(6, 16)];
+    
+    [self.varNames_firstInputView methodNames_fillContent:varNames_tmpAccount methodNames_canEditing:YES];
+    [self.varNames_secondInputView methodNames_fillContent:varNames_tmpPassword methodNames_canEditing:YES];
+    [self.varNames_firstInputView methodNames_setInputViewKeyboardReutrnType:varNames_keyboardReturnNext];
+    [self.varNames_secondInputView methodNames_setInputViewKeyboardReutrnType:varNames_keyboardReturnDefault];
+    self.varNames_firstInputView.methodNames_nextInputView = ^{
+        [weakSelf.varNames_secondInputView methodNames_becomeFirstResponder];
+    };
+}
 
 - (void)methodNames_layoutSubViews {
     
@@ -164,8 +179,8 @@
     
     [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_agreeButton methodNames_constriant:methodNames_setMargin_base()];
     [ClassNames_BaseViewLayout methodNames_layoutCenterY:self.varNames_agreeButton methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_agreeButton methodNames_constriant:15];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_agreeButton methodNames_constriant:15];
+    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_agreeButton methodNames_constriant:22];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_agreeButton methodNames_constriant:22];
     
     [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_delegateTextView methodNames_constriant:methodNames_setMargin_base() * 5];
     [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_delegateTextView methodNames_constriant:0];

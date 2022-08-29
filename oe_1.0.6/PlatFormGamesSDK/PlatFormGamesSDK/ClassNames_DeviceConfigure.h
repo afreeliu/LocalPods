@@ -191,15 +191,25 @@ static inline NSString *methodNames_translateStringToHex(NSString *varNames_s) {
     return resultS;
 }
 
-static inline NSString *methodNames_getRandAccountAndPwd(NSInteger i) {
+static inline NSString *methodNames_getRandAccountAndPwd(NSInteger count) {
     NSString *charset = @"0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    NSString *key = methodNames_getDeviceUUID();
-    NSString *time = methodNames_getCurrentTimestamp();
-    NSString *hash = methodNames_md5([NSString stringWithFormat:@"%@%@", key, time]);
-    NSInteger len = hash.length;
-    NSInteger start = (i * len)/4;
-    NSString *hashPiece = [hash substringWithRange:NSMakeRange(start, start+len/4)];
-    return hashPiece;
+//    NSString *key = methodNames_getDeviceUUID();
+//    NSString *time = methodNames_getCurrentTimestamp();
+//    NSString *hash = methodNames_md5([NSString stringWithFormat:@"%@%@", key, time]);
+//    NSInteger len = hash.length;
+//    NSInteger start = (i * len)/4;
+//    NSString *hashPiece = [hash substringWithRange:NSMakeRange(start, start+len/4)];
+    
+    long timestamp = (long)([[NSDate date]timeIntervalSince1970] * 1000);
+    srand((unsigned)timestamp);
+    NSMutableString *ss = [NSMutableString string];
+    for (int i = 0; i < count; i++) {
+        NSInteger loc = rand()%charset.length;
+        NSString *one = [charset substringWithRange:NSMakeRange(loc, 1)];
+        [ss appendString:one];
+    }
+    return ss;
+
 //    for (NSInteger i = 0; i < 2; i++) {
 //        NSInteger start = (i * len)/4;
 //        NSString *hashPiece = [hash substringWithRange:NSMakeRange(start, start+len/4)];

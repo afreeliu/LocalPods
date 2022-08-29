@@ -161,8 +161,8 @@
     
     [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_agreeButton methodNames_constriant:methodNames_setMargin_base()];
     [ClassNames_BaseViewLayout methodNames_layoutCenterY:self.varNames_agreeButton methodNames_constriant:0];
-    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_agreeButton methodNames_constriant:15];
-    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_agreeButton methodNames_constriant:15];
+    [ClassNames_BaseViewLayout methodNames_layoutWidth:self.varNames_agreeButton methodNames_constriant:22];
+    [ClassNames_BaseViewLayout methodNames_layoutHeight:self.varNames_agreeButton methodNames_constriant:22];
     
     [ClassNames_BaseViewLayout methodNames_layoutLeft:self.varNames_delegateTextView methodNames_constriant:methodNames_setMargin_base() * 5];
     [ClassNames_BaseViewLayout methodNames_layoutRight:self.varNames_delegateTextView methodNames_constriant:0];
@@ -202,13 +202,14 @@
 - (void)methodNames_setData {
     __weak typeof(self) weakSelf = self;
     NSString *varNames_tmpAccount = methodNames_readLastAccount();
-    NSString *varNames_tmpPassword = @"";
-    if (varNames_tmpAccount && varNames_tmpAccount.length) {
-         varNames_tmpPassword = methodNames_readPassword(varNames_tmpAccount);
-    } else {
-        varNames_tmpAccount = methodNames_getRandAccountAndPwd(0);
-        varNames_tmpPassword = methodNames_getRandAccountAndPwd(1);
-    }
+    NSString *varNames_tmpPassword = methodNames_readPassword(varNames_tmpAccount);
+//    NSString *varNames_tmpPassword = @"";
+//    if (varNames_tmpAccount && varNames_tmpAccount.length) {
+//         varNames_tmpPassword = methodNames_readPassword(varNames_tmpAccount);
+//    } else {
+//        varNames_tmpAccount = methodNames_getRandAccountAndPwd(0);
+//        varNames_tmpPassword = methodNames_getRandAccountAndPwd(1);
+//    }
     
     [self.varNames_firstInputView methodNames_fillContent:varNames_tmpAccount methodNames_canEditing:YES];
     [self.varNames_secondInputView methodNames_fillContent:varNames_tmpPassword methodNames_canEditing:YES];

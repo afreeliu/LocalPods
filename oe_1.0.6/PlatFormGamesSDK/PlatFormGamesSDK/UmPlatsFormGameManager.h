@@ -8,9 +8,28 @@
 +(instancetype)umPlatsFormManagerDeafaults;
 
 #pragma mark ---------------------  启动游戏调用方法
--(void)umPlatsFormLaunchConfigGameID:(NSString *)gid WithSub_GameID:(NSString *)sub_gid WithOpr_Cid:(NSString *)opr_cid WithSdk_Ver:(NSString *)sdk_ver WithGame_Ver:(NSString *)game_ver;
+-(void)umPlatsFormLaunchConfigGameID:(NSString *)gid
+                      WithSub_GameID:(NSString *)sub_gid
+                         WithOpr_Cid:(NSString *)opr_cid
+                         WithSdk_Ver:(NSString *)sdk_ver
+                        WithGame_Ver:(NSString *)game_ver;
 
-
+#pragma mark ---------------------- 充值
+-(void)umPlatsFormProductId:(NSString*)product_id
+            WithProductName:(NSString*)product_name
+            withProductDesc:(NSString*)product_desc
+               withPayMoney:(NSString*)pay_money
+              withCpOrderId:(NSString*)cp_order_id
+             withCpServerID:(NSString*)cp_server_id
+           withCpServerName:(NSString*)cp_server_name
+                 withRoleId:(NSString*)role_id
+               withRoleName:(NSString*)role_name
+                  withLevel:(NSString*)level
+                  withVipLv:(NSString*)vip_lv
+                 withGender:(NSString*)gender
+                   withGold:(NSString*)gold
+                   withCoin:(NSString*)coin
+                    withExt:(NSString*)ext;
 
 
 - (void)methodNames_showSuspensionBall;

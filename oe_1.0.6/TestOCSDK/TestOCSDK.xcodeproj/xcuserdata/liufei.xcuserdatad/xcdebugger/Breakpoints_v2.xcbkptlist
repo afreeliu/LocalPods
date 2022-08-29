@@ -14,8 +14,8 @@
             filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/UmPlatsFormGameManager.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "403"
-            endingLineNumber = "403"
+            startingLineNumber = "494"
+            endingLineNumber = "494"
             landmarkName = "UmPlatsFormGameManager"
             landmarkType = "3">
          </BreakpointContent>
@@ -42,8 +42,8 @@
             filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/ClassNames_MainView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "688"
-            endingLineNumber = "688"
+            startingLineNumber = "689"
+            endingLineNumber = "689"
             landmarkName = "-methodNames_createResetPasswordView"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,8 +74,8 @@
             filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/ClassNames_MainView.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "896"
-            endingLineNumber = "896"
+            startingLineNumber = "897"
+            endingLineNumber = "897"
             landmarkName = "-methodNames_createBindPersonIDViewFromView:"
             landmarkType = "7">
          </BreakpointContent>
@@ -99,16 +99,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "36A2B126-EDE0-4142-B901-65B11608A719"
+            uuid = "72906826-75E6-4DF0-BAB0-F5A90E2C3A7A"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/ClassNames_AutoLoginView.m"
+            filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/UmPlatsFormGameManager.m"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
-            landmarkName = "-methodNames_commitAutoLoginAction:password:"
+            startingLineNumber = "243"
+            endingLineNumber = "243"
+            landmarkName = "-umPlatsFormProductId:WithProductName:withProductDesc:withPayMoney:withCpOrderId:withCpServerID:withCpServerName:withRoleId:withRoleName:withLevel:withVipLv:withGender:withGold:withCoin:withExt:"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7367F5BF-3D8C-49A1-A13F-915106FB0B90"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/ClassNames_InputView.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1098"
+            endingLineNumber = "1098"
+            landmarkName = "-methodNames_rotateView"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D39318A1-3298-4211-A456-9DE5DD96F28E"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "../PlatFormGamesSDK/PlatFormGamesSDK/ClassNames_PhoneRegisterView.m"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "348"
+            endingLineNumber = "348"
+            landmarkName = "-methodNames_phoneRegisterSuccess:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

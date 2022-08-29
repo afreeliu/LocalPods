@@ -191,6 +191,94 @@
     });
     
 }
+#pragma mark ---------------------- 充值
+-(void)umPlatsFormProductId:(NSString*)product_id
+            WithProductName:(NSString*)product_name
+            withProductDesc:(NSString*)product_desc
+               withPayMoney:(NSString*)pay_money
+              withCpOrderId:(NSString*)cp_order_id
+             withCpServerID:(NSString*)cp_server_id
+           withCpServerName:(NSString*)cp_server_name
+                 withRoleId:(NSString*)role_id
+               withRoleName:(NSString*)role_name
+                  withLevel:(NSString*)level
+                  withVipLv:(NSString*)vip_lv
+                 withGender:(NSString*)gender
+                   withGold:(NSString*)gold
+                   withCoin:(NSString*)coin
+                    withExt:(NSString*)ext {
+    NSMutableDictionary *varName_tmpParameter = [ClassNames_BaseParameters methodNames_getBaseParameters];
+    [varName_tmpParameter setValue:methodNames_readUserID() forKey:@"udi"];
+    [varName_tmpParameter setValue:methodNames_readUserName() forKey:@"uname"];
+    [varName_tmpParameter setValue:product_id forKey:@"product_id"];
+    [varName_tmpParameter setValue:product_name forKey:@"product_name"];
+    [varName_tmpParameter setValue:product_desc forKey:@"product_desc"];
+    [varName_tmpParameter setValue:pay_money forKey:@"pay_money"];
+    [varName_tmpParameter setValue:cp_order_id forKey:@"cp_order_id"];
+    [varName_tmpParameter setValue:cp_server_id forKey:@"cp_server_id"];
+    [varName_tmpParameter setValue:cp_server_name forKey:@"cp_server_name"];
+    [varName_tmpParameter setValue:role_id forKey:@"role_id"];
+    [varName_tmpParameter setValue:role_name forKey:@"role_name"];
+    [varName_tmpParameter setValue:level forKey:@"level"];
+    [varName_tmpParameter setValue:vip_lv forKey:@"vip_lv"];
+    [varName_tmpParameter setValue:gender forKey:@"gender"];
+    [varName_tmpParameter setValue:gold forKey:@"gold"];
+    [varName_tmpParameter setValue:coin forKey:@"coin"];
+    [varName_tmpParameter setValue:ext forKey:@"ext"];
+    
+    [ClassNames_PGHubView methodNames_showIndicatorWithTitlte:@"开始下单..."];
+    [self.varNames_orderModel methodNames_fetchDataWithdURL:methodNames_gameIosplace() parameters:varName_tmpParameter];
+    self.varNames_orderModel.methodNames_FetchError = ^(NSError *error) {
+        NSString *err = [error.userInfo objectForKey:NSLocalizedDescriptionKey];
+        if (err && err.length) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [ClassNames_PGHubView methodNames_hide];
+                [ClassNames_PGHubView methodNames_showErrorMessage:err];
+                methodNames_postNotification(@"umplatformgameappStore", nil, @{@"result": @"2", @"msg": @"removeLoading"});
+            });
+        }
+    };
+    self.varNames_orderModel.methodNames_completeFetchData = ^(ClassNames_MemberOrderModel *object) {
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [ClassNames_PGHubView methodNames_hide];
+            
+            if (object.varNames_code == 200) {
+                if ([object.varNames_pay_type isEqualToString:@"OFF"]) {
+                    /// 内购
+                    ClassName_IAPInfo *varNames_info = [[ClassName_IAPInfo alloc] init];
+                    varNames_info.varNames_productID = product_id;
+                    varNames_info.varNames_orderID = object.varNames_order_code;
+                    varNames_info.varNames_orderMoney = pay_money;
+                    [[ClassName_IAPMain methodNames_iapMainDefaults] methodNames_starBuy:varNames_info];
+                } else {
+                    /// web
+                    [ClassNames_RechargeView methodNames_showPayWebViewWithURL:object.varNames_pay_url];
+                }
+            } else {
+                if (object.varNames_msg) {
+                    if ([object.varNames_msg isKindOfClass:NSArray.class]) {
+                        NSArray *varNames_tmpmsgArray = (NSArray *) object.varNames_msg;
+                        NSString *varNames_tmpmsg = [varNames_tmpmsgArray firstObject];
+                        [ClassNames_PGHubView methodNames_showErrorMessage:varNames_tmpmsg];
+                    } else {
+                        [ClassNames_PGHubView methodNames_showErrorMessage:object.varNames_msg];
+                    }
+                    
+                }
+            }
+            methodNames_postNotification(@"umplatformgameappStore", nil, @{@"result": @"2", @"msg": @"removeLoading"});
+        });
+        
+    };
+    
+    
+}
+
+
+
+
+
+
 
 
 #pragma mark --------------------- SDK 登录入口
@@ -302,6 +390,9 @@
         //methodNames_debugLog(@"plist中isPassLogin设置为0");
 //        [self methodNames_createLoginView];
         [[ClassNames_MainView methodNames_instanceMainView]methodNames_showLoginView];
+        if ([self.varNames_gameInitModel.varNames_notice objectForKey:@"title"] && [self.varNames_gameInitModel.varNames_notice objectForKey:@"tips"]) {
+            [[ClassNames_MainView methodNames_instanceMainView]methodNames_showNoticeViewWithTitle:[self.varNames_gameInitModel.varNames_notice objectForKey:@"title"]?:@"" methodNames_content:[self.varNames_gameInitModel.varNames_notice objectForKey:@"tips"]?:@""];
+        }
     } else {
         //methodNames_debugLog(@"plist中isPassLogin设置为1");
         /// 是否需要隐藏登录还需根据 是否正在审----------核
